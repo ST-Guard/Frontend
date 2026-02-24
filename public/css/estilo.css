@@ -635,7 +635,7 @@ header a {
 
 .st-login-right {
     width: 55%;
-    background-image: url("../assets/imagemlogin.png");
+    /* background-image: url("../assets/imagemlogin.png"); */
     background-size: cover;
     background-position: center;
 }

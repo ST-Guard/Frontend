@@ -9,6 +9,46 @@
     <link rel="stylesheet" href="./dashboard.css">
 </head>
 <body>
+
+    <header>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0F1C2E; width: 100%;">
+    <div class="container-fluid px-5">
+      <a class="navbar-brand fs-3 fw-semibold" href="#">Smart Data</a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-4">
+          <li class="nav-item">
+            <a class="nav-link text-white fs-5" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fs-5" href="#">Servidores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fs-5" href="#">Relatórios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fs-5" href="#">Alertas</a>
+          </li>
+        </ul>
+        
+        <div class="d-flex">
+          <a href="login.html">
+            <button class="btn" style="background-color: #F5CC4D; width: 120px; height: 38px; 
+                                       border-radius: 6px; font-weight: 500;">
+              Login
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
 <div class="container-fluid py-3 px-lg-4 px-2">
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
         <h4 class="fw-bold mb-0" style="color: #0f2b4f;"><i style="color: #2e5aaf;"></i>ST Guard · Monitoramento</h4>
@@ -69,5 +109,42 @@
             </div>
         </div>
     </div>
+
+    <div class="row g-3">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <span>Relatório de Monitoramento</span>
+                    <span class="small text-dark">ID Servidor | CPU | RAM | Memória(HD/SSD)</span>
+                </div>
+                <div class="card-body">
+                    <div class="conversation-row d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">Center ID 1</div>
+                        <div>Intel XEON Processador</div>
+                        <span class="badge-dscp">DynamicRAM 1TB</span>
+                        <span class="badge-dscp">20TB em Memória HHD</span>
+                    </div>
+                    <div class="conversation-row d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">Center ID 2</div>
+                        <div>AMD Hyperthread Processador</div>
+                        <span class="badge-dscp">RDIMM 2TB</span>
+                        <span class="badge-dscp">20TB em Memória HHD</span>
+                    </div>
+                    <div class="conversation-row d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">Center ID 3</div>
+                        <div>AMD Hyperthread Processador</div>
+                        <span class="badge-dscp">DynamicRAM 1TB</span>
+                        <span class="badge-dscp">10TB em Disco de Memória SSD</span>
+                    </div>
+                    <div class="conversation-row d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">Center ID 4</div>
+                        <div>Intel XEON Processador</div>
+                        <span class="badge-dscp">RDIMM 2TB</span>
+                        <span class="badge-dscp">10TB em Disco de Memória SSD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </body>
 </html>
