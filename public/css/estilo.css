@@ -556,6 +556,24 @@ header a {
   font-size: 12px;
 }
 
+/* Tamanho padrão para Desktop */
+#div_banner_titulo {
+  font-size: 60px;
+}
+
+/* Quando a tela for menor que 768px (Tablets e Celulares) */
+@media (max-width: 768px) {
+  #div_banner_titulo {
+    font-size: 32px;
+    text-align: center;
+  }
+  
+  .container-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 /* LOGIN */
 
 .st-login-section {
