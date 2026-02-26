@@ -1,0 +1,77 @@
+.st-login-section {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.st-login-esquerda {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+.st-login-direita {
+    width: 50%;
+    background:
+        linear-gradient(rgba(46, 83, 117, 0.7),
+            rgba(46, 83, 117, 0.7)), url("../assets/imgs/supervisores-login");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.st-login-section .st-campo input {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    font-size: 13px;
+    color: black;
+    transition: 0.2s;
+}
+
+.st-login-card h2 {
+    font-size: 45px;
+    font-weight: 700;
+    color: #0F1C2E;
+    margin-bottom: 5px;
+}
+
+.st-login-card p {
+    color: #6c757d;
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+.st-login-section .st-campo label {
+    font-weight: 400;
+    color: #adb5bd;
+    margin-bottom: 10px;
+}
+
+.st-botao {
+    width: 100%;
+    border-radius: 6px;
+    background-color: #F5CC4D;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.st-botao:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 991px) {
+    .st-login-direita {
+        display: none;
+    }
+
+    .st-login-esquerda {
+        width: 100%;
+    }
+}
