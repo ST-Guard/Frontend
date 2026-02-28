@@ -52,13 +52,13 @@ body {
 .nav-login button {
   width: 120px;
   height: 38px;
-  border-radius: 6px;
-  border: none;
   background-color: #F5CC4D;
-  font-size: 18px;
-  font-weight: 500;
+  padding: 14px 35px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 .nav-login button:hover {
@@ -776,22 +776,6 @@ body {
 
 .st-campo input:focus {
     border-color: #f5c542;
-}
-
-.st-botao {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background-color: #f5c542;
-    color: #1c1d24;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.st-botao:hover {
-    background-color: #e0b232;
 }
 
 .alerta_erro {
