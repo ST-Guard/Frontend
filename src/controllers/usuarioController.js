@@ -2,31 +2,30 @@ var usuarioModel = require("../models/usuarioModel");
 
 function autenticar(req, res) {
 
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
+    var emailVar = req.body.emailServer;
+    var senhaVar = req.body.senhaServer;
+    
 
-    if (email == undefined) {
+    if (emailVar == undefined) {
         return res.status(400).send("Seu email está undefined!");
-    } else if (senha == undefined) {
+    } else if (senhaVar == undefined) {
         return res.status(400).send("Sua senha está indefinida!");
     }
 
-    usuarioModel.autenticar(email, senha)
+    usuarioModel.autenticar(emailVar,senhaVar)
         .then(function (resultadoAutenticar) {
 
             if (resultadoAutenticar.length == 1) {
                 res.json({
-                    idUsuario: resultadoAutenticar[0].idUsuario,
-                    email: resultadoAutenticar[0].email,
-                    nome: resultadoAutenticar[0].nome,
-                    fkEmpresa: resultadoAutenticar[0].fkEmpresa
+                    idToken: resultadoAutenticar[0].idToken
                 });
             } else if (resultadoAutenticar.length == 0) {
                 res.status(403).send("Email e/ou senha inválido(s)");
             } else {
                 res.status(403).send("Mais de um usuário com o mesmo login!");
             }
-        })
+        }
+    )
         .catch(function (erro) {
             console.log(erro);
             res.status(500).json(erro.sqlMessage);
@@ -38,7 +37,6 @@ function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
     var fkEmpresa = req.body.idEmpresaVincularServer;
 
     // Faça as validações dos valores
@@ -90,7 +88,7 @@ function cadastrarCompleto(req, res) {
 
             var idEmpresa = resultadoEmpresa.insertId;
 
-            // 2️⃣ Cadastra usuário
+            
             return usuarioModel.cadastrar(nome, email, senha, idEmpresa);
         })
         .then(function (resultadoUsuario) {

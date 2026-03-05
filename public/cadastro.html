@@ -68,16 +68,6 @@
             <input id="input_cnpj" type="text" placeholder="CNPJ">
           </div>
 
-          <div class="st-campo">
-            <label>Senha</label>
-            <input id="input_senha" type="password" placeholder="Crie uma senha">
-          </div>
-
-          <div class="st-campo">
-            <label>Confirmar senha</label>
-            <input type="password" placeholder="Confirme a senha">
-          </div>
-
           <button onclick="cadastrar()" class="st-botao">Cadastrar</button>
 
         </div>
@@ -104,9 +94,9 @@
     var cnpj = input_cnpj.value;
     var nomeUsuario = input_nome.value;
     var email = input_email.value;
-    var senha = input_senha.value;
+   
     // Verificando se há algum campo em branco
-   if (nomeEmpresa == "" || cnpj == "" || nomeUsuario == "" || email == "" || senha == "") {
+   if (nomeEmpresa == "" || cnpj == "" || nomeUsuario == "" || email == "") {
   alert("Preencha todos os campos!");
   return;
 }
@@ -121,8 +111,8 @@
     nomeEmpresaServer: nomeEmpresa,
     cnpjServer: cnpj,
     nomeServer: nomeUsuario,
-    emailServer: email,
-    senhaServer: senha
+    emailServer: email
+    
   }),
 }
   )
