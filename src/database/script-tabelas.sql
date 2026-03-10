@@ -1,5 +1,6 @@
 show databases;
 show tables;
+drop database smartData;
 
 CREATE DATABASE smartData;
 USE smartData;

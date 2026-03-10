@@ -93,7 +93,7 @@ function entrar() {
         if (senhaVar == "" || emailVar == "" ) {
             
            div_erros_login.innerHTML = `<p style="color: red;"> Todos os campos estão vazios</p>`
-            finalizarAguardar();
+          
             return false;
         }
       
@@ -132,7 +132,7 @@ function entrar() {
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                  
                 });
             }
 
