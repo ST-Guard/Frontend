@@ -541,6 +541,86 @@ header a {
   }
 }
 
+/* LOGIN */
+
+.st-login-section {
+  background-color: #244770;
+}
+
+.st-login-section {
+    display: flex;
+    height: calc(100vh - 70px);
+}
+
+.st-login-left {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.st-login-container {
+    width: 100%;
+    max-width: 350px;
+}
+
+.st-login-card {
+    width: 100%;
+}
+
+.st-login-card h2 {
+    margin-bottom: 30px;
+}
+
+
+.st-campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.st-campo label {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.st-campo input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #1f3d6b;
+    background-color: #0f223f;
+    color: white;
+    outline: none;
+}
+
+.st-campo input:focus {
+    border-color: #f5c542;
+}
+
+
+.st-botao {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f5c542;
+    color: #0b1f3a;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.st-botao:hover {
+    background-color: #e0b232;
+}
+
+
+.st-login-right {
+    width: 55%;
+    /* background-image: url("../assets/imagemlogin.png"); */
+    background-size: cover;
+    background-position: center;
+}
+
 
 .alerta_erro {
   position: absolute;
