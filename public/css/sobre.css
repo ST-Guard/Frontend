@@ -12,11 +12,13 @@
     font-weight: 700;
     color: #0F1C2E;
     margin-bottom: 10px;
+    font-size: 60px;
 }
 
 .titulo-pilares p {
     color: #6b7280;
     font-size: 20px;
+    font-weight: 300;
 }
 
 .titulo-pilares h1:after {
@@ -47,11 +49,11 @@
     color: white;
     transition: 0.3s;
     width: 320px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .coluna:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .icone-pilar {
@@ -115,7 +117,7 @@
 .beneficio p {
     font-size: 15px;
     color: white;
-    font-weight: 250;
+    font-weight: 300;
 }
 
 .secao-cta {
@@ -133,6 +135,7 @@
     color: white;
     margin-top: 10px;
     margin-bottom: 30px;
+    font-weight: 300;
 }
 
 .botao-cta {
