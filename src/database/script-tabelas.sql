@@ -1,5 +1,4 @@
 show databases;
-show tables;
 drop database smartData;
 
 CREATE DATABASE smartData;
@@ -35,12 +34,12 @@ identificadorDT VARCHAR(100),
 capacidadeServidores INT,
 fkEmpresa INT,
 	CONSTRAINT fkDataCenterEmpresa
-    FOREIGN KEY(fkEmpresa)
-	REFERENCES empresa(idEmpresa),
+		FOREIGN KEY(fkEmpresa)
+			REFERENCES empresa(idEmpresa),
 fkServidor INT,
 	CONSTRAINT fkDataCenterServidor
-    FOREIGN KEY(fkServidor)
-    REFERENCES servidor(idServidor)
+		FOREIGN KEY(fkServidor)
+			REFERENCES servidor(idServidor)
 );
 
 CREATE TABLE endereco(
@@ -75,3 +74,11 @@ fkComponentes INT,
 	PRIMARY KEY (fkServidor, fkComponentes)
 );
 
+INSERT INTO usuario(nome, email, cpf, senha) VALUES
+	("Lucas Millan", "lucas.millan@gmail.com", "12345678909", "Lucas123");
+
+SELECT * from usuario;
+
+select * from dataCenter;
+
+select * from servidor;
