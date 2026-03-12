@@ -49,13 +49,15 @@
           </div>
 
 
-          <button onclick="nextPage()" class="st-botao">Proxima página</button>
+          <button onclick="cadastrar()" class="st-botao">Cadastrar</button>
 
         </div>
 
       </div>
     </div>
 
+
+    <!-- QUEBRADO ERROOO -->
   </section>
   <div style="display: none;" id="div_nextpage" class="st-cadastro-container">
     <div class="st-cadastro-card">
@@ -156,13 +158,13 @@
 
 
     // Verificando se há algum campo em branco
-    if (cpf == "" || senha == "" || nomeUsuario == "" || email == "" || dt == "" || servidor == "") {
+    if (cpf == "" || senha == "" || nomeUsuario == "" || email == "") {
       alert("Preencha todos os campos!");
       return;
     }
 
     // Enviando o valor da nova input
-    fetch("/usuarios/cadastrarCompleto", {
+    fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -172,8 +174,8 @@
         senhaServer: senha,
         nomeServer: nomeUsuario,
         emailServer: email,
-        dtServer: dt,
-        servidorServer: servidor
+        // dtServer: dt,
+        // servidorServer: servidor
       }),
     }
     )

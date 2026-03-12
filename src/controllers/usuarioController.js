@@ -39,8 +39,8 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
-    var dt = req.body.dtServer;
-    var servidor = req.body.servidorServer;
+    // var dt = req.body.dtServer;
+    // var servidor = req.body.servidorServer;
 
 
     // Faça as validações dos valores
@@ -52,14 +52,16 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha está undefined!");
     } else if (cpf == undefined) {
         res.status(400).send("Sua cpf está undefined!");
-    } else if (dt == undefined) {
-        res.status(400).send("Seu DataCenter está undefined!");
-    } else if (servidor == undefined) {
-        res.status(400).send("Seu Servidor está undefined!");
-    } else {
+    } 
+    // else if (dt == undefined) {
+    //     res.status(400).send("Seu DataCenter está undefined!");
+    // } else if (servidor == undefined) {
+    //     res.status(400).send("Seu Servidor está undefined!");
+    // } 
+    else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha, cpf, dt, servidor)
+        usuarioModel.cadastrar(nome, email, senha, cpf)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -87,15 +89,13 @@ function cadastrarCompleto(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    var dt = req.body.dtServer;
-    var servidor = req.body.servidorServer;
 
-    if (!cpf || !nome || !email || !senha|| !dt|| !servidor) {
+    if (!cpf || !nome || !email || !senha) {
         return res.status(400).send("Campos obrigatórios vazios");
     }
 
 
-    usuarioModel.cadastrar(nome, email, senha, cpf,dt , servidor)
+    usuarioModel.cadastrar(nome, email, senha, cpf)
         .then(function (resultado) {
             res.json(resultado);
         })

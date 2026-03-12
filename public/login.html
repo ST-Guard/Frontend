@@ -83,65 +83,58 @@
 
 
 function entrar() {
-        
-
-        var senhaVar = senha_input.value;
-        var emailVar = email_input.value;
-        
-
-        if (senhaVar == "" || emailVar == "" ) {
-            
-           div_erros_login.innerHTML = `<p style="color: red;"> Todos os campos estão vazios</p>`
-          
-            return false;
-        }
-      
-        console.log("FORM TOKEN: ", emailVar,senhaVar);
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.token;
-                   
-
-                    setTimeout(function () {
-                        window.location = "pages/dashboardTec.html";
-                    }, 1000); 
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                  
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
-    }
-
+  var senhaVar = senha_input.value;
+  var emailVar = email_input.value;
     
+  if (senhaVar == "" || emailVar == "" ) {
+      div_erros_login.innerHTML = `<p style="color: red;"> Todos os campos estão vazios</p>`
+      return false;
+  }
+  
+  console.log("FORM TOKEN: ", emailVar,senhaVar);
 
+  fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          emailServer: emailVar,
+          senhaServer: senhaVar
+      })
+  }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then(json => {
+              console.log(json);
+              console.log(JSON.stringify(json));
+              sessionStorage.ID_USUARIO = json.id;
+              sessionStorage.NOME_USUARIO = json.nome;
+              sessionStorage.EMAIL_USUARIO = json.email;
+              
+              setTimeout(function () {
+                  window.location = "pages/dashboardTec.html";
+              }, 1000); 
+
+          });
+
+        } else {
+
+            console.log("Houve um erro ao tentar realizar o login!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+              
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    return false;
+}
 </script>
