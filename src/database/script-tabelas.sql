@@ -76,6 +76,16 @@ fkComponentes INT,
 
 INSERT INTO usuario(nome, email, cpf, senha) VALUES
 	("Lucas Millan", "lucas.millan@gmail.com", "12345678909", "Lucas123");
+    
+INSERT INTO usuario(nome, email, cpf, senha) VALUES
+	("teste", "teste@gmail.com", "12345678900", "teste");
+    
+INSERT INTO usuario(nome, email, cpf, senha, idGerente) VALUES
+	("joao", "joao@gmail.com", "12345678902", "teste", 5);
+
+SELECT * FROM usuario WHERE idGerente = 5;
+
+SELECT idUsuario, nome, email, idGerente FROM usuario WHERE email = 'teste@gmail.com' AND senha = 'teste';
 
 SELECT * from usuario;
 
