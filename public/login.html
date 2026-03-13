@@ -120,12 +120,15 @@ function entrar() {
               if(json.idGerente == undefined){
                 sessionStorage.ID_GERENTE = null;
 
-              }
-              
-              setTimeout(function () {
+                setTimeout(function () {
                   window.location = "pages/dashboardGestor.html";
-              }, 500); 
+                }, 500); 
 
+              } else{
+                setTimeout(function () {
+                    window.location = "pages/dashboardAnalista.html";
+                }, 500); 
+              }
           });
 
         } else {
