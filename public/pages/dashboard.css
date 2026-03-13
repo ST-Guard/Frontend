@@ -51,8 +51,6 @@ body {
 
 .barra-disco {
     background-color: #f2b547;
-<<<<<<< HEAD
-=======
 }
 
 .card-grafico {
@@ -228,7 +226,6 @@ body {
     border-radius: 30px;
     font-size: 0.7rem;
     font-weight: 500;
->>>>>>> 2c087d2 (center graph card on dashboard and removing missing icons)
 }
 
 .freq-card {
