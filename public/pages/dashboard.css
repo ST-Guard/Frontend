@@ -12,6 +12,10 @@ body {
     backdrop-filter: blur(2px);
 }
 
+.navbar-nav {
+    justify-content: flex-end;
+    width: 100%;
+}
 
 .valor-grande {
     font-size: 2.2rem;
