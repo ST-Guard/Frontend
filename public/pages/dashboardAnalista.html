@@ -15,33 +15,32 @@
 </head>
 <body>
     <header>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0F1C2E; width: 100%;">
-      <div class="container-fluid px-5">
-        <a class="navbar-brand fs-3 fw-semibold" href="#">
-          <a class="navbar-brand" href="index.html">
-            <img src="../assets/fundos-home/smart_branca.png" alt="Smart Data Logo" style="height: 50px; width: auto;">
-          </a>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0F1C2E; width: 100%;">
+            <div class="container-fluid px-5">
+                <a class="navbar-brand fs-3 fw-semibold" href="#">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="../assets/fundos-home/smart_branca.png" alt="Smart Data Logo"
+                            style="height: 50px; width: auto;">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-<div class="collapse navbar-collapse" id="navbarNav">
-  <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-4">
-    <li class="nav-item">
-        <button style="" onclick="limparSessao">Sair</button>
-      <a class="nav-link text-white fs-5" 
-         style="background-color: red; width: auto; height: 38px; 
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-4">
+                            <li class="nav-item">
+                                <button onclick="limparSessao">Sair</button>
+                                <a class="nav-link text-white fs-5" style="background-color: red; width: auto; height: 38px; 
                 border-radius: 6px; font-weight: 500; padding: 0 20px; 
-                display: flex; align-items: center; justify-content: center; cursor: pointer;" 
-         onclick="limparSessao()">Sair</a>
-    </li>
-  </ul>
-</div>
-      </div>
-    </nav>
-  </header>
+                display: flex; align-items: center; justify-content: center; cursor: pointer;"
+                                    onclick="limparSessao()">Sair</a>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+        </nav>
+    </header>
 
     <div class="container-fluid py-3 px-lg-4 px-2">
         <!-- <div class="row g-3 mb-4">
@@ -219,53 +218,53 @@
                 </div>
             </div>
         </div>
-        </body>
-        <script>
-            const servidoresMonitorados = [
-                { id: 'CENTER-ID-01', processador: 'Intel XEON', ram: 'DynamicRAM 1TB', disco: '20TB HHD' },
-                { id: 'CENTER-ID-02', processador: 'AMD Hyperthread', ram: 'RDIMM 2TB', disco: '20TB HHD' },
-                { id: 'CENTER-ID-03', processador: 'AMD Hyperthread', ram: 'DynamicRAM 1TB', disco: '10TB SSD' },
-                { id: 'CENTER-ID-04', processador: 'Intel XEON', ram: 'RDIMM 2TB', disco: '10TB SSD' }
-            ];
+</body>
+<script>
+    const servidoresMonitorados = [
+        { id: 'CENTER-ID-01', processador: 'Intel XEON', ram: 'DynamicRAM 1TB', disco: '20TB HHD' },
+        { id: 'CENTER-ID-02', processador: 'AMD Hyperthread', ram: 'RDIMM 2TB', disco: '20TB HHD' },
+        { id: 'CENTER-ID-03', processador: 'AMD Hyperthread', ram: 'DynamicRAM 1TB', disco: '10TB SSD' },
+        { id: 'CENTER-ID-04', processador: 'Intel XEON', ram: 'RDIMM 2TB', disco: '10TB SSD' }
+    ];
 
-            const alertasAtivos = [
-                { servidor: 'CENTER-ID-01', componente: 'CPU', mensagem: 'CPU parou', tempo: 'Agora', cor: '#2469f0' },
-                { servidor: 'CENTER-ID-02', componente: 'RAM', mensagem: 'RAM sem resposta', tempo: '2 min', cor: '#23b26d' },
-                { servidor: 'CENTER-ID-03', componente: 'RAM', mensagem: 'Falha de memória', tempo: '5 min', cor: '#23b26d' }
-            ];
+    const alertasAtivos = [
+        { servidor: 'CENTER-ID-01', componente: 'CPU', mensagem: 'CPU parou', tempo: 'Agora', cor: '#2469f0' },
+        { servidor: 'CENTER-ID-02', componente: 'RAM', mensagem: 'RAM sem resposta', tempo: '2 min', cor: '#23b26d' },
+        { servidor: 'CENTER-ID-03', componente: 'RAM', mensagem: 'Falha de memória', tempo: '5 min', cor: '#23b26d' }
+    ];
 
 
-            function preencherTabelaServidores() {
-                const tabela = document.getElementById('tabelaServidores');
-                let html = '';
+    function preencherTabelaServidores() {
+        const tabela = document.getElementById('tabelaServidores');
+        let html = '';
 
-                for (let i = 0; i < servidoresMonitorados.length; i++) {
-                    const servidor = servidoresMonitorados[i];
+        for (let i = 0; i < servidoresMonitorados.length; i++) {
+            const servidor = servidoresMonitorados[i];
 
-        //             html += `
-        //     <div class="linha-tabela d-flex flex-wrap align-items-center justify-content-between">
-        //         <div class="d-flex align-items-center">
-        //             <i class="bi bi-hdd-stack me-2" style="color: #2469f0;"></i>
-        //             ${servidor.id}
-        //         </div>
-        //         <div>${servidor.processador}</div>
-        //         <span class="badge-dscp">${servidor.ram}</span>
-        //         <span class="badge-dscp">${servidor.disco}</span>
-        //     </div>
-        // `;
-                }
+            //             html += `
+            //     <div class="linha-tabela d-flex flex-wrap align-items-center justify-content-between">
+            //         <div class="d-flex align-items-center">
+            //             <i class="bi bi-hdd-stack me-2" style="color: #2469f0;"></i>
+            //             ${servidor.id}
+            //         </div>
+            //         <div>${servidor.processador}</div>
+            //         <span class="badge-dscp">${servidor.ram}</span>
+            //         <span class="badge-dscp">${servidor.disco}</span>
+            //     </div>
+            // `;
+        }
 
-                tabela.innerHTML = html;
-            }
+        tabela.innerHTML = html;
+    }
 
-            function preencherAlertas() {
-                const lista = document.getElementById('listaAlertas');
-                let html = '';
+    function preencherAlertas() {
+        const lista = document.getElementById('listaAlertas');
+        let html = '';
 
-                for (let i = 0; i < alertasAtivos.length; i++) {
-                    const alerta = alertasAtivos[i];
+        for (let i = 0; i < alertasAtivos.length; i++) {
+            const alerta = alertasAtivos[i];
 
-                    html += `
+            html += `
             <div class="col-md-4">
                 <div class="d-flex align-items-center gap-2 p-2 rounded bg-alerta">
                     <i class="" style="color: ${alerta.cor}; font-size: 0.8rem;"></i>
@@ -277,88 +276,89 @@
                 </div>
             </div>
         `;
-                }
+        }
 
-                lista.innerHTML = html;
-            }
+        lista.innerHTML = html;
+    }
 
-            function criarGraficoFrequencia() {
-                const ctx = document.getElementById("graficoFrequenciaMemoria")?.getContext("2d");
+    function criarGraficoFrequencia() {
+        const ctx = document.getElementById("graficoFrequenciaMemoria")?.getContext("2d");
 
-                if (!ctx) return;
+        if (!ctx) return;
 
-                const labelsTempo = [];
-                for (let i = 0; i < 20; i++) {
-                    labelsTempo.push(i * 3 + "s");
-                }
+        const labelsTempo = [];
+        for (let i = 0; i < 20; i++) {
+            labelsTempo.push(i * 3 + "s");
+        }
 
-                const dadosCanalA = [
-                    2400, 2450, 2666, 2800, 3200, 3000, 3100, 3200, 3150, 3080,
-                    2950, 2880, 3020, 3180, 3220, 3160, 3080, 3000, 3100, 3200,
-                ];
+        const dadosCanalA = [
+            2400, 2450, 2666, 2800, 3200, 3000, 3100, 3200, 3150, 3080,
+            2950, 2880, 3020, 3180, 3220, 3160, 3080, 3000, 3100, 3200,
+        ];
 
-                const dadosCanalB = [
-                    2350, 2400, 2550, 2700, 3100, 2950, 3050, 3180, 3120, 3050,
-                    2900, 2820, 2980, 3150, 3200, 3120, 3040, 2950, 3060, 3180,
-                ];
+        const dadosCanalB = [
+            2350, 2400, 2550, 2700, 3100, 2950, 3050, 3180, 3120, 3050,
+            2900, 2820, 2980, 3150, 3200, 3120, 3040, 2950, 3060, 3180,
+        ];
 
-                new Chart(ctx, {
-                    type: "line",
-                    data: {
-                        labels: labelsTempo,
-                        datasets: [
-                            {
-                                label: "Canal A (MHz)",
-                                data: dadosCanalA,
-                                borderColor: "#2469f0",
-                                backgroundColor: "rgba(36, 105, 240, 0.05)",
-                                tension: 0.3,
-                                pointRadius: 3,
-                                borderWidth: 2,
-                                fill: true,
-                            },
-                            {
-                                label: "Canal B (MHz)",
-                                data: dadosCanalB,
-                                borderColor: "#23b26d",
-                                backgroundColor: "rgba(35, 178, 109, 0.05)",
-                                tension: 0.3,
-                                pointRadius: 3,
-                                borderWidth: 2,
-                                fill: true,
-                            },
-                        ],
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labelsTempo,
+                datasets: [
+                    {
+                        label: "Canal A (MHz)",
+                        data: dadosCanalA,
+                        borderColor: "#2469f0",
+                        backgroundColor: "rgba(36, 105, 240, 0.05)",
+                        tension: 0.3,
+                        pointRadius: 3,
+                        borderWidth: 2,
+                        fill: true,
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: "top",
-                                labels: {
-                                    boxWidth: 12,
-                                    font: { size: 11 },
-                                },
-                            },
-                        },
-                        scales: {
-                            y: {
-                                min: 2000,
-                                max: 3400,
-                                ticks: {
-                                    callback: function (valor) {
-                                        return valor + " MHz";
-                                    },
-                                    stepSize: 200,
-                                },
-                            },
+                    {
+                        label: "Canal B (MHz)",
+                        data: dadosCanalB,
+                        borderColor: "#23b26d",
+                        backgroundColor: "rgba(35, 178, 109, 0.05)",
+                        tension: 0.3,
+                        pointRadius: 3,
+                        borderWidth: 2,
+                        fill: true,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: "top",
+                        labels: {
+                            boxWidth: 12,
+                            font: { size: 11 },
                         },
                     },
-                });
-            }
-            preencherTabelaServidores();
-            preencherAlertas();
-            criarGraficoFrequencia();
-        </script>
+                },
+                scales: {
+                    y: {
+                        min: 2000,
+                        max: 3400,
+                        ticks: {
+                            callback: function (valor) {
+                                return valor + " MHz";
+                            },
+                            stepSize: 200,
+                        },
+                    },
+                },
+            },
+        });
+    }
+    preencherTabelaServidores();
+    preencherAlertas();
+    criarGraficoFrequencia();
+</script>
+
 </html>
