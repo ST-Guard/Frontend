@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="dashboard.css" />
     <link rel="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    <script src="../js/sessao.js"></script>
 </head>
 <body>
     <header>
@@ -42,9 +43,9 @@
 
             <div class="d-flex">
               <a href="../cadastro.html">
-                <button class="btn" style="background-color: #F5CC4D; width: auto   ; height: 38px; 
-                                       border-radius: 6px; font-weight: 500;">
-                  Cadastrar Usuário
+                <button class="btn" style="background-color: #ff140c; width: auto   ; height: 38px; 
+                                       border-radius: 6px; font-weight: 500;" onclick="limparSessão()">
+                  Sair
                 </button>
               </a>
             </div>
@@ -54,7 +55,7 @@
   </header>
 
     <div class="container-fluid py-3 px-lg-4 px-2">
-        <div class="row g-3 mb-4">
+        <!-- <div class="row g-3 mb-4">
             <div class="col-6 col-md-4">
                 <div class="card-monitoramento p-3 h-100">
                     <div class="d-flex justify-content-between align-items-center">
@@ -112,7 +113,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row g-3 mb-4">
             <div class="col-12">
                 <div class="card-monitoramento p-3">
@@ -216,13 +217,13 @@
             </div>
             <div class="row g-3">
                 <div class="col-12">
-                    <div class="card card-tabela">
-                        <div class="card-header d-flex justify-content-between bg-transparent border-0 pt-3">
+                    <div class="card card-tabela" style="height: 0rem;"> <!--ALTERADO O TAMANHO-->
+                        <!-- <div class="card-header d-flex justify-content-between bg-transparent border-0 pt-3">
                             <span class="fw-bold" style="color: #0b2b4a">
                                 <i class="bi bi-server me-2"></i>Relatório de Monitoramento · Servidores
                             </span>
                             <span class="small text-muted">ID Servidor | CPU | RAM | Memória</span>
-                        </div>
+                        </div> -->
                         <div class="card-body pt-0" id="tabelaServidores">
                         </div>
                     </div>
@@ -252,17 +253,17 @@
                 for (let i = 0; i < servidoresMonitorados.length; i++) {
                     const servidor = servidoresMonitorados[i];
 
-                    html += `
-            <div class="linha-tabela d-flex flex-wrap align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-hdd-stack me-2" style="color: #2469f0;"></i>
-                    ${servidor.id}
-                </div>
-                <div>${servidor.processador}</div>
-                <span class="badge-dscp">${servidor.ram}</span>
-                <span class="badge-dscp">${servidor.disco}</span>
-            </div>
-        `;
+        //             html += `
+        //     <div class="linha-tabela d-flex flex-wrap align-items-center justify-content-between">
+        //         <div class="d-flex align-items-center">
+        //             <i class="bi bi-hdd-stack me-2" style="color: #2469f0;"></i>
+        //             ${servidor.id}
+        //         </div>
+        //         <div>${servidor.processador}</div>
+        //         <span class="badge-dscp">${servidor.ram}</span>
+        //         <span class="badge-dscp">${servidor.disco}</span>
+        //     </div>
+        // `;
                 }
 
                 tabela.innerHTML = html;

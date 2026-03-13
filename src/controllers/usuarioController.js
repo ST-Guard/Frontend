@@ -1,29 +1,33 @@
 var usuarioModel = require("../models/usuarioModel");
+// var aquarioModel = require("../models/aquarioModel");
 
 function autenticar(req, res) {
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
 
-    var emailVar = req.body.emailServer;
-    var senhaVar = req.body.senhaServer;
-
-
-    if (emailVar == undefined) {
+    if (email == undefined) {
         return res.status(400).send("Seu email está undefined!");
-    } else if (senhaVar == undefined) {
+    } else if (senha == undefined) {
         return res.status(400).send("Sua senha está indefinida!");
     }
 
-    usuarioModel.autenticar(emailVar, senhaVar)
-        .then(function (resultadoAutenticar) {
+    usuarioModel.autenticar(email, senha)
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
 
             if (resultadoAutenticar.length == 1) {
                 res.json({
-                    idToken: resultadoAutenticar[0].idToken
+                    idUsuario: resultadoAutenticar[0].idUsuario,
+                    email: resultadoAutenticar[0].email,
+                    nome: resultadoAutenticar[0].nome
                 });
-            } else if (resultadoAutenticar.length == 0) {
-                res.status(403).send("Email e/ou senha inválido(s)");
-            } else {
-                res.status(403).send("Mais de um usuário com o mesmo login!");
-            }
+                } else if (resultadoAutenticar.length == 0) {
+                    res.status(403).send("Email e/ou senha inválido(s)");
+                } else {
+                    res.status(403).send("Mais de um usuário com o mesmo login!");
+                }
         }
         )
         .catch(function (erro) {
@@ -39,6 +43,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
+    var idGerente = req.body.idGerenteServer;
     // var dt = req.body.dtServer;
     // var servidor = req.body.servidorServer;
 
@@ -59,9 +64,8 @@ function cadastrar(req, res) {
     //     res.status(400).send("Seu Servidor está undefined!");
     // } 
     else {
-
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha, cpf)
+        usuarioModel.cadastrar(nome, email, senha, cpf, idGerente)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -81,29 +85,29 @@ function cadastrar(req, res) {
 var empresaModel = require("../models/empresaModel");
 var usuarioModel = require("../models/usuarioModel");
 
-function cadastrarCompleto(req, res) {
+// function cadastrarCompleto(req, res) {
 
 
 
-    var cpf = req.body.cpfServer;
-    var nome = req.body.nomeServer;
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
+//     var cpf = req.body.cpfServer;
+//     var nome = req.body.nomeServer;
+//     var email = req.body.emailServer;
+//     var senha = req.body.senhaServer;
 
-    if (!cpf || !nome || !email || !senha) {
-        return res.status(400).send("Campos obrigatórios vazios");
-    }
+//     if (!cpf || !nome || !email || !senha) {
+//         return res.status(400).send("Campos obrigatórios vazios");
+//     }
 
 
-    usuarioModel.cadastrar(nome, email, senha, cpf)
-        .then(function (resultado) {
-            res.json(resultado);
-        })
-        .catch(function (erro) {
-            console.log(erro);
-            res.status(500).json(erro.sqlMessage);
-        });
-}
+//     usuarioModel.cadastrar(nome, email, senha, cpf)
+//         .then(function (resultado) {
+//             res.json(resultado);
+//         })
+//         .catch(function (erro) {
+//             console.log(erro);
+//             res.status(500).json(erro.sqlMessage);
+//         });
+// }
 
 
 
@@ -111,5 +115,5 @@ function cadastrarCompleto(req, res) {
 module.exports = {
     autenticar,
     cadastrar,
-    cadastrarCompleto
+    // cadastrarCompleto
 }
