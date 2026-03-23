@@ -1,6 +1,6 @@
 .st-login-section {
     display: flex;
-    min-height: 100vh;
+    height: 90vh;
     width: 100%;
 }
 
@@ -94,7 +94,7 @@
 }
 
 .st-botao {
-    width: 100%;
+    width: 35%;
     background-color: #F5CC4D;
     padding: 14px 35px;
     border: none;
@@ -102,6 +102,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 17px;
 }
 
 .st-botao:hover {
