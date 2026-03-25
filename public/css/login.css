@@ -91,6 +91,7 @@
     padding: 0 20px;
     width: 100%;
     color: black;
+    border-bottom: 1px solid black;
 }
 
 .st-botao {
