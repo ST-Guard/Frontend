@@ -207,19 +207,21 @@ main #div_relatorios #div_relatorios_kpi .kpi img {
 
 main #monitoramento {
   background-color: #0F1C2E;
-  margin-top: -95px;
-  padding-top: 140px;
-  position: relative;
-  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+
   color: white;
   text-align: center;
-  height: 100vh;
+  min-height: 80vh;
+  box-sizing: border-box;
 }
 
 main #monitoramento .container-monitoramento {
   width: 90%;
   max-width: 1200px;
-  margin: auto;
+  
   text-align: center;
   color: white;
 }
@@ -228,10 +230,11 @@ main #monitoramento h1 {
   font-size: 42px;
   font-family: 'Outfit', sans-serif;
   margin-bottom: 10px;
+  
 }
 
 main #monitoramento p {
-  margin-bottom: 60px;
+  
   font-size: 20px;
   color: white;
   font-weight: lighter;
@@ -249,7 +252,7 @@ main #monitoramento .cards-container .elementos {
   padding: 40px 25px;
   min-height: 250px;
   transition: 0.25s;
-  margin-bottom: 50px;
+  
   font-size: 16px;
   color: #e1ecf5;
   text-align: left;
@@ -811,6 +814,7 @@ input {
   margin: 0;
   gap: 18px; 
   box-sizing: border-box;
+  padding-bottom: 10px;
 }
 
 
@@ -824,7 +828,7 @@ input {
 
 .card_azul .titulo h1{
   color: #f5c542;
-  font-size: 35px;
+  font-size: 40px;
   text-align: center;
   
 }
@@ -875,13 +879,24 @@ input {
 }
 
 .formulario button {
-  height: 85px;
-  background-color: #f5c542;
+  height: 60px;
+  background-color: #F5CC4D;;
   border: 0;
   border-radius: 5px;
-  color: #1f3d6b;
-  font-weight: 800 ;
+  
+  font-weight: 600 ;
   font-size: 20px;
+}
+
+.formulario button:hover{
+  transform: translateY(-3px);
+  filter: brightness(1.2);
+
+}
+
+.formulario button:active{
+  background-color: #6b561c;
+  
 }
 
 
@@ -893,9 +908,47 @@ input {
 
 .formulario .inputs textarea{
   width: 100%;
+  
+}
+
+.caixa_input {
+  position: relative;
+}
+
+.caixa_input input {
+  padding-left: 50px;
+}
+
+.caixa_input i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  
+}
+
+.caixa_input img{
+  height: 40px;
 }
 
 
+.caixa_input_text_area {
+  position: relative;
+}
+
+.caixa_input_text_area textarea {
+  padding: 10px 10px 10px 50px;
+}
+
+.caixa_input_text_area i {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.caixa_input_text_area img{
+  height: 40px;
+}
 
 @media (max-width: 1200px) {
     .card_azul {
