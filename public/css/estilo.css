@@ -391,7 +391,7 @@ main #diferenciais .botao-amarelo {
 }
 
 footer#footer {
-  background-color: #071625;
+  background-color: #1d334f;
   padding: 60px 0;
   color: white;
   display: flex;
@@ -790,39 +790,41 @@ input {
 
 
 .fale_conosco {
-  height: 90vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/fundos-home/fundo-fale-conosco.png');
+  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/fundos-home/pessoas_monitorar.jpeg');
   background-size: cover;
-  
+  box-sizing: border-box;
 }
 
 .card_azul {
-  background-color: rgba(14, 36, 56, 0.85);
+  background-color: rgba(29, 51, 79, 0.85);
   width: 40%;
-  height: 90vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 7vh;
   margin: 0;
-  gap: 15px; 
+  gap: 18px; 
+  box-sizing: border-box;
 }
 
-.card_azul {
-  
-}
+
 
 .titulo {
   width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .card_azul .titulo h1{
   color: #f5c542;
-  font-size: 30px;
+  font-size: 35px;
   text-align: center;
   
 }
@@ -834,7 +836,7 @@ input {
 
 .formulario h1 {
   color: #ffffff;
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -843,24 +845,89 @@ input {
 
 .formulario {
   width: 75%;
+  display: flex;
+  gap: 2px;
+  
 }
 
 .formulario input {
   border: solid 2px gray;
   border-radius: 5px;
+  text-align: left;
   
 }
 
-.input_mensagem {
-  height:100px;
+
+.formulario textarea {
+  border: solid 2px gray;
+  border-radius: 5px;
+  text-align: left;
+  padding: 5px;
+  font-size: 15px;
+  height: 125px;
+  width: 100%;  
+}
+
+
+
+.inputs {
+  height: 60px;
 }
 
 .formulario button {
-  height: 65px;
+  height: 85px;
   background-color: #f5c542;
   border: 0;
   border-radius: 5px;
   color: #1f3d6b;
-  font-weight: bold 800;
-  font-size: 15px;
+  font-weight: 800 ;
+  font-size: 20px;
+}
+
+
+
+.formulario .inputs {
+  width: 100%;
+}
+
+
+.formulario .inputs textarea{
+  width: 100%;
+}
+
+
+
+@media (max-width: 1200px) {
+    .card_azul {
+    width: 80%;
+    padding: 10px;
+  }
+}
+
+
+@media (max-width: 1060px) {
+    .card_azul {
+    width: 100%;
+    justify-content: center;
+
+    padding: 10px;
+  }
+}
+
+
+@media (max-width: 730px) {
+  .card_azul {
+    width: 100%;
+     justify-content: center;
+     padding: 10px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .card_azul {
+    width: 100%;
+   padding: 10px;
+    justify-content: center; 
+  }
 }
