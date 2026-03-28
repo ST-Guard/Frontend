@@ -10,7 +10,7 @@
     height: 100vh;
     background-color: transparent;
     display: flex;
-    align-items: end;
+    align-items: start;
     justify-content: right;
     position: absolute;
     top: 0;
@@ -23,17 +23,15 @@
 }
 
 .conteiner_modal {
-    background-color: #F5CC4D;
-    width: 38%;
-    height: 35vh;
+    background-color: #f5cb4d;
+    width: 25%;
+    height: 22vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    margin: 20px;
     z-index: 99;
-
 }
 
 .conteiner_modal header {
@@ -57,7 +55,8 @@
     display: flex;
     align-items: center;
     padding: 5px;
-    font-size: 17px;
+    margin: 2px;
+    font-size: 14px;
     border-radius: 10px;
 }
 
@@ -67,8 +66,9 @@
 }
 
 .conteiner_modal .titulo p {
-    font-size: 22px;
+    font-size: 17px;
     padding-left: 5px;
+    margin-bottom: -5px;
 }
 
 .conteiner_modal .conteiner_barra {
