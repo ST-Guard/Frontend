@@ -35,6 +35,10 @@ header .logo {
   font-weight: 600;
 }
 
+.navbar_navbar-expand-lg_navbar-dark{
+  height: 100%;
+}
+
 header .navbar-nav .nav-link:hover {
   color: #66C0F4 !important;
   transition: .2s;
@@ -203,19 +207,21 @@ main #div_relatorios #div_relatorios_kpi .kpi img {
 
 main #monitoramento {
   background-color: #0F1C2E;
-  margin-top: -95px;
-  padding-top: 140px;
-  position: relative;
-  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+
   color: white;
   text-align: center;
-  height: 100vh;
+  min-height: 80vh;
+  box-sizing: border-box;
 }
 
 main #monitoramento .container-monitoramento {
   width: 90%;
   max-width: 1200px;
-  margin: auto;
+  
   text-align: center;
   color: white;
 }
@@ -224,10 +230,11 @@ main #monitoramento h1 {
   font-size: 42px;
   font-family: 'Outfit', sans-serif;
   margin-bottom: 10px;
+  
 }
 
 main #monitoramento p {
-  margin-bottom: 60px;
+  
   font-size: 20px;
   color: white;
   font-weight: lighter;
@@ -245,7 +252,7 @@ main #monitoramento .cards-container .elementos {
   padding: 40px 25px;
   min-height: 250px;
   transition: 0.25s;
-  margin-bottom: 50px;
+  
   font-size: 16px;
   color: #e1ecf5;
   text-align: left;
@@ -320,7 +327,7 @@ main #terceiro-banner .banner-conteudo #sobre-empresa button {
 
 main #diferenciais {
   background: linear-gradient(#0e2438, #0b1c2d);
-  padding: 80px 0;
+  padding: 60px 0;
   color: white;
   text-align: center;
 }
@@ -362,7 +369,7 @@ main #diferenciais .cards-diferenciais .card-diferencial p {
 
 main #diferenciais .linha-destaque {
   height: 2px;
-  margin: 60px 0;
+  margin: 30px 0;
   background: linear-gradient(to right, transparent, #F5CC4D, transparent);
 }
 
@@ -387,7 +394,7 @@ main #diferenciais .botao-amarelo {
 }
 
 footer#footer {
-  background-color: #071625;
+  background-color: #1d334f;
   padding: 60px 0;
   color: white;
   display: flex;
@@ -781,5 +788,213 @@ input {
 
   header .navbar-brand img {
     height: 40px;
+  }
+}
+
+
+.fale_conosco {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/fundos-home/pessoas_monitorar.jpeg');
+  background-size: cover;
+  box-sizing: border-box;
+}
+
+.card_azul {
+  background-color: rgba(29, 51, 79, 0.85);
+  width: 40%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 7vh;
+  margin: 0;
+  gap: 18px; 
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+
+
+.titulo {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card_azul .titulo h1{
+  color: #f5c542;
+  font-size: 40px;
+  text-align: center;
+  
+}
+
+.card_azul .titulo p{
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.formulario h1 {
+  color: #ffffff;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.formulario {
+  width: 75%;
+  display: flex;
+  gap: 2px;
+  
+}
+
+.formulario input {
+  border: solid 2px gray;
+  border-radius: 5px;
+  text-align: left;
+  
+}
+
+
+.formulario textarea {
+  border: solid 2px gray;
+  border-radius: 5px;
+  text-align: left;
+  padding: 5px;
+  font-size: 15px;
+  height: 125px;
+  width: 100%;  
+}
+
+
+
+.inputs {
+  height: 60px;
+}
+
+.formulario button {
+  height: 60px;
+  background-color: #F5CC4D;;
+  border: 0;
+  border-radius: 5px;
+  
+  font-weight: 600 ;
+  font-size: 20px;
+}
+
+.formulario button:hover{
+  transform: translateY(-3px);
+  filter: brightness(1.2);
+
+}
+
+.formulario button:active{
+  background-color: #6b561c;
+  
+}
+
+
+
+.formulario .inputs {
+  width: 100%;
+}
+
+
+.formulario .inputs textarea{
+  width: 100%;
+  
+}
+
+.caixa_input {
+  position: relative;
+}
+
+.caixa_input input {
+  padding-left: 40px;
+}
+
+.caixa_input i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  
+}
+
+.caixa_input img{
+  height: 25px;
+}
+
+
+.caixa_input_text_area {
+  position: relative;
+}
+
+.caixa_input_text_area textarea {
+  padding: 10px 10px 10px 40px;
+}
+
+.caixa_input_text_area i {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.caixa_input_text_area img{
+  height: 25px;
+}
+
+
+
+#mensagem_erro h1{
+  color: red;
+  text-align: center;
+  font-size: 15px;
+}
+
+#mensagem_erro p{
+  color: rgb(68, 255, 68);
+  text-align: center;
+  font-size: 15px;
+}
+
+@media (max-width: 1200px) {
+    .card_azul {
+    width: 80%;
+    padding: 10px;
+  }
+}
+
+
+@media (max-width: 1060px) {
+    .card_azul {
+    width: 100%;
+    justify-content: center;
+
+    padding: 10px;
+  }
+}
+
+
+@media (max-width: 730px) {
+  .card_azul {
+    width: 100%;
+     justify-content: center;
+     padding: 10px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .card_azul {
+    width: 100%;
+   padding: 10px;
+    justify-content: center; 
   }
 }

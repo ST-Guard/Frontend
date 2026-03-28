@@ -21,7 +21,7 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0F1C2E; width: 100%;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0F1C2E; width: 100%; height: 100%;">
       <div class="container-fluid px-5">
         <a class="navbar-brand fs-3 fw-semibold" href="#">
           <a class="navbar-brand" href="index.html">
@@ -50,7 +50,7 @@
             </ul>
 
             <div class="d-flex">
-              <a href="login.html">
+              <a href="./pages/loginlogout/login.html">
                 <button class="btn" style="background-color: #F5CC4D; width: 120px; height: 38px; 
                                        border-radius: 6px; font-weight: 500;">
                   Login
@@ -76,59 +76,17 @@
       </div>
 
       <div id="div_banner_button">
-        <a href="login.html">
+        <a href="./pages/loginlogout/login.html">
           <button id="button_yellow">Começar Agora</button>
         </a>
-        <a href="sobre.html">
+        <a href="./pages/pages-index/sobre.html">
           <button id="button_transparent_blue">Saiba mais</button>
         </a>
       </div>
     </div>
 
-    <div id="div_relatorios">
-      <div id="div_relatorios_kpi">
-        <div id="div_kpi_1" class="kpi">
-          <div id="div_img1">
-            <img src="./assets/fundos-home/servidor 1.png" alt="">
-          </div>
-          <div id="div_texto1">
-            <span>23</span> <br>
-            Servidores Online
-          </div>
-        </div>
-
-        <div id="div_kpi_2" class="kpi">
-          <div id="div_img2">
-            <img src="./assets/fundos-home/atencao 2.png" alt="">
-          </div>
-          <div id="div_texto2">
-            <span>15</span> <br>
-            Alertas Ativos
-          </div>
-        </div>
-
-        <div id="div_kpi_3" class="kpi">
-          <div id="div_img3">
-            <img src="./assets/fundos-home/relatorio 1.png" alt="">
-          </div>
-          <div id="div_texto3">
-            <span>120</span> <br>
-            Relatórios Gerados
-          </div>
-        </div>
-
-        <div id="div_kpi_4" class="kpi">
-          <div id="div_img4">
-            <img src="./assets/fundos-home/comercial 1.png" alt="">
-          </div>
-          <div id="div_texto4">
-            <span>40</span> <br>
-            Equipes
-          </div>
-        </div>
-      </div>
-    </div>
-
+  
+  
     <section id="monitoramento">
       <div class="container-monitoramento">
         <h1>Monitore Seus Serviços Em Tempo Hábil</h1>
@@ -224,13 +182,55 @@
         <div class="linha-destaque"></div>
 
         <div class="cta-diferenciais">
-          <a href="login.html">
+          <a href="./pages/loginlogout/login.html">
             <button class="botao-amarelo">Começar Agora</button>
           </a>
         </div>
       </div>
     </section>
   </main>
+  <section class="fale_conosco">
+      <div class="card_azul">
+          <div class="titulo">
+            <h1>Fale Conosco!</h1>
+    
+            <p>Tem alguma dúvida ou se interessou por nossos serviços? Preencha o formulário abaixo</p>
+          </div>
+          <div class="formulario">
+            <div class="campo">
+            <h1>Nome completo</h1>
+            <div class="caixa_input">
+            <input type="text" class="inputs" id="input_nome">
+            <i><img src="./assets/icon/do-utilizador.png" alt=""></i>
+            </div>
+            </div>
+            <br> 
+            <div class="campo">
+            <h1>Email</h1>
+            <div class="caixa_input">
+            <input type="text" class="inputs" value=" " id="input_email">
+            <i><img src="./assets/icon/e-mail.png" alt=""></i>
+            </div>
+            </div>
+            <br>
+            <div class="campo">
+            <h1>Mensagem</h1>
+            <div class="caixa_input_text_area">
+            <textarea type="text" class="input_mensagem" maxlength="255" id="input_mensagem"></textarea>
+            <i><img src="./assets/icon/text-message.png" alt=""></i>
+            </div>
+          </div>
+            <br> 
+
+            <button onclick="enviar_mensagem()">Enviar</button>
+            
+            
+          </div>
+            <div id="mensagem_erro"></div>  
+      </div>
+
+
+  </section>
 
   <footer id="footer">
     <div class="container-footer-img">
@@ -254,7 +254,7 @@
         <a href="#div_relatorios">Serviços</a>
         <a href="#terceiro-banner">Smart Data</a>
         <a href="#diferenciais">Benefícios</a>
-        <a href="login.html">Login</a>
+        <a href="./pages/loginlogout/login.html">Login</a>
       </div>
 
       <div class="coluna-footer">
@@ -268,6 +268,8 @@
       </div>
     </div>
   </footer>
+
+  <script src="./js/fale_conos.js"></script>
 </body>
 
 </html>

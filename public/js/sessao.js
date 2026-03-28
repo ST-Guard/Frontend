@@ -8,6 +8,7 @@ function validarSessao() {
     if (email != null && nome != null) {
         b_usuario.innerHTML = nome;
     } else {
+        console.log("AAAAAAAA");
         window.location = "../login.html";
     }
 }
@@ -33,4 +34,5 @@ function finalizarAguardar(texto) {
         divErrosLogin.innerHTML = texto;
     }
 }
+
 
