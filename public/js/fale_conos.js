@@ -26,7 +26,7 @@ function enviar_mensagem(){
     mensagem_erro.innerHTML = mensagem
 
     if(contador_validações < 1) {
-
+        
         fetch("/enviar", {
             method: "POST",
             headers: {
@@ -39,6 +39,26 @@ function enviar_mensagem(){
             })
         }).then(function(resposta){
               mensagem_erro.innerHTML = "<p>Mensagem enviada com sucesso!</p>"
+        }).catch(function(erro) {
+            
+    mensagem_erro.innerHTML = "<h1>erro servidor</h1>"
+        })
+
+
+                fetch("https://api.staticforms.xyz/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                accessKey: "",
+                nome: nome_usuario,
+                email: email_usuario,
+                mensagem: mensagem_usuario
+            })
+        }).then(function(resposta){
+            
+            console.log("deu certo")
         }).catch(function(erro) {
             
     mensagem_erro.innerHTML = "<h1>erro servidor</h1>"
