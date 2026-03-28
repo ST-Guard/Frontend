@@ -14,6 +14,7 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
+var falecosnosRouter = require("./src/routes/faleconosco")
 
 
 // middlewares
@@ -25,7 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // rotas
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-
+app.use("/enviar", falecosnosRouter)
 
 
 // inicia o servidor

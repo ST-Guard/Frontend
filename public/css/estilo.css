@@ -916,7 +916,7 @@ input {
 }
 
 .caixa_input input {
-  padding-left: 50px;
+  padding-left: 40px;
 }
 
 .caixa_input i {
@@ -928,7 +928,7 @@ input {
 }
 
 .caixa_input img{
-  height: 40px;
+  height: 25px;
 }
 
 
@@ -937,7 +937,7 @@ input {
 }
 
 .caixa_input_text_area textarea {
-  padding: 10px 10px 10px 50px;
+  padding: 10px 10px 10px 40px;
 }
 
 .caixa_input_text_area i {
@@ -947,7 +947,21 @@ input {
 }
 
 .caixa_input_text_area img{
-  height: 40px;
+  height: 25px;
+}
+
+
+
+#mensagem_erro h1{
+  color: red;
+  text-align: center;
+  font-size: 15px;
+}
+
+#mensagem_erro p{
+  color: rgb(68, 255, 68);
+  text-align: center;
+  font-size: 15px;
 }
 
 @media (max-width: 1200px) {

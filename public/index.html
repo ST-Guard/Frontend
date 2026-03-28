@@ -200,7 +200,7 @@
             <div class="campo">
             <h1>Nome completo</h1>
             <div class="caixa_input">
-            <input type="text" class="inputs">
+            <input type="text" class="inputs" id="input_nome">
             <i><img src="./assets/icon/do-utilizador.png" alt=""></i>
             </div>
             </div>
@@ -208,7 +208,7 @@
             <div class="campo">
             <h1>Email</h1>
             <div class="caixa_input">
-            <input type="text" class="inputs">
+            <input type="text" class="inputs" value=" " id="input_email">
             <i><img src="./assets/icon/e-mail.png" alt=""></i>
             </div>
             </div>
@@ -216,14 +216,17 @@
             <div class="campo">
             <h1>Mensagem</h1>
             <div class="caixa_input_text_area">
-            <textarea type="text" class="input_mensagem" maxlength="255"></textarea>
+            <textarea type="text" class="input_mensagem" maxlength="255" id="input_mensagem"></textarea>
             <i><img src="./assets/icon/text-message.png" alt=""></i>
             </div>
           </div>
             <br> 
-            <button>Enviar</button>
+
+            <button onclick="enviar_mensagem()">Enviar</button>
+            
+            
           </div>
-              
+            <div id="mensagem_erro"></div>  
       </div>
 
 
@@ -265,6 +268,8 @@
       </div>
     </div>
   </footer>
+
+  <script src="./js/fale_conos.js"></script>
 </body>
 
 </html>
