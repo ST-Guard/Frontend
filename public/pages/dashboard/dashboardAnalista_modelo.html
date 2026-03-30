@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./../../css/dashboard.css" />
     <script src="./../../js/sessao.js"></script>
     <link rel="icon" href="./../../assets/icon/icon.png">
+    <link rel="stylesheet" href="../../css/dashboard_analista_especifica.css">
 </head>
 
 <body>
@@ -17,7 +18,7 @@
             <div class="logo-nav" onclick="fnNavegar('/')">
                 <img src="./../../assets/logos/smart data branco.png" alt="">
             </div>
-            
+
             <div class="right-nav">
 
                 <div class="logo-notificao">
@@ -31,11 +32,11 @@
                         <p class="qtd-notificao">10</p>
                     </div>
 
-                    
+
                 </div>
 
                 <div class="separacao"></div>
-                
+
                 <div class="logo-usuario">
                     <div class="userImg">
                         <img src="./../../assets/dashboard-icons/cirucloUser.svg" alt="">
@@ -59,7 +60,7 @@
                     <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
                     <p>Dashboard</p>
                 </div>
-                 <div class="sidebar-button">
+                <div class="sidebar-button">
                     <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
                     <p>Servidores</p>
                 </div>
@@ -70,7 +71,57 @@
 
             </div>
         </div>
-
+        <main>
+            <div class="conteiner_select">
+                <select name="" id="">
+                    <option value="1" selected>RAM</option>
+                    <option value="2">DISCO</option>
+                    <option value="3">CPU</option>
+                </select>
+            </div>
+            <div class="conteiner_kpis">
+                <div class="kpi" id="qtd_alerta">
+                    <div class="conteiner_left">
+                        <div class="desc">Quantidade de alertas</div>
+                        <div class="num">8</div>
+                        <div class="msg">+3 última hora</div>
+                    </div>
+                    <div class="container_right">
+                        <div class="icon"><img src="../../assets/dashboard-icons/icon_ram.svg" alt=""></div>
+                    </div>
+                </div>
+                <div class="kpi" id="pico_x">
+                     <div class="conteiner_left">
+                        <div class="desc">Pico da <span>RAM</span></div>
+                        <div class="num"><span>70</span>%</div>
+                        <div class="msg">+3 última hora</div>
+                    </div>
+                    <div class="container_right">
+                        <div class="icon">x</div>
+                    </div>
+                </div>
+                <div class="kpi" id="media_x">
+                     <div class="conteiner_left">
+                        <div class="desc">Uso médio de <span>RAM</span></div>
+                        <div class="num"><span>67</span>%</div>
+                        <div class="msg">+5% em comparação a ontem</div>
+                    </div>
+                    <div class="container_right">
+                        <div class="icon">x</div>
+                    </div>
+                </div>
+                <div class="kpi" id="tempo_resposta">
+                     <div class="conteiner_left">
+                        <div class="desc">Tempo de resposta</div>
+                        <div class="num"><span>150</span>(ms)</div>
+                        <div class="msg">Recomendado 30(ms)</div>
+                    </div>
+                    <div class="container_right">
+                        <div class="icon">x</div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
 </body>
@@ -79,25 +130,25 @@
 
 <script>
 
-    function fnNavegar(local){
-         window.location.href = local
+    function fnNavegar(local) {
+        window.location.href = local
     }
-    
-validarSessao();
-function validarSessao() {
-        
-    var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
 
-    var b_usuario = document.getElementById("b_usuario");
+    // validarSessao();
+    // function validarSessao() {
 
-    if (email != null && nome != null) {
-        b_usuario.innerHTML = nome;
-    } else {
-        console.log("AAAAAAAA");
-        window.location.href = "/pages/loginlogout/login.html";
-    }
-}
+    //     var email = sessionStorage.EMAIL_USUARIO;
+    //     var nome = sessionStorage.NOME_USUARIO;
+
+    //     var b_usuario = document.getElementById("b_usuario");
+
+    //     if (email != null && nome != null) {
+    //         b_usuario.innerHTML = nome;
+    //     } else {
+    //         console.log("AAAAAAAA");
+    //         window.location.href = "/pages/loginlogout/login.html";
+    //     }
+    // }
 
 
 
