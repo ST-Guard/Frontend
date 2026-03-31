@@ -1,0 +1,203 @@
+* {
+    font-family: "IBM Plex Sans", sans-serif !important;
+}
+
+body {
+    background-color: #EDEDED;
+
+}
+
+.corpoDash {
+    width: 100%;
+
+}
+
+.corpoDash #container_kpis {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px red;
+    display: flex;
+    gap: 1%;
+
+
+}
+
+#container_kpis .div_kpi {
+    width: 23rem;
+    height: 12rem;
+    border-left: 7px solid black;
+    background-color: white;
+    border-radius: 12px;
+    padding: 1%;
+    display: flex;
+    gap: 5%;
+    border-right: 2px solid #e3e3e4 !important;
+    border-top: 2px solid #e3e3e4 !important;
+    border-bottom: 2px solid #e3e3e4 !important;
+
+
+}
+
+#container_kpis .div_kpi h3 {
+    color: #494B4E;
+    font-weight: 400;
+    font-size: 1.2rem;
+    width: 14rem;
+
+}
+
+#container_kpis .div_kpi h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+#container_kpis .div_kpi h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+#container_kpis .kpi1 h4 {
+    color: #2469F0;
+}
+
+
+#container_kpis .kpi2 h4 {
+    color: #23B26D;
+}
+
+#container_kpis .kpi3 h4 {
+    color: #F5CC4D;
+}
+
+
+#container_kpis .kpi4 h4 {
+    color: #F65CA4;
+}
+
+#container_kpis .kpi5 h4 {
+    color: #8B5CF6;
+}
+
+
+#container_kpis .kpi1 {
+    border-color: #2469F0;
+}
+
+#container_kpis .kpi2 {
+    border-color: #23B26D;
+}
+
+#container_kpis .kpi3 {
+    border-color: #F5CC4D;
+}
+
+
+#container_kpis .kpi4 {
+    border-color: #F65CA4;
+}
+
+#container_kpis .kpi5 {
+    border-color: #8B5CF6;
+}
+
+
+.div_icon {
+    width: 4.5rem;
+    height: 4rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.div_icon img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.kpi1_Icon {
+    background-color: #2469F0;
+}
+
+.kpi2_Icon {
+    background-color: #23B26D;
+}
+
+.kpi3_Icon {
+    background-color: #F5CC4D;
+}
+
+.kpi4_Icon {
+    background-color: #F65CA4;
+}
+
+.kpi5_Icon {
+    background-color: #8B5CF6;
+}
+
+
+#container_graficosP1 {
+    display: flex;
+    width: 100%;
+    gap: 1%;
+    padding: 2%;
+    border: 2px solid green;
+    font-family: "IBM Plex Sans", sans-serif !important;
+    color: #0F1C2E;
+}
+
+.grafico1 {
+    border: 2px solid #e3e3e4;
+    width: 70%;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    padding: 2%;
+}
+
+#container_graficosP1 .div_graficoUsoGeral {
+    width: 90%;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+
+}
+
+
+#container_graficosP1 .div_alertas-mae {
+    border: 1px solid #FF5252;
+    width: 30%;
+    border-radius: 16px;
+    height: 40rem;
+    padding: 1.5%;
+}
+
+#container_graficosP1 .div_alertas-conteudo {
+    border: 2px solid #e3e3e4;
+    width: 100%;
+    border-radius: 16px;
+    height: 36.3rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-left: 6%;   
+}
+
+#container_graficosP1 .div_alertas-conteudo .div_alertas {
+    gap: 20%;
+}
+#container_graficosP1 .div_alertas-conteudo .div_alertas .div_alerta{
+    width: 26rem;
+    height: 7rem;
+        border: 1px solid yellow    ;
+}
