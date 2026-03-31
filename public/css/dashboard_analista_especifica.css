@@ -1,0 +1,83 @@
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.corpoPagina main {
+    width: 82%;
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column
+}
+
+.corpoPagina main .conteiner_select {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 3% 5%;
+}
+
+.corpoPagina main .conteiner_select select {
+    width: 20%;
+    text-align: center;
+    background-color: #E0F2FD;
+    padding: 1%;
+    border-radius: 3px;
+    border: 2px solid #aeddfa;
+}
+
+.corpoPagina main .conteiner_kpis {
+    display: flex;
+    justify-content: space-between;
+    padding: 0% 5% 3% 5%;
+}
+
+.corpoPagina main .conteiner_kpis .kpi {
+    border: 2px solid rgba(0, 0, 0, 0.282);
+    width: 23%;
+    border-radius: 10px;
+    display: flex;
+    padding: 2%;
+}
+
+.corpoPagina main .conteiner_kpis .kpi .conteiner_left {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.corpoPagina main .conteiner_kpis .kpi .conteiner_left .desc {
+    font-size: 15px;
+    color: #6B7280;
+}
+
+.corpoPagina main .conteiner_kpis .kpi .conteiner_left .num {
+    font-size: 25px;
+    font-weight: 600;
+    color: #000;
+}
+
+.corpoPagina main .conteiner_kpis .kpi .container_right {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.corpoPagina main .conteiner_kpis .kpi .container_right .icon {
+    border-radius: 5px;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 187, 163);
+}
+
+.corpoPagina main .conteiner_kpis .kpi .container_right .icon img {
+    width: 70%;
+    height: 50%;
+}

@@ -94,3 +94,9 @@
     background-color: #192D4A;
     border-radius: 10px;
 }
+
+@media (max-width: 768px) {
+    .conteiner_modal {
+        width: 65%;
+    }
+}

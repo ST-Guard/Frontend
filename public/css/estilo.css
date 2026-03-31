@@ -35,7 +35,7 @@ header .logo {
   font-weight: 600;
 }
 
-.navbar_navbar-expand-lg_navbar-dark{
+.navbar_navbar-expand-lg_navbar-dark {
   height: 100%;
 }
 
@@ -221,7 +221,7 @@ main #monitoramento {
 main #monitoramento .container-monitoramento {
   width: 90%;
   max-width: 1200px;
-  
+
   text-align: center;
   color: white;
 }
@@ -230,11 +230,11 @@ main #monitoramento h1 {
   font-size: 42px;
   font-family: 'Outfit', sans-serif;
   margin-bottom: 10px;
-  
+
 }
 
 main #monitoramento p {
-  
+
   font-size: 20px;
   color: white;
   font-weight: lighter;
@@ -252,7 +252,7 @@ main #monitoramento .cards-container .elementos {
   padding: 40px 25px;
   min-height: 250px;
   transition: 0.25s;
-  
+
   font-size: 16px;
   color: #e1ecf5;
   text-align: left;
@@ -603,7 +603,7 @@ input {
 .simulador .container {
   flex-direction: column;
   overflow: scroll;
-  height: var(--tamanho-simulador);
+  height: var(--\-simulador);
 }
 
 #alerta {
@@ -798,7 +798,7 @@ input {
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/fundos-home/pessoas_monitorar.jpeg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/fundos-home/pessoas_monitorar.jpeg');
   background-size: cover;
   box-sizing: border-box;
 }
@@ -812,12 +812,10 @@ input {
   align-items: center;
   padding-top: 7vh;
   margin: 0;
-  gap: 18px; 
+  gap: 18px;
   box-sizing: border-box;
   padding-bottom: 10px;
 }
-
-
 
 .titulo {
   width: 75%;
@@ -826,14 +824,14 @@ input {
   gap: 20px;
 }
 
-.card_azul .titulo h1{
+.card_azul .titulo h1 {
   color: #f5c542;
   font-size: 40px;
   text-align: center;
-  
+
 }
 
-.card_azul .titulo p{
+.card_azul .titulo p {
   color: #ffffff;
   font-size: 18px;
 }
@@ -851,14 +849,14 @@ input {
   width: 75%;
   display: flex;
   gap: 2px;
-  
+
 }
 
 .formulario input {
   border: solid 2px gray;
   border-radius: 5px;
   text-align: left;
-  
+
 }
 
 
@@ -869,7 +867,7 @@ input {
   padding: 5px;
   font-size: 15px;
   height: 125px;
-  width: 100%;  
+  width: 100%;
 }
 
 
@@ -880,35 +878,31 @@ input {
 
 .formulario button {
   height: 60px;
-  background-color: #F5CC4D;;
+  background-color: #F5CC4D;
+  ;
   border: 0;
   border-radius: 5px;
-  
-  font-weight: 600 ;
+
+  font-weight: 600;
   font-size: 20px;
 }
 
-.formulario button:hover{
+.formulario button:hover {
   transform: translateY(-3px);
   filter: brightness(1.2);
-
 }
 
-.formulario button:active{
+.formulario button:active {
   background-color: #6b561c;
-  
 }
-
-
 
 .formulario .inputs {
   width: 100%;
 }
 
 
-.formulario .inputs textarea{
+.formulario .inputs textarea {
   width: 100%;
-  
 }
 
 .caixa_input {
@@ -924,10 +918,10 @@ input {
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-  
+
 }
 
-.caixa_input img{
+.caixa_input img {
   height: 25px;
 }
 
@@ -946,26 +940,26 @@ input {
   top: 10px;
 }
 
-.caixa_input_text_area img{
+.caixa_input_text_area img {
   height: 25px;
 }
 
 
 
-#mensagem_erro h1{
+#mensagem_erro h1 {
   color: red;
   text-align: center;
   font-size: 15px;
 }
 
-#mensagem_erro p{
+#mensagem_erro p {
   color: rgb(68, 255, 68);
   text-align: center;
   font-size: 15px;
 }
 
 @media (max-width: 1200px) {
-    .card_azul {
+  .card_azul {
     width: 80%;
     padding: 10px;
   }
@@ -973,7 +967,7 @@ input {
 
 
 @media (max-width: 1060px) {
-    .card_azul {
+  .card_azul {
     width: 100%;
     justify-content: center;
 
@@ -985,8 +979,8 @@ input {
 @media (max-width: 730px) {
   .card_azul {
     width: 100%;
-     justify-content: center;
-     padding: 10px;
+    justify-content: center;
+    padding: 10px;
   }
 }
 
@@ -994,7 +988,7 @@ input {
 @media (max-width: 480px) {
   .card_azul {
     width: 100%;
-   padding: 10px;
-    justify-content: center; 
+    padding: 10px;
+    justify-content: center;
   }
 }
