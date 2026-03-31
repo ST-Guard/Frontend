@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Data | Gestor</title>
     <link rel="stylesheet" href="./../../css/dashboard.css" />
-    <script src="./../../js/sessao.js"></script>
+    <link rel="stylesheet" href="./../../css/dashGeralAnalista.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="./../../assets/icon/icon.png">
 </head>
 
@@ -17,7 +23,7 @@
             <div class="logo-nav" onclick="fnNavegar('/')">
                 <img src="./../../assets/logos/smart data branco.png" alt="">
             </div>
-            
+
             <div class="right-nav">
 
                 <div class="logo-notificao">
@@ -31,11 +37,11 @@
                         <p class="qtd-notificao">10</p>
                     </div>
 
-                    
+
                 </div>
 
                 <div class="separacao"></div>
-                
+
                 <div class="logo-usuario">
                     <div class="userImg">
                         <img src="./../../assets/dashboard-icons/cirucloUser.svg" alt="">
@@ -59,7 +65,7 @@
                     <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
                     <p>Dashboard</p>
                 </div>
-                 <div class="sidebar-button">
+                <div class="sidebar-button">
                     <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
                     <p>Servidores</p>
                 </div>
@@ -71,6 +77,97 @@
             </div>
         </div>
 
+        <div class="corpoDash">
+            <div id="container_kpis">
+                <div class="div_kpi kpi1">
+                    <div class="info_kpi">
+                        <h3>TOTAL DE SERVIDORES</h3>
+                        <h1>3</h1>
+                        <h4>2 servidores ativos</h4>
+                    </div>
+
+                    <div class="div_icon kpi1_Icon">
+                        <img src="./../../assets/dashboard-icons/icon_kpiServer.svg" id="icon_kpi1" alt="">
+                    </div>
+                </div>
+
+                <div class="div_kpi kpi2">
+                    <div class="info_kpi">
+                        <h3>USO MÉDIO DE RAM</h3>
+                        <h1>70%</h1>
+                        <h4>+10% desde ontem</h4>
+
+                    </div>
+
+                    <div class="div_icon kpi2_Icon">
+                        <img src="./../../assets/dashboard-icons/icon_kpiRAM.svg" id="icon_kpi2" alt="">
+                    </div>
+                </div>
+
+                <div class="div_kpi kpi3">
+                    <div class="info_kpi">
+                        <h3>USO MÉDIO DE CPU</h3>
+                        <h1>75%</h1>
+                        <h4>+5% desde ontem</h4>
+
+                    </div>
+
+                    <div class="div_icon kpi3_Icon">
+                        <img src="./../../assets/dashboard-icons/icon_kpiCPU.svg" id="icon_kpi3" alt="">
+                    </div>
+                </div>
+
+                <div class="div_kpi kpi4">
+                    <div class="info_kpi">
+                        <h3>USO DO DISCO</h3>
+                        <h1>18TB</h1>
+                        <h4>Total de 47TB</h4>
+
+                    </div>
+
+                    <div class="div_icon kpi4_Icon">
+                        <img src="./../../assets/dashboard-icons/icon_kpiDisco.svg" id="icon_kpi4" alt="">
+                    </div>
+                </div>
+                <div class="div_kpi kpi5">
+                    <div class="info_kpi">
+                        <h3>LATÊNCIA MÉDIA</h3>
+                        <h1>50 MS</h1>
+                        <h4>Média de ontem 65MS</h4>
+
+                    </div>
+
+                    <div class="div_icon kpi5_Icon">
+                        <img src="./../../assets/dashboard-icons/icon_kpiRede.svg" id="icon_kpi5" alt="">
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="container_graficosP1">
+                <div class="grafico1">
+                                        <h1>Monitoramento do Uso de recursos nas últimas 24 horas</h1>
+
+                <div class="div_graficoUsoGeral">
+                    <canvas id="graficoUso"></canvas>
+                </div>
+                </div>
+                <div class="div_alertas-mae">
+                    <div class="div_alertas-conteudo">
+                        <h1>Alertas ativos no dia</h1>
+
+                        <div class="div_alertas">
+                            <div class="div_alerta Urgente"></div>
+                            <div class="div_alerta Impotante"></div>
+                            <div class="div_alerta Urgente"></div>
+                            <div class="div_alerta Impotante"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </body>
@@ -79,27 +176,83 @@
 
 <script>
 
-    function fnNavegar(local){
-         window.location.href = local
+    function fnNavegar(local) {
+        window.location.href = local
     }
-    
-validarSessao();
-function validarSessao() {
-        
-    var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
 
-    var b_usuario = document.getElementById("b_usuario");
+    //validarSessao();
+    function validarSessao() {
 
-    if (email != null && nome != null) {
-        b_usuario.innerHTML = nome;
-    } else {
-        console.log("AAAAAAAA");
-        window.location.href = "/pages/loginlogout/login.html";
+        var email = sessionStorage.EMAIL_USUARIO;
+        var nome = sessionStorage.NOME_USUARIO;
+
+        var b_usuario = document.getElementById("b_usuario");
+
+        if (email != null && nome != null) {
+            b_usuario.innerHTML = nome;
+        } else {
+            console.log("AAAAAAAA");
+            window.location.href = "/pages/loginlogout/login.html";
+        }
     }
-}
 
+    const ctx = document.getElementById('graficoUso');
 
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '23:59'],
+            datasets: [
+                {
+                    label: 'RAM',
+                    data: [40, 35, 60, 75, 80, 65, 50],
+                    borderColor: '#23B26D',
+                    backgroundColor: '#23B26D',
+                    tension: 0.4,
+                    pointRadius: 4
+                },
+                {
+                    label: 'CPU',
+                    data: [30, 25, 50, 65, 70, 60, 45],
+                    borderColor: '#F5CC4D',
+                    backgroundColor: '#F5CC4D',
+                    tension: 0.4,
+                    pointRadius: 4
+                },
+                {
+                    label: 'DISCO',
+                    data: [45, 38, 72, 85, 92, 67, 54],
+                    borderColor: '#F65CA4',
+                    backgroundColor: '#F65CA4',
+                    tension: 0.4,
+                    pointRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+          
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: '#e3e3e4',
+                        borderDash: [5, 5]
+                    }
+                },
+                x: {
+                    grid: {
+                        color: '#e3e3e4',
+                        borderDash: [5, 5]
+                    }
+                }
+            }
+        }});
 
 </script>
 
