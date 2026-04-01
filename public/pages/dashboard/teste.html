@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Doughnut Chart Example</title>
+    <!-- Include Chart.js library from a CDN -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+    <div style="width: 400px; margin: auto;">
+        <canvas id="myDoughnutChart"></canvas>
+    </div>
+
+    <!-- Your custom script -->
+    <script src="chartConfig.js"></script>
+</body>
+</html>
+<script>
+    // Data for the chart
+const data = {
+    labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+    datasets: [{
+        label: 'Dataset 1',
+        data: [10, 20, 15, 5, 50], // The values for each segment
+        backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+        ],
+        hoverOffset: 4 // Adds a slight offset on hover for better interaction
+    }]
+};
+
+// Configuration options
+const config = {
+    type: 'doughnut', // Specifies the chart type as doughnut
+    data: data,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top', // Position the legend at the top
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Doughnut Chart Example' // Chart title
+            }
+        },
+        // Adjust the cutout percentage to control the inner circle size
+        cutout: '60%' 
+    },
+};
+
+// Render the chart
+window.onload = function() {
+    const ctx = document.getElementById('myDoughnutChart').getContext('2d');
+    new Chart(ctx, config);
+};
+
+</script>
