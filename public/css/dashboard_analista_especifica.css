@@ -17,7 +17,7 @@
 .corpoPagina main .conteiner_select {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     padding: 3% 5%;
 }
 
@@ -216,15 +216,27 @@
     }
 
     /* ------------------------------------------------------------------- */
+    /* SELECT */
+
+    .corpoPagina main .conteiner_select select {
+        width: 40%;
+        text-align: center;
+        background-color: #E0F2FD;
+        padding: 1%;
+        border-radius: 3px;
+        border: 2px solid #aeddfa;
+    }
+
+    /* ------------------------------------------------------------------- */
     /* KPI */
     .corpoPagina main .conteiner_kpis {
         flex-wrap: wrap;
+        gap: 22px;
     }
 
     .corpoPagina main .conteiner_kpis .kpi {
         width: 45%;
     }
-
 
     /* ------------------------------------------------------------------- */
     /* GRÁFICOS */
