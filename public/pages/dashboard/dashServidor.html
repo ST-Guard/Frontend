@@ -46,11 +46,11 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-                <div class="sidebar-button-select">
+                <div class="sidebar-button">
                     <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
                     <p>Dashboard</p>
                 </div>
-                <div class="sidebar-button">
+                <div class="sidebar-button-select">
                     <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
                     <p>Servidores</p>
                 </div>
@@ -69,54 +69,44 @@
             </div>
         </div>
         <div class="SubcorpoPagina">
-            <div id="container_kpis">
+            <div class="container_kpis">
                 <div class="div_kpi kpi1">
                     <div class="info_kpi">
-                        <h3>FUNCIONARIO ATIVOS</h3>
-                        <h1>5</h1>
-                        <h4>10 inativos</h4>
-                    </div>
-                    <div class="div_icon kpi1_Icon">
-                        <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-paper.svg" id="icon_kpi1" alt="">
+                        <h3>Total</h3>
+                        <h1>8</h1>
                     </div>
                 </div>
                 <div class="div_kpi kpi2">
                     <div class="info_kpi">
-                        <h3>QUANTIDADE DE ALERTAS</h3>
-                        <h1>8</h1>
-                        <h4>+3 ultima hora</h4>
-
-                    </div>
-                    <div class="div_icon kpi2_Icon">
-                        <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-alert.svg" id="icon_kpi2" alt="">
+                        <h3>Online</h3>
+                        <h1 style="color: #4CAF50;">3</h1>
                     </div>
                 </div>
                 <div class="div_kpi kpi3">
                     <div class="info_kpi">
-                        <h3>USO GERAL DE RECURSO</h3>
-                        <h1>50%</h1>
-                        <h4>+5% desde ontem</h4>
-                    </div>
-                    <div class="div_icon kpi3_Icon">
-                        <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-grafic.svg" id="icon_kpi4"
-                            alt="">
+                        <h3>Atenção</h3>
+                        <h1 style="color: #F5CC4D;">2</h1>
                     </div>
                 </div>
                 <div class="div_kpi kpi4">
                     <div class="info_kpi">
-                        <h3>SERVIDORES ATIVOS</h3>
-                        <h1>5</h1>
-                        <h4>2 servidores inativos</h4>
+                        <h3>Critico</h3>
+                        <h1 style="color: #FF5252;">2</h1>
                     </div>
-                    <div class="div_icon kpi4_Icon">
-                        <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-server.svg" id="icon_kpi4"
-                            alt="">
+                </div>
+                <div class="div_kpi kpi4">
+                    <div class="info_kpi">
+                        <h3>Offline</h3>
+                        <h1 style="color: #6B7280;">1</h1>
                     </div>
                 </div>
             </div>
-            <div class="grafico-usoMedioRecursos">
-                <div>
-                    <canvas id="chartusomedio"></canvas>
+            <div class="boxBusca">
+                <div class="busca">
+                    <input type="text" id="buscaServidor" class="inputComIcone">
+                </div>
+                <div class="botoes">
+
                 </div>
             </div>
         </div>
