@@ -7,6 +7,18 @@ body {
 
 }
 
+:root {
+    --tituloKPI: #494B4E;
+    --Cpu: #00b68bb0;
+    --Ram: #461ea49b;
+    --Disco: #4c6ef5;
+    --KPI-urgente: #fe4141;
+    --KPI-importante: #ffcd35;
+    --KPI-normal: #4caf4f;
+    --corDaFonte: #0F1C2E;
+
+}
+
 .corpoDash {
     width: 100%;
 
@@ -18,7 +30,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: solid 2px red;
     display: flex;
     gap: 1%;
 
@@ -26,132 +37,137 @@ body {
 }
 
 #container_kpis .div_kpi {
-    width: 23rem;
-    height: 12rem;
-    border-left: 7px solid black;
+    width: 15.5%;
+    height: auto;
     background-color: white;
     border-radius: 12px;
     padding: 1%;
     display: flex;
-    gap: 5%;
-    border-right: 2px solid #e3e3e4 !important;
-    border-top: 2px solid #e3e3e4 !important;
-    border-bottom: 2px solid #e3e3e4 !important;
-
-
+    border: 2px solid #e3e3e4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
 }
-
-#container_kpis .div_kpi h3 {
-    color: #494B4E;
-    font-weight: 400;
-    font-size: 1.2rem;
-    width: 14rem;
-
-}
-
-#container_kpis .div_kpi h1 {
-    margin: 0;
-    font-size: 3rem;
-}
-
-#container_kpis .div_kpi h4 {
-    margin: 0;
-    font-size: 1.1rem;
-}
-
-#container_kpis .kpi1 h4 {
-    color: #2469F0;
-}
-
-
-#container_kpis .kpi2 h4 {
-    color: #23B26D;
-}
-
-#container_kpis .kpi3 h4 {
-    color: #F5CC4D;
-}
-
-
-#container_kpis .kpi4 h4 {
-    color: #F65CA4;
-}
-
-#container_kpis .kpi5 h4 {
-    color: #8B5CF6;
-}
-
-
-#container_kpis .kpi1 {
-    border-color: #2469F0;
-}
-
-#container_kpis .kpi2 {
-    border-color: #23B26D;
-}
-
-#container_kpis .kpi3 {
-    border-color: #F5CC4D;
-}
-
-
-#container_kpis .kpi4 {
-    border-color: #F65CA4;
-}
-
-#container_kpis .kpi5 {
-    border-color: #8B5CF6;
-}
-
 
 .div_icon {
-    width: 4.5rem;
-    height: 4rem;
-    border-radius: 1rem;
+    width: 25%;
+    max-width: 120px;
+    border-radius: 0.8rem;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10%;
 }
 
-.div_icon img {
-    width: 2.5rem;
-    height: 2.5rem;
+.info_kpi {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
-.kpi1_Icon {
-    background-color: #2469F0;
+.containerTitulo {
+    display: flex;
 }
 
-.kpi2_Icon {
-    background-color: #23B26D;
+#container_kpis .div_kpi h3 {
+    color: #494B4E;
+    font-weight: 400;
+    font-size: 1.3rem;
+    width: 14rem;
 }
 
-.kpi3_Icon {
-    background-color: #F5CC4D;
-}
-
-.kpi4_Icon {
-    background-color: #F65CA4;
-}
-
-.kpi5_Icon {
-    background-color: #8B5CF6;
+#container_kpis .div_kpi h1 {
+    margin: 0;
+    font-size: 2.2rem;
 }
 
 
+#container_kpis .div_kpi h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--tituloKPI);
+    font-weight: 500;
+}
+
+#container_kpis .div_kpi h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #0F1C2E;
+
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+}
+
+.status #circuloStatus {
+    border-radius: 50%;
+    background-color: var(--tituloKPI);
+    width: 10px;
+    height: 10px;
+}
+
+
+
+
+#container_kpis .kpi2,
+#container_kpis .kpi5 {
+    border-top: 9px solid var(--KPI-urgente);
+
+}
+
+#container_kpis .kpi2 #circuloStatus,
+#container_kpis .kpi5 #circuloStatus {
+    background-color: var(--KPI-urgente);
+}
+
+#container_kpis .kpi3,
+#container_kpis .kpi4 {
+    border-top: 9px solid var(--KPI-importante);
+
+}
+
+
+
+#container_kpis .kpi3 #circuloStatus,
+#container_kpis .kpi4 #circuloStatus {
+    background-color: var(--KPI-importante);
+
+}
+
+#container_kpis .kpi6,
+#container_kpis .kpi7 {
+    border-top: 9px solid var(--KPI-normal);
+
+}
+
+#container_kpis .kpi1 {
+    border-top: 9px solid #EDEDED;
+
+}
+
+#container_kpis .kpi6 #circuloStatus,
+#container_kpis .kpi7 #circuloStatus {
+    background-color: var(--KPI-normal);
+
+}
+
+
+
+/*Gráficosss p1*/
 #container_graficosP1 {
     display: flex;
     width: 100%;
     gap: 1%;
     padding: 2%;
-    border: 2px solid green;
     font-family: "IBM Plex Sans", sans-serif !important;
     color: #0F1C2E;
+
 }
 
 .grafico1 {
-    border: 2px solid #e3e3e4;
     width: 70%;
     height: 40rem;
     display: flex;
@@ -160,6 +176,8 @@ body {
     align-items: center;
     border-radius: 16px;
     padding: 2%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+
 }
 
 #container_graficosP1 .div_graficoUsoGeral {
@@ -175,11 +193,12 @@ body {
 
 
 #container_graficosP1 .div_alertas-mae {
-    border: 1px solid #FF5252;
     width: 30%;
     border-radius: 16px;
-    height: 40rem;
+    height: 40%;
     padding: 1.5%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+
 }
 
 #container_graficosP1 .div_alertas-conteudo {
@@ -190,14 +209,64 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    padding-left: 6%;   
+    padding: 3%;
+    padding-left: 6%;
 }
 
 #container_graficosP1 .div_alertas-conteudo .div_alertas {
-    gap: 20%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    gap: 2rem;
 }
-#container_graficosP1 .div_alertas-conteudo .div_alertas .div_alerta{
-    width: 26rem;
+
+#container_graficosP1 .div_alertas-conteudo .div_alertas .div_alerta {
+    width: 95%;
     height: 7rem;
-        border: 1px solid yellow    ;
+    border-radius: 10px;
+}
+
+#container_graficosP1 .div_alertas-conteudo .div_alertas .urgente {
+    border: 1px solid #fd2a2a;
+    background-color: #fd2a2a2a;
+
+}
+
+#container_graficosP1 .div_alertas-conteudo .div_alertas .importante {
+    border: 1px solid #ffcd35;
+    background-color: #ffcd352f;
+
+}
+
+#div_conteudoAlert{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 4%;
+    color: var(--corDaFonte);
+}
+
+#div_conteudoAlert .conteudoTitulo{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#div_conteudoAlert .conteudoTitulo h3{
+    font-size: 1.2rem;
+}
+#div_conteudoAlert .conteudoTitulo h5{
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--tituloKPI);
+}
+
+#div_conteudoAlert img{
+    width: 8%;
+}
+
+#div_conteudoAlert h4{
+    font-size: 1rem;
+    font-weight: 450;
 }

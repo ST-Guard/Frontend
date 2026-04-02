@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="./../../css/dashGeralAnalista.css" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="./../../assets/icon/icon.png">
     <link rel="stylesheet" href="../../css/dashboard_analista_especifica.css">
@@ -81,89 +82,216 @@
         <div class="corpoDash">
             <div id="container_kpis">
                 <div class="div_kpi kpi1">
+
                     <div class="info_kpi">
-                        <h3>TOTAL DE SERVIDORES</h3>
+                        <div class="containerTitulo">
+                            <h3>TOTAL DE SERVIDORES</h3>
+                        </div>
+
                         <h1>3</h1>
-                        <h4>2 servidores ativos</h4>
+                        <h4>3 ativos</h4>
                     </div>
 
-                    <div class="div_icon kpi1_Icon">
-                        <img src="./../../assets/dashboard-icons/icon_kpiServer.svg" id="icon_kpi1" alt="">
+                    <div class="icon_kpi">
+                        <img src="./../../assets/dashboard-icons/icon_kpiServer.svg" alt="">
                     </div>
+
                 </div>
 
                 <div class="div_kpi kpi2">
+
                     <div class="info_kpi">
-                        <h3>USO MÉDIO DE RAM</h3>
-                        <h1>70%</h1>
-                        <h4>+10% desde ontem</h4>
+                        <div class="containerTitulo">
 
+                            <h3>USO MÉDIO DE RAM</h3>
+                            <div id="circuloStatus"></div>
+
+
+                        </div>
+                        <h1>90%</h1>
+
+                        <div class="status">
+                            <h4><span id="qntUsada">15</span><span id="qntTotal"><span id="unMedida">GB de <span
+                                            id="unMedida">23</span><span id="qntTotal"><span id="unMedida">GB </h4>
+                        </div>
                     </div>
 
-                    <div class="div_icon kpi2_Icon">
-                        <img src="./../../assets/dashboard-icons/icon_kpiRAM.svg" id="icon_kpi2" alt="">
-                    </div>
+
+
+                    <div class="estado"></div>
+
                 </div>
-
                 <div class="div_kpi kpi3">
+
                     <div class="info_kpi">
-                        <h3>USO MÉDIO DE CPU</h3>
+                        <div class="containerTitulo">
+                            <h3>USO MÉDIO DE CPU</h3>
+                            <div id="circuloStatus"></div>
+
+
+                        </div>
+
                         <h1>75%</h1>
-                        <h4>+5% desde ontem</h4>
 
+                        <div class="status">
+                            <h4><span id="valorPorcent">5</span>% vs última medição </h4>
+                        </div>
                     </div>
 
-                    <div class="div_icon kpi3_Icon">
-                        <img src="./../../assets/dashboard-icons/icon_kpiCPU.svg" id="icon_kpi3" alt="">
-                    </div>
+
                 </div>
-
                 <div class="div_kpi kpi4">
+
                     <div class="info_kpi">
-                        <h3>USO DO DISCO</h3>
-                        <h1>18TB</h1>
-                        <h4>Total de 47TB</h4>
+                        <div class="containerTitulo">
+                            <h3>TEMPERATURA MÉDIA</h3>
+                            <div id="circuloStatus"></div>
 
+                        </div>
+
+                        <h1>72°C</h1>
+
+                        <div class="status">
+                            <h4><span id="compAntigo">-5</span>°C vs última medição </h4>
+                        </div>
                     </div>
 
-                    <div class="div_icon kpi4_Icon">
-                        <img src="./../../assets/dashboard-icons/icon_kpiDisco.svg" id="icon_kpi4" alt="">
-                    </div>
                 </div>
+
                 <div class="div_kpi kpi5">
                     <div class="info_kpi">
-                        <h3>LATÊNCIA MÉDIA</h3>
-                        <h1>50 MS</h1>
-                        <h4>Média de ontem 65MS</h4>
+                        <div class="containerTitulo">
+
+                            <h3>USO DO DISCO</h3>
+                            <div id="circuloStatus"></div>
+
+
+                        </div>
+                        <h1>93%</h1>
+                        <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
+                                47</span><span id="unMedida">TB </h4>
 
                     </div>
 
-                    <div class="div_icon kpi5_Icon">
-                        <img src="./../../assets/dashboard-icons/icon_kpiRede.svg" id="icon_kpi5" alt="">
+                </div>
+
+                <div class="div_kpi kpi6">
+
+                    <div class="info_kpi">
+                        <div class="containerTitulo">
+                            <h3>LATÊNCIA MÉDIA I/O</h3>
+                            <div id="circuloStatus"></div>
+
+                        </div>
+
+                        <h1>10 ms</h1>
+                        <div class="status">
+                            <h4>Última: <span id="ultimoValor"></span>30 ms</span> </h4>
+                        </div>
                     </div>
+
+
+
+                </div>
+
+                <div class="div_kpi kpi7">
+
+                    <div class="info_kpi">
+                        <div class="containerTitulo">
+                            <h3>LATÊNCIA MÉDIA PING</h3>
+                            <div id="circuloStatus"></div>
+
+                        </div>
+
+                        <h1>20 ms</h1>
+                        <div class="status">
+                            <h4>Última: <span id="ultimoValor"></span>15 ms</span> </h4>
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>
 
             <div id="container_graficosP1">
                 <div class="grafico1">
-                                        <h1>Monitoramento do Uso de recursos nas últimas 24 horas</h1>
+                    <h1>Monitoramento do Uso de recursos nas últimas 24 horas</h1>
 
-                <div class="div_graficoUsoGeral">
-                    <canvas id="graficoUso"></canvas>
-                </div>
+                    <div class="div_graficoUsoGeral">
+                        <canvas id="graficoUso"></canvas>
+                    </div>
                 </div>
                 <div class="div_alertas-mae">
                     <div class="div_alertas-conteudo">
                         <h1>Alertas ativos no dia</h1>
 
                         <div class="div_alertas">
-                            <div class="div_alerta Urgente"></div>
-                            <div class="div_alerta Impotante"></div>
-                            <div class="div_alerta Urgente"></div>
-                            <div class="div_alerta Impotante"></div>
+                            <div class="div_alerta urgente">
+                                <div id="div_conteudoAlert">
+                        
+                                    <div class="conteudoTitulo">
 
+                                        <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+                                        <h3>SRV-DC01-WEB-05</h3>
+                                        <h5>2 min atrás</h5>
+
+                                    </div>
+                                    <h4>CPU acima de 95% por mais de 10 minutos.</h4>
+                                </div>
+
+                            </div>
+                            <div class="div_alerta importante">
+                                <div id="div_conteudoAlert">
+
+                                    <div class="conteudoTitulo">
+                                        <img src="../../assets/dashboard-icons/icon_impor.svg" alt="">
+                                        <h3>SRV-DC02-DB-12</h3>
+                                        <h5>15 min atrás</h5>
+
+                                    </div>
+                                    <h4>Temperatura do processador em 82°C.</h4>
+                                </div>
+                            </div>
+
+                            <div class="div_alerta urgente">
+                                <div id="div_conteudoAlert">
+
+                                    <div class="conteudoTitulo">
+                                        <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+                                        <h3>SRV-DC01-WEB-05</h3>
+                                        <h5>20 min atrás</h5>
+
+                                    </div>
+                                    <h4>Uso de RAM acima de 92% por mais de 5 minutos.</h4>
+                                </div>
+                            </div>
+
+                            <div class="div_alerta importante">
+                             <div id="div_conteudoAlert">
+
+                                    <div class="conteudoTitulo">
+                                        <img src="../../assets/dashboard-icons/icon_impor.svg" alt="">
+                                        <h3>SRV-FK02-GM-02</h3>
+                                        <h5>21 min atrás</h5>
+
+                                    </div>
+                                    <h4>Uso de CPU acima de 85%.</h4>
+                                </div>
                         </div>
+                        <div class="div_alerta urgente">
+                                <div id="div_conteudoAlert">
+
+                                    <div class="conteudoTitulo">
+                                        <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+                                        <h3>SRV-DC01-WEB-08</h3>
+                                        <h5>24 min atrás</h5>
+
+                                    </div>
+                                    <h4>Uso de Disco alcançou 90% de uso.</h4>
+                                </div>
+                            </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -207,24 +335,24 @@
                 {
                     label: 'RAM',
                     data: [40, 35, 60, 75, 80, 65, 50],
-                    borderColor: '#23B26D',
-                    backgroundColor: '#23B26D',
+                    borderColor: '#461ea4',
+                    backgroundColor: '#461ea4',
                     tension: 0.4,
                     pointRadius: 4
                 },
                 {
                     label: 'CPU',
                     data: [30, 25, 50, 65, 70, 60, 45],
-                    borderColor: '#F5CC4D',
-                    backgroundColor: '#F5CC4D',
+                    borderColor: '#00b68bb0',
+                    backgroundColor: '#00b68bb0',
                     tension: 0.4,
                     pointRadius: 4
                 },
                 {
                     label: 'DISCO',
                     data: [45, 38, 72, 85, 92, 67, 54],
-                    borderColor: '#F65CA4',
-                    backgroundColor: '#F65CA4',
+                    borderColor: '#4c6ef5',
+                    backgroundColor: '#4c6ef5',
                     tension: 0.4,
                     pointRadius: 4
                 }
@@ -237,7 +365,7 @@
                     position: 'bottom'
                 }
             },
-          
+
             scales: {
                 y: {
                     beginAtZero: true,
@@ -253,7 +381,8 @@
                     }
                 }
             }
-        }});
+        }
+    });
 
 </script>
 
