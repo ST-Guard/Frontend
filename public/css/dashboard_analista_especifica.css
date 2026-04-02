@@ -207,3 +207,48 @@
     font-size: 27px;
     padding: 2%;
 }
+
+
+@media (max-width: 768px) {
+
+    .corpoPagina main {
+        width: 100%;
+    }
+
+    /* ------------------------------------------------------------------- */
+    /* KPI */
+    .corpoPagina main .conteiner_kpis {
+        flex-wrap: wrap;
+    }
+
+    .corpoPagina main .conteiner_kpis .kpi {
+        width: 45%;
+    }
+
+
+    /* ------------------------------------------------------------------- */
+    /* GRÁFICOS */
+    .corpoPagina main .conteiner_graficos_parte1 {
+        width: 100%;
+        flex-direction: column;
+        min-height: 65vh;
+    }
+
+    .corpoPagina main .conteiner_graficos_parte1 .conteiner_latencia {
+        width: 100%;
+        max-height: 50vh;
+        margin-bottom: 5%;
+    }
+
+    .corpoPagina main .conteiner_graficos_parte1 .conteiner_uso {
+        width: 100%;
+        min-height: 50vh;
+    }
+
+    .corpoPagina main .conteiner_grafico_parte2 .grafico {
+        width: 100% !important;
+        height: 50vh !important;
+        display: flex;
+        justify-content: center;
+    }
+}
