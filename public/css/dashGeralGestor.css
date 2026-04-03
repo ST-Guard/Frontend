@@ -17,6 +17,10 @@ body {
   --KPI4-icon: #4caf507a;
 }
 
+
+
+
+
 /* MEXENDO NA SIDEBAR E NO NAV BAR PARA FICAREM ESTATICO NA TELA */
 
 header {
@@ -51,6 +55,49 @@ header {
   max-width: 100%;
 }
 
+
+/* BOTOÊS PARA TROCA DE DASH */
+
+.container-dashboards{
+    width: 100%;
+    height: auto;
+    padding-left: 5vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+.btn-option-dashboard{
+    width: 12%;
+    height: 6vh;
+    border: solid #66c0f4 1px;
+    background-color: #66c0f4a3;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size:1.5rem;
+    cursor: no-drop;
+}
+.btn-option-dashboard-desable{
+    width: 12%;
+    height: 6vh;
+    border: solid #244770 1px;
+    background-color: #24477032;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size:1.5rem;
+    cursor: pointer;
+
+}
+
+
 /* KPISSSSSSSSSSSSSSS ////////////////////////*/
 
 #container_kpis {
@@ -59,7 +106,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 2px red;
+  /* border: solid 2px red; */
   display: flex;
   gap: 1%;
 }
@@ -168,7 +215,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 2px red;
+  /* border: solid 2px red; */
   display: flex;
   gap: 1%;
 }

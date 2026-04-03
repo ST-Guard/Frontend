@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
 function fnNavegar(local) {
   window.location.href = local;
 }
+document.addEventListener('DOMContentLoaded', () => {
 
 validarSessao();
 function validarSessao() {
