@@ -98,11 +98,15 @@ body {
     height: 10%;
 }
 
-.input-com-icone {
-    background-image: url('../assets/dashboard-servidor/Lupa.png');
-    padding-left: 40px;
-    height: 40px;
-    width: 100%;
+.busca {
+    display: flex;
+}
+
+.busca img {
+    z-index: 10;
+    align-self: center;
+    margin-right: -20px;
+    height: 12px;
 }
 
 .busca input {
@@ -110,6 +114,12 @@ body {
     border-radius: 10px;
     background-color: #E5E7EB;
     display: flex;
-    height: 3.5vh;
+    padding-left: 28px;
+    width: 500px;
+    height: 4.5vh;
+}
 
+.botoes {
+    display: flex;
+    background-color: ;
 }
