@@ -5,13 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Data | Gestor</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="./../../css/dashboard.css">
-    <link rel="stylesheet" href="./../../css/dashGeralGestor.css" />
-    <script src="./../../js/dashGestor.js"></script>
+    <link rel="stylesheet" href="./../../css/dashboard.css" />
     <script src="./../../js/sessao.js"></script>
     <link rel="icon" href="./../../assets/icon/icon.png">
-
 </head>
 
 <body>
@@ -21,7 +17,7 @@
             <div class="logo-nav" onclick="fnNavegar('/')">
                 <img src="./../../assets/logos/smart data branco.png" alt="">
             </div>
-
+            
             <div class="right-nav">
 
                 <div class="logo-notificao">
@@ -35,11 +31,11 @@
                         <p class="qtd-notificao">10</p>
                     </div>
 
-
+                    
                 </div>
 
                 <div class="separacao"></div>
-
+                
                 <div class="logo-usuario">
                     <div class="userImg">
                         <img src="./../../assets/dashboard-icons/cirucloUser.svg" alt="">
@@ -63,7 +59,7 @@
                     <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
                     <p>Dashboard</p>
                 </div>
-                <div class="sidebar-button">
+                 <div class="sidebar-button">
                     <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
                     <p>Servidores</p>
                 </div>
@@ -71,7 +67,7 @@
                     <img src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
                     <p>Alerta</p>
                 </div>
-                <div class="sidebar-button">
+                 <div class="sidebar-button">
                     <img src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
                     <p>Funcionario</p>
                 </div>
@@ -82,86 +78,36 @@
             </div>
         </div>
 
-
-
-        <div class="SubcorpoPagina">
-
-
-            <div id="container_kpis">
-                <div class="div_kpi kpi1">
-                    <div class="info_kpi">
-                        <h3>FUNCIONARIO ATIVOS</h3>
-                        <h1>5</h1>
-                        <h4>10 inativos</h4>
-                    </div>
-
-                    <div class="div_icon kpi1_Icon">
-                        <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-paper.svg" id="icon_kpi1" alt="">
-                    </div>
-                </div>
-
-                <div class="div_kpi kpi2">
-                    <div class="info_kpi">
-                        <h3>QUANTIDADE DE ALERTAS</h3>
-                        <h1>8</h1>
-                        <h4>+3 ultima hora</h4>
-
-                    </div>
-
-                    <div class="div_icon kpi2_Icon">
-                        <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-alert.svg" id="icon_kpi2" alt="">
-                    </div>
-                </div>
-
-                <div class="div_kpi kpi3">
-                    <div class="info_kpi">
-                        <h3>USO GERAL DE RECURSO</h3>
-                        <h1>50%</h1>
-                        <h4>+5% desde ontem</h4>
-
-                    </div>
-
-
-                    <div class="div_icon kpi3_Icon">
-                        <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-grafic.svg" id="icon_kpi4"
-                            alt="">
-                    </div>
-                </div>
-                <div class="div_kpi kpi4">
-                    <div class="info_kpi">
-                        <h3>SERVIDORES ATIVOS</h3>
-                        <h1>5</h1>
-                        <h4>2 servidores inativos</h4>
-
-                    </div>
-
-                    <div class="div_icon kpi4_Icon">
-                        <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-server.svg" id="icon_kpi4"
-                            alt="">
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="grafico-usoMedioRecursos">
-                <div>
-                    <canvas id="chartusomedio"></canvas>
-                </div>
-            </div>
-
-        </div>
-
     </div>
-
 
 </body>
 
 
 
+<script>
+
+    function fnNavegar(local){
+         window.location.href = local
+    }
+    
+validarSessao();
+function validarSessao() {
+        
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
+
+    var b_usuario = document.getElementById("b_usuario");
+
+    if (email != null && nome != null) {
+        b_usuario.innerHTML = nome;
+    } else {
+        console.log("AAAAAAAA");
+        window.location.href = "/pages/loginlogout/login.html";
+    }
+}
+
+
+
+</script>
 
 </html>
-
-
-
-<!-- FIZ javascript separado rs  -->
