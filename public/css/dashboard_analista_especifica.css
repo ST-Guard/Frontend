@@ -7,15 +7,17 @@
 
 .corpoPagina main {
     width: 82%;
+    min-height: auto;
     background-color: rgb(240, 240, 240);
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    overflow: scroll;
 }
 
 .corpoPagina main .conteiner_select {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     padding: 3% 5%;
 }
 
@@ -35,11 +37,12 @@
 }
 
 .corpoPagina main .conteiner_kpis .kpi {
-    border: 2px solid rgba(0, 0, 0, 0.282);
+    border: 2px solid rgba(0, 0, 0, 0.150);
     width: 23%;
     border-radius: 10px;
     display: flex;
     padding: 2%;
+    background-color: #fff;
 }
 
 .corpoPagina main .conteiner_kpis .kpi .conteiner_left {
@@ -61,7 +64,7 @@
 }
 
 .corpoPagina main .conteiner_kpis .kpi .container_right {
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: center;
     height: 100%;
@@ -78,6 +81,186 @@
 }
 
 .corpoPagina main .conteiner_kpis .kpi .container_right .icon img {
-    width: 70%;
-    height: 50%;
+    width: 80%;
+    height: 60%;
+}
+
+/*KPI*/
+.corpoPagina main .conteiner_kpis .kpi .conteiner_left #alerta {
+    color: rgb(251, 53, 53);
+}
+
+.corpoPagina main .conteiner_kpis .kpi .conteiner_left #total {
+    color: rgb(37, 133, 37);
+}
+
+.corpoPagina main .conteiner_kpis .kpi .conteiner_left #percent {
+    color: rgb(188, 188, 60);
+}
+
+.corpoPagina main .conteiner_kpis .kpi .conteiner_left #ms {
+    color: rgb(79, 79, 255);
+}
+
+.corpoPagina main .conteiner_kpis .kpi .container_right #alerta {
+    background-color: rgba(251, 53, 53, 0.568);
+}
+
+.corpoPagina main .conteiner_kpis .kpi .container_right #total {
+    background-color: rgba(37, 133, 37, 0.563);
+}
+
+.corpoPagina main .conteiner_kpis .kpi .container_right #percent {
+    background-color: rgb(188, 188, 60, 0.563);
+}
+
+.corpoPagina main .conteiner_kpis .kpi .container_right #ms {
+    background-color: rgb(79, 79, 255, 0.563);
+}
+
+/* ----------------------------------------------------------------------------------- */
+.corpoPagina main .conteiner_graficos_parte1 {
+    width: 100%;
+    min-height: 65vh;
+    margin: 0% 5% 0% 0%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0% 3% 0% 3%;
+    ;
+}
+
+.corpoPagina main .conteiner_graficos_parte1 .conteiner_latencia {
+    width: 52%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
+    padding: 3%;
+}
+
+.corpoPagina main .conteiner_graficos_parte1 .conteiner_uso {
+    width: 47%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3%;
+}
+
+/* .corpoPagina main .conteiner_graficos_parte1 .conteiner_uso  .grafico {
+    width: 80% !important;
+    height: 80% !important;
+    display: flex;
+    justify-content: center;
+} */
+
+.corpoPagina main .conteiner_graficos_parte1 .conteiner_uso .total {
+    width: 100%;
+    text-align: center;
+    margin-top: 4%;
+    font-size: 17px;
+}
+
+.titulo {
+    font-size: 27px;
+    padding: 5%;
+}
+
+
+.corpoPagina main .conteiner_graficos_parte1 .conteiner_latencia .grafico {
+    width: 100% !important;
+    height: 80% !important;
+    display: flex;
+    justify-content: center;
+}
+
+.corpoPagina main .conteiner_graficos_parte1 .conteiner_latencia .total {
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+}
+
+/* ----------------------------------------------------------------------------------- */
+.corpoPagina main .conteiner_grafico_parte2 {
+    width: 94%;
+    min-height: 65vh;
+    margin: 3% 3% 0% 3%;
+    margin-right: 10%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
+    padding: 3%;
+}
+
+.corpoPagina main .conteiner_grafico_parte2 .grafico {
+    width: 100% !important;
+    height: 70% !important;
+    display: flex;
+    justify-content: center;
+}
+
+.titulo2 {
+    font-size: 27px;
+    padding: 2%;
+}
+
+
+@media (max-width: 768px) {
+
+    .corpoPagina main {
+        width: 100%;
+    }
+
+    /* ------------------------------------------------------------------- */
+    /* SELECT */
+
+    .corpoPagina main .conteiner_select select {
+        width: 40%;
+        text-align: center;
+        background-color: #E0F2FD;
+        padding: 1%;
+        border-radius: 3px;
+        border: 2px solid #aeddfa;
+    }
+
+    /* ------------------------------------------------------------------- */
+    /* KPI */
+    .corpoPagina main .conteiner_kpis {
+        flex-wrap: wrap;
+        gap: 22px;
+    }
+
+    .corpoPagina main .conteiner_kpis .kpi {
+        width: 45%;
+    }
+
+    /* ------------------------------------------------------------------- */
+    /* GRÁFICOS */
+    .corpoPagina main .conteiner_graficos_parte1 {
+        width: 100%;
+        flex-direction: column;
+        min-height: 65vh;
+    }
+
+    .corpoPagina main .conteiner_graficos_parte1 .conteiner_latencia {
+        width: 100%;
+        max-height: 50vh;
+        margin-bottom: 5%;
+    }
+
+    .corpoPagina main .conteiner_graficos_parte1 .conteiner_uso {
+        width: 100%;
+        min-height: 50vh;
+    }
+
+    .corpoPagina main .conteiner_grafico_parte2 .grafico {
+        width: 100% !important;
+        height: 50vh !important;
+        display: flex;
+        justify-content: center;
+    }
 }
