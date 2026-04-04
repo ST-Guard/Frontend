@@ -80,6 +80,7 @@
         </div>
 
         <div class="corpoDash">
+
             <div id="container_kpis">
                 <div class="div_kpi kpi1">
 
@@ -104,14 +105,14 @@
                         <div class="containerTitulo">
 
                             <h3>USO MÉDIO DE RAM</h3>
-                            <div id="circuloStatus"></div>
+                            <img src="./../../assets/dashboard-icons/icon_kpiRAM.svg" alt="">
 
 
                         </div>
                         <h1>90%</h1>
 
                         <div class="status">
-                            <h4><span id="qntUsada">15</span><span id="qntTotal"><span id="unMedida">GB de <span
+                            <h4><span id="qntUsada">20</span><span id="qntTotal"><span id="unMedida">GB de <span
                                             id="unMedida">23</span><span id="qntTotal"><span id="unMedida">GB </h4>
                         </div>
                     </div>
@@ -126,7 +127,7 @@
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>USO MÉDIO DE CPU</h3>
-                            <div id="circuloStatus"></div>
+                            <img src="./../../assets/dashboard-icons/icon_kpiCPU.svg" alt="">
 
 
                         </div>
@@ -140,30 +141,14 @@
 
 
                 </div>
-                <div class="div_kpi kpi4">
 
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3>TEMPERATURA MÉDIA</h3>
-                            <div id="circuloStatus"></div>
-
-                        </div>
-
-                        <h1>72°C</h1>
-
-                        <div class="status">
-                            <h4><span id="compAntigo">-5</span>°C vs última medição </h4>
-                        </div>
-                    </div>
-
-                </div>
 
                 <div class="div_kpi kpi5">
                     <div class="info_kpi">
                         <div class="containerTitulo">
 
                             <h3>USO DO DISCO</h3>
-                            <div id="circuloStatus"></div>
+                            <img src="./../../assets/dashboard-icons/icon_kpiDisco.svg" alt="">
 
 
                         </div>
@@ -175,31 +160,13 @@
 
                 </div>
 
-                <div class="div_kpi kpi6">
-
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3>LATÊNCIA MÉDIA I/O</h3>
-                            <div id="circuloStatus"></div>
-
-                        </div>
-
-                        <h1>10 ms</h1>
-                        <div class="status">
-                            <h4>Última: <span id="ultimoValor"></span>30 ms</span> </h4>
-                        </div>
-                    </div>
-
-
-
-                </div>
 
                 <div class="div_kpi kpi7">
 
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>LATÊNCIA MÉDIA PING</h3>
-                            <div id="circuloStatus"></div>
+                            <img src="./../../assets/dashboard-icons/icon_kpiRede.svg" alt="">
 
                         </div>
 
@@ -215,21 +182,176 @@
             </div>
 
             <div id="container_graficosP1">
-                <div class="grafico1">
-                    <h1>Monitoramento do Uso de recursos nas últimas 24 horas</h1>
 
-                    <div class="div_graficoUsoGeral">
-                        <canvas id="graficoUso"></canvas>
+                <div id="servidores_criticos">
+                    <div id="conteudoServCrit">
+                        <div class="conteudoTitulo">
+                            <h1>Servidores Críticos</h1>
+                            <button onclick="funcao()">Ver todos os servidores (<span id="qntServ">4</span>)</button>
+                        </div>
+
+                        <div class="div_server">
+                            <div class="div_nomeServer">
+
+                                <img src="./../../assets/dashboard-icons/server.svg" alt="">
+                                <h4><span id="nomeServer">SRV-DC01-E1-06</span></h4>
+                            </div>
+
+
+                            <div class="div_compCadastrados">
+
+                                <div class="div_componente">
+                                    <div class="compTitulo">
+                                        <div class="compIcon">
+                                            <img src="./../../assets/dashboard-icons/icon_kpiCPU.svg" alt="">
+                                            <h5>
+                                                CPU USO TOTAL
+                                            </h5>
+                                        </div>
+                                        <div class="div_tituloEspec">
+
+                                            <h6> <span id="qntNucleos">8</span> núcleos</h6>
+                                        </div>
+                                    </div>
+                                    <div class="divStatus">
+                                        <h5><span id="qntUsoCPU">95.4</span>%</h5>
+
+                                        <div class="barra">
+                                            <div class="progresso progressoCPU" style="width: 95.4%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="div_especiCrit">
+                                        <div class="div_esp1">
+                                            <div class="conteudo_esp">
+                                                <img src="./../../assets/dashboard-icons/user.svg" alt="">
+                                                <h5>
+                                                    Usuário: <span id="porcentagemUsoUser">64.1</span>%
+
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="div_esp2">
+                                            <div class="conteudo_esp">
+                                                <img src="./../../assets/dashboard-icons/settings.svg" alt="">
+                                                <h5>
+                                                    Sistema: <span id="porcentagemUsoUser">36.3</span>%
+
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="div_server">
+                            <div class="div_nomeServer">
+
+                                <img src="./../../assets/dashboard-icons/server.svg" alt="">
+                                <h4><span id="nomeServer">SRV-DC01-E1-06</span></h4>
+                            </div>
+
+
+                            <div class="div_compCadastrados">
+
+                                <div class="div_componente">
+                                    <div class="compTitulo">
+                                        <div class="compIcon">
+                                            <img src="./../../assets/dashboard-icons/icon_kpiRAM.svg" alt="">
+                                            <h5>
+                                                RAM USO TOTAL
+                                            </h5>
+                                        </div>
+                                        <div class="div_tituloEspec">
+                                            <h6>Disponível <span id="dispRAM">9.2</span><span
+                                                    id="uniMedidaRAM">GB</span>
+                                            </h6>
+                                        </div>
+
+                                    </div>
+                                    <div class="divStatus">
+                                        <h5><span id="qntUsoRAM">92.7</span>%</h5>
+
+                                        <div class="barra">
+                                            <div class=" progresso progressoRam" style="width: 92.1%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="div_especiCrit">
+                                        <div class="div_esp1">
+                                            <div class="conteudo_esp">
+                                                <img src="./../../assets/dashboard-icons/database.svg" alt="">
+                                                <h5>
+                                                    Em cache: <span id="qntCacheRAM">2.1</span><span
+                                                        id="uniMedidaRAM">GB</span>
+
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="div_esp2">
+                                            <div class="conteudo_esp">
+                                                <img src="./../../assets/dashboard-icons/circle-check.svg" alt="">
+                                                <h5>
+                                                    Livre: <span id="qntLivre">2.1</span><span
+                                                        id="uniMedidaRAM">GB</span>
+
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_componente">
+                                    <div class="compTitulo">
+                                        <div class="compIcon">
+                                            <img src="./../../assets/dashboard-icons/icon_kpiCPU.svg" alt="">
+                                            <h5>
+                                                CPU USO TOTAL
+                                            </h5>
+                                        </div>
+                                        <div class="div_tituloEspec">
+
+                                            <h6> <span id="qntNucleos">8</span> núcleos</h6>
+                                        </div>
+                                    </div>
+                                    <div class="divStatus">
+                                        <h5><span id="qntUsoCPU">42.1</span>%</h5>
+
+                                        <div class="barra">
+                                            <div class="progresso progressoCPU" style="width: 42%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="div_especiCrit">
+                                        <div class="div_esp1">
+                                            <div class="conteudo_esp">
+                                                <img src="./../../assets/dashboard-icons/user.svg" alt="">
+                                                <h5>
+                                                    Usuário: <span id="porcentagemUsoUser">24</span>%
+
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="div_esp2">
+                                            <div class="conteudo_esp">
+                                                <img src="./../../assets/dashboard-icons/settings.svg" alt="">
+                                                <h5>
+                                                    Sistema: <span id="porcentagemUsoUser">18</span>%
+
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="div_alertas-mae">
                     <div class="div_alertas-conteudo">
-                        <h1>Alertas ativos no dia</h1>
+                        <h1>Alertas do dia</h1>
 
                         <div class="div_alertas">
                             <div class="div_alerta urgente">
                                 <div id="div_conteudoAlert">
-                        
+
                                     <div class="conteudoTitulo">
 
                                         <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
@@ -259,7 +381,7 @@
 
                                     <div class="conteudoTitulo">
                                         <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
-                                        <h3>SRV-DC01-WEB-05</h3>
+                                        <h3>SRV-DC01-E1-06</h3>
                                         <h5>20 min atrás</h5>
 
                                     </div>
@@ -268,7 +390,7 @@
                             </div>
 
                             <div class="div_alerta importante">
-                             <div id="div_conteudoAlert">
+                                <div id="div_conteudoAlert">
 
                                     <div class="conteudoTitulo">
                                         <img src="../../assets/dashboard-icons/icon_impor.svg" alt="">
@@ -278,8 +400,8 @@
                                     </div>
                                     <h4>Uso de CPU acima de 85%.</h4>
                                 </div>
-                        </div>
-                        <div class="div_alerta urgente">
+                            </div>
+                            <div class="div_alerta urgente">
                                 <div id="div_conteudoAlert">
 
                                     <div class="conteudoTitulo">
@@ -291,18 +413,220 @@
                                     <h4>Uso de Disco alcançou 90% de uso.</h4>
                                 </div>
                             </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+
+            <div id="container_graficosP2">
+                <div class="grafico1">
+                    <h1>Monitoramento do Uso de recursos nas últimas 24 horas</h1>
+
+                    <div class="div_graficoUsoGeral">
+                        <canvas id="graficoUso"></canvas>
+                    </div>
+                </div>
+
+                <div class="grafico2">
+                    <div class="div_conteudoGraficoTop3">
+                        <h1>Top 3 Processos - Uso de Ram</h1>
+
+                        <div class="div_graficoProc">
+                            <canvas id="graficoTopProcRAM"></canvas>
+                        </div>
+                        <hr>
+
+                        <div class="top3">
+
+                            <div class="top">
+                                <div class="div_tituloPodio">
+                                    <div class="podio podio1">1</div>
+                                    <h4><span id="maisConsomeRam1"> My SQL Server</span></h4>
+                                </div>
+
+                                <div class="div_valoresPodio">
+                                    <h4 id="podio1"><span id="totalUsado1">9</span>GB</h4>
+                                    <h5><span id="totalUsadoPorcent1">41.9</span>% do total</h5>
+                                </div>
+                            </div>
+                            <div class="top">
+                                <div class="div_tituloPodio">
+                                    <div class="podio podio2">2</div>
+                                    <h4><span id="maisConsomeRam2"> Apache Web Server</span></h4>
+                                </div>
+
+                                <div class="div_valoresPodio">
+                                    <h4 id="podio2"><span id="totalUsado2">6.5</span>GB</h4>
+                                    <h5><span id="totalUsadoPorcent2">30.2</span>% do tota</h5>
+                                </div>
+                            </div>
+                            <div class="top">
+                                <div class="div_tituloPodio">
+                                    <div class="podio podio3">3</div>
+                                    <h4><span id="maisConsomeRam3"> Node.js Application</span></h4>
+                                </div>
+
+                                <div class="div_valoresPodio">
+                                    <h4 id="podio3"><span id="totalUsado3">6</span>GB</h4>
+                                    <h5><span id="totalUsadoPorcent3">27.9</span>% do tota</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="totalTop3">
+                            <h4>Total do Top 3:</h4>
+                            <h4><span id="totalUsoRamTop3">21.5</span>GB (<span id="totalUsoPorcentRam">93.4%</span>)
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="container_graficosP3">
+                <div class="div_containerGraficosDunuts">
+
+                    <div class="grafico_donut donut1">
+                        <h1>Uso de RAM</h1>
+
+                        <div class="conteudo_grafico">
+                            <canvas id="graficoUsoRam"></canvas>
+                        </div>
+                        <hr>
+                        <div class="especificacoes donutEsp1">
+
+                            <div class="esp_uso">
+                                <h3>Em Uso:</h3>
+                                <h3><span id="qntUsadaRam">20</span> <span class="unMedida">GB</span></h3>
+                            </div>
+
+                            <div class="esp_disp">
+                                <h3>Disponível:</h3>
+                                <h3><span id="qntDispRam">3</span> <span class="unMedida">GB</span></h3>
+                            </div>
+
+                            <div class="esp_total">
+                                <h3>Total:</h3>
+                                <h3><span id="qntTotalRam">23</span> <span class="unMedida">GB</span></h3>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="grafico_donut donut2">
+                        <h1>Uso de CPU</h1>
+
+                        <div class="conteudo_grafico">
+                            <canvas id="graficoUsoCPU"></canvas>
+                        </div>
+                        <hr>
+                        <div class="especificacoes donutEsp2">
+
+                            <div class="esp_uso">
+                                <h3>Em Uso:</h3>
+                                <h3><span id="qntUsadaCPU">75</span> <span class="unMedida">%</span></h3>
+                            </div>
+
+                            <div class="esp_disp">
+                                <h3>Disponível:</h3>
+                                <h3><span id="qntDispCPU">25</span> <span class="unMedida">%</span></h3>
+                            </div>
+
+                            <div class="esp_total">
+                                <h3>Total:</h3>
+                                <h3><span id="qntTotalCPU">100</span> <span class="unMedida">%</span></h3>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="grafico_donut donut3 donutEsp3">
+                        <h1>Uso de Disco</h1>
+
+                        <div class="conteudo_grafico">
+                            <canvas id="graficoUsoDisco"></canvas>
+                        </div>
+                        <hr>
+                        <div class="especificacoes">
+
+                            <div class="esp_uso">
+                                <h3>Em Uso:</h3>
+                                <h3><span id="qntUsadaDisco">43</span> <span class="unMedida">TB</span></h3>
+                            </div>
+
+                            <div class="esp_disp">
+                                <h3>Disponível:</h3>
+                                <h3><span id="qntDispDisco">4</span> <span class="unMedida">TB</span></h3>
+                            </div>
+
+                            <div class="esp_total">
+                                <h3>Total:</h3>
+                                <h3><span id="qntTotalDisco">47</span> <span class="unMedida">TB</span></h3>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="grafico4">
+                    <div class="div_conteudoGraficoTop3">
+                        <h1>Top 3 Processos - Uso de CPU</h1>
+
+                        <div class="div_graficoProc">
+                            <canvas id="graficoTopProcCPU"></canvas>
+                        </div>
+                        <hr>
+
+                        <div class="top3">
+
+                            <div class="top">
+                                <div class="div_tituloPodio">
+                                    <div class="podio podio1">1</div>
+                                    <h4><span id="maisConsomeCPU1"> srcds_linux</span></h4>
+                                </div>
+
+                                <div class="div_valoresPodio">
+                                    <h4><span id="totalUsadoPorcentCPU1">48</span>% </h4>
+                                </div>
+                            </div>
+                            <div class="top">
+                                <div class="div_tituloPodio">
+                                    <div class="podio podio2">2</div>
+                                    <h4><span id="maisConsomeCPU2"> SourceMod</span></h4>
+                                </div>
+
+                                <div class="div_valoresPodio">
+                                    <h4><span id="totalUsadoPorcentCPU2">14</span>% </h4>
+                                </div>
+                            </div>
+                            <div class="top">
+                                <div class="div_tituloPodio">
+                                    <div class="podio podio3">3</div>
+                                    <h4><span id="maisConsomeCPU3"> My SQL Server</span></h4>
+                                </div>
+
+                                <div class="div_valoresPodio">
+                                    <h4><span id="totalUsadoPorcentCPU3">8</span>% </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="totalTop3">
+                            <h4>Total do Top 3:</h4>
+                            <h4><span id="totalUsoPorcentCPU">70%</span></h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
+    </div>
     </div>
 
 </body>
 
 
-
+</html>
 <script>
 
     function fnNavegar(local) {
@@ -325,34 +649,151 @@
         }
     }
 
-    const ctx = document.getElementById('graficoUso');
 
-    new Chart(ctx, {
+
+    const graficoTop3Ram = document.getElementById('graficoTopProcRAM');
+    new Chart(graficoTop3Ram, {
+        type: 'bar',
+        data: {
+            labels: [
+                'MySQL Server',
+                'Apache Web Server',
+                'Node.js Application'
+            ],
+            datasets: [{
+                data: [41.9, 30.2, 27.9],
+                backgroundColor: [
+                    '#244770',
+                    '#66C0F4',
+                    '#F5CC4D'
+                ],
+                borderRadius: 5,
+                borderSkipped: false,
+                barThickness: 50,
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'RAM (GB)'
+                    },
+                    grid: {
+                        color: '#e5e7eb',
+
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+
+                    }
+                }
+            }
+        }
+    });
+
+    const graficoTop3CPU = document.getElementById('graficoTopProcCPU');
+    new Chart(graficoTop3CPU, {
+        type: 'bar',
+        data: {
+            labels: [
+                'srcds_linux',
+                'SourceMod',
+                'MySQL Server'
+            ],
+            datasets: [{
+                data: [48, 14, 8],
+                backgroundColor: [
+                    '#244770',
+                    '#66C0F4',
+                    '#F5CC4D'
+                ],
+                borderRadius: 5,
+                borderSkipped: false,
+                barThickness: 50,
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'RAM (GB)'
+                    },
+                    grid: {
+                        color: '#e5e7eb',
+
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+
+                    }
+                }
+            }
+        }
+    });
+
+    const graficoUsoG = document.getElementById('graficoUso');
+    new Chart(graficoUsoG, {
         type: 'line',
         data: {
             labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '23:59'],
             datasets: [
                 {
                     label: 'RAM',
-                    data: [40, 35, 60, 75, 80, 65, 50],
-                    borderColor: '#461ea4',
-                    backgroundColor: '#461ea4',
+                    data: [40, 35, 60, 75, 70, 65, 50],
+                    borderColor: '#244770',
+                    backgroundColor: '#244770',
                     tension: 0.4,
                     pointRadius: 4
                 },
                 {
                     label: 'CPU',
-                    data: [30, 25, 50, 65, 70, 60, 45],
-                    borderColor: '#00b68bb0',
-                    backgroundColor: '#00b68bb0',
+                    data: [35, 40, 52, 65, 70, 60, 45],
+                    borderColor: '#66C0F4',
+                    backgroundColor: '#66C0F4',
                     tension: 0.4,
                     pointRadius: 4
                 },
                 {
                     label: 'DISCO',
-                    data: [45, 38, 72, 85, 92, 67, 54],
-                    borderColor: '#4c6ef5',
-                    backgroundColor: '#4c6ef5',
+                    data: [30, 43, 45, 65, 70, 67, 54],
+                    borderColor: '#F5CC4D',
+                    backgroundColor: '#F5CC4D',
+                    tension: 0.4,
+                    pointRadius: 4
+                },
+                {
+                    label: 'LATÊNCIA',
+                    data: [15, 25, 23, 20, 21, 31, 10],
+                    borderColor: '#400094c0',
+                    backgroundColor: '#400094c0',
                     tension: 0.4,
                     pointRadius: 4
                 }
@@ -384,6 +825,158 @@
         }
     });
 
-</script>
+    //Gráfico de donut de RAM
+    const textoNoCentroDonutRAM = {
+        id: 'textoCentral',
+        beforeDraw(chart) {
+            const { width, height, ctx } = chart;
 
-</html>
+            ctx.save();
+
+            ctx.font = 'bold 24px IBM Plex Sans';
+            ctx.fillStyle = '#244770';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            ctx.fillText('95.0%', width / 2, height / 2 - 5);
+
+            ctx.font = '12px IBM Plex Sans';
+            ctx.fillStyle = '#6B7280';
+
+            ctx.fillText('Em uso', width / 2, height / 2 + 15);
+
+            ctx.restore();
+        }
+    };
+    const donutRam = document.getElementById('graficoUsoRam');
+    new Chart(donutRam, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [90, 10],
+                backgroundColor: [
+                    '#244770',
+                    '#E5E7EB'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                }
+            }
+        },
+        plugins: [textoNoCentroDonutRAM]
+    });
+
+
+    //Gráfico de donut CPU
+
+    const textoNoCentroDonutCPU = {
+        id: 'textoCentral',
+        beforeDraw(chart) {
+            const { width, height, ctx } = chart;
+
+            ctx.save();
+
+            ctx.font = 'bold 24px IBM Plex Sans';
+            ctx.fillStyle = '#66C0F4';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            ctx.fillText('75.0%', width / 2, height / 2 - 5);
+
+            ctx.font = '12px IBM Plex Sans';
+            ctx.fillStyle = '#6B7280';
+
+            ctx.fillText('Em uso', width / 2, height / 2 + 15);
+
+            ctx.restore();
+        }
+    };
+    const donutCPU = document.getElementById('graficoUsoCPU');
+    new Chart(donutCPU, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [75, 25],
+                backgroundColor: [
+                    '#66C0F4',
+                    '#E5E7EB'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                }
+            }
+        },
+        plugins: [textoNoCentroDonutCPU]
+    });
+
+
+    //Gráfico de donut CPU
+    const textoNoCentroDonutDisco = {
+        id: 'textoCentral',
+        beforeDraw(chart) {
+            const { width, height, ctx } = chart;
+
+            ctx.save();
+
+            ctx.font = 'bold 24px IBM Plex Sans';
+            ctx.fillStyle = '#F5CC4D';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            ctx.fillText('93.2', width / 2, height / 2 - 5);
+
+            ctx.font = '12px IBM Plex Sans';
+            ctx.fillStyle = '#6B7280';
+            ctx.fillText('Em uso', width / 2, height / 2 + 15);
+
+            ctx.restore();
+        }
+    };
+    const donutDisco = document.getElementById('graficoUsoDisco');
+    new Chart(donutDisco, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [93, 7],
+                backgroundColor: [
+                    '#F5CC4D',
+                    '#E5E7EB'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                }
+            }
+        },
+        plugins: [textoNoCentroDonutDisco]
+    });
+
+</script>
