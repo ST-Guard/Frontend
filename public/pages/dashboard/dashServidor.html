@@ -71,7 +71,69 @@
                 </div>
             </div>
         </div>
-        <div class="SubcorpoPagina">
+        <div class="SubcorpoPagina">~
+            <div class="containerCadastro" style="display: none;" onclick="fecharCadastro()" id="boxCadastro">
+                <div class="boxCadastroCss" onclick="event.stopPropagation()">
+                    <div class="inicioCadastro">
+                        <div class="letraIniCadastro">
+                            <h2>Cadastro Servidor</h2>
+                        </div>
+                        <div class="letraFecharCadastro">
+                            <button onclick="fecharCadastro()">Fechar</button>
+                        </div>
+                    </div>
+                    <div class="inputServidor">
+                        <div class="inputNomeServ">
+                            <span>Nome do Servidor</span>
+                            <input type="text" id="nomeServ" placeholder="SERVIDOR-DC01-WEB-05">
+                        </div>
+                        <div class="inputTipoServ">
+                            <span>Tipo do Servidor</span>
+                            <input type="text" id="tipoServ" placeholder="----------">
+                        </div>
+                    </div>
+                    <div class="estadoServidorCss">
+                        <span>Estado</span>
+                        <select id="estadoServidor">
+                            <option disabled selected>Selecione</option>
+                            <hr>
+                            <option>Ativo</option>
+                            <hr>
+                            <option>Inativo</option>
+                        </select>
+                    </div>
+                    <div class="meioCadastro">
+                        <div class="letraMeioCadastro">
+                            <h2>Componentes</h2>
+                        </div>
+                    </div>
+                    <div class="inputCompo">
+                        <div class="inicioCompo">
+                            <div class="inputNomeCompo">
+                                <span>Nome do componente</span>
+                                <input type="text" id="nomeCompo" placeholder="CPU">
+                            </div>
+                            <div class="inputTipoCompo">
+                                <span>Tipo do componente</span>
+                                <input type="text" id="tipoCompo" placeholder="----------">
+                            </div>
+                        </div>
+                        <div class="finalCompo">
+                            <div class="inputUnidCompo">
+                                <span>Unidade de medida</span>
+                                <input type="text" id="nomeCompo" placeholder="%">
+                            </div>
+                            <div class="inputCapCompo">
+                                <span>Capacidade máxima</span>
+                                <input type="text" id="tipoCompo" placeholder="90%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botaoCadastrar">
+                        <button onclick="cadastrar()">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
             <div class="container_kpis">
                 <div class="div_kpi kpi1">
                     <div class="info_kpi">
@@ -112,7 +174,7 @@
                 <div class="botoes">
                     <button style="padding: 10px 25px;">Buscar</button>
                     <div class="botaoCadastro">
-                        <button>
+                        <button onclick="cadastrar()">
                             <img src="../../assets/dashboard-servidor/iconCadastro.png" alt="">
                             Cadastrar Servidor
                         </button>
@@ -232,4 +294,11 @@
     atualizarBarraRAM(34)
     atualizarBarraDISCO(46.5)
 
+    function fecharCadastro() {
+        boxCadastro.style.display = "none"
+    }
+
+    function cadastrar() {
+        boxCadastro.style.display = "flex"
+    }
 </script>
