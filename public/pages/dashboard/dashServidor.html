@@ -121,16 +121,16 @@
                         <div class="finalCompo">
                             <div class="inputUnidCompo">
                                 <span>Unidade de medida</span>
-                                <input type="text" id="nomeCompo" placeholder="%">
+                                <input type="text" id="unidCompo" placeholder="%">
                             </div>
                             <div class="inputCapCompo">
                                 <span>Capacidade máxima</span>
-                                <input type="text" id="tipoCompo" placeholder="90%">
+                                <input type="number" id="capCompo" placeholder="90">
                             </div>
                         </div>
                     </div>
                     <div class="botaoCadastrar">
-                        <button onclick="cadastrar()">Cadastrar</button>
+                        <button onclick="verificar()">Cadastrar</button>
                     </div>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                 <div class="botoes">
                     <button style="padding: 10px 25px;">Buscar</button>
                     <div class="botaoCadastro">
-                        <button onclick="cadastrar()">
+                        <button onclick="cadastrarAbrir()">
                             <img src="../../assets/dashboard-servidor/iconCadastro.png" alt="">
                             Cadastrar Servidor
                         </button>
@@ -298,7 +298,107 @@
         boxCadastro.style.display = "none"
     }
 
-    function cadastrar() {
+    function cadastrarAbrir() {
         boxCadastro.style.display = "flex"
     }
+
+    function verificar() {
+        const nomeServidor = document.getElementById("nomeServ").value
+        const tipoServidor = document.getElementById("tipoServ").value
+        const estadoServidor = document.getElementById("estadoServidor").value
+        const nomeComponente = document.getElementById("nomeCompo").value
+        const tipoComponente = document.getElementById("tipoCompo").value
+        const unidComponente = document.getElementById("unidCompo").value
+        const capComponente = document.getElementById("capCompo").value
+
+        const unidades = ["%", "GHz", "cores", "GB", "MB", "TB", "Mbps", "Gbps", "KB/s", "MB/s"]
+        const verifUnid = unidades.includes(unidComponente);
+
+        if (!nomeServidor || nomeServidor.trim() == "") {
+            alert("Nome de servidor invalido")
+        } else if (!nomeComponente || nomeComponente.trim() == "") {
+            alert("Nome de componente invalido")
+        } else if (!tipoServidor || tipoServidor.trim() == "") {
+            alert("Tipo de servidor invalido")
+        } else if (!tipoComponente || tipoComponente.trim() == "") {
+            alert("Tipo de Componente invalido")
+        } else if (!unidComponente || unidComponente.trim() == "") {
+            alert("Unidade de Componente invalido")
+        } else if (!capComponente || capComponente.trim() == "") {
+            alert("Capacidade de Componente invalido")
+        } else if (estadoServidor == "Selecione") {
+            alert("Selecione um estado de servidor")
+        } else if (verifUnid == false) {
+            alert("Componente invalido")
+        } else {
+            cadastrarServidor()
+        }
+    }
+
+    function cadastrarServidor() {
+
+        const nomeServidor = document.getElementById("nomeServ").value
+        const tipoServidor = document.getElementById("tipoServ").value
+        const estadoServidor = document.getElementById("estadoServidor").value
+
+        fetch("/cadastrarServ", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServ: nomeServidor,
+                tipoServ: tipoServidor,
+                estadoServ: estadoServidor
+            })
+        })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cadastrarComponente()
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`Erro: ${resposta}`);
+        })
+    }
+
+    function cadastrarComponente() {
+
+        const nomeComponente = document.getElementById("nomeCompo").value
+        const tipoComponente = document.getElementById("tipoCompo").value
+        const unidComponente = document.getElementById("unidCompo").value
+        const capComponente = document.getElementById("capCompo").value
+
+        fetch("/cadastrarCompo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeCompo: nomeComponente,
+                tipoCompo: tipoComponente,
+                unidCompo: unidComponente,
+                capCompo: capComponente
+            })
+        })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                alert("Cadastro realizado com sucesso")
+                exibir()
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`Erro: ${resposta}`);
+        })
+    }
+
+
 </script>
