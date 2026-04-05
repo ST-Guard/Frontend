@@ -83,8 +83,14 @@
 
         <main>
 
-            <!-- SELECT -->
+
             <div class="conteiner_select">
+                <select>
+                    <option>SERVIDOR 1</option>
+                    <option>SERVIDOR 2</option>
+                    <option>SERVIDOR 3</option>
+                    <option>SERVIDOR 4</option>
+                </select>
                 <select>
                     <option>RAM</option>
                     <option>DISCO</option>
@@ -92,10 +98,8 @@
                 </select>
             </div>
 
-            <!-- KPIs -->
-            <div class="conteiner_kpis">
 
-                <!-- KPI 1 -->
+            <div class="conteiner_kpis">
                 <div class="kpi">
                     <div class="conteiner_left">
                         <div class="desc">Quantidades de alertas</div>
@@ -112,7 +116,7 @@
                 <!-- KPI 2 -->
                 <div class="kpi">
                     <div class="conteiner_left">
-                        <div class="desc">Pico da <span>RAM</span></div>
+                        <div class="desc">Pico de ultilização da <span>RAM</span></div>
                         <div class="num"><span>70</span>%</div>
                         <div class="msg" id="total">Total de <span>20GB</span></div>
                     </div>
@@ -152,7 +156,6 @@
                 </div>
 
             </div>
-
             <div class="conteiner_graficos_parte1">
                 <div class="conteiner_latencia">
                     <div class="titulo">Latência de rede</div>
@@ -195,7 +198,7 @@
 
 </body>
 
-
+<script src="../../js/dashEspecificaAnalista.js"></script>
 
 <script>
 
