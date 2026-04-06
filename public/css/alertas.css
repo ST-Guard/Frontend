@@ -987,25 +987,24 @@ align-items: center;
     }
 
 
-
     .kpis {
         gap: 10px;
         height: 10%;
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
     }
 
     .kp1 {
-        width: 100%;
+        width: 30%;
 
     }
 
     .kp2 {
-        width: 100%;
+        width: 30%;
     }
 
     .kp3 {
-        width: 100%;
+        width: 30%;
     }
 
 
