@@ -2,8 +2,16 @@
     font-family: "IBM Plex Sans", sans-serif !important;
 }
 
-body {
-    background-color: #EDEDED;
+
+:root {
+    --tituloKPI: #494B4E;
+    --Cpu: #00b68bb0;
+    --Ram: #461ea49b;
+    --Disco: #4c6ef5;
+    --KPI-urgente: #e30000;
+    --KPI-importante: #f4b805;
+    --KPI-normal: #027806;
+    --azulClarinho: #66C0F4 --corDaFonte: #0F1C2E;
 
 }
 
@@ -14,190 +22,683 @@ body {
 
 .corpoDash #container_kpis {
     width: 100%;
-    height: 20%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: solid 2px red;
     display: flex;
-    gap: 1%;
-
-
+    gap: 16px;
+    padding: 2%;
+    padding-bottom: 0;
+    flex-wrap: wrap
 }
 
 #container_kpis .div_kpi {
-    width: 23rem;
-    height: 12rem;
-    border-left: 7px solid black;
+    flex: 1 1 250px;
+    max-width: 300px;
+    height: auto;
     background-color: white;
     border-radius: 12px;
     padding: 1%;
     display: flex;
-    gap: 5%;
-    border-right: 2px solid #e3e3e4 !important;
-    border-top: 2px solid #e3e3e4 !important;
-    border-bottom: 2px solid #e3e3e4 !important;
+    border: 2px solid #e3e3e4;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+}
 
 
+.info_kpi {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.containerTitulo {
+    display: flex;
 }
 
 #container_kpis .div_kpi h3 {
     color: #494B4E;
     font-weight: 400;
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
     width: 14rem;
-
 }
 
 #container_kpis .div_kpi h1 {
     margin: 0;
-    font-size: 3rem;
+    font-size: clamp(1.5rem, 2vw, 2.2rem);
+}
+
+
+#container_kpis .div_kpi h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--tituloKPI);
+    font-weight: 500;
 }
 
 #container_kpis .div_kpi h4 {
     margin: 0;
     font-size: 1.1rem;
+    font-weight: 500;
+    color: #0F1C2E;
+
 }
 
-#container_kpis .kpi1 h4 {
-    color: #2469F0;
+.status {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+}
+
+#circuloStatus {
+    border-radius: 50%;
+    background-color: var(--tituloKPI);
+    width: 10px;
+    height: 10px;
 }
 
 
-#container_kpis .kpi2 h4 {
-    color: #23B26D;
+
+
+#container_kpis .kpi2,
+#container_kpis .kpi5 {
+    border-top: 9px solid var(--KPI-urgente);
+
 }
 
-#container_kpis .kpi3 h4 {
-    color: #F5CC4D;
+#container_kpis .kpi2 #circuloStatus,
+#container_kpis .kpi5 #circuloStatus {
+    background-color: var(--KPI-urgente);
+}
+
+#container_kpis .kpi3,
+#container_kpis .kpi4 {
+    border-top: 9px solid var(--KPI-importante);
+
 }
 
 
-#container_kpis .kpi4 h4 {
-    color: #F65CA4;
+
+#container_kpis .kpi3 #circuloStatus,
+#container_kpis .kpi4 #circuloStatus {
+    background-color: var(--KPI-importante);
+
 }
 
-#container_kpis .kpi5 h4 {
-    color: #8B5CF6;
-}
+#container_kpis .kpi6,
+#container_kpis .kpi7 {
+    border-top: 9px solid var(--KPI-normal);
 
+}
 
 #container_kpis .kpi1 {
-    border-color: #2469F0;
+    border-top: 9px solid #EDEDED;
+
 }
 
-#container_kpis .kpi2 {
-    border-color: #23B26D;
+#container_kpis .kpi6 #circuloStatus,
+#container_kpis .kpi7 #circuloStatus {
+    background-color: var(--KPI-normal);
+
 }
 
-#container_kpis .kpi3 {
-    border-color: #F5CC4D;
-}
+/*Responsividade KPIs */
+@media (max-width: 768px) {
+    #container_kpis {
+        gap: 100px;
+        justify-content: center;
+    }
 
-
-#container_kpis .kpi4 {
-    border-color: #F65CA4;
-}
-
-#container_kpis .kpi5 {
-    border-color: #8B5CF6;
-}
-
-
-.div_icon {
-    width: 4.5rem;
-    height: 4rem;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10%;
-}
-
-.div_icon img {
-    width: 2.5rem;
-    height: 2.5rem;
-}
-
-.kpi1_Icon {
-    background-color: #2469F0;
-}
-
-.kpi2_Icon {
-    background-color: #23B26D;
-}
-
-.kpi3_Icon {
-    background-color: #F5CC4D;
-}
-
-.kpi4_Icon {
-    background-color: #F65CA4;
-}
-
-.kpi5_Icon {
-    background-color: #8B5CF6;
+    #container_kpis .div_kpi {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
 }
 
 
+/*Gráficosss p1*/
 #container_graficosP1 {
     display: flex;
     width: 100%;
-    gap: 1%;
     padding: 2%;
-    border: 2px solid green;
     font-family: "IBM Plex Sans", sans-serif !important;
     color: #0F1C2E;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
 }
 
-.grafico1 {
-    border: 2px solid #e3e3e4;
-    width: 70%;
-    height: 40rem;
+#servidores_criticos {
+    width: 68%;
+    border-radius: 16px;
+    min-height: 200px;
+    padding: 2%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    gap: 10px;
+}
+
+#servidores_criticos #conteudoServCrit {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    border: 2px solid #e3e3e4;
+    width: 100%;
+    max-height: 300px;
+    padding: 3%;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 16px;
+    gap: 20px;
+}
+
+#servidores_criticos #conteudoServCrit h4 {
+    font-size: 1.4rem;
+}
+
+#conteudoServCrit .conteudoTitulo {
+    display: flex;
+    justify-content: space-between;
+}
+
+#servidores_criticos #conteudoServCrit .div_server {
+    border: 1px solid #fd2a2a;
+    background-color: #fd2a2a3b;
+    display: flex;
+    flex-direction: column;
     border-radius: 16px;
     padding: 2%;
+    gap: 10px;
 }
 
-#container_graficosP1 .div_graficoUsoGeral {
-    width: 90%;
-    height: 40rem;
+
+
+#servidores_criticos #conteudoServCrit .div_compCadastrados {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    background-color: #fff7f7;
+    box-shadow: inset 0 0 0 1px #fca5a5;
+    border-radius: 16px;
+    flex-wrap: wrap;
+
+}
+
+#servidores_criticos #conteudoServCrit .div_compCadastrados .div_componente {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    height: auto;
+    padding: 2%;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 300px;
+}
+
+.div_componente h5 {
+    font-size: 1.2rem;
+}
+
+#servidores_criticos #conteudoServCrit .div_compCadastrados .div_componente .div_especiCrit {
+    display: flex;
+    justify-content: space-between;
+}
+
+#servidores_criticos #conteudoServCrit .div_server .div_nomeServer {
+    display: flex;
+    gap: 10px;
+}
+
+
+
+
+#conteudoServCrit .conteudoTitulo button {
+    width: auto;
+    height: auto;
+    padding: 1%;
+    border-radius: 6px;
+    border: 1px solid #66C0F4;
+    background-color: #66c0f423;
+    font-size: 1rem;
+}
+
+#conteudoServCrit .compTitulo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.compIcon {
+    display: flex;
+    gap: 10px;
+}
+
+.compIcon img {
+    max-width: 30%;
+}
+
+#servidores_criticos #conteudoServCrit .compTitulo h6 {
+    font-size: 1rem;
+
+}
+
+#servidores_criticos #conteudoServCrit .compTitulo .div_tituloEspec {
+    background-color: #dfe3e8;
+    border-radius: 10px;
+    max-width: 40%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.divStatus {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 16px;
-
+    width: 100%;
 }
 
+.divStatus h5 {
+    font-size: 1.5rem;
+}
+
+.barra {
+    width: 100%;
+    height: 12px;
+    background: #dfe3e8;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.progresso {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.divStatus .progressoRam {
+    background-color: #1c4886;
+}
+
+.divStatus .progressoCPU {
+    background-color: #66C0F4;
+}
+
+.conteudo_esp {
+    display: flex;
+    gap: 5px;
+}
+
+.conteudo_esp h5 {
+    font-size: 1.1rem;
+    color: #494B4E;
+    font-weight: 500;
+}
+
+.conteudo_esp img {
+    width: 13%
+}
 
 #container_graficosP1 .div_alertas-mae {
-    border: 1px solid #FF5252;
     width: 30%;
     border-radius: 16px;
-    height: 40rem;
-    padding: 1.5%;
+    min-height: px;
+    padding: 2%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+
 }
 
 #container_graficosP1 .div_alertas-conteudo {
     border: 2px solid #e3e3e4;
     width: 100%;
+    max-height: 300px;
     border-radius: 16px;
-    height: 36.3rem;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    padding-left: 6%;   
+    padding: 3%;
+    padding-left: 6%;
+
 }
 
 #container_graficosP1 .div_alertas-conteudo .div_alertas {
-    gap: 20%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    gap: 16px;
 }
-#container_graficosP1 .div_alertas-conteudo .div_alertas .div_alerta{
-    width: 26rem;
-    height: 7rem;
-        border: 1px solid yellow    ;
+
+#container_graficosP1 .div_alertas-conteudo .div_alertas .div_alerta {
+    width: 95%;
+    height: auto;
+    border-radius: 10px;
+}
+
+#container_graficosP1 .div_alertas-conteudo .div_alertas .urgente {
+    border: 1px solid #fd2a2a;
+    background-color: #fd2a2a3b;
+
+
+}
+
+#container_graficosP1 .div_alertas-conteudo .div_alertas .importante {
+    border: 1px solid #ffcd35;
+    background-color: #ffcd3539;
+
+
+}
+
+#div_conteudoAlert {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 4%;
+    color: var(--corDaFonte);
+}
+
+#div_conteudoAlert .conteudoTitulo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#div_conteudoAlert .conteudoTitulo h3 {
+    font-size: 1.2rem;
+}
+
+#div_conteudoAlert .conteudoTitulo h5 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--tituloKPI);
+}
+
+#div_conteudoAlert img {
+    width: 8%;
+}
+
+#div_conteudoAlert h4 {
+    font-size: 1rem;
+    font-weight: 450;
+}
+
+
+@media (max-width: 768px) {
+    #container_graficosP1 {
+        flex-direction: column;
+    }
+
+    #container_graficosP1 .div_alertas-mae {
+        width: 100%;
+        margin-top: 25px;
+                margin-bottom: 6px;
+
+    }
+
+    #container_graficosP2 .grafico1,
+     #container_graficosP1 .div_alertas-mae,  #container_graficosP2 .grafico2,#container_graficosP3 .grafico4{
+        width: 100%;
+        flex: 1 1 100%;
+    }
+    #container_graficosP3 .grafico4{
+        margin-top: 18%;
+    }
+     #container_graficosP2 {
+        gap: 2rem;
+     }
+    #servidores_criticos {
+        width: 100%;
+    }
+}
+
+@media (max-width: 822px) {
+    .div_nomeServer {
+        gap: 20px;
+    }
+}
+
+/*graficos p2*/
+
+#container_graficosP2 {
+    display: flex;
+    width: 100%;
+    padding: 2%;
+    font-family: "IBM Plex Sans", sans-serif !important;
+    color: #0F1C2E;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#container_graficosP2 .grafico1,
+#container_graficosP2 .grafico2, #container_graficosP3 .grafico4 {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    padding: 2%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+
+}
+
+#container_graficosP2 .grafico1 {
+    width: 68%;
+
+}
+
+#container_graficosP2 .grafico2, #container_graficosP3 .grafico4 {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#container_graficosP2 .div_graficoUsoGeral {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+
+}
+
+.div_conteudoGraficoTop3 {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+}
+
+ .div_graficoProc {
+    width: 80%;
+    height: 250px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #d0d0d0;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.top3 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.top3 .top {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.top3 .div_tituloPodio {
+    display: flex;
+    gap: 10px;
+    width: 70%;
+    height: auto;
+    align-items: center;
+}
+
+.top3 .top .podio {
+    width: 10%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bolder;
+
+}
+
+.top3 .top .podio1 {
+    background-color: #1c4886;
+}
+
+.top3 .top #podio1 {
+    color: #1c4886;
+}
+
+.top3 .top .podio2 {
+    background-color: #F5CC4D;
+}
+
+.top3 .top #podio2 {
+    color: #F5CC4D;
+}
+.top3 .top .podio3 {
+    background-color: #66C0F4;
+}
+
+.top3 .top #podio3 {
+    color: #66C0F4;
+}
+.top3 .top h4, .totalTop3 h4 {
+    font-size: 1rem;
+}
+
+.top .div_valoresPodio {
+    display: flex;
+    width: 30%;
+    height: auto;
+    flex-direction: column;
+    text-align: end;
+
+}
+.top3 .top .div_valoresPodio h5{
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+
+.totalTop3{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.totalTop3 h4{
+    font-weight: 400;
+}
+
+
+
+
+#container_graficosP3 {
+    display: flex;
+    width: 100%;
+    padding: 2%;
+    gap: 20px;
+    font-family: "IBM Plex Sans", sans-serif ;
+    color: #0F1C2E;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+#container_graficosP3 .div_containerGraficosDunuts {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 16px;
+    gap: 1%;
+    width: 65%;
+    flex: 2 1 600px;
+}
+
+
+.grafico_donut h1{
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+#container_graficosP3 .div_containerGraficosDunuts .especificacoes {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+}
+
+.esp_uso,
+.esp_disp,
+.esp_total {
+    display: flex;
+    justify-content: space-between;
+}
+
+.esp_uso h3,
+.esp_disp h3,
+.esp_total h3 {
+  font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.donutEsp3 .esp_uso h3 span{
+    color: #F5CC4D;
+    font-weight: bold;
+}
+
+.donutEsp2 .esp_uso h3 span{
+    color: #66C0F4;
+    font-weight: bold;
+}
+
+.donutEsp1 .esp_uso h3 span{
+    color: #1c4886;
+    font-weight: bold;
+}
+
+.esp_disp h3 span{
+        color: #00a437c3;
+    font-weight: bold;
+}
+.div_containerGraficosDunuts .grafico_donut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    border-radius: 16px;
+    padding: 2%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    flex: 1 1 300px;
+}
+
+.conteudo_grafico {
+flex: 1 1 300px;    
+height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
