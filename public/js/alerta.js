@@ -1,5 +1,26 @@
 var alertas = [];
 
+
+function mudarDash() {
+    window.location = "dashboardGestor_modelo.html"
+}
+
+function mudarServidor() {
+    window.location = "dashServidor.html"
+}
+
+function mudarAlerta() {
+    window.location = "dashboardAlertas.html"
+}
+
+function mudarFuncionario() {
+    window.location = "cadastroFuncionario.html"
+}
+
+function mudarConfig() {
+    window.location = "config.html"
+}
+
 function obterdados(idAquario) {
     fetch(`/medidas/tempo-real/${idAquario}`)
         .then(resposta => {

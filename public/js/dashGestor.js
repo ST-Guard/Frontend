@@ -17,7 +17,25 @@
 //   }
 // }
 
+function mudarDash() {
+    window.location = "dashGestor_modelo.html"
+}
 
+function mudarServidor() {
+    window.location = "dashServidor.html"
+}
+
+function mudarAlerta() {
+    window.location = "dashboardAlertas.html"
+}
+
+function mudarFuncionario() {
+    window.location = "cadastroFuncionario.html"
+}
+
+function mudarConfig() {
+    window.location = "config.html"
+}
 
 // DASHBOARD
 
