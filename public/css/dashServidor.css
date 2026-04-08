@@ -407,6 +407,17 @@ body {
     width: 80%;
 }
 
+.botaoZona {
+    margin-top: 8px;
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid #244770;
+    background-color: #244770;
+    color: white;
+    cursor: pointer;
+}
+
 .estadoServidorCss {
     display: flex;
     flex-direction: column;

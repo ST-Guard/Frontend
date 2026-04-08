@@ -94,6 +94,7 @@
                         </div>
                     </div>
                     <div class="estadoServidorCss">
+                        
                         <span>Estado</span>
                         <select id="estadoServidor">
                             <option disabled selected>Selecione</option>
@@ -102,6 +103,19 @@
                             <hr>
                             <option>Inativo</option>
                         </select>
+
+                        <span>DataBase</span>
+                        <select id="selectDataBase">
+                            <option disabled selected>Selecione a DataBase</option>
+                        </select>
+                        <span>Zona</span>
+                        <select id="zonaServidor">
+                            <option disabled selected>Selecione a zona</option>
+                        </select>
+                        <button class="botaoZona" onclick="mostrarZona()">
+                            Nova Zona
+                        </button>
+                        <input type="text" id="novaZonaInput" placeholder="Nome da nova zona" style="display:none; margin-top:10px;">
                     </div>
                     <div class="meioCadastro">
                         <div class="letraMeioCadastro">
@@ -273,6 +287,16 @@
 
 <script>
 
+    function mostrarZona() {
+        const inputZona = document.getElementById("novaZonaInput");
+        inputZona.style.display = "block";
+    }
+
+    function fecharZona() {
+        const inputZona = document.getElementById("novaZonaInput");
+        inputZona.style.display = "none";
+    }
+
     function mudarDash() {
         window.location = "dashboardGestor.html"
     }
@@ -321,6 +345,8 @@
 
     function cadastrarAbrir() {
         boxCadastro.style.display = "flex"
+        carregarZonas()
+        carregarDatabases()
     }
 
     function verificar() {
@@ -356,13 +382,33 @@
         }
     }
 
+    function carregarDatabases() {
+        const fkEmpresa = sessionStorage.FK_EMPRESA;
+
+        fetch(`/servidor/carregarDatabases/${fkEmpresa}`)
+            .then(resposta => resposta.json())
+            .then(lista => {
+                const selectDatabase = document.getElementById("selectDataBase");
+                selectDatabase.innerHTML = `<option disabled selected>Selecione a database</option>`;
+
+                for (let i = 0; i < lista.length; i++) {
+                    selectDatabase.innerHTML += `
+                        <option value="${lista[i].idDataCenter}">
+                            ${lista[i].nome}
+                        </option>
+                    `;
+                }
+            })
+            .catch(erro => console.log(erro));
+    }
+
     function cadastrarServidor() {
 
-        const nomeServidor = document.getElementById("nomeServ").value
-        const tipoServidor = document.getElementById("tipoServ").value
-        const estadoServidor = document.getElementById("estadoServidor").value
+        const nomeServidor = document.getElementById("nomeServ").value;
+        const tipoServidor = document.getElementById("tipoServ").value;
+        const estadoServidor = document.getElementById("estadoServidor").value;
 
-        fetch("/cadastrarServ", {
+        fetch("/servidor/cadastrarServ", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -373,53 +419,70 @@
                 estadoServ: estadoServidor
             })
         })
-        .then(function (resposta) {
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                cadastrarComponente()
+        .then(res => {
+            if (res.ok) {
+                alert("Servidor cadastrado com componentes!");
+                exibir();
             } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
+                throw "Erro ao cadastrar";
             }
         })
-        .catch(function (resposta) {
-            console.log(`Erro: ${resposta}`);
-        })
+        .catch(err => console.log(err));
     }
 
-    function cadastrarComponente() {
+    function cadastrarZona() {
 
-        const nomeComponente = document.getElementById("nomeCompo").value
-        const tipoComponente = document.getElementById("tipoCompo").value
-        const unidComponente = document.getElementById("unidCompo").value
-        const capComponente = document.getElementById("capCompo").value
+        const nomeZona = document.getElementById("nomeZona").value;
 
-        fetch("/cadastrarCompo", {
+        if (!nomeZona || nomeZona.trim() == "") {
+            alert("Nome da zona inválido");
+            return;
+        }
+
+        fetch("/servidor/cadastrarZona", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                nomeCompo: nomeComponente,
-                tipoCompo: tipoComponente,
-                unidCompo: unidComponente,
-                capCompo: capComponente
+                nomeZona: nomeZona
             })
         })
-        .then(function (resposta) {
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                alert("Cadastro realizado com sucesso")
-                exibir()
+        .then(res => {
+            if (res.ok) {
+                alert("Zona cadastrada!");
+                fecharZona();
+                carregarZonas();
             } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
+                throw "Erro ao cadastrar zona";
             }
         })
-        .catch(function (resposta) {
-            console.log(`Erro: ${resposta}`);
-        })
+        .catch(err => console.log(err));
     }
 
+    function carregarZonas() {
+
+        fetch("/servidor/carregarZonas")
+            .then(function(resposta) {
+                return resposta.json();
+            })
+            .then(function(lista) {
+
+                var selectZona = document.getElementById("zonaServidor");
+                selectZona.innerHTML = `<option disabled selected>Selecione a zona</option>`;
+                for (var i = 0; i < lista.length; i++) {
+
+                    select.innerHTML += `
+                        <option value="${lista[i].id}">
+                            ${lista[i].nome}
+                        </option>
+                    `;
+                }
+
+            })
+            .catch(function(erro) {
+                console.log(erro);
+            });
+    }
 
 </script>

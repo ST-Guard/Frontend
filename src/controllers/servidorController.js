@@ -1,37 +1,61 @@
 var servidorModel = require("../models/servidorModel");
 
+function carregarDatabases(req, res) {
+    const fkEmpresa = req.params.fkEmpresa;
+
+    servidorModel.carregarDatabases(fkEmpresa)
+        .then(resultado => res.json(resultado))
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function cadastrarZona(req, res) {
+
+    const nomeZona = req.body.nomeZona;
+
+    if (nomeZona == undefined) {
+        res.status(400).send("Nome da zona inválido!");
+    } else {
+
+        servidorModel.cadastrarZona(nomeZona)
+            .then(function(resultado){
+                res.json(resultado);
+            })
+            .catch(function(erro){
+                console.log(erro);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
+function listarZonas(req, res){
+
+    servidorModel.listarZonas()
+        .then(function(resultado){
+            res.json(resultado);
+        })
+        .catch(function(erro){
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 function cadastrarServidor(req, res) {
 
-    const nomeServidor = req.body.nomeServ
-    const tipoServidor = req.body.tipoServ
-    const estadoServidor = req.body.estadoServ
+    const { nomeServ, tipoServ, estadoServ } = req.body;
 
-    if (nomeServidor == undefined) {
-        res.status(400).send("Nome do servidor está inválido!");
-    } 
-    else if (tipoServidor == undefined) {
-        res.status(400).send("Tipo do servidor está inválido!");
-    } 
-    else if (estadoServidor == undefined) {
-        res.status(400).send("Estado do servidor inválido!");
-    } else {
-        servidorModel.cadastrarServidor(nomeServidor, tipoServidor, estadoServidor)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ) .catch(
-                function(erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
-
+    servidorModel.cadastrarServidorCompleto(
+        nomeServ,
+        tipoServ,
+        estadoServ
+    )
+    .then(resultado => res.json(resultado))
+    .catch(erro => {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
 
 function cadastrarComponente(req, res) {
@@ -73,6 +97,9 @@ function cadastrarComponente(req, res) {
 }
 
 module.exports = {
+    carregarDatabases,
+    cadastrarZona,
+    listarZonas,
     cadastrarServidor,
     cadastrarComponente
 }
