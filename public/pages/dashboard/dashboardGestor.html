@@ -1,287 +1,213 @@
 <!doctype html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Data | Gestor</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./../../css/dashboard.css" />
+    <link rel="stylesheet" href="./../../css/dashGeralGestor.css" />
+    <script src="./../../js/dashGestor.js"></script>
     <script src="./../../js/sessao.js"></script>
-    <link rel="icon" href="./../../assets/icon/icon.png">
+    <link rel="icon" href="./../../assets/icon/icon.png" />
+  </head>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
-<body>
+  <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0F1C2E; width: 100%;">
-            <div class="container-fluid px-5">
-                <a class="navbar-brand fs-3 fw-semibold" href="#">
-                    <a class="navbar-brand" href="public/index.html">
-                        <img src="./../../assets/fundos-home/smart_branca.png" alt="Smart Data Logo"
-                            style="height: 50px; width: auto;">
-                    </a>
+      <nav>
+        <div class="logo-nav" onclick="fnNavegar('/')">
+          <img src="./../../assets/logos/smart data branco.png" alt="" />
+        </div>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-4">
-                            <li class="nav-item">
-                                <a class="nav-link text-white fs-5" style="background-color: #F5CC4D; width: auto; height: 38px; 
-                border-radius: 6px; font-weight: 500; padding: 0 20px; 
-                display: flex; align-items: center; justify-content: center;" href="../cadastro copy.html">Cadastrar
-                                    Analista</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white fs-5" style="background-color: #F5CC4D; width: auto; height: 38px; 
-                border-radius: 6px; font-weight: 500; padding: 0 20px; 
-                display: flex; align-items: center; justify-content: center;" href="#terceiro-banner">Cadastrar
-                                    DataCenter</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white fs-5" style="background-color: #F5CC4D; width: auto; height: 38px; 
-                border-radius: 6px; font-weight: 500; padding: 0 20px; 
-                display: flex; align-items: center; justify-content: center;" href="#diferenciais">Cadastrar
-                                    Servidor</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white fs-5" style="background-color: red; width: auto; height: 38px; 
-                border-radius: 6px; font-weight: 500; padding: 0 20px; 
-                display: flex; align-items: center; justify-content: center; cursor: pointer;"
-                                    onclick="limparSessao()">Sair</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
+        <div class="right-nav">
+          <div class="logo-notificao">
+            <div class="icon-notificao">
+              <img src="./../../assets/dashboard-icons/notificao.svg" alt="" />
             </div>
-        
-        </nav>
+
+            <div class="qtd-notificao">
+              <img src="./../../assets/dashboard-icons/circulo.svg" alt="" />
+              <p class="qtd-notificao">10</p>
+            </div>
+          </div>
+
+          <div class="separacao"></div>
+
+          <div class="logo-usuario">
+            <div class="userImg">
+              <img
+                src="./../../assets/dashboard-icons/cirucloUser.svg"
+                alt=""
+              />
+            </div>
+            <div class="userInfo">
+              <h2 class="user-name">Matheus Valle</h2>
+              <h3 class="user-cargo">Analista de operações</h3>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
 
-    <div class="container-fluid py-3 px-lg-4 px-2">
-        <div class="row g-3 mb-4">
-            <div class="col-6 col-md-4">
-                <div class="card-monitoramento p-3 h-100">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="rotulo-medicao"><i class="bi bi-cpu me-1"></i> CPU · Uso Total</span>
-                        <span class="badge bg-light text-dark rounded-pill px-3 py-1" id="cpuNucleos">8 Núcleos</span>
-                    </div>
-                    <div class="d-flex align-baseline mt-2">
-                        <span class="valor-grande" id="cpuValor">42</span><span class="unidade">%</span>
-                    </div>
-                    <div class="barra-progresso w-100 mt-2">
-                        <div id="cpuBarra" class="barra-cpu" style="width: 42%; height: 8px; border-radius: 20px"></div>
-                    </div>
-                    <div class="d-flex justify-content-between mt-2 small text-muted">
-                        <span><i class="bi bi-person-circle me-1"></i>Usuário 28%</span>
-                        <span><i class="bi bi-gear me-1"></i>Sistema 14%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4">
-                <div class="card-monitoramento p-3 h-100">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="rotulo-medicao"><i class="bi bi-memory me-1"></i> RAM · 16 GB</span>
-                        <span class="badge bg-light text-dark rounded-pill px-3 py-1" id="ramDisponivel">Disponível
-                            9.2G</span>
-                    </div>
-                    <div class="d-flex align-baseline mt-2">
-                        <span class="valor-grande" id="ramValor">6.8</span><span class="unidade">GB</span>
-                    </div>
-                    <div class="barra-progresso w-100 mt-2">
-                        <div id="ramBarra" class="barra-ram" style="width: 42.5%; height: 8px; border-radius: 20px">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between mt-2 small text-muted">
-                        <span><i class="bi bi-database me-1"></i>Em cache 2.1G</span>
-                        <span><i class="bi bi-check-circle me-1"></i>Livre 9.2G</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4">
-                <div class="card-monitoramento p-3 h-100">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="rotulo-medicao"><i class="bi bi-hdd me-1"></i> DISCO · 512 GB</span>
-                        <span class="badge bg-light text-dark rounded-pill px-3 py-1" id="discoTipo">SSD</span>
-                    </div>
-                    <div class="d-flex align-baseline mt-2">
-                        <span class="valor-grande" id="discoValor">238</span><span class="unidade">GB</span>
-                    </div>
-                    <div class="barra-progresso w-100 mt-2">
-                        <div id="discoBarra" class="barra-disco" style="width: 46.5%; height: 8px; border-radius: 20px">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between mt-2 small text-muted">
-                        <span><i class="bi bi-folder me-1"></i>Em uso 238G</span>
-                        <span><i class="bi bi-folder2-open me-1"></i>Livre 274G</span>
-                    </div>
-                </div>
-            </div>
+    <div class="corpoPagina">
+      <div class="sidebar">
+        <div class="sidebar-buttons">
+          <div class="sidebar-button-select">
+            <img
+              src="../../assets/dashboard-icons/icon_dashboard_azul.svg"
+              alt=""
+            />
+            <p>Dashboard</p>
+          </div>
+          <div class="sidebar-button">
+            <img
+              src="../../assets/dashboard-icons/icon_servidores_branco.svg"
+              alt=""
+            />
+            <p>Servidores</p>
+          </div>
+          <div class="sidebar-button">
+            <img
+              src="../../assets/dashboard-icons/icon_alerta_branco.svg"
+              alt=""
+            />
+            <p>Alerta</p>
+          </div>
+          <div class="sidebar-button">
+            <img
+              src="../../assets/dashboard-icons/icon_form_branco.svg"
+              alt=""
+            />
+            <p>Funcionario</p>
+          </div>
+          <div class="sidebar-button">
+            <img
+              src="../../assets/dashboard-icons/icon_config_branco.svg"
+              alt=""
+            />
+            <p>Configurações</p>
+          </div>
         </div>
-        <div class="row g-3">
-            <div class="col-12">
-                <div class="card card-tabela">
-                    <div class="card-header d-flex justify-content-between bg-transparent border-0 pt-3">
-                        <span class="fw-bold" style="color: #0b2b4a">
-                            <i class="bi bi-server me-2"></i>Relatório de Monitoramento · Servidores
-                        </span>
-                        <span class="small text-muted">ID Servidor | CPU | RAM | Memória</span>
-                    </div>
-                    <div class="card-body pt-0" id="tabelaServidores">
-                    </div>
-                </div>
-            </div>
+      </div>
+
+      <div class="SubcorpoPagina">
+        <div class="container-dashboards">
+            <div class="btn-option-dashboard">1° Dashboard</div>
+            <div class="btn-option-dashboard-desable" onclick="fnNavegar('/pages/dashboard/dashboardAnalista.html')">2° Dashboard</div>
         </div>
+
+
+
+        <div id="container_kpis">
+          <div class="div_kpi kpi1">
+            <div class="info_kpi">
+              <h3>FUNCIONARIO ATIVOS</h3>
+              <h1>5</h1>
+              <h4>10 inativos</h4>
+            </div>
+
+            <div class="div_icon kpi1_Icon">
+              <img
+                src="./../../assets/dashboard-icons/icons-dashGestor/icon-paper.svg"
+                id="icon_kpi1"
+                alt=""
+              />
+            </div>
+          </div>
+
+          <div class="div_kpi kpi2">
+            <div class="info_kpi">
+              <h3>QUANTIDADE DE ALERTAS</h3>
+              <h1>8</h1>
+              <h4>+3 ultima hora</h4>
+            </div>
+
+            <div class="div_icon kpi2_Icon">
+              <img
+                src="./../../assets/dashboard-icons/icons-dashGestor/icon-alert.svg"
+                id="icon_kpi2"
+                alt=""
+              />
+            </div>
+          </div>
+
+          <div class="div_kpi kpi3">
+            <div class="info_kpi">
+              <h3>USO GERAL DE RECURSO</h3>
+              <h1>50%</h1>
+              <h4>+5% desde ontem</h4>
+            </div>
+
+            <div class="div_icon kpi3_Icon">
+              <img
+                src="./../../assets/dashboard-icons/icons-dashGestor/icon-grafic.svg"
+                id="icon_kpi4"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="div_kpi kpi4">
+            <div class="info_kpi">
+              <h3>SERVIDORES ATIVOS</h3>
+              <h1>5</h1>
+              <h4>2 servidores inativos</h4>
+            </div>
+
+            <div class="div_icon kpi4_Icon">
+              <img
+                src="./../../assets/dashboard-icons/icons-dashGestor/icon-server.svg"
+                id="icon_kpi4"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="grafico-usoMedioRecursos">
+          <div>
+            <canvas id="chartusomedio"></canvas>
+          </div>
+        </div>
+
+        <div class="grafico-PicoUsoSemanal">
+            
+          <div class="header-grafico">
+            <div class="texto-titulo">
+              <h3>Pico de Uso Semanal</h3>
+              <span>Valores máximos registrados por dia</span>
+            </div>
+            <div class="filtro-componente">
+              <label>Componente:</label>
+              <select id="select-componente">
+                <option value="CPU">CPU</option>
+                <option value="RAM">RAM</option>
+                <option value="DISCO">DISCO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="canvas-container">
+            <canvas id="chartpicousosemanal"></canvas>
+          </div>
+
+          <div class="footer-grafico">
+            <div class="stat">
+              <p>Pico Máximo</p>
+              <b style="color: #f54d4d">91%</b>
+            </div>
+            <div class="stat">
+              <p>Pico Médio</p>
+              <b style="color: #5dade2">77%</b>
+            </div>
+            <div class="stat">
+              <p>Pico Mínimo</p>
+              <b style="color: #2ecc71">58%</b>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
-<script>
-    const servidoresMonitorados = [
-        { id: 'CENTER-ID-01', processador: 'Intel XEON', ram: 'DynamicRAM 1TB', disco: '20TB HHD' },
-        { id: 'CENTER-ID-02', processador: 'AMD Hyperthread', ram: 'RDIMM 2TB', disco: '20TB HHD' },
-        { id: 'CENTER-ID-03', processador: 'AMD Hyperthread', ram: 'DynamicRAM 1TB', disco: '10TB SSD' },
-        { id: 'CENTER-ID-04', processador: 'Intel XEON', ram: 'RDIMM 2TB', disco: '10TB SSD' }
-    ];
-
-    const alertasAtivos = [
-        { servidor: 'CENTER-ID-01', componente: 'CPU', mensagem: 'CPU parou', tempo: 'Agora', cor: '#2469f0' },
-        { servidor: 'CENTER-ID-02', componente: 'RAM', mensagem: 'RAM sem resposta', tempo: '2 min', cor: '#23b26d' },
-        { servidor: 'CENTER-ID-03', componente: 'RAM', mensagem: 'Falha de memória', tempo: '5 min', cor: '#23b26d' }
-    ];
-
-
-    function preencherTabelaServidores() {
-        const tabela = document.getElementById('tabelaServidores');
-        let html = '';
-
-        for (let i = 0; i < servidoresMonitorados.length; i++) {
-            const servidor = servidoresMonitorados[i];
-
-            html += `
-            <div class="linha-tabela d-flex flex-wrap align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-hdd-stack me-2" style="color: #2469f0;"></i>
-                    ${servidor.id}
-                </div>
-                <div>${servidor.processador}</div>
-                <span class="badge-dscp">${servidor.ram}</span>
-                <span class="badge-dscp">${servidor.disco}</span>
-            </div>
-        `;
-        }
-
-        tabela.innerHTML = html;
-    }
-
-    function preencherAlertas() {
-        const lista = document.getElementById('listaAlertas');
-        let html = '';
-
-        for (let i = 0; i < alertasAtivos.length; i++) {
-            const alerta = alertasAtivos[i];
-
-            html += `
-            <div class="col-md-4">
-                <div class="d-flex align-items-center gap-2 p-2 rounded bg-alerta">
-                    <i class="" style="color: ${alerta.cor}; font-size: 0.8rem;"></i>
-                    <div class="small flex-grow-1">
-                        <span class="fw-semibold" style="color: #0b2b4a;">${alerta.servidor}</span>
-                        <br><span class="text-danger" style="font-size: 0.7rem;">${alerta.mensagem}</span>
-                    </div>
-                    <span class="badge ${alerta.tempo === 'Agora' ? 'bg-danger' : 'bg-danger bg-opacity-10 text-danger px-2'}" style="font-size: 0.6rem;">${alerta.tempo}</span>
-                </div>
-            </div>
-        `;
-        }
-
-        lista.innerHTML = html;
-    }
-
-    function criarGraficoFrequencia() {
-        const ctx = document.getElementById("graficoFrequenciaMemoria")?.getContext("2d");
-
-        if (!ctx) return;
-
-        const labelsTempo = [];
-        for (let i = 0; i < 20; i++) {
-            labelsTempo.push(i * 3 + "s");
-        }
-
-        const dadosCanalA = [
-            2400, 2450, 2666, 2800, 3200, 3000, 3100, 3200, 3150, 3080,
-            2950, 2880, 3020, 3180, 3220, 3160, 3080, 3000, 3100, 3200,
-        ];
-
-        const dadosCanalB = [
-            2350, 2400, 2550, 2700, 3100, 2950, 3050, 3180, 3120, 3050,
-            2900, 2820, 2980, 3150, 3200, 3120, 3040, 2950, 3060, 3180,
-        ];
-
-        new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: labelsTempo,
-                datasets: [
-                    {
-                        label: "Canal A (MHz)",
-                        data: dadosCanalA,
-                        borderColor: "#2469f0",
-                        backgroundColor: "rgba(36, 105, 240, 0.05)",
-                        tension: 0.3,
-                        pointRadius: 3,
-                        borderWidth: 2,
-                        fill: true,
-                    },
-                    {
-                        label: "Canal B (MHz)",
-                        data: dadosCanalB,
-                        borderColor: "#23b26d",
-                        backgroundColor: "rgba(35, 178, 109, 0.05)",
-                        tension: 0.3,
-                        pointRadius: 3,
-                        borderWidth: 2,
-                        fill: true,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: "top",
-                        labels: {
-                            boxWidth: 12,
-                            font: { size: 11 },
-                        },
-                    },
-                },
-                scales: {
-                    y: {
-                        min: 2000,
-                        max: 3400,
-                        ticks: {
-                            callback: function (valor) {
-                                return valor + " MHz";
-                            },
-                            stepSize: 200,
-                        },
-                    },
-                },
-            },
-        });
-    }
-    preencherTabelaServidores();
-    preencherAlertas();
-    criarGraficoFrequencia();
-</script>
-
+  </body>
 </html>
+
+<!-- FIZ javascript separado rs  -->
