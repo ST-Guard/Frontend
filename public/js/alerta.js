@@ -2,7 +2,7 @@ var alertas = [];
 
 
 function mudarDash() {
-    window.location = "dashboardGestor_modelo.html"
+    window.location = "dashboardGestor.html"
 }
 
 function mudarServidor() {

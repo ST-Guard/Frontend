@@ -1,6 +1,6 @@
 
 function mudarDash() {
-    window.location = "dashGestor_modelo.html"
+    window.location = "dashboardGestor.html"
 }
 
 function mudarServidor() {

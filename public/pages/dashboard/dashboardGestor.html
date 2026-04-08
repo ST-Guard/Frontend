@@ -7,8 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./../../css/dashboard.css" />
     <link rel="stylesheet" href="./../../css/dashGeralGestor.css" />
-    <script src="./../../js/dashGestor.js"></script>
     <script src="./../../js/sessao.js"></script>
+    <script src="./../../js/dashGestor.js"></script>
     <link rel="icon" href="./../../assets/icon/icon.png" />
   </head>
 
@@ -50,45 +50,31 @@
     </header>
 
     <div class="corpoPagina">
-      <div class="sidebar">
-        <div class="sidebar-buttons">
-          <div class="sidebar-button-select">
-            <img
-              src="../../assets/dashboard-icons/icon_dashboard_azul.svg"
-              alt=""
-            />
-            <p>Dashboard</p>
-          </div>
-          <div class="sidebar-button">
-            <img
-              src="../../assets/dashboard-icons/icon_servidores_branco.svg"
-              alt=""
-            />
-            <p>Servidores</p>
-          </div>
-          <div class="sidebar-button">
-            <img
-              src="../../assets/dashboard-icons/icon_alerta_branco.svg"
-              alt=""
-            />
-            <p>Alerta</p>
-          </div>
-          <div class="sidebar-button">
-            <img
-              src="../../assets/dashboard-icons/icon_form_branco.svg"
-              alt=""
-            />
-            <p>Funcionario</p>
-          </div>
-          <div class="sidebar-button">
-            <img
-              src="../../assets/dashboard-icons/icon_config_branco.svg"
-              alt=""
-            />
-            <p>Configurações</p>
-          </div>
+        <div class="sidebar">
+            <div class="sidebar-buttons">
+
+                <div class="sidebar-button-select">
+                    <img  src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                    <p onclick="mudarDash()">Dashboard</p>
+                </div>
+                <div class="sidebar-button">
+                    <img  src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+                    <p onclick="mudarServidor()">Servidores</p>
+                </div>
+                <div class="sidebar-button">
+                    <img  src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
+                    <p onclick="mudarAlerta()">Alerta</p>
+                </div>
+                <div class="sidebar-button" onclick="window.location.href='./../../pages/dashboard/cadastroFuncionario.html'" style="cursor: pointer;">
+                    <img  src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
+                    <p onclick="mudarFuncionario()">Funcionarios</p>
+                </div>
+                <div class="sidebar-button">
+                    <img  src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
+                    <p onclick="mudarConfig()">Configurações</p>
+                </div>
+            </div>
         </div>
-      </div>
 
       <div class="SubcorpoPagina">
         <div class="container-dashboards">
