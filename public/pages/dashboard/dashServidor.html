@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="SubcorpoPagina">~
+        <div class="SubcorpoPagina">
             <div class="containerCadastro" style="display: none;" onclick="fecharCadastro()" id="boxCadastro">
                 <div class="boxCadastroCss" onclick="event.stopPropagation()">
                     <div class="inicioCadastro">
@@ -108,14 +108,11 @@
                         <select id="selectDataBase">
                             <option disabled selected>Selecione a DataBase</option>
                         </select>
+                        <button onclick="carregarZonas()">Carregar</button>
                         <span>Zona</span>
-                        <select id="zonaServidor">
+                        <select id="zonaServidor" style="display: flex;">
                             <option disabled selected>Selecione a zona</option>
                         </select>
-                        <button class="botaoZona" onclick="mostrarZona()">
-                            Nova Zona
-                        </button>
-                        <input type="text" id="novaZonaInput" placeholder="Nome da nova zona" style="display:none; margin-top:10px;">
                     </div>
                     <div class="meioCadastro">
                         <div class="letraMeioCadastro">
@@ -345,7 +342,6 @@
 
     function cadastrarAbrir() {
         boxCadastro.style.display = "flex"
-        carregarZonas()
         carregarDatabases()
     }
 
@@ -398,6 +394,8 @@
                         </option>
                     `;
                 }
+                const idDataCenter = lista[].idDataCenter
+                
             })
             .catch(erro => console.log(erro));
     }
@@ -430,37 +428,8 @@
         .catch(err => console.log(err));
     }
 
-    function cadastrarZona() {
-
-        const nomeZona = document.getElementById("nomeZona").value;
-
-        if (!nomeZona || nomeZona.trim() == "") {
-            alert("Nome da zona inválido");
-            return;
-        }
-
-        fetch("/servidor/cadastrarZona", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nomeZona: nomeZona
-            })
-        })
-        .then(res => {
-            if (res.ok) {
-                alert("Zona cadastrada!");
-                fecharZona();
-                carregarZonas();
-            } else {
-                throw "Erro ao cadastrar zona";
-            }
-        })
-        .catch(err => console.log(err));
-    }
-
     function carregarZonas() {
+        habilitarZona.style.
 
         fetch("/servidor/carregarZonas")
             .then(function(resposta) {
@@ -473,7 +442,7 @@
                 for (var i = 0; i < lista.length; i++) {
 
                     select.innerHTML += `
-                        <option value="${lista[i].id}">
+                        <option value="${lista[i].idZona}">
                             ${lista[i].nome}
                         </option>
                     `;
