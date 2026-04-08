@@ -4,19 +4,20 @@ function fnNavegar(local) {
 document.addEventListener('DOMContentLoaded', () => {
 
 validarSessao();
-function validarSessao() {
-  var email = sessionStorage.EMAIL_USUARIO ? sessionStorage.EMAIL_USUARIO : null ;
-  var nome = sessionStorage.NOME_USUARIO ? sessionStorage.NOME_USUARIO : null;
+    function validarSessao() {
+    var email = sessionStorage.EMAIL_USUARIO ? sessionStorage.EMAIL_USUARIO : null ;
+    var nome = sessionStorage.NOME_USUARIO ? sessionStorage.NOME_USUARIO : null;
 
-  var b_usuario = document.getElementById("b_usuario");
+    var b_usuario = document.getElementById("b_usuario");
 
-  if (email != null && nome != null) {
-    b_usuario.innerHTML = nome;
-  } else {
-    console.log("AAAAAAAA");
-    window.location.href = "/pages/loginlogout/login.html";
-  }
-}
+    if (email != null && nome != null) {
+        b_usuario.innerHTML = nome;
+    } else {
+        console.log("AAAAAAAA");
+        window.location.href = "/pages/loginlogout/login.html";
+    }
+    }
+})
 
 function mudarDash() {
     window.location = "dashGestor_modelo.html"
