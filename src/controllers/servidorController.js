@@ -11,32 +11,13 @@ function carregarDatabases(req, res) {
         });
 }
 
-function cadastrarZona(req, res) {
-
-    const nomeZona = req.body.nomeZona;
-
-    if (nomeZona == undefined) {
-        res.status(400).send("Nome da zona inválido!");
-    } else {
-
-        servidorModel.cadastrarZona(nomeZona)
-            .then(function(resultado){
-                res.json(resultado);
-            })
-            .catch(function(erro){
-                console.log(erro);
-                res.status(500).json(erro.sqlMessage);
-            });
-    }
-}
-
 function listarZonas(req, res){
 
-    servidorModel.listarZonas()
-        .then(function(resultado){
-            res.json(resultado);
-        })
-        .catch(function(erro){
+    const idDataCenter = req.params.idDataCenter;
+
+    servidorModel.listarZonas(idDataCenter)
+        .then(resultado => res.json(resultado))
+        .catch(erro => {
             console.log(erro);
             res.status(500).json(erro.sqlMessage);
         });
@@ -44,13 +25,9 @@ function listarZonas(req, res){
 
 function cadastrarServidor(req, res) {
 
-    const { nomeServ, tipoServ, estadoServ } = req.body;
+    const {nomeServ, tipoServ, estadoServ, fkZona, nomeCompo, tipoCompo, unidCompo, capCompo} = req.body;
 
-    servidorModel.cadastrarServidorCompleto(
-        nomeServ,
-        tipoServ,
-        estadoServ
-    )
+    servidorModel.cadastrarServidor(nomeServ, tipoServ, estadoServ, fkZona, nomeCompo, tipoCompo, unidCompo, capCompo)
     .then(resultado => res.json(resultado))
     .catch(erro => {
         console.log(erro);
@@ -58,48 +35,38 @@ function cadastrarServidor(req, res) {
     });
 }
 
-function cadastrarComponente(req, res) {
+function listarServidores(req, res) {
 
-    const nomeComponente = req.body.nomeCompo
-    const tipoComponente = req.body.tipoCompo
-    const unidComponente = req.body.unidCompo
-    const capComponente = req.body.capCompo
+    var idEmpresa = req.params.idEmpresa;
 
-    if (nomeComponente == undefined) {
-        res.status(400).send("Nome do componente está inválido!");
-    } 
-    else if (tipoComponente == undefined) {
-        res.status(400).send("Tipo do componente está inválido!");
-    } 
-    else if (unidComponente == undefined) {
-        res.status(400).send("Unidade do componente inválida!");
-    } 
-    else if (capComponente == undefined) {
-        res.status(400).send("Capacidade do componente inválida!");
-    } else {
-        servidorModel.cadastrarComponente(nomeComponente, tipoComponente, unidComponente, capComponente)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ) .catch(
-                function(erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
+    servidorModel.listarServidores(idEmpresa)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
 
+function adicionarComponente(req, res) {
+
+    const {fkServidor, nome, tipo, unidade, capacidade} = req.body;
+
+    servidorModel.adicionarComponente(fkServidor, nome, tipo, unidade, capacidade)
+    .then(resultado => {
+        res.json(resultado);
+    })
+    .catch(erro => {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
 
 module.exports = {
     carregarDatabases,
-    cadastrarZona,
     listarZonas,
     cadastrarServidor,
-    cadastrarComponente
+    listarServidores,
+    adicionarComponente
 }

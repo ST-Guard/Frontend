@@ -12,55 +12,79 @@ function carregarDatabases(fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-function cadastrarZona(nomeZona, fkUsuario) {
-
-    var instrucaoSql = `
-        INSERT INTO zona (nomeZona, fkEmpresa)
-        SELECT 
-            '${nomeZona}',
-            p.fkEmpresa
-        FROM usuario u
-        JOIN papel p ON u.fkPapel = p.idPapel
-        WHERE u.idUsuario = ${fkUsuario};
+function listarZonas(idDataCenter) {
+    const instrucaoSql = `
+        SELECT idZona, nome FROM zona
+        WHERE fkDataCenter = ?;
     `;
-
-    console.log(instrucaoSql);
-    return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql, [idDataCenter]);
 }
 
-function listarZonas(){
+async function cadastrarServidor(nome, tipo, estado, fkZona, nomeComp, tipoComp, unidade, capacidade) {
 
-    var instrucaoSql = `
-        SELECT id, nome FROM zona;
-    `;
-
-    return database.executar(instrucaoSql);
-}
-
-function cadastrarServidor(nomeServidor, tipoServidor, estadoServidor) {
-
-    var instrucaoSql = `
-        INSERT INTO servidor (nome, tipo, estado)
-        VALUES (?, ?, ?);
-    `;
-
-    return database.executar(instrucaoSql, [nomeServidor, tipoServidor, estadoServidor]);
-}
-
-function cadastrarComponente(nome, tipo, unidade, capacidade) {
-
-    var instrucaoSql = `
-        INSERT INTO componente (nome, tipo, unidade, capacidade)
+    const servidorResult = await database.executar(`
+        INSERT INTO servidor (nome, tipo, estado, fkZona)
         VALUES (?, ?, ?, ?);
+    `, [nome, tipo, estado, fkZona]);
+
+    const idServidor = servidorResult.insertId;
+
+    const componenteResult = await database.executar(`
+        INSERT INTO componentes (nome, tipo, unidadeMedida, capacidadeMaxima)
+        VALUES (?, ?, ?, ?);
+    `, [nomeComp, tipoComp, unidade, capacidade]);
+
+    const idComponente = componenteResult.insertId;
+
+    await database.executar(`
+        INSERT INTO componentes_servidor (limite, fkServidor, fkComponentes)
+        VALUES (?, ?, ?);
+    `, [capacidade, idServidor, idComponente]);
+
+}
+
+function listarServidores(idEmpresa) {
+
+    var instrucao = `
+        SELECT
+            s.idServidor,
+            s.nome,
+            s.estado
+        FROM servidor s
+            JOIN zona z ON z.idZona = s.fkZona
+            JOIN datacenter d ON d.idDataCenter = z.fkDataCenter
+            JOIN usuario u ON u.idUsuario = d.fkUsuarioDataCenter
+            JOIN papel p ON p.idPapel = u.fkPapel
+        WHERE p.fkEmpresa = ?
+        ORDER BY s.idServidor;
     `;
 
-    return database.executar(instrucaoSql, [nome, tipo, unidade, capacidade]);
+    return database.executar(instrucao, [idEmpresa]);
+}
+
+async function adicionarComponente(fkServidor, nome, tipo, unidade, capacidade) {
+
+    const componenteResult = await database.executar(`
+        INSERT INTO componentes
+        (nome, tipo, unidadeMedida, capacidadeMaxima)
+        VALUES (?, ?, ?, ?);
+    `, [nome, tipo, unidade, capacidade]);
+
+    const idComponente = componenteResult.insertId;
+
+    await database.executar(`
+        INSERT INTO componentes_servidor
+        (limite, fkServidor, fkComponentes)
+        VALUES (?, ?, ?);
+    `, [capacidade, fkServidor, idComponente]);
+
+    return { message: "Componente adicionado com sucesso" };
 }
 
 module.exports = {
     carregarDatabases,
-    cadastrarZona,
     listarZonas,
+    listarServidores,
     cadastrarServidor,
-    cadastrarComponente
+    adicionarComponente
 };
