@@ -1,5 +1,9 @@
 * {
     font-family: "IBM Plex Sans", sans-serif !important;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 
@@ -13,12 +17,12 @@
     --KPI-normal: #027806;
     --azulClarinho: #66C0F4;
     --corDaFonte: #0F1C2E;
-
 }
 
 .corpoDash {
-    width: 100%;
-    overflow: scroll;
+    width: 82%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .corpoDash #container_kpis {
@@ -32,12 +36,13 @@
     padding: 2%;
     padding-bottom: 0;
     flex-wrap: wrap;
-    color:var(--corDaFonte);
+    color: var(--corDaFonte);
 }
 
 #container_kpis .div_kpi {
-    flex: 1 1 250px;
-    max-width: 300px;
+     width: 18.5%; 
+     /* width: 22%;
+    width: 25%;  */
     height: auto;
     background-color: #F4FBFF;
     border-radius: 12px;
@@ -114,10 +119,10 @@
     color: #c62222;
 
 }
+
 #container_kpis .kpi3,
 #container_kpis .kpi5 {
-     border: 2px solid
- var(--KPI-importante);
+    border: 2px solid var(--KPI-importante);
 
 }
 
@@ -129,9 +134,8 @@
 
 
 
-#container_kpis .kpi5{
-        border: 2px solid 
-var(--KPI-normal);
+#container_kpis .kpi5 {
+    border: 2px solid var(--KPI-normal);
 
 }
 
@@ -139,11 +143,13 @@ var(--KPI-normal);
     color: #027823;
 
 }
+
 .div_situacao {
-display: flex;
-gap: 5%;
+    display: flex;
+    gap: 5%;
 }
-.div_situacao img{
+
+.div_situacao img {
     width: 12%;
 }
 
@@ -438,21 +444,26 @@ gap: 5%;
     #container_graficosP1 .div_alertas-mae {
         width: 100%;
         margin-top: 25px;
-                margin-bottom: 6px;
+        margin-bottom: 6px;
 
     }
 
     #container_graficosP2 .grafico1,
-     #container_graficosP1 .div_alertas-mae,  #container_graficosP2 .grafico2,#container_graficosP3 .grafico4{
+    #container_graficosP1 .div_alertas-mae,
+    #container_graficosP2 .grafico2,
+    #container_graficosP3 .grafico4 {
         width: 100%;
         flex: 1 1 100%;
     }
-    #container_graficosP3 .grafico4{
+
+    #container_graficosP3 .grafico4 {
         margin-top: 18%;
     }
-     #container_graficosP2 {
+
+    #container_graficosP2 {
         gap: 2rem;
-     }
+    }
+
     #servidores_criticos {
         width: 100%;
     }
@@ -477,7 +488,8 @@ gap: 5%;
 }
 
 #container_graficosP2 .grafico1,
-#container_graficosP2 .grafico2, #container_graficosP3 .grafico4 {
+#container_graficosP2 .grafico2,
+#container_graficosP3 .grafico4 {
     min-height: 300px;
     display: flex;
     flex-direction: column;
@@ -494,7 +506,8 @@ gap: 5%;
 
 }
 
-#container_graficosP2 .grafico2, #container_graficosP3 .grafico4 {
+#container_graficosP2 .grafico2,
+#container_graficosP3 .grafico4 {
     width: 30%;
     display: flex;
     flex-direction: column;
@@ -522,7 +535,7 @@ gap: 5%;
     flex-direction: column;
 }
 
- .div_graficoProc {
+.div_graficoProc {
     width: 80%;
     height: 250px;
 }
@@ -582,6 +595,7 @@ hr {
 .top3 .top #podio2 {
     color: #F5CC4D;
 }
+
 .top3 .top .podio3 {
     background-color: #66C0F4;
 }
@@ -589,7 +603,9 @@ hr {
 .top3 .top #podio3 {
     color: #66C0F4;
 }
-.top3 .top h4, .totalTop3 h4 {
+
+.top3 .top h4,
+.totalTop3 h4 {
     font-size: 1rem;
 }
 
@@ -601,19 +617,20 @@ hr {
     text-align: end;
 
 }
-.top3 .top .div_valoresPodio h5{
+
+.top3 .top .div_valoresPodio h5 {
     font-size: 0.9rem;
     font-weight: 500;
 }
 
 
-.totalTop3{
+.totalTop3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.totalTop3 h4{
+.totalTop3 h4 {
     font-weight: 400;
 }
 
@@ -625,7 +642,7 @@ hr {
     width: 100%;
     padding: 2%;
     gap: 20px;
-    font-family: "IBM Plex Sans", sans-serif ;
+    font-family: "IBM Plex Sans", sans-serif;
     color: #0F1C2E;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -642,10 +659,11 @@ hr {
 }
 
 
-.grafico_donut h1{
+.grafico_donut h1 {
     margin-bottom: 3%;
     margin-top: 3%;
 }
+
 #container_graficosP3 .div_containerGraficosDunuts .especificacoes {
     display: flex;
     justify-content: space-between;
@@ -663,29 +681,30 @@ hr {
 .esp_uso h3,
 .esp_disp h3,
 .esp_total h3 {
-  font-size: 1.1rem;
+    font-size: 1.1rem;
     font-weight: 500;
 }
 
-.donutEsp3 .esp_uso h3 span{
+.donutEsp3 .esp_uso h3 span {
     color: #F5CC4D;
     font-weight: bold;
 }
 
-.donutEsp2 .esp_uso h3 span{
+.donutEsp2 .esp_uso h3 span {
     color: #66C0F4;
     font-weight: bold;
 }
 
-.donutEsp1 .esp_uso h3 span{
+.donutEsp1 .esp_uso h3 span {
     color: #1c4886;
     font-weight: bold;
 }
 
-.esp_disp h3 span{
-        color: #00a437c3;
+.esp_disp h3 span {
+    color: #00a437c3;
     font-weight: bold;
 }
+
 .div_containerGraficosDunuts .grafico_donut {
     display: flex;
     flex-direction: column;
@@ -698,8 +717,8 @@ hr {
 }
 
 .conteudo_grafico {
-flex: 1 1 300px;    
-height: auto;
+    flex: 1 1 300px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
