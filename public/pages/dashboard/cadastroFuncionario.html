@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Data | Gestor</title>
+    <link rel="stylesheet" href="./../../css/cadastroFuncionario.css">
+    <script src="./../../js/funcionario.js" defer></script>
+    <link rel="icon" href="./../../assets/icon/icon.png">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo-nav" onclick="window.location.href='/'">
+                <img src="./../../assets/logos/smart data branco.png" alt="Smart Data Logo">
+            </div>
+
+            <div class="right-nav">
+                <div class="logo-notificao">
+                    <div class="icon-notificao">
+                        <img src="./../../assets/dashboard-icons/notificao.svg" alt="">
+                    </div>
+                    <div class="qtd-notificao">
+                        <img src="./../../assets/dashboard-icons/circulo.svg" alt="">
+                        <p>10</p>
+                    </div>
+                </div>
+
+                <div class="separacao"></div>
+
+                <div class="logo-usuario">
+                    <div class="userImg">
+                        <img src="./../../assets/dashboard-icons/cirucloUser.svg" alt="User Icon">
+                    </div>
+                    <div class="userInfo">
+                        <h2 class="user-name">Matheus Valle</h2>
+                        <h3 class="user-cargo">Gestor de operações</h3>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="corpoPagina">
+        <div class="sidebar">
+            <div class="sidebar-buttons">
+
+                <div class="sidebar-button">
+                    <img  src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                    <p onclick="mudarDash()">Dashboard</p>
+                </div>
+                <div class="sidebar-button">
+                    <img  src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+                    <p onclick="mudarServidor()">Servidores</p>
+                </div>
+                <div class="sidebar-button">
+                    <img  src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
+                    <p onclick="mudarAlerta()">Alerta</p>
+                </div>
+                <div class="sidebar-button-select" onclick="window.location.href='./../../pages/dashboard/cadastroFuncionario.html'" style="cursor: pointer;">
+                    <img  src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
+                    <p onclick="mudarFuncionario()">Funcionarios</p>
+                </div>
+                <div class="sidebar-button">
+                    <img  src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
+                    <p onclick="mudarConfig()">Configurações</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="conteudo">
+            <div class="conteudo_cabecalho">
+                <h1 class="conteudo_titulo">Funcionários</h1>
+
+                <div class="kpi">
+                    <p class="kpi_ativos">Funcionários ativos</p>
+                    <h2 id="kpi_ativos">0</h2>
+                    <h4 id="kpi_inativos">0 Inativos</h4>
+                    <img src="./../../assets/img-funcionario/docs.png">
+                </div>
+            </div>
+
+            <div class="card_busca">
+                <div class="busca">
+                    <img src="../../assets/img-funcionario/lupa.png">
+                    <input type="text" class="busca_input" placeholder="Buscar Funcionário...">
+                </div>
+                <button class="busca_botao_buscar">Buscar</button>
+                <button class="busca_botao_cadastrar" onclick="abrirModal()">Cadastrar Funcionário +</button>
+            </div>
+
+            <div id="lista_funcionarios"></div>
+        </div>
+    </div>
+
+    <div id="modal_cadastro" class="modal-container" style="display: none;">
+        <div class="modal-conteudo">
+            <div class="modal-header">
+                <h2>Cadastro</h2>
+                <button onclick="fecharModal()" class="botao-fechar">Fechar</button>
+            </div>
+
+            <div class="modal-corpo">
+                <label>Nome do funcionário</label>
+                <input id="input_nome_cadastro" placeholder="Ex: Matheus">
+
+                <label>E-mail</label>
+                <input id="input_email_cadastro" placeholder="matheus@gmail.com">
+
+                <label>Telefone</label>
+                <input id="input_telefone_cadastro" placeholder="(11) 99999-8888">
+
+                <label>Senha</label>
+                <input id="input_senha_cadastro" type="password" placeholder="******">
+
+                <label>CPF</label>
+                <input id="input_cpf_cadastro" placeholder="000.000.000-00">
+
+                <label>Selecione o cargo</label>
+                <select id="select_cargo_cadastro">
+                    <option value="">Selecione</option>
+                    <option value="2">Analista de Suporte</option>
+                    <option value="1">Gestor de Infraestrutura</option>
+                </select>
+
+                <button onclick="cadastrar()" class="botao-cadastrar-modal">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

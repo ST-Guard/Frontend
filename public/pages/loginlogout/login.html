@@ -8,7 +8,7 @@
 
   <title>Smart Data | Login</title>
 
-  <script src="./js/sessao.js"></script>
+  <script src="../../js/sessao.js"></script>
 
   <link rel="stylesheet" href="./../../css/login.css">
   <link rel="icon" href="./../../assets/icon/favicon2.ico">
@@ -169,6 +169,9 @@
   }
 
   function entrar() {
+    var email_input = document.getElementById("email_input"); 
+    var senha_input = document.getElementById("senha_input");
+
     var senhaVar = senha_input.value;
     var emailVar = email_input.value;
 
@@ -198,33 +201,41 @@
         console.log(resposta);
 
         resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
+          console.log("Dados recebidos: ", json);
+          //console.log(JSON.stringify(json));
 
           sessionStorage.ID_USUARIO = json.idUsuario;
           sessionStorage.NOME_USUARIO = json.nome;
           sessionStorage.EMAIL_USUARIO = json.email;
+          sessionStorage.FK_PAPEL = json.fkPapel;
+          sessionStorage.FK_EMPRESA = json.fkEmpresa;
 
-          if (json.idGerente == undefined) {
-            sessionStorage.ID_GERENTE = null;
-
+          /*if (json.fkPapel == 1) {
             setTimeout(function () {
-              window.location = "pages/dashboardGestor.html";
+              window.location.href = '/pages/dashboard/dashboardGestor.html';
             }, 200);
 
           } else {
             setTimeout(function () {
-              window.location = "pages/dashboardAnalista.html";
+              window.location.href = '/pages/dashboard/dashboardAnalista.html';
             }, 200);
+          }*/
+
+          if (json.fkPapel == 1) {
+             window.location.href = './../dashboard/dashboardGestor.html';
+          } else {
+             window.location.href = './../dashboard/dashboardAnalista.html';
           }
         });
 
+        
       } else {
 
-        console.log("Houve um erro ao tentar realizar o login!");
+        //console.log("Houve um erro ao tentar realizar o login!");
 
         resposta.text().then(texto => {
-          console.error(texto);
+          console.error("ERRO VINDO DO SERVIDOR: ", texto);
+          alert("Erro no servidor! Verifique o console do VS Code.");
 
         });
       }

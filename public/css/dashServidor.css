@@ -1,0 +1,752 @@
+* {
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+body {
+    background-color: #EDEDED;
+    box-sizing: border-box;
+}
+
+.info_kpi h3 {
+    color: #6B7280;
+}
+
+ .container_kpis {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 1%;
+}
+
+.container_kpis .div_kpi {
+    width: 15%;
+    height: 8rem;
+    background-color: white;
+    border-radius: 12px;
+    padding: 1%;
+    display: flex;
+    gap: 5%;
+    border-right: 2px solid #e3e3e4 !important;
+    border-top: 2px solid #e3e3e4 !important;
+    border-bottom: 2px solid #e3e3e4 !important;
+}
+
+.container_kpis .div_kpi h3 {
+    color: #494B4E;
+    font-weight: 400;
+    font-size: 1rem;
+    width: 14rem;
+    margin: 0;
+}
+
+.container_kpis .div_kpi h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.div_kpi h4 {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.info_kpi h4 {
+    color: #66C0F4;
+}
+
+.info_kpi{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.info_kpi h1 {
+    color: #0F1C2E;
+}
+
+.container_kpis {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 1%;
+}
+
+.SubcorpoPagina{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.boxBusca {
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid #E5E7EB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 10%;
+}
+
+.busca {
+    display: flex;
+    width: 55%;
+    margin-right: 10px;
+}
+
+.busca img {
+    z-index: 10;
+    align-self: center;
+    margin-right: -20px;
+    height: 12px;
+}
+
+.busca input {
+    border: none;
+    border-radius: 10px;
+    background-color: #E5E7EB;
+    color: #5c5d5f;
+    display: flex;
+    padding-left: 28px;
+    width: 100%;
+    height: 4.5vh;
+    font-size: 17px;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.botoes button {
+    background-color: #66C0F4;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    height: 40px;
+    cursor: pointer;
+}
+
+.botaoCadastro button{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.boxServidor {
+    background-color: #66C0F418;
+    border: #66C0F4 1px solid;
+    border-radius: 10px;
+    width: 80%;
+    margin-top: 40px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.servidor {
+    background-color: #F9FAFB;
+    border: #E5E7EB solid 1px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; 
+    min-height: 160px; 
+    height: auto;      
+    margin: 20px 40px 0;
+    padding: 10px 15px;
+}
+
+.inicioServidor {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.inicioServidor h3 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-left: 10px;
+}
+
+.inicioServidor img {
+    width: 24px;
+    height: 24px;
+}
+
+.estadoServidor {
+    align-items: center;
+    background-color: #FF525220;
+    border-radius: 20px;
+    color: #FF5252;
+    display: flex;
+    justify-content: center;
+    height: 75%;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 20px;
+    padding: 6px 14px;
+    width: fit-content;
+}
+
+.gridCompo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.boxCpu,
+.boxRam,
+.boxDisco {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 30px;
+}
+
+.inicioCpu,
+.inicioRam,
+.inicioDisco {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    margin-top: 15px;
+    width: 80%;
+}
+
+.inicioCpu img,
+.inicioRam img,
+.inicioDisco img {
+    width: 5%;
+}
+
+.inicioCpu span,
+.inicioRam span,
+.inicioDisco span {
+    color: #A38F8B;
+}
+
+.infoSistema {
+    align-items: center;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    display: flex;
+    font-size: 12px;
+    justify-content: center;
+    margin-left: 15px;
+    padding: 4px 10px;
+    width: fit-content;
+}
+
+.porcentagemCpu,
+.porcentagemRam,
+.porcentagemDisco {
+    color: #244770;
+    display: flex;
+    font-family: "Inter", sans-serif;
+    width: 80%;
+    height: 42%;
+}
+
+.porcentagemCpu h2,
+.porcentagemRam h2,
+.porcentagemDisco h2 {
+    font-size: 28px;
+}
+
+.porcentagemCpu span,
+.porcentagemRam span,
+.porcentagemDisco span {
+    margin-top: 15px;
+}
+
+.barraCpu,
+.barraRam,
+.barraDisco {
+    width: 80%;
+    height: 8px;
+    background-color: #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.barraPreenchimentoCpu {
+    height: 100%;
+    width: 0%;
+    background-color: #2469F0;
+    border-radius: 10px;
+    transition: 0.4s ease;
+}
+
+.barraPreenchimentoRam {
+    height: 100%;
+    width: 0%;
+    background-color: #23B26D;
+    border-radius: 10px;
+    transition: 0.4s ease;
+}
+
+.barraPreenchimentoDisco {
+    height: 100%;
+    width: 0%;
+    background-color: #F2B547;
+    border-radius: 10px;
+    transition: 0.4s ease;
+}
+
+.porcentagemLadoCpu,
+.porcentagemLadoRam,
+.porcentagemLadoDisco {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.porcentagemLadoCpu img,
+.porcentagemLadoRam img,
+.porcentagemLadoDisco img {
+    width: 12%;
+    margin-right: 5px;
+}
+
+.usuarioPorcentagem,
+.configPorcentagem {
+    display: flex;
+    align-items: center;
+}
+
+.containerCadastro {
+    position: fixed;
+    inset: 0;
+    background-color: #00000005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.boxCadastroCss {
+    background-color: #ffffff;
+    border: #E5E7EB solid 1px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    overflow-y: auto;
+    width: 60%;
+}
+
+.inicioCadastro {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+
+.letraIniCadastro {
+    font-size: 24px;
+}
+
+.letraFecharCadastro {
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
+}
+
+.letraFecharCadastro button {
+    background-color: #244770;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    height: 45%;
+    width: 100px;
+}
+
+.containerComponente {
+    position: fixed;
+    inset: 0;
+    background-color: #00000005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.boxComponenteCss {
+    background-color: #ffffff;
+    border: #E5E7EB solid 1px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 60%;
+    overflow-y: auto;
+    width: 50%;
+}
+
+.inicioComponente {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+
+.letraComponente {
+    font-size: 24px;
+}
+
+.letraFecharComponente {
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
+}
+
+.letraFecharComponente button {
+    background-color: #244770;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 20px;
+    height: 45%;
+    width: 100px;
+}
+
+.inputServidor {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15%;
+}
+
+.inputNomeServ,
+.inputTipoServ {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.inputNomeServ span,
+.inputTipoServ span {
+    padding-left: 10px;
+}
+
+.inputNomeServ input,
+.inputTipoServ input {
+    background-color: #66C0F420;
+    border: solid 1px #66C0F4;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    padding-left: 35px;
+    height: 43px;
+    width: 80%;
+}
+
+.botaoZona {
+    margin-top: 8px;
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid #244770;
+    background-color: #244770;
+    color: white;
+    cursor: pointer;
+}
+
+.estadoServidorCss {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15%;
+}
+
+.estadoServidorCss span {
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.estadoServidorCss select{
+    background-color: #66C0F420;
+    border: solid 1px #66C0F4;
+    border-radius: 10px;
+    color: #244770;
+    text-align: center;
+    font-size: 20px;
+    width: 50%;
+}
+
+.meioCadastro {
+    display: flex;
+    margin: 0 13.5%;
+    margin-top: 20px;
+}
+
+.letraMeioCadastro {
+    font-size: 24px;
+}
+
+.inicioCompo,
+.finalCompo {
+    display: flex;
+    gap: 50px;
+}
+
+.inicioCompo span,
+.finalCompo span{
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.inputCompo {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 15%;
+}
+
+.inicioCompoBox,
+.finalCompoBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.inicioCompo,
+.finalCompo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.inputNomeCompo,
+.inputTipoCompo,
+.inputUnidCompo,
+.inputCapCompo {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.inputNomeCompo input,
+.inputTipoCompo input,
+.inputUnidCompo input,
+.inputCapCompo input{
+    background-color: #66C0F420;
+    border: 1px solid #66C0F4;
+    border-radius: 10px;
+    font-size: 17px;
+    padding-left: 35px;
+    height: 43px;
+    width: 330px;
+}
+
+#carregandoZonas {
+    background-color: #244770;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 20%;
+}
+
+.botaoCadastrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botaoCadastrar button{
+    background-color: #2469F0;
+    border: 1px solid #244770;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 40px;
+    width: 65%;
+    height: 60px;
+}
+
+@media (max-width: 768px) {
+
+    .container_kpis {
+        flex-wrap: wrap;
+        gap: 15px;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .container_kpis .div_kpi {
+        width: 45%;
+        height: 7rem;
+    }
+
+    .boxBusca {
+        width: 90%;
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .busca {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .botoes {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .botoes button {
+        width: 88%;
+    }
+
+    .boxServidor {
+        width: 90%;
+        margin-top: 40px;
+    }
+
+    .servidor {
+        margin: 25px;
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    .gridCompo {
+        gap: 50px;
+        grid-template-columns: 1fr;
+    }
+
+    .boxCpu,
+    .boxRam,
+    .boxDisco {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .inicioServidor h3 {
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+
+    .porcentagemCpu h2,
+    .porcentagemRam h2,
+    .porcentagemDisco h2 {
+        font-size: 24px;
+    }
+
+    .barraCpu,
+    .barraRam,
+    .barraDisco {
+        width: 100%;
+    }
+
+    .porcentagemCpu,
+    .porcentagemRam,
+    .porcentagemDisco {
+        width: 100%;
+    }
+
+    .inicioCpu,
+    .inicioRam,
+    .inicioDisco {
+        width: 100%;
+    }
+
+    .inicioCpu img,
+    .inicioRam img,
+    .inicioDisco img {
+        width: 20px;
+    }
+
+    .porcentagemLadoCpu img,
+    .porcentagemLadoRam img,
+    .porcentagemLadoDisco img {
+        width: 8%;
+    }
+
+    .boxCadastroCss {
+        width: 95vw;
+        height: 90vh;
+        border-radius: 15px;
+    }
+
+    .inicioCadastro {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 40px;
+    }
+
+    .letraFecharCadastro {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .letraFecharCadastro button {
+        width: 120px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .inicioCompo {
+        margin-bottom: 40px;
+    }
+
+    .inicioCompo,
+    .finalCompo {
+        flex-direction: column;
+    }
+
+    .botaoCadastrar button {
+        width: 90%;
+    }
+
+    .inputServidor {
+        margin: 0 7%;
+    }
+
+    .inputNomeServ input,
+    .inputTipoServ input {
+        background-color: #66C0F420;
+        border: 1px solid #66C0F4;
+        border-radius: 10px;
+        font-size: 17px;
+        padding-left: 35px;
+        height: 43px;
+        width: 325px;
+    }
+
+    .estadoServidorCss {
+        margin: 0 7%;
+    }
+
+    .estadoServidorCss select{
+        background-color: #66C0F420;
+        border: solid 1px #66C0F4;
+        border-radius: 10px;
+        color: #244770;
+        text-align: center;
+        font-size: 20px;
+        width: 80%;
+    }
+}
