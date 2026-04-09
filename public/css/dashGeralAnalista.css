@@ -11,7 +11,8 @@
     --KPI-urgente: #e30000;
     --KPI-importante: #f4b805;
     --KPI-normal: #027806;
-    --azulClarinho: #66C0F4 --corDaFonte: #0F1C2E;
+    --azulClarinho: #66C0F4;
+    --corDaFonte: #0F1C2E;
 
 }
 
@@ -30,19 +31,19 @@
     gap: 16px;
     padding: 2%;
     padding-bottom: 0;
-    flex-wrap: wrap
+    flex-wrap: wrap;
+    color:var(--corDaFonte);
 }
 
 #container_kpis .div_kpi {
     flex: 1 1 250px;
     max-width: 300px;
     height: auto;
-    background-color: white;
+    background-color: #F4FBFF;
     border-radius: 12px;
     padding: 1%;
     display: flex;
-    border: 2px solid #e3e3e4;
-
+    border: 2px solid #0073b65a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
 }
 
@@ -103,45 +104,47 @@
 
 
 #container_kpis .kpi2,
-#container_kpis .kpi5 {
-    border-top: 9px solid var(--KPI-urgente);
-
-}
-
-#container_kpis .kpi2 #circuloStatus,
-#container_kpis .kpi5 #circuloStatus {
-    background-color: var(--KPI-urgente);
-}
-
-#container_kpis .kpi3,
 #container_kpis .kpi4 {
-    border-top: 9px solid var(--KPI-importante);
+    border: 2px solid var(--KPI-urgente);
+
+}
+
+#container_kpis .kpi2 h1,
+#container_kpis .kpi4 h1 {
+    color: #c62222;
+
+}
+#container_kpis .kpi3,
+#container_kpis .kpi5 {
+     border: 2px solid
+ var(--KPI-importante);
+
+}
+
+#container_kpis .kpi3 h1,
+#container_kpis .kpi5 h1 {
+    color: #e9cd00;
 
 }
 
 
 
-#container_kpis .kpi3 #circuloStatus,
-#container_kpis .kpi4 #circuloStatus {
-    background-color: var(--KPI-importante);
+#container_kpis .kpi5{
+        border: 2px solid 
+var(--KPI-normal);
 
 }
 
-#container_kpis .kpi6,
-#container_kpis .kpi7 {
-    border-top: 9px solid var(--KPI-normal);
+#container_kpis .kpi5 h1 {
+    color: #027823;
 
 }
-
-#container_kpis .kpi1 {
-    border-top: 9px solid #EDEDED;
-
+.div_situacao {
+display: flex;
+gap: 5%;
 }
-
-#container_kpis .kpi6 #circuloStatus,
-#container_kpis .kpi7 #circuloStatus {
-    background-color: var(--KPI-normal);
-
+.div_situacao img{
+    width: 12%;
 }
 
 /*Responsividade KPIs */
@@ -202,8 +205,8 @@
 }
 
 #servidores_criticos #conteudoServCrit .div_server {
-    border: 1px solid #fd2a2a;
-    background-color: #fd2a2a3b;
+    border: 1px solid #66C0F4;
+    background-color: #66C0F418;
     display: flex;
     flex-direction: column;
     border-radius: 16px;
@@ -218,7 +221,6 @@
     gap: 20px;
     overflow-x: auto;
     background-color: #fff7f7;
-    box-shadow: inset 0 0 0 1px #fca5a5;
     border-radius: 16px;
     flex-wrap: wrap;
 
