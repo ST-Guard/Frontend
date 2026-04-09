@@ -523,6 +523,7 @@
                             </div>
                         </div>
                         <div class="gridCompo"id="gridCompo${servidores[i].idServidor}">
+                            ${carregarComponentes(servidores[i].idServidor)}
                         </div>
                     </div>
                     `;
@@ -600,6 +601,23 @@
                 document.getElementById("zonaSpan").style.display = 'flex';
             })
             .catch(erro => console.log(erro));
+    }
+
+    function carregarComponentes(idServidor) {
+
+        cpu = []
+        disco = []
+        ram = []
+        console.log(idServidor)
+
+        fetch(`/servidor/listarComponentes/${idServidor}`)
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function (servidores) {
+                console.log(servidores);
+
+            });
     }
 
     function adicionarComponente() {
