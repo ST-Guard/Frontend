@@ -17,7 +17,7 @@
 
 .corpoDash {
     width: 100%;
-
+    overflow: scroll;
 }
 
 .corpoDash #container_kpis {

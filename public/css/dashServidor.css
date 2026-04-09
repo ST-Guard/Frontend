@@ -78,8 +78,9 @@ body {
 }
 
 .SubcorpoPagina{
-    width: 100%;
+    width: 82%;
     display: flex;
+    min-height: 90vh;
     flex-direction: column;
     justify-content: baseline;
     align-items: center;

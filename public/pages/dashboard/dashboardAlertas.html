@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Data | Alertas</title>
     <link rel="stylesheet" href="../../css/alertas.css" />
+    <link rel="stylesheet" href="../../css/dashboard.css">
     <script src="./../../js/sessao.js"></script>
     <script src="./../../js/alerta.js"></script>
     <link rel="icon" href="./../../assets/icon/icon.png">
@@ -54,26 +55,30 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-
                 <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p onclick="mudarDash()">Dashboard</p>
+                    <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                    <p><a href="dashboardGestor.html">Dashboard</a></p>
+                    <!-- <p onclick="mudarDash()">Dashboard</p> -->
                 </div>
                 <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
-                    <p onclick="mudarServidor()">Servidores</p>
+                    <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+                    <p><a href="dashServidor.html">Servidores</a></p>
+                    <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button-select">
-                    <img  src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
-                    <p onclick="mudarAlerta()">Alerta</p>
-                </div>
-                <div class="sidebar-button" onclick="window.location.href='./../../pages/dashboard/cadastroFuncionario.html'" style="cursor: pointer;">
-                    <img  src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
-                    <p onclick="mudarFuncionario()">Funcionarios</p>
+                    <img src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
+                    <p><a href="dashboardAlertas.html">Alertas</a></p>
+                    <!-- <p onclick="mudarAlerta()">Alerta</p> -->
                 </div>
                 <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
-                    <p onclick="mudarConfig()">Configurações</p>
+                    <img src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
+                    <p><a href="dashServidor.html">Funcionários</a></p>
+                    <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
+                </div>
+                <div class="sidebar-button">
+                    <img src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
+                    <p><a href="dashServidor.html">Configurações</a></p>
+                    <!-- <p onclick="mudarConfig()">Configurações</p> -->
                 </div>
             </div>
         </div>
