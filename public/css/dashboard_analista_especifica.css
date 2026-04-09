@@ -4,14 +4,17 @@
     margin: 0;
     box-sizing: border-box;
 }
-
+.corpoPagina {
+    overflow-y: hidden;
+}
 .corpoPagina main {
     width: 82%;
     min-height: auto;
     background-color: rgb(240, 240, 240);
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .corpoPagina main .conteiner_select {

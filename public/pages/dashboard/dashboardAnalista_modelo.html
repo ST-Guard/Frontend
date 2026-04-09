@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Data | Gestor</title>
+    <title>Smart Data | Analista </title>
     <link rel="stylesheet" href="./../../css/dashboard.css" />
     <link rel="stylesheet" href="./../../css/dashGeralAnalista.css" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
@@ -15,7 +15,7 @@
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="./../../assets/icon/icon.png">
-    <link rel="stylesheet" href="../../css/dashboard_analista_especifica.css">
+
 </head>
 
 <body>
@@ -65,15 +65,15 @@
 
                 <div class="sidebar-button-select">
                     <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p>Dashboard</p>
+                    <p><a href="">Dashboard</a></p>
                 </div>
                 <div class="sidebar-button">
                     <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
-                    <p>Servidores</p>
+                    <p><a href="dashServidor.html">Servidores</a></p>
                 </div>
                 <div class="sidebar-button">
                     <img src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
-                    <p>Configurações</p>
+                    <p><a href="#">Configurações</a></p>
                 </div>
 
             </div>
@@ -103,13 +103,12 @@
 
                     <div class="info_kpi">
                         <div class="containerTitulo">
-
                             <h3>USO MÉDIO DE RAM</h3>
-                            <img src="./../../assets/dashboard-icons/icon_kpiRAM.svg" alt="">
-
-
                         </div>
-                        <h1>90%</h1>
+                        <div class="div_situacao">
+                            <h1>90%</h1>
+                            <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+                        </div>
 
                         <div class="status">
                             <h4><span id="qntUsada">20</span><span id="qntTotal"><span id="unMedida">GB de <span
@@ -127,12 +126,11 @@
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>USO MÉDIO DE CPU</h3>
-                            <img src="./../../assets/dashboard-icons/icon_kpiCPU.svg" alt="">
-
-
                         </div>
-
-                        <h1>75%</h1>
+                        <div class="div_situacao">
+                            <h1>75%</h1>
+                            <img src="../../assets/dashboard-icons/icon_impor.svg" alt="">
+                        </div>
 
                         <div class="status">
                             <h4><span id="valorPorcent">5</span>% vs última medição </h4>
@@ -143,34 +141,34 @@
                 </div>
 
 
-                <div class="div_kpi kpi5">
+                <div class="div_kpi kpi4">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-
                             <h3>USO DO DISCO</h3>
-                            <img src="./../../assets/dashboard-icons/icon_kpiDisco.svg" alt="">
-
-
                         </div>
-                        <h1>93%</h1>
+                        <div class="div_situacao">
+                            <h1>93%</h1>
+                            <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+                        </div>
+
                         <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
                                 47</span><span id="unMedida">TB </h4>
-
                     </div>
 
                 </div>
 
 
-                <div class="div_kpi kpi7">
+                <div class="div_kpi kpi5">
 
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>LATÊNCIA MÉDIA PING</h3>
-                            <img src="./../../assets/dashboard-icons/icon_kpiRede.svg" alt="">
+                        </div>
+                        <div class="div_situacao">
+                            <h1>20 ms</h1>
+                            <img src="../../assets/dashboard-icons/circle-check.svg" alt="">
 
                         </div>
-
-                        <h1>20 ms</h1>
                         <div class="status">
                             <h4>Última: <span id="ultimoValor"></span>15 ms</span> </h4>
                         </div>
@@ -611,7 +609,7 @@
                         </div>
                         <hr>
                         <div class="totalTop3">
-                            <h4>Total do Top 3:</h4>
+                            <h4>Total do Top 3:</h4 />
                             <h4><span id="totalUsoPorcentCPU">70%</span></h4>
                         </div>
                     </div>

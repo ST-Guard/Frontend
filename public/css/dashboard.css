@@ -17,7 +17,7 @@
 
 html,
 body {
-    max-width: 100%;
+    width: 100%;
     overflow-x: hidden;
     background-color: var(--fundo-pagina);
     font-size: 0.85rem;
@@ -43,7 +43,6 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 nav {
@@ -150,7 +149,7 @@ nav {
 /* ######## SIDEBAR ######## */
 .sidebar {
     width: 18%;
-    height: 100%;
+    height: 90vh;
     max-width: 100%;
     background-color: var(--azul-mais-escuro);
     border-top: solid var(--azul-escuro) 0.5px;
@@ -203,6 +202,11 @@ nav {
     margin-bottom: 0;
 }
 
+.corpoPagina .sidebar .sidebar-buttons .sidebar-button p a,
+.corpoPagina .sidebar .sidebar-buttons .sidebar-button-select p a{
+    text-decoration: none;
+    color:#fff;
+}
 .sidebar-button-select img,
 .sidebar-button img {
     width: 24px;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Data | Gestor</title>
+    <title>Smart Data | Servidores</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./../../css/dashboard.css">
     <link rel="stylesheet" href="./../../css/dashServidor.css" />
@@ -13,7 +13,9 @@
     <link rel="icon" href="./../../assets/icon/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 
 </head>
 
@@ -49,29 +51,34 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-
                 <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p onclick="mudarDash()">Dashboard</p>
+                    <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                    <p><a href="dashboardGestor.html">Dashboard</a></p>
+                    <!-- <p onclick="mudarDash()">Dashboard</p> -->
                 </div>
                 <div class="sidebar-button-select">
-                    <img  src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
-                    <p onclick="mudarServidor()">Servidores</p>
+                    <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+                    <p><a href="dashServidor.html">Servidores</a></p>
+                    <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
-                    <p onclick="mudarAlerta()">Alerta</p>
-                </div>
-                <div class="sidebar-button" onclick="window.location.href='./../../pages/dashboard/cadastroFuncionario.html'" style="cursor: pointer;">
-                    <img  src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
-                    <p onclick="mudarFuncionario()">Funcionarios</p>
+                    <img src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
+                    <p><a href="dashboardAlertas.html">Alertas</a></p>
+                    <!-- <p onclick="mudarAlerta()">Alerta</p> -->
                 </div>
                 <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
-                    <p onclick="mudarConfig()">Configurações</p>
+                    <img src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
+                    <p><a href="dashServidor.html">Funcionários</a></p>
+                    <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
+                </div>
+                <div class="sidebar-button">
+                    <img src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
+                    <p><a href="dashServidor.html">Configurações</a></p>
+                    <!-- <p onclick="mudarConfig()">Configurações</p> -->
                 </div>
             </div>
         </div>
+
         <div class="SubcorpoPagina">
             <div class="containerCadastro" style="display: none;" onclick="fecharCadastro()" id="boxCadastro">
                 <div class="boxCadastroCss" onclick="event.stopPropagation()">
@@ -94,7 +101,7 @@
                         </div>
                     </div>
                     <div class="estadoServidorCss">
-                        
+
                         <span>Estado</span>
                         <select id="estadoServidor">
                             <option disabled selected>Selecione</option>
@@ -235,7 +242,8 @@
                     <div class="inicioServidor">
                         <img src="../../assets/dashboard-servidor/IconServidor.png" alt="">
                         <h3 id="nomeServidor">SERVIDOR-DC01-WEB-05</h3>
-                        <img src="../../assets/dashboard-servidor/editar.png" alt="" style="margin-left: 10px; cursor: pointer;" onclick="abrirComponente()" id="editarServidor">
+                        <img src="../../assets/dashboard-servidor/editar.png" alt=""
+                            style="margin-left: 10px; cursor: pointer;" onclick="abrirComponente()" id="editarServidor">
                         <div class="estadoServidor">Critico</div>
                     </div>
                     <div class="gridCompo">
@@ -318,6 +326,7 @@
     </div>
 
 </body>
+
 </html>
 
 <script>
@@ -415,14 +424,14 @@
                     `;
                 }
 
-                selectDatabase.addEventListener('change', function() {
+                selectDatabase.addEventListener('change', function () {
                     idDataCenterSelecionado = document.getElementById("selectDataBase").value;
                     console.log('DataCenter selecionado:', idDataCenterSelecionado);
                 });
             })
             .catch(erro => console.log(erro));
     }
-    
+
     function adicionarComponente() {
 
         const modal = document.getElementById("modalComponente");
@@ -451,20 +460,20 @@
                 capacidade
             })
         })
-        .then(async res => {
+            .then(async res => {
 
-            const data = await res.json();
-            if (!res.ok) {
-                throw data.message || "Erro ao cadastrar componente";
-            }
-            alert("Componente adicionado!");
-            fecharComponente();
-            mostrarServidores();
-        })
-        .catch(err => {
-            console.error(err);
-            alert(err);
-        });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw data.message || "Erro ao cadastrar componente";
+                }
+                alert("Componente adicionado!");
+                fecharComponente();
+                mostrarServidores();
+            })
+            .catch(err => {
+                console.error(err);
+                alert(err);
+            });
     }
 
     function carregarDatabases() {
@@ -484,14 +493,14 @@
                     `;
                 }
 
-                selectDatabase.addEventListener('change', function() {
+                selectDatabase.addEventListener('change', function () {
                     idDataCenterSelecionado = document.getElementById("selectDataBase").value;
                     console.log('DataCenter selecionado:', idDataCenterSelecionado);
                 });
             })
             .catch(erro => console.log(erro));
     }
-    
+
     function mostrarServidores() {
 
         var idEmpresa = sessionStorage.FK_EMPRESA;
@@ -561,15 +570,15 @@
                 capCompo: capComponente
             })
         })
-        .then(res => {
-            if (res.ok) {
-                alert("Servidor cadastrado com sucesso!");
-                location.reload();
-            } else {
-                throw "Erro ao cadastrar";
-            }
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                if (res.ok) {
+                    alert("Servidor cadastrado com sucesso!");
+                    location.reload();
+                } else {
+                    throw "Erro ao cadastrar";
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     function carregarZonas() {
@@ -640,16 +649,16 @@
                 capacidade
             })
         })
-        .then(res => {
-            if (res.ok) {
-                alert("Componente adicionado!");
-                fecharComponente();
-                mostrarServidores();
-            } else {
-                throw "Erro ao cadastrar componente";
-            }
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                if (res.ok) {
+                    alert("Componente adicionado!");
+                    fecharComponente();
+                    mostrarServidores();
+                } else {
+                    throw "Erro ao cadastrar componente";
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     function atualizarBarraCPU(porcentagem) {
