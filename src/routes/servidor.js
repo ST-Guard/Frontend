@@ -19,6 +19,10 @@ router.get("/listarServidores/:idEmpresa", function (req, res) {
     servidorController.listarServidores(req, res);
 });
 
+router.get("/listarComponentes/:idServidor", function (req, res) {
+    servidorController.listarComponentes(req, res);
+});
+
 router.post("/adicionarComponente", function (req, res) {
     servidorController.adicionarComponente(req, res);
 });

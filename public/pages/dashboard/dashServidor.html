@@ -538,8 +538,14 @@
                     `;
                 }
 
+                for (var i = 0; i < servidores.length; i++) {
+                    carregarComponentes(servidores[i].idServidor);
+                }
+
                 box.innerHTML = mensagem;
             });
+
+
     }
 
     function cadastrarServidor() {
@@ -610,6 +616,29 @@
                 document.getElementById("zonaSpan").style.display = 'flex';
             })
             .catch(erro => console.log(erro));
+    }
+
+    function carregarComponentes(idServidor) {
+
+        cpu = []
+        disco = []
+        ram = []
+        console.log("ID recebido:", idServidor);
+
+        fetch(`/servidor/listarComponentes/${idServidor}`)
+            .then(res => res.json())
+            .then(componentes => {
+
+                var grid = document.getElementById(`gridCompo${idServidor}`);
+
+                var html = "";
+
+                for (var i = 0; i < componentes.length; i++) {
+                    html += `<p>${componentes[i].nome}</p>`;
+                }
+
+                grid.innerHTML = html;
+            });
     }
 
     function adicionarComponente() {

@@ -49,6 +49,20 @@ function listarServidores(req, res) {
         });
 }
 
+function listarComponentes(req, res) {
+
+    var idServidor = req.params.idServidor;
+
+    servidorModel.listarComponentes(idServidor)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 function adicionarComponente(req, res) {
 
     const {fkServidor, nome, tipo, unidade, capacidade} = req.body;
@@ -68,5 +82,6 @@ module.exports = {
     listarZonas,
     cadastrarServidor,
     listarServidores,
+    listarComponentes,
     adicionarComponente
 }

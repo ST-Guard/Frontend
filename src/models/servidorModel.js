@@ -62,6 +62,25 @@ function listarServidores(idEmpresa) {
     return database.executar(instrucao, [idEmpresa]);
 }
 
+function listarComponentes(idEmpresa) {
+
+    var instrucao = `
+        SELECT
+            s.idServidor,
+            s.nome,
+            s.estado
+        FROM servidor s
+            JOIN zona z ON z.idZona = s.fkZona
+            JOIN datacenter d ON d.idDataCenter = z.fkDataCenter
+            JOIN usuario u ON u.idUsuario = d.fkUsuarioDataCenter
+            JOIN papel p ON p.idPapel = u.fkPapel
+        WHERE p.fkEmpresa = ?
+        ORDER BY s.idServidor;
+    `;
+
+    return database.executar(instrucao, [idEmpresa]);
+}
+
 async function adicionarComponente(fkServidor, nome, tipo, unidade, capacidade) {
 
     const componenteResult = await database.executar(`
@@ -85,6 +104,7 @@ module.exports = {
     carregarDatabases,
     listarZonas,
     listarServidores,
+    listarComponentes,
     cadastrarServidor,
     adicionarComponente
 };
