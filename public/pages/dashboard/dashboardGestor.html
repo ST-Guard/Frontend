@@ -1,199 +1,198 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Data | Gestor</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="./../../css/dashboard.css" />
-    <link rel="stylesheet" href="./../../css/dashGeralGestor.css" />
-    <script src="./../../js/sessao.js"></script>
-    <script src="./../../js/dashGestor.js"></script>
-    <link rel="icon" href="./../../assets/icon/icon.png" />
-  </head>
 
-  <body>
-    <header>
-      <nav>
-        <div class="logo-nav" onclick="fnNavegar('/')">
-          <img src="./../../assets/logos/smart data branco.png" alt="" />
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Data | Gestor</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="./../../css/dashboard.css" />
+  <link rel="stylesheet" href="./../../css/dashGeralGestor.css" />
+  <script src="./../../js/sessao.js"></script>
+  <script src="./../../js/dashGestor.js"></script>
+  <link rel="icon" href="./../../assets/icon/icon.png" />
+     <link rel="stylesheet" href="../../css/reset.css">
+</head>
 
-        <div class="right-nav">
-          <div class="logo-notificao">
-            <div class="icon-notificao">
-              <img src="./../../assets/dashboard-icons/notificao.svg" alt="" />
-            </div>
+<body>
+  <header>
+    <nav>
+      <div class="logo-nav" onclick="fnNavegar('/')">
+        <img src="./../../assets/logos/smart data branco.png" alt="" />
+      </div>
 
-            <div class="qtd-notificao">
-              <img src="./../../assets/dashboard-icons/circulo.svg" alt="" />
-              <p class="qtd-notificao">10</p>
-            </div>
+      <div class="right-nav">
+        <div class="logo-notificao">
+          <div class="icon-notificao">
+            <img src="./../../assets/dashboard-icons/notificao.svg" alt="" />
           </div>
 
-          <div class="separacao"></div>
-
-          <div class="logo-usuario">
-            <div class="userImg">
-              <img
-                src="./../../assets/dashboard-icons/cirucloUser.svg"
-                alt=""
-              />
-            </div>
-            <div class="userInfo">
-              <h2 class="user-name">Matheus Valle</h2>
-              <h3 class="user-cargo">Analista de operações</h3>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <div class="corpoPagina">
-        <div class="sidebar">
-            <div class="sidebar-buttons">
-
-                <div class="sidebar-button-select">
-                    <img  src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p onclick="mudarDash()">Dashboard</p>
-                </div>
-                <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
-                    <p onclick="mudarServidor()">Servidores</p>
-                </div>
-                <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
-                    <p onclick="mudarAlerta()">Alerta</p>
-                </div>
-                <div class="sidebar-button" onclick="window.location.href='./../../pages/dashboard/cadastroFuncionario.html'" style="cursor: pointer;">
-                    <img  src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
-                    <p onclick="mudarFuncionario()">Funcionarios</p>
-                </div>
-                <div class="sidebar-button">
-                    <img  src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
-                    <p onclick="mudarConfig()">Configurações</p>
-                </div>
-            </div>
-        </div>
-
-      <div class="SubcorpoPagina">
-        <div class="container-dashboards">
-            <div class="btn-option-dashboard">1° Dashboard</div>
-            <div class="btn-option-dashboard-desable" onclick="fnNavegar('/pages/dashboard/dashboardAnalista.html')">2° Dashboard</div>
-        </div>
-
-
-
-        <div id="container_kpis">
-          <div class="div_kpi kpi1">
-            <div class="info_kpi">
-              <h3>FUNCIONARIO ATIVOS</h3>
-              <h1>5</h1>
-              <h4>10 inativos</h4>
-            </div>
-
-            <div class="div_icon kpi1_Icon">
-              <img
-                src="./../../assets/dashboard-icons/icons-dashGestor/icon-paper.svg"
-                id="icon_kpi1"
-                alt=""
-              />
-            </div>
-          </div>
-
-          <div class="div_kpi kpi2">
-            <div class="info_kpi">
-              <h3>QUANTIDADE DE ALERTAS</h3>
-              <h1>8</h1>
-              <h4>+3 ultima hora</h4>
-            </div>
-
-            <div class="div_icon kpi2_Icon">
-              <img
-                src="./../../assets/dashboard-icons/icons-dashGestor/icon-alert.svg"
-                id="icon_kpi2"
-                alt=""
-              />
-            </div>
-          </div>
-
-          <div class="div_kpi kpi3">
-            <div class="info_kpi">
-              <h3>USO GERAL DE RECURSO</h3>
-              <h1>50%</h1>
-              <h4>+5% desde ontem</h4>
-            </div>
-
-            <div class="div_icon kpi3_Icon">
-              <img
-                src="./../../assets/dashboard-icons/icons-dashGestor/icon-grafic.svg"
-                id="icon_kpi4"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="div_kpi kpi4">
-            <div class="info_kpi">
-              <h3>SERVIDORES ATIVOS</h3>
-              <h1>5</h1>
-              <h4>2 servidores inativos</h4>
-            </div>
-
-            <div class="div_icon kpi4_Icon">
-              <img
-                src="./../../assets/dashboard-icons/icons-dashGestor/icon-server.svg"
-                id="icon_kpi4"
-                alt=""
-              />
-            </div>
+          <div class="qtd-notificao">
+            <img src="./../../assets/dashboard-icons/circulo.svg" alt="" />
+            <p class="qtd-notificao">10</p>
           </div>
         </div>
 
-        <div class="grafico-usoMedioRecursos">
-          <div>
-            <canvas id="chartusomedio"></canvas>
-          </div>
-        </div>
+        <div class="separacao"></div>
 
-        <div class="grafico-PicoUsoSemanal">
-            
-          <div class="header-grafico">
-            <div class="texto-titulo">
-              <h3>Pico de Uso Semanal</h3>
-              <span>Valores máximos registrados por dia</span>
-            </div>
-            <div class="filtro-componente">
-              <label>Componente:</label>
-              <select id="select-componente">
-                <option value="CPU">CPU</option>
-                <option value="RAM">RAM</option>
-                <option value="DISCO">DISCO</option>
-              </select>
-            </div>
+        <div class="logo-usuario">
+          <div class="userImg">
+            <img src="./../../assets/dashboard-icons/cirucloUser.svg" alt="" />
           </div>
-
-          <div class="canvas-container">
-            <canvas id="chartpicousosemanal"></canvas>
-          </div>
-
-          <div class="footer-grafico">
-            <div class="stat">
-              <p>Pico Máximo</p>
-              <b style="color: #f54d4d">91%</b>
-            </div>
-            <div class="stat">
-              <p>Pico Médio</p>
-              <b style="color: #5dade2">77%</b>
-            </div>
-            <div class="stat">
-              <p>Pico Mínimo</p>
-              <b style="color: #2ecc71">58%</b>
-            </div>
+          <div class="userInfo">
+            <h2 class="user-name">Matheus Valle</h2>
+            <h3 class="user-cargo">Analista de operações</h3>
           </div>
         </div>
       </div>
+    </nav>
+  </header>
+
+  <div class="corpoPagina">
+    <div class="sidebar">
+      <div class="sidebar-buttons">
+        <div class="sidebar-button-select">
+          <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+          <p><a href="dashboardGestor.html">Dashboard</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+          <p><a href="dashServidor.html">Servidores</a></p>
+          <!-- <p onclick="mudarServidor()">Servidores</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
+          <p><a href="dashboardAlertas.html">Alertas</a></p>
+          <!-- <p onclick="mudarAlerta()">Alerta</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
+          <p><a href="dashServidor.html">Funcionários</a></p>
+          <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
+          <p><a href="dashServidor.html">Configurações</a></p>
+          <!-- <p onclick="mudarConfig()">Configurações</p> -->
+        </div>
+      </div>
     </div>
-  </body>
+
+
+    <div class="SubcorpoPagina">
+      <!-- <div class="container-dashboards">
+        <div class="btn-option-dashboard">1° Dashboard</div>
+        <div class="btn-option-dashboard-desable" onclick="fnNavegar('/pages/dashboard/dashboardAnalista.html')">2°
+          Dashboard</div>
+      </div> -->
+
+      <div class="conteiner_select">
+        <select>
+          <option>DASHBOARD 1</option>
+          <option>DASHBOARD 2</option>
+        </select>
+      </div>
+
+
+
+      <div id="container_kpis">
+        <div class="div_kpi kpi1">
+          <div class="info_kpi">
+            <h3>FUNCIONARIO ATIVOS</h3>
+            <h1>5</h1>
+            <h4>10 inativos</h4>
+          </div>
+
+          <div class="div_icon kpi1_Icon">
+            <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-paper.svg" id="icon_kpi1" alt="" />
+          </div>
+        </div>
+
+        <div class="div_kpi kpi2">
+          <div class="info_kpi">
+            <h3>QUANTIDADE DE ALERTAS</h3>
+            <h1>8</h1>
+            <h4>+3 ultima hora</h4>
+          </div>
+
+          <div class="div_icon kpi2_Icon">
+            <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-alert.svg" id="icon_kpi2" alt="" />
+          </div>
+        </div>
+
+        <div class="div_kpi kpi3">
+          <div class="info_kpi">
+            <h3>USO GERAL DE RECURSO</h3>
+            <h1>50%</h1>
+            <h4>+5% desde ontem</h4>
+          </div>
+
+          <div class="div_icon kpi3_Icon">
+            <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-grafic.svg" id="icon_kpi4" alt="" />
+          </div>
+        </div>
+
+        <div class="div_kpi kpi4">
+          <div class="info_kpi">
+            <h3>SERVIDORES ATIVOS</h3>
+            <h1>5</h1>
+            <h4>2 servidores inativos</h4>
+          </div>
+
+          <div class="div_icon kpi4_Icon">
+            <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-server.svg" id="icon_kpi4" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="grafico-usoMedioRecursos">
+        <div>
+          <canvas id="chartusomedio"></canvas>
+        </div>
+      </div>
+
+      <div class="grafico-PicoUsoSemanal">
+
+        <div class="header-grafico">
+          <div class="texto-titulo">
+            <h3>Pico de Uso Semanal</h3>
+            <span>Valores máximos registrados por dia</span>
+          </div>
+          <div class="filtro-componente">
+            <label>Componente:</label>
+            <select id="select-componente">
+              <option value="CPU">CPU</option>
+              <option value="RAM">RAM</option>
+              <option value="DISCO">DISCO</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="canvas-container">
+          <canvas id="chartpicousosemanal"></canvas>
+        </div>
+
+        <div class="footer-grafico">
+          <div class="stat">
+            <p>Pico Máximo</p>
+            <b style="color: #f54d4d">91%</b>
+          </div>
+          <div class="stat">
+            <p>Pico Médio</p>
+            <b style="color: #5dade2">77%</b>
+          </div>
+          <div class="stat">
+            <p>Pico Mínimo</p>
+            <b style="color: #2ecc71">58%</b>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
 </html>
 
 <!-- FIZ javascript separado rs  -->
