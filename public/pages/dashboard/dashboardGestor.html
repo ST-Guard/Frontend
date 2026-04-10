@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smart Data | Gestor</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="./../../css/dashboard.css" />
-  <link rel="stylesheet" href="./../../css/dashGeralGestor.css" />
   <script src="./../../js/sessao.js"></script>
   <script src="./../../js/dashGestor.js"></script>
   <link rel="icon" href="./../../assets/icon/icon.png" />
-     <link rel="stylesheet" href="../../css/reset.css">
+  <link rel="stylesheet" href="../../css/reset.css">
+  <link rel="stylesheet" href="../../css/Kpi.css">
+  <link rel="stylesheet" href="./../../css/dashboard.css" />
+  <link rel="stylesheet" href="./../../css/dashGeralGestor.css" />
 </head>
 
 <body>
@@ -98,50 +99,69 @@
 
       <div id="container_kpis">
         <div class="div_kpi kpi1">
+
           <div class="info_kpi">
-            <h3>FUNCIONARIO ATIVOS</h3>
-            <h1>5</h1>
-            <h4>10 inativos</h4>
+            <div class="containerTitulo">
+              <h3>SERVIDORES TOTAIS</h3>
+            </div>
+
+            <h1>3</h1>
+            <h4>3 ativos</h4>
           </div>
 
-          <div class="div_icon kpi1_Icon">
-            <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-paper.svg" id="icon_kpi1" alt="" />
+          <div class="icon_kpi">
+            <img src="./../../assets/dashboard-icons/icon_kpiServer.svg" alt="">
           </div>
+
         </div>
 
         <div class="div_kpi kpi2">
-          <div class="info_kpi">
-            <h3>QUANTIDADE DE ALERTAS</h3>
-            <h1>8</h1>
-            <h4>+3 ultima hora</h4>
-          </div>
 
-          <div class="div_icon kpi2_Icon">
-            <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-alert.svg" id="icon_kpi2" alt="" />
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>USO MÉDIO DE RAM</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>90%</h1>
+              <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+            </div>
+
+            <div class="status">
+              <h4><span id="qntUsada">20</span><span id="qntTotal"><span id="unMedida">GB de <span
+                      id="unMedida">23</span><span id="qntTotal"><span id="unMedida">GB </h4>
+            </div>
           </div>
+          <div class="estado"></div>
         </div>
-
         <div class="div_kpi kpi3">
-          <div class="info_kpi">
-            <h3>USO GERAL DE RECURSO</h3>
-            <h1>50%</h1>
-            <h4>+5% desde ontem</h4>
-          </div>
 
-          <div class="div_icon kpi3_Icon">
-            <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-grafic.svg" id="icon_kpi4" alt="" />
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>USO MÉDIO DE CPU</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>75%</h1>
+              <img src="../../assets/dashboard-icons/icon_impor.svg" alt="">
+            </div>
+
+            <div class="status">
+              <h4><span id="valorPorcent">5</span>% vs última medição </h4>
+            </div>
           </div>
         </div>
 
         <div class="div_kpi kpi4">
           <div class="info_kpi">
-            <h3>SERVIDORES ATIVOS</h3>
-            <h1>5</h1>
-            <h4>2 servidores inativos</h4>
-          </div>
+            <div class="containerTitulo">
+              <h3>USO DO DISCO</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>93%</h1>
+              <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+            </div>
 
-          <div class="div_icon kpi4_Icon">
-            <img src="./../../assets/dashboard-icons/icons-dashGestor/icon-server.svg" id="icon_kpi4" alt="" />
+            <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
+                47</span><span id="unMedida">TB </h4>
           </div>
         </div>
       </div>
