@@ -6,17 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Data | Servidores</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="./../../css/dashboard.css">
-    <link rel="stylesheet" href="./../../css/dashServidor.css" />
     <script src="./../../js/dashGestor.js"></script>
     <script src="./../../js/sessao.js"></script>
     <link rel="icon" href="./../../assets/icon/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/Kpi.css">
+    <link rel="stylesheet" href="./../../css/dashboard.css">
+    <link rel="stylesheet" href="./../../css/dashServidor.css" />
 
 </head>
 
@@ -191,38 +198,81 @@
                     </div>
                 </div>
             </div>
-            <div class="container_kpis">
+
+            <div id="container_kpis">
                 <div class="div_kpi kpi1">
                     <div class="info_kpi">
-                        <h3>Total</h3>
-                        <h1>8</h1>
+                        <div class="containerTitulo">
+                            <h3>TOTAL DE SERVIDORES</h3>
+                        </div>
+                        <h1>3</h1>
+                        <h4>3 ativos</h4>
                     </div>
+                    <div class="icon_kpi">
+                        <img src="./../../assets/dashboard-icons/icon_kpiServer.svg" alt="">
+                    </div>
+
                 </div>
                 <div class="div_kpi kpi2">
                     <div class="info_kpi">
-                        <h3>Online</h3>
-                        <h1 style="color: #4CAF50;">3</h1>
+                        <div class="containerTitulo">
+                            <h3>USO MÉDIO DE RAM</h3>
+                        </div>
+                        <div class="div_situacao">
+                            <h1>90%</h1>
+                            <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+                        </div>
+                        <div class="status">
+                            <h4><span id="qntUsada">20</span><span id="qntTotal"><span id="unMedida">GB de <span
+                                            id="unMedida">23</span><span id="qntTotal"><span id="unMedida">GB </h4>
+                        </div>
                     </div>
+                    <div class="estado"></div>
                 </div>
                 <div class="div_kpi kpi3">
                     <div class="info_kpi">
-                        <h3>Atenção</h3>
-                        <h1 style="color: #F5CC4D;">2</h1>
+                        <div class="containerTitulo">
+                            <h3>USO MÉDIO DE CPU</h3>
+                        </div>
+                        <div class="div_situacao">
+                            <h1>75%</h1>
+                            <img src="../../assets/dashboard-icons/icon_impor.svg" alt="">
+                        </div>
+
+                        <div class="status">
+                            <h4><span id="valorPorcent">5</span>% vs última medição </h4>
+                        </div>
                     </div>
                 </div>
                 <div class="div_kpi kpi4">
                     <div class="info_kpi">
-                        <h3>Critico</h3>
-                        <h1 style="color: #FF5252;">2</h1>
+                        <div class="containerTitulo">
+                            <h3>USO DO DISCO</h3>
+                        </div>
+                        <div class="div_situacao">
+                            <h1>93%</h1>
+                            <img src="../../assets/dashboard-icons/icon_urgent.svg" alt="">
+                        </div>
+                        <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
+                                47</span><span id="unMedida">TB </h4>
                     </div>
                 </div>
-                <div class="div_kpi kpi4">
+                <div class="div_kpi kpi5">
                     <div class="info_kpi">
-                        <h3>Offline</h3>
-                        <h1 style="color: #6B7280;">1</h1>
+                        <div class="containerTitulo">
+                            <h3>LATÊNCIA MÉDIA PING</h3>
+                        </div>
+                        <div class="div_situacao">
+                            <h1>20 ms</h1>
+                            <img src="../../assets/dashboard-icons/circle-check.svg" alt="">
+                        </div>
+                        <div class="status">
+                            <h4>Última: <span id="ultimoValor"></span>15 ms</span> </h4>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="boxBusca">
                 <div class="busca">
                     <img src="../../assets/dashboard-servidor/Lupa.png" alt="">
