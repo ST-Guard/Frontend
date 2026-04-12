@@ -12,9 +12,9 @@
     --Cpu: #00b68bb0;
     --Ram: #461ea49b;
     --Disco: #4c6ef5;
-    --KPI-urgente: #e30000;
-    --KPI-importante: #f4b805;
-    --KPI-normal: #027806;
+    --KPI-urgente: #DB1616;
+    --KPI-importante: #FFC100;
+    --KPI-normal: #2c8f2f;
     --azulClarinho: #66C0F4;
     --corDaFonte: #0F1C2E;
 }
@@ -74,6 +74,7 @@
 #container_kpis .div_kpi h1 {
     margin: 0;
     font-size: clamp(1.5rem, 2vw, 2.2rem);
+    font-weight: 500;
 }
 
 
@@ -116,7 +117,7 @@
 
 #container_kpis .kpi2 h1,
 #container_kpis .kpi4 h1 {
-    color: #c62222;
+    color: var(--KPI-urgente);;
 
 }
 
@@ -128,7 +129,7 @@
 
 #container_kpis .kpi3 h1,
 #container_kpis .kpi5 h1 {
-    color: #e9cd00;
+    color: var(--KPI-importante);
 
 }
 
@@ -140,7 +141,7 @@
 }
 
 #container_kpis .kpi5 h1 {
-    color: #027823;
+    color: var(--KPI-normal);
 
 }
 
@@ -327,14 +328,15 @@
     height: 100%;
     border-radius: 999px;
     transition: width 0.3s ease;
+    background-color: var(--KPI-normal);
 }
 
 .divStatus .progressoRam {
-    background-color: #1c4886;
+    background-color: var(--KPI-urgente);
 }
 
 .divStatus .progressoCPU {
-    background-color: #66C0F4;
+    background-color: var(--KPI-urgente);
 }
 
 .conteudo_esp {
@@ -388,14 +390,14 @@
 }
 
 #container_graficosP1 .div_alertas-conteudo .div_alertas .urgente {
-    border: 1px solid #fd2a2a;
-    background-color: #fd2a2a3b;
+    border: 1px solid var(--KPI-urgente);
+    background-color: #fd2a2a22;
 
 
 }
 
 #container_graficosP1 .div_alertas-conteudo .div_alertas .importante {
-    border: 1px solid #ffcd35;
+    border: 1px solid var(--KPI-importante);
     background-color: #ffcd3539;
 
 
