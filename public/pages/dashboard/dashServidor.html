@@ -81,112 +81,234 @@
 
         <div class="SubcorpoPagina">
             <div class="containerCadastro" style="display: none;" onclick="fecharCadastro()" id="boxCadastro">
-                <div class="boxCadastroCss" onclick="event.stopPropagation()">
+                <div class="boxCadastroCss" onclick="event.stopPropagation()" id="boxCadastroServidor">
                     <div class="inicioCadastro">
-                        <div class="letraIniCadastro">
-                            <h2>Cadastro Servidor</h2>
+                        <h1>Cadastro servidor</h1>
+                        <button onclick="fecharCadastro()">Fechar</button>
+                    </div>
+                    <div class="inputServidor">
+                        <div class="inputIndividual">
+                            <span>Nome do servidor</span>
+                            <input type="text" id="nomeServ" placeholder="SERVIDOR-DC01-WEB-05">
                         </div>
-                        <div class="letraFecharCadastro">
-                            <button onclick="fecharCadastro()">Fechar</button>
+                        <div class="inputIndividual">
+                            <span>Tipo do Servidor</span>
+                            <input type="text" id="tipoServ" placeholder="Web">
+                        </div>
+                    </div>
+                    <div class="selectServidor">
+                        <div class="selectIndividual">
+                            <span>Estado</span>
+                            <select id="estadoServidor">
+                                <option disabled selected>Selecione</option>
+                                <hr>
+                                <option>Ativo</option>
+                                <hr>
+                                <option>Inativo</option>
+                            </select>
+                        </div>
+                        <div class="selectIndividual">
+                            <span>DataBase</span>
+                            <select id="selectDataBase">
+                                <option disabled selected>Selecione a DataBase</option>
+                            </select>
+                            <div class="botaoZonas">
+                                <button onclick="carregarZonas()" id="carregandoZonas">Carregar Zonas</button>
+                            </div>
+                        </div>
+                        <div class="selectIndividual">
+                            <span id="zonaSpan" style="display: none;">Zona</span>
+                            <select id="zonaServidor" style="display: none;">
+                                <option disabled selected>Selecione a zona</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="botaoContinuar">
+                        <button onclick="continuarCpu()">Continuar</button>
+                    </div>
+                </div>
+                <div class="boxContinuarCpu" onclick="event.stopPropagation()" id="boxCadastroCpu" style="display: none;">
+                    <div class="inicioCadastro">
+                        <h1>Cadastro Componente</h1>
+                        <button onclick="fecharCadastro()">Fechar</button>
+                    </div>
+                    <div class="partesCadastro">
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconCpu.png" alt="">
+                        </div>
+                        <div class="imagemPartes">
+                            <img src="../../assets/dashboard-servidor/iconRam.png" alt="">
+                        </div>
+                        <div class="imagemPartes">
+                            <img src="../../assets/dashboard-servidor/iconCache.png" alt="">
+                        </div>
+                        <div class="imagemPartes">
+                            <img src="../../assets/dashboard-servidor/iconWeb.png" alt="">
                         </div>
                     </div>
                     <div class="inputServidor">
-                        <div class="inputNomeServ">
-                            <span>Nome do Servidor</span>
-                            <input type="text" id="nomeServ" placeholder="SERVIDOR-DC01-WEB-05">
-                        </div>
-                        <div class="inputTipoServ">
-                            <span>Tipo do Servidor</span>
-                            <input type="text" id="tipoServ" placeholder="----------">
-                        </div>
-                    </div>
-                    <div class="estadoServidorCss">
-
-                        <span>Estado</span>
-                        <select id="estadoServidor">
-                            <option disabled selected>Selecione</option>
-                            <hr>
-                            <option>Ativo</option>
-                            <hr>
-                            <option>Inativo</option>
-                        </select>
-
-                        <span>DataBase</span>
-                        <select id="selectDataBase">
-                            <option disabled selected>Selecione a DataBase</option>
-                        </select>
-                        <button onclick="carregarZonas()" id="carregandoZonas">Carregar Zonas</button>
-                        <span id="zonaSpan" style="display: none;">Zona</span>
-                        <select id="zonaServidor" style="display: none;">
-                            <option disabled selected>Selecione a zona</option>
-                        </select>
-                    </div>
-                    <div class="meioCadastro">
-                        <div class="letraMeioCadastro">
-                            <h2>Componentes</h2>
-                        </div>
-                    </div>
-                    <div class="inputCompo">
-                        <div class="inicioCompo">
-                            <div class="inputNomeCompo">
-                                <span>Nome do componente</span>
-                                <input type="text" id="nomeCompo" placeholder="CPU">
+                        <div class="inputGrupo">
+                            <div class="inputIndividual">
+                                <span>Nome do Componente</span>
+                                <input type="text" id="nomeCpu" value="CPU" disabled>
                             </div>
-                            <div class="inputTipoCompo">
-                                <span>Tipo do componente</span>
-                                <input type="text" id="tipoCompo" placeholder="----------">
+                            <div class="inputIndividual">
+                                <span>Tipo do Componente</span>
+                                <input type="text" id="tipoCpu" value="Processador" disabled>
                             </div>
                         </div>
-                        <div class="finalCompo">
-                            <div class="inputUnidCompo">
+                        <div class="inputGrupo">
+                            <div class="inputIndividual">
                                 <span>Unidade de medida</span>
-                                <input type="text" id="unidCompo" placeholder="%">
+                                <input type="text" id="unidadeCpu" value="%" disabled>
                             </div>
-                            <div class="inputCapCompo">
-                                <span>Capacidade máxima</span>
-                                <input type="number" id="capCompo" placeholder="90">
+                            <div class="inputIndividual">
+                                <span>Capacidade maxima</span>
+                                <input type="number" id="capCpu" placeholder="90">
                             </div>
                         </div>
                     </div>
-                    <div class="botaoCadastrar">
-                        <button onclick="verificar()">Cadastrar</button>
+                    <div class="botoesCpu">
+                        <button onclick="voltarServidor()">Voltar</button>
+                        <button onclick="continuarRam()">Continuar</button>
                     </div>
                 </div>
-            </div>
-            <div class="containerComponente" style="display: none;" onclick="fecharComponente()" id="boxComponente">
-                <div class="boxComponenteCss" onclick="event.stopPropagation()">
-                    <div class="inicioComponente">
-                        <div class="letraComponente">
-                            <h2>Cadastro Componente</h2>
+                <div class="boxContinuarRam" onclick="event.stopPropagation()" id="boxCadastroRam" style="display: none;">
+                    <div class="inicioCadastro">
+                        <h1>Cadastro Componente</h1>
+                        <button onclick="fecharCadastro()">Fechar</button>
+                    </div>
+                    <div class="partesCadastro">
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconCpu.png" alt="">
                         </div>
-                        <div class="letraFecharComponente">
-                            <button onclick="fecharComponente()">Fechar</button>
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconRam.png" alt="">
+                        </div>
+                        <div class="imagemPartes">
+                            <img src="../../assets/dashboard-servidor/iconCache.png" alt="">
+                        </div>
+                        <div class="imagemPartes">
+                            <img src="../../assets/dashboard-servidor/iconWeb.png" alt="">
                         </div>
                     </div>
-                    <div class="inputCompo">
-                        <div class="inicioCompoBox">
-                            <div class="inputNomeCompo">
-                                <span>Nome do componente</span>
-                                <input type="text" id="nomeCompoBox" placeholder="CPU">
+                    <div class="inputServidor">
+                        <div class="inputGrupo">
+                            <div class="inputIndividual">
+                                <span>Nome do Componente</span>
+                                <input type="text" id="nomeRam" value="Ram" disabled>
                             </div>
-                            <div class="inputTipoCompo">
-                                <span>Tipo do componente</span>
-                                <input type="text" id="tipoCompoBox" placeholder="----------">
+                            <div class="inputIndividual">
+                                <span>Tipo do Componente</span>
+                                <input type="text" id="tipoRam" value="Memoria" disabled>
                             </div>
                         </div>
-                        <div class="finalCompoBox">
-                            <div class="inputUnidCompo">
+                        <div class="inputGrupo">
+                            <div class="inputIndividual">
                                 <span>Unidade de medida</span>
-                                <input type="text" id="unidCompoBox" placeholder="%">
+                                <input type="text" id="unidadeRam" value="GB" disabled>
                             </div>
-                            <div class="inputCapCompo">
-                                <span>Capacidade máxima</span>
-                                <input type="number" id="capCompoBox" placeholder="90">
+                            <div class="inputIndividual">
+                                <span>Capacidade maxima</span>
+                                <input type="number" id="capRam" placeholder="24">
                             </div>
                         </div>
                     </div>
-                    <div class="botaoCadastrar">
-                        <button onclick="adicionarComponente()">Cadastrar</button>
+                    <div class="botoesCpu">
+                        <button onclick="voltarRam()">Voltar</button>
+                        <button onclick="continuarDisco()">Continuar</button>
+                    </div>
+                </div>
+                <div class="boxContinuarDisco" onclick="event.stopPropagation()" id="boxCadastroDisco" style="display: none;">
+                    <div class="inicioCadastro">
+                        <h1>Cadastro Componente</h1>
+                        <button onclick="fecharCadastro()">Fechar</button>
+                    </div>
+                    <div class="partesCadastro">
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconCpu.png" alt="">
+                        </div>
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconRam.png" alt="">
+                        </div>
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconCache.png" alt="">
+                        </div>
+                        <div class="imagemPartes">
+                            <img src="../../assets/dashboard-servidor/iconWeb.png" alt="">
+                        </div>
+                    </div>
+                    <div class="inputServidor">
+                        <div class="inputGrupo">
+                            <div class="inputIndividual">
+                                <span>Nome do Componente</span>
+                                <input type="text" id="nomeDisco" value="Disco" disabled>
+                            </div>
+                            <div class="inputIndividual">
+                                <span>Tipo do Componente</span>
+                                <input type="text" id="tipoDisco" value="Armazenamento" disabled>
+                            </div>
+                        </div>
+                        <div class="inputGrupo">
+                            <div class="inputIndividual">
+                                <span>Unidade de medida</span>
+                                <input type="text" id="unidadeDisco" value="GB" disabled>
+                            </div>
+                            <div class="inputIndividual">
+                                <span>Capacidade maxima</span>
+                                <input type="number" id="capDisco" placeholder="256">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botoesCpu">
+                        <button onclick="voltarDisco()">Voltar</button>
+                        <button onclick="continuarRede()">Continuar</button>
+                    </div>
+                </div>
+                <div class="boxContinuarRede" onclick="event.stopPropagation()" id="boxCadastroRede" style="display: none;">
+                    <div class="inicioCadastro">
+                        <h1>Cadastro Componente</h1>
+                        <button onclick="fecharCadastro()">Fechar</button>
+                    </div>
+                    <div class="partesCadastro">
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconCpu.png" alt="">
+                        </div>
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconRam.png" alt="">
+                        </div>
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconCache.png" alt="">
+                        </div>
+                        <div class="imagemPartes-select">
+                            <img src="../../assets/dashboard-servidor/iconWeb.png" alt="">
+                        </div>
+                    </div>
+                    <div class="inputServidor">
+                        <div class="inputGrupo">
+                            <div class="inputIndividual">
+                                <span>Nome do Componente</span>
+                                <input type="text" id="nomeRede" value="Rede" disabled>
+                            </div>
+                            <div class="inputIndividual">
+                                <span>Tipo do Componente</span>
+                                <input type="text" id="tipoRede" value="Latencia" disabled>
+                            </div>
+                        </div>
+                        <div class="inputGrupo">
+                            <div class="inputIndividual">
+                                <span>Unidade de medida</span>
+                                <input type="text" id="unidadeRede" value="MB/s" disabled>
+                            </div>
+                            <div class="inputIndividual">
+                                <span>Capacidade maxima</span>
+                                <input type="number" id="capRede" placeholder="40">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botoesCpu">
+                        <button onclick="voltarRede()">Voltar</button>
+                        <button onclick="verificar()">Cadastrar</button>
                     </div>
                 </div>
             </div>
@@ -242,8 +364,6 @@
                     <div class="inicioServidor">
                         <img src="../../assets/dashboard-servidor/IconServidor.png" alt="">
                         <h3 id="nomeServidor">SERVIDOR-DC01-WEB-05</h3>
-                        <img src="../../assets/dashboard-servidor/editar.png" alt=""
-                            style="margin-left: 10px; cursor: pointer;" onclick="abrirComponente()" id="editarServidor">
                         <div class="estadoServidor">Critico</div>
                     </div>
                     <div class="gridCompo">
@@ -274,7 +394,7 @@
                         <div class="boxRam">
                             <div class="inicioRam">
                                 <img src="../../assets/dashboard-servidor/iconRam.png" alt="">
-                                <span>RAM - 20 GB</span>
+                                <span>RAM - 24 GB</span>
                                 <span class="infoSistema" style="color: black;">Disponivel 13.2GB</span>
                             </div>
                             <div class="porcentagemRam">
@@ -316,6 +436,30 @@
                                 <div class="configPorcentagem">
                                     <img src="../../assets/dashboard-servidor/iconFolder.png" alt="">
                                     <span>Livre 274G</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxRede">
+                            <div class="inicioRede">
+                                <img src="../../assets/dashboard-servidor/iconWeb.png" alt="">
+                                <span>REDE - LATÊNCIA</span>
+                                <span class="infoSistema" style="color: black;">Ms</span>
+                            </div>
+                            <div class="porcentagemRede">
+                                <h2>23</h2>
+                                <span>Ms</span>
+                            </div>
+                            <div class="barraRede">
+                                <div class="barraPreenchimentoRede" id="RedeBarra"></div>
+                            </div>
+                            <div class="porcentagemLadoRede">
+                                <div class="usuarioPorcentagem">
+                                    <img src="../../assets/dashboard-servidor/iconRede.png" alt="">
+                                    <span>Jitter 5 ms</span>
+                                </div>
+                                <div class="configPorcentagem">
+                                    <img src="../../assets/dashboard-servidor/iconPerda.png" alt="">
+                                    <span>Perda 0%</span>
                                 </div>
                             </div>
                         </div>
@@ -374,34 +518,72 @@
         carregarDatabases()
     }
 
+    function voltarServidor() {
+        boxCadastroServidor.style.display = "flex"
+        boxCadastroCpu.style.display = "none"
+    }
+    
+    function voltarCpu() {
+        boxCadastroCpu.style.display = "flex"
+        boxCadastroRam.style.display = "none"
+    }
+    
+    function voltarRam() {
+        boxCadastroCpu.style.display = "flex"
+        boxCadastroRam.style.display = "none"
+    }
+    
+    function voltarDisco() {
+        boxCadastroRam.style.display = "flex"
+        boxCadastroDisco.style.display = "none"
+    }
+    
+    function voltarRede() {
+        boxCadastroDisco.style.display = "flex"
+        boxCadastroRede.style.display = "none"
+    }
+
+    function continuarCpu() {
+        boxCadastroServidor.style.display = "none"
+        boxCadastroCpu.style.display = "flex"
+    }
+
+    function continuarRam() {
+        boxCadastroCpu.style.display = "none"
+        boxCadastroRam.style.display = "flex"
+    }
+
+    function continuarDisco() {
+        boxCadastroRam.style.display = "none"
+        boxCadastroDisco.style.display = "flex"
+    }
+
+    function continuarRede() {
+        boxCadastroDisco.style.display = "none"
+        boxCadastroRede.style.display = "flex"
+    }
+
     function verificar() {
-        const nomeServidor = document.getElementById("nomeServ").value
-        const tipoServidor = document.getElementById("tipoServ").value
-        const estadoServidor = document.getElementById("estadoServidor").value
-        const nomeComponente = document.getElementById("nomeCompo").value
-        const tipoComponente = document.getElementById("tipoCompo").value
-        const unidComponente = document.getElementById("unidCompo").value
-        const capComponente = document.getElementById("capCompo").value
+        const nomeServidor = nomeServ.value.trim();
+        const tipoServidor = tipoServ.value.trim();
+        const estadoServidor = document.getElementById("estadoServidor").value;
+        const zona = document.getElementById("zonaServidor").value;
 
-        const unidades = ["%", "GHz", "cores", "GB", "MB", "TB", "Mbps", "Gbps", "KB/s", "MB/s"]
-        const verifUnid = unidades.includes(unidComponente);
+        const capCpu = document.getElementById("capCpu").value;
+        const capRam = document.getElementById("capRam").value;
+        const capDisco = document.getElementById("capDisco").value;
+        const capRede = document.getElementById("capRede").value;
 
-        if (!nomeServidor || nomeServidor.trim() == "") {
+        if (!nomeServidor) {
             alert("Nome de servidor invalido")
-        } else if (!nomeComponente || nomeComponente.trim() == "") {
-            alert("Nome de componente invalido")
-        } else if (!tipoServidor || tipoServidor.trim() == "") {
+        } else if (!tipoServidor) {
             alert("Tipo de servidor invalido")
-        } else if (!tipoComponente || tipoComponente.trim() == "") {
-            alert("Tipo de Componente invalido")
-        } else if (!unidComponente || unidComponente.trim() == "") {
-            alert("Unidade de Componente invalido")
-        } else if (!capComponente || capComponente.trim() == "") {
-            alert("Capacidade de Componente invalido")
         } else if (estadoServidor == "Selecione") {
             alert("Selecione um estado de servidor")
-        } else if (verifUnid == false) {
-            alert("Componente invalido")
+        } else if (!zona) {
+            alert("Selecione uma zona!")
+        } else if (!capCpu || !capRam || !capDisco || !capRede) {
+            alert("Tipo de Capacidade invalida")
         } else {
             cadastrarServidor()
         }
@@ -506,57 +688,265 @@
         var idEmpresa = sessionStorage.FK_EMPRESA;
 
         fetch(`/servidor/listarServidores/${idEmpresa}`)
-            .then(function (res) {
-                return res.json();
-            })
-            .then(function (servidores) {
-                console.log(servidores);
-                console.log(document.getElementById("boxServidor"));
-
-                var box = document.getElementById("boxServidores");
-                box.innerHTML = "";
-
+            .then(res => res.json())
+            .then(servidores => {
+                console.log("SERVIDORES:", servidores);
+                boxServidores.innerHTML = "";
                 var mensagem = "";
-
                 for (var i = 0; i < servidores.length; i++) {
-
                     mensagem += `
                     <div class="servidor">
                         <div class="inicioServidor">
                             <img src="../../assets/dashboard-servidor/IconServidor.png">
                             <h3>${servidores[i].nome}</h3>
-                            <img src="../../assets/dashboard-servidor/editar.png" style="margin-left:10px;cursor:pointer;"
-                                onclick="abrirComponente(${servidores[i].idServidor})">
                             <div class="estadoServidor">
                                 ${servidores[i].estado}
                             </div>
                         </div>
-                        <div class="gridCompo"id="gridCompo${servidores[i].idServidor}">
+
+                        <div class="gridCompo" id="gridCompo${servidores[i].idServidor}">
+                            <div class="boxCpu">
+                                <div class="inicioCpu">
+                                    <img src="../../assets/dashboard-servidor/iconCpu.png">
+                                    <span>CPU USO TOTAL</span>
+                                    <span class="infoSistema">8 nucleos</span>
+                                </div>
+                                <div class="porcentagemCpu">
+                                    <h2 id="cpuValor${servidores[i].idServidor}"></h2>
+                                    <span>%</span>
+                                </div>
+                                <div class="barraCpu">
+                                    <div class="barraPreenchimentoCpu" id="cpuBarra${servidores[i].idServidor}"></div>
+                                </div>
+                                <div class="porcentagemLadoCpu">
+                                    <div class="usuarioPorcentagem">
+                                        <img src="../../assets/dashboard-servidor/user.png" alt="">
+                                        <span id="cpuUso${servidores[i].idServidor}">Usuario </span>
+                                    </div>
+                                    <div class="configPorcentagem">
+                                        <img src="../../assets/dashboard-servidor/iconConfig.jpg" alt="">
+                                        <span id="cpuLivre${servidores[i].idServidor}">Sistema </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxRam">
+                                <div class="inicioRam">
+                                    <img src="../../assets/dashboard-servidor/iconRam.png">
+                                    <span>RAM - ${servidores[i].limiteRam} GB</span>
+                                    <span class="infoSistema">GB</span>
+                                </div>
+                                <div class="porcentagemRam">
+                                    <h2 id="ramValor${servidores[i].idServidor}"></h2>
+                                    <span>GB</span>
+                                </div>
+                                <div class="barraRam">
+                                    <div class="barraPreenchimentoRam" id="ramBarra${servidores[i].idServidor}"></div>
+                                </div>
+                                <div class="porcentagemLadoRam">
+                                    <div class="usuarioPorcentagem">
+                                        <img src="../../assets/dashboard-servidor/iconBd.png" alt="">
+                                        <span id="ramUso${servidores[i].idServidor}">Em cache </span>
+                                    </div>
+                                    <div class="configPorcentagem">
+                                        <img src="../../assets/dashboard-servidor/iconCheck.png" alt="">
+                                        <span id="ramLivre${servidores[i].idServidor}">Livre </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxDisco">
+                                <div class="inicioDisco">
+                                    <img src="../../assets/dashboard-servidor/iconCache.png">
+                                    <span>DISCO - ${servidores[i].limiteDisco} GB</span>
+                                    <span class="infoSistema">GB</span>
+                                </div>
+                                <div class="porcentagemDisco">
+                                    <h2 id="discoValor${servidores[i].idServidor}"></h2>
+                                    <span>GB</span>
+                                </div>
+                                <div class="barraDisco">
+                                    <div class="barraPreenchimentoDisco" id="discoBarra${servidores[i].idServidor}"></div>
+                                </div>
+                                <div class="porcentagemLadoDisco">
+                                    <div class="usuarioPorcentagem">
+                                        <img src="../../assets/dashboard-servidor/iconFolder.png" alt="">
+                                        <span id="discoUso${servidores[i].idServidor}">Em uso </span>
+                                    </div>
+                                    <div class="configPorcentagem">
+                                        <img src="../../assets/dashboard-servidor/iconFolder.png" alt="">
+                                        <span id="discoLivre${servidores[i].idServidor}">Livre </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="boxRede">
+                                <div class="inicioRede">
+                                    <img src="../../assets/dashboard-servidor/iconWeb.png">
+                                    <span>REDE - ${servidores[i].limiteRede}</span>
+                                    <span class="infoSistema">ms</span>
+                                </div>
+                                <div class="porcentagemRede">
+                                    <h2 id="redeValor${servidores[i].idServidor}"></h2>
+                                    <span>ms</span>
+                                </div>
+                                <div class="barraRede">
+                                    <div class="barraPreenchimentoRede" id="redeBarra${servidores[i].idServidor}"></div>
+                                </div>
+                                <div class="porcentagemLadoDisco">
+                                    <div class="usuarioPorcentagem">
+                                        <img src="../../assets/dashboard-servidor/iconRede.png" alt="">
+                                        <span id="redeUso${servidores[i].idServidor}">Em uso </span>
+                                    </div>
+                                    <div class="configPorcentagem">
+                                        <img src="../../assets/dashboard-servidor/iconPerda.png" alt="">
+                                        <span id="redeLivre${servidores[i].idServidor}">Livre </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     `;
                 }
+                
+                boxServidores.innerHTML = mensagem;
 
-                for (var i = 0; i < servidores.length; i++) {
-                    carregarComponentes(servidores[i].idServidor);
+                for (let i = 0; i < servidores.length; i++) {
+                    const idServidor = servidores[i].idServidor
+                    
+                    const cpuValor = document.getElementById("cpuValor" + idServidor);
+                    const cpuUso = document.getElementById("cpuUso" + idServidor);
+                    const cpuLivre = document.getElementById("cpuLivre" + idServidor);
+                    const barraCpu = document.getElementById("cpuBarra" + idServidor);
+                    
+                    const ramValor = document.getElementById("ramValor" + idServidor);
+                    const ramUso = document.getElementById("ramUso" + idServidor);
+                    const ramLivre = document.getElementById("ramLivre" + idServidor);
+                    const barraRam = document.getElementById("ramBarra" + idServidor);
+
+                    const discoValor = document.getElementById("discoValor" + idServidor);
+                    const discoUso = document.getElementById("discoUso" + idServidor);
+                    const discoLivre = document.getElementById("discoLivre" + idServidor);
+                    const barraDisco = document.getElementById("discoBarra" + idServidor);
+
+                    const redeValor = document.getElementById("redeValor" + idServidor);
+                    const redeUso = document.getElementById("redeUso" + idServidor);
+                    const redeLivre = document.getElementById("redeLivre" + idServidor);
+                    const barraRede = document.getElementById("redeBarra" + idServidor);
+
+                    const aleatorioCpu = gerarPorcentagem()
+                    const aleatorioRam = gerarRam()
+                    const aleatorioDisco = gerarArmazenamento()
+                    const aleatorioRede = gerarRede()
+
+                    const ramPorcentagem = (aleatorioRam / servidores[i].limiteRam) * 100
+                    const discoPorcentagem = (aleatorioDisco / servidores[i].limiteDisco) * 100
+                    const redePorcentagem = (aleatorioRede / servidores[i].limiteRede) * 100
+
+                    const cpuUsoValor =  100 - aleatorioCpu
+                    const ramUsoValor =  servidores[i].limiteRam - aleatorioRam
+                    const discoUsoValor =  servidores[i].limiteDisco - aleatorioDisco
+                    const redeUsoValor =  servidores[i].limiteRede - aleatorioRede
+                    
+                    cpuUso.innerHTML = `Em Uso ${aleatorioCpu}%`
+                    cpuLivre.innerHTML = `Sobrando ${cpuUsoValor}%`
+
+                    ramUso.innerHTML = `Em cache ${aleatorioRam} GB`
+                    ramLivre.innerHTML = `Livre ${ramUsoValor} GB`
+
+                    discoUso.innerHTML = `Em cache ${aleatorioDisco} GB`
+                    discoLivre.innerHTML = `Livre ${discoUsoValor} GB`
+
+                    redeUso.innerHTML = `Atual ${aleatorioRede} Ms`
+                    redeLivre.innerHTML = `Até perigo ${redeUsoValor} Ms`
+
+                    cpuValor.innerHTML = aleatorioCpu
+                    ramValor.innerHTML = aleatorioRam
+                    discoValor.innerHTML = aleatorioDisco
+                    redeValor.innerHTML = aleatorioRede
+
+                    barraCpu.style.width = aleatorioCpu + "%";
+                    barraRam.style.width = ramPorcentagem + "%";
+                    barraDisco.style.width = discoPorcentagem + "%";
+                    barraRede.style.width = redePorcentagem + "%";
+
+                    if (aleatorioCpu >= 85) {
+                        barraCpu.style.backgroundColor = "#810606"
+                    } else if (aleatorioCpu >= 70) {
+                        barraCpu.style.backgroundColor = "#f28647"
+                    }
+
+                    if (ramPorcentagem >= 85) {
+                        barraRam.style.backgroundColor = "#810606"
+                    } else if (ramPorcentagem >= 70) {
+                        barraRam.style.backgroundColor = "#f28647"
+                    }
+
+                    if (discoPorcentagem >= 85) {
+                        barraDisco.style.backgroundColor = "#810606"
+                    } else if (discoPorcentagem >= 70) {
+                        barraDisco.style.backgroundColor = "#f28647"
+                    }
+
+                    if (redePorcentagem >= 85) {
+                        barraRede.style.backgroundColor = "#810606"
+                    } else if (redePorcentagem >= 70) {
+                        barraRede.style.backgroundColor = "#f28647"
+                    }
+
+                    function gerarPorcentagem() {
+                        return Math.floor(Math.random() * (servidores[i].limiteCpu - 10)) + 1;
+                    }
+    
+                    function gerarRam() {
+                        return Math.floor(Math.random() * (servidores[i].limiteRam - 2)) + 1;
+                    }
+    
+                    function gerarArmazenamento() {
+                        return Math.floor(Math.random() * (servidores[i].limiteDisco - 25)) + 1;
+                    }
+    
+                    function gerarRede() {
+                        return Math.floor(Math.random() * (servidores[i].limiteRede - 10)) + 1;
+                    }
                 }
 
-                box.innerHTML = mensagem;
+                // for (var i = 0; i < servidores.length; i++) {
+                //     carregarComponentes(servidores[i].idServidor);
+                // }
             });
-
-
     }
 
     function cadastrarServidor() {
 
-        const nomeServidor = document.getElementById("nomeServ").value;
-        const tipoServidor = document.getElementById("tipoServ").value;
+        const nomeServidor = nomeServ.value;
+        const tipoServidor = tipoServ.value;
         const estadoServidor = document.getElementById("estadoServidor").value;
         const idZona = document.getElementById("zonaServidor").value;
-        const nomeComponente = document.getElementById("nomeCompo").value;
-        const tipoComponente = document.getElementById("tipoCompo").value;
-        const unidComponente = document.getElementById("unidCompo").value;
-        const capComponente = Number(document.getElementById("capCompo").value);
+
+        const componentes = [
+            {
+                nome: "CPU",
+                tipo: "Processador",
+                unidade: "%",
+                capacidade: Number(capCpu.value)
+            },
+            {
+                nome: "RAM",
+                tipo: "Memoria",
+                unidade: "GB",
+                capacidade: Number(capRam.value)
+            },
+            {
+                nome: "Disco",
+                tipo: "Armazenamento",
+                unidade: "GB",
+                capacidade: Number(capDisco.value)
+            },
+            {
+                nome: "Rede",
+                tipo: "Latencia",
+                unidade: "ms",
+                capacidade: Number(capRede.value)
+            }
+        ];
 
         fetch("/servidor/cadastrarServ", {
             method: "POST",
@@ -569,32 +959,29 @@
                 estadoServ: estadoServidor,
                 fkDataCenter: idDataCenterSelecionado,
                 fkZona: idZona,
-                nomeCompo: nomeComponente,
-                tipoCompo: tipoComponente,
-                unidCompo: unidComponente,
-                capCompo: capComponente
+                componentes: componentes
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    alert("Servidor cadastrado com sucesso!");
-                    location.reload();
-                } else {
-                    throw "Erro ao cadastrar";
-                }
-            })
-            .catch(err => console.log(err));
+        .then(res => {
+            if (res.ok) {
+                alert("Servidor cadastrado com sucesso!");
+                location.reload();
+            } else {
+                throw "Erro ao cadastrar";
+            }
+        })
+        .catch(err => console.log(err));
     }
 
     function carregarZonas() {
-        zonaSpan.style.display = "flex"
-        zonaServidor.style.display = "flex"
 
         if (!idDataCenterSelecionado) {
             alert("Selecione primeiro uma DataBase!");
             return;
         }
 
+        zonaSpan.style.display = "flex"
+        zonaServidor.style.display = "flex"
         console.log(idDataCenterSelecionado)
 
         fetch(`/servidor/carregarZonas/${idDataCenterSelecionado}`)
@@ -622,7 +1009,6 @@
         cpu = []
         disco = []
         ram = []
-        console.log("ID recebido:", idServidor);
 
         fetch(`/servidor/listarComponentes/${idServidor}`)
             .then(res => res.json())
@@ -672,26 +1058,102 @@
             .catch(err => console.log(err));
     }
 
-    function atualizarBarraCPU(porcentagem) {
-        const barra = document.getElementById("cpuBarra");
-
-        barra.style.width = porcentagem + "%";
-    }
-
-    function atualizarBarraRAM(porcentagem) {
-        const barra = document.getElementById("ramBarra");
-
-        barra.style.width = porcentagem + "%";
-    }
-
-    function atualizarBarraDISCO(porcentagem) {
-        const barra = document.getElementById("discoBarra");
-
-        barra.style.width = porcentagem + "%";
-    }
-
-    atualizarBarraCPU(52)
-    atualizarBarraRAM(34)
-    atualizarBarraDISCO(46.5)
-
 </script>
+
+
+<!-- Usar quando for puxar os dados, e arrumar o carregar componentes, sem funcionar por agora -->
+    <!-- function mostrarServidores() {
+
+        var idEmpresa = sessionStorage.FK_EMPRESA;
+
+        fetch(`/servidor/listarServidores/${idEmpresa}`)
+            .then(res => res.json())
+            .then(servidores => {
+                console.log("SERVIDORES:", servidores);
+
+                var box = document.getElementById("boxServidores");
+                box.innerHTML = "";
+
+                var mensagem = "";
+
+                for (var i = 0; i < servidores.length; i++) {
+
+                    mensagem += `
+                    <div class="servidor">
+                        <div class="inicioServidor">
+                            <img src="../../assets/dashboard-servidor/IconServidor.png">
+                            <h3>${servidores[i].nome}</h3>
+                            <div class="estadoServidor">
+                                ${servidores[i].estado}
+                            </div>
+                        </div>
+
+                        <div class="gridCompo" id="gridCompo${servidores[i].idServidor}">
+                            <div class="boxCpu">
+                                <div class="inicioCpu">
+                                    <img src="../../assets/dashboard-servidor/iconCpu.png">
+                                    <span>CPU</span>
+                                    <span class="infoSistema">%</span>
+                                </div>
+                                <div class="porcentagemCpu">
+                                    <h2 id="cpuValor${servidores[i].idServidor}">--</h2>
+                                    <span>%</span>
+                                </div>
+                                <div class="barraCpu">
+                                    <div class="barraPreenchimentoCpu" id="cpuBarra${servidores[i].idServidor}"></div>
+                                </div>
+                            </div>
+                            <div class="boxRam">
+                                <div class="inicioRam">
+                                    <img src="../../assets/dashboard-servidor/iconRam.png">
+                                    <span>RAM</span>
+                                    <span class="infoSistema">GB</span>
+                                </div>
+                                <div class="porcentagemRam">
+                                    <h2 id="ramValor${servidores[i].idServidor}">--</h2>
+                                    <span>GB</span>
+                                </div>
+                                <div class="barraRam">
+                                    <div class="barraPreenchimentoRam" id="ramBarra${servidores[i].idServidor}"></div>
+                                </div>
+                            </div>
+                            <div class="boxDisco">
+                                <div class="inicioDisco">
+                                    <img src="../../assets/dashboard-servidor/iconCache.png">
+                                    <span>DISCO</span>
+                                    <span class="infoSistema">GB</span>
+                                </div>
+                                <div class="porcentagemDisco">
+                                    <h2 id="discoValor${servidores[i].idServidor}">--</h2>
+                                    <span>GB</span>
+                                </div>
+                                <div class="barraDisco">
+                                    <div class="barraPreenchimentoDisco" id="discoBarra${servidores[i].idServidor}"></div>
+                                </div>
+                            </div>
+                            <div class="boxRede">
+                                <div class="inicioRede">
+                                    <img src="../../assets/dashboard-servidor/iconWeb.png">
+                                    <span>REDE - LATÊNCIA</span>
+                                    <span class="infoSistema">ms</span>
+                                </div>
+                                <div class="porcentagemRede">
+                                    <h2 id="redeValor${servidores[i].idServidor}">--</h2>
+                                    <span>ms</span>
+                                </div>
+                                <div class="barraRede">
+                                    <div class="barraPreenchimentoRede" id="redeBarra${servidores[i].idServidor}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                }
+
+                boxServidores.innerHTML = mensagem;
+
+                // for (var i = 0; i < servidores.length; i++) {
+                //     carregarComponentes(servidores[i].idServidor);
+                // }
+            });
+    } -->

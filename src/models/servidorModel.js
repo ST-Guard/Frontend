@@ -20,27 +20,29 @@ function listarZonas(idDataCenter) {
     return database.executar(instrucaoSql, [idDataCenter]);
 }
 
-async function cadastrarServidor(nome, tipo, estado, fkZona, nomeComp, tipoComp, unidade, capacidade) {
+async function cadastrarServidor(nome, tipo, estado, fkZona) {
 
-    const servidorResult = await database.executar(`
+    const resultado = await database.executar(`
         INSERT INTO servidor (nome, tipo, estado, fkZona)
         VALUES (?, ?, ?, ?);
     `, [nome, tipo, estado, fkZona]);
 
-    const idServidor = servidorResult.insertId;
+    return resultado;
+}
+
+async function cadastrarComponente(nome, tipo, unidade, capacidade, fkServidor) {
 
     const componenteResult = await database.executar(`
         INSERT INTO componentes (nome, tipo, unidadeMedida, capacidadeMaxima)
         VALUES (?, ?, ?, ?);
-    `, [nomeComp, tipoComp, unidade, capacidade]);
+    `, [nome, tipo, unidade, capacidade]);
 
     const idComponente = componenteResult.insertId;
 
     await database.executar(`
         INSERT INTO componentes_servidor (limite, fkServidor, fkComponentes)
         VALUES (?, ?, ?);
-    `, [capacidade, idServidor, idComponente]);
-
+    `, [capacidade, fkServidor, idComponente]);
 }
 
 function listarServidores(idEmpresa) {
@@ -49,13 +51,22 @@ function listarServidores(idEmpresa) {
         SELECT
             s.idServidor,
             s.nome,
-            s.estado
-        FROM servidor s
-            JOIN zona z ON z.idZona = s.fkZona
+            s.estado,
+
+            MAX(CASE WHEN c.nome = 'CPU' THEN cs.limite END) AS limiteCpu,
+            MAX(CASE WHEN c.nome = 'RAM' THEN cs.limite END) AS limiteRam,
+            MAX(CASE WHEN c.nome = 'DISCO' THEN cs.limite END) AS limiteDisco,
+            MAX(CASE WHEN c.nome = 'REDE' THEN cs.limite END) AS limiteRede
+
+        FROM servidor s JOIN zona z ON z.idZona = s.fkZona
             JOIN datacenter d ON d.idDataCenter = z.fkDataCenter
             JOIN usuario u ON u.idUsuario = d.fkUsuarioDataCenter
             JOIN papel p ON p.idPapel = u.fkPapel
+            LEFT JOIN componentes_servidor cs ON cs.fkServidor = s.idServidor
+            LEFT JOIN componentes c ON c.idComponente = cs.fkComponentes
+
         WHERE p.fkEmpresa = ?
+        GROUP BY s.idServidor, s.nome, s.estado
         ORDER BY s.idServidor;
     `;
 
@@ -81,30 +92,11 @@ function listarComponentes(idEmpresa) {
     return database.executar(instrucao, [idEmpresa]);
 }
 
-async function adicionarComponente(fkServidor, nome, tipo, unidade, capacidade) {
-
-    const componenteResult = await database.executar(`
-        INSERT INTO componentes
-        (nome, tipo, unidadeMedida, capacidadeMaxima)
-        VALUES (?, ?, ?, ?);
-    `, [nome, tipo, unidade, capacidade]);
-
-    const idComponente = componenteResult.insertId;
-
-    await database.executar(`
-        INSERT INTO componentes_servidor
-        (limite, fkServidor, fkComponentes)
-        VALUES (?, ?, ?);
-    `, [capacidade, fkServidor, idComponente]);
-
-    return { message: "Componente adicionado com sucesso" };
-}
-
 module.exports = {
     carregarDatabases,
     listarZonas,
     listarServidores,
     listarComponentes,
     cadastrarServidor,
-    adicionarComponente
+    cadastrarComponente
 };

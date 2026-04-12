@@ -25,10 +25,29 @@ function listarZonas(req, res){
 
 function cadastrarServidor(req, res) {
 
-    const {nomeServ, tipoServ, estadoServ, fkZona, nomeCompo, tipoCompo, unidCompo, capCompo} = req.body;
+    const { nomeServ, tipoServ, estadoServ, fkZona, componentes } = req.body;
 
-    servidorModel.cadastrarServidor(nomeServ, tipoServ, estadoServ, fkZona, nomeCompo, tipoCompo, unidCompo, capCompo)
-    .then(resultado => res.json(resultado))
+    servidorModel.cadastrarServidor(nomeServ, tipoServ, estadoServ, fkZona)
+    .then(resultado => {
+        const idServidor = resultado.insertId;
+        let promises = [];
+        for (let i = 0; i < componentes.length; i++) {
+            let comp = componentes[i];
+            promises.push(
+                servidorModel.cadastrarComponente(
+                    comp.nome,
+                    comp.tipo,
+                    comp.unidade,
+                    comp.capacidade,
+                    idServidor
+                )
+            );
+        }
+        return Promise.all(promises);
+    })
+    .then(() => {
+        res.json({ mensagem: "Servidor e componentes cadastrados com sucesso" });
+    })
     .catch(erro => {
         console.log(erro);
         res.status(500).json(erro.sqlMessage);
@@ -41,6 +60,7 @@ function listarServidores(req, res) {
 
     servidorModel.listarServidores(idEmpresa)
         .then(function (resultado) {
+                console.log("RESULTADO:", resultado);
             res.json(resultado);
         })
         .catch(function (erro) {
