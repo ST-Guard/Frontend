@@ -5,27 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Data | Cadastro funcionários</title>
-    <script src="./../../js/funcionario.js" defer></script>
-    <link rel="icon" href="./../../assets/icon/icon.png">
-    <link rel="stylesheet" href="../../css/dashboard.css">
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="./../../css/cadastroFuncionario.css">
+    <script src="./../js/dashFuncionario.js" defer></script>
+    <link rel="icon" href="./../assets/icon/icon.png">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="./../css/dashFuncionario.css">
 </head>
 
 <body>
     <header>
         <nav>
             <div class="logo-nav" onclick="window.location.href='/'">
-                <img src="./../../assets/logos/smart data branco.png" alt="Smart Data Logo">
+                <img src="./../assets/logos/smart data branco.png" alt="Smart Data Logo">
             </div>
 
             <div class="right-nav">
                 <div class="logo-notificao">
                     <div class="icon-notificao">
-                        <img src="./../../assets/dashboard-icons/notificao.svg" alt="">
+                        <img src="./../assets/dashboard-icons/notificao.svg" alt="">
                     </div>
                     <div class="qtd-notificao">
-                        <img src="./../../assets/dashboard-icons/circulo.svg" alt="">
+                        <img src="./../assets/dashboard-icons/circulo.svg" alt="">
                         <p>10</p>
                     </div>
                 </div>
@@ -34,7 +33,7 @@
 
                 <div class="logo-usuario">
                     <div class="userImg">
-                        <img src="./../../assets/dashboard-icons/cirucloUser.svg" alt="User Icon">
+                        <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="User Icon">
                     </div>
                     <div class="userInfo">
                         <h2 class="user-name">Matheus Valle</h2>
@@ -49,27 +48,27 @@
         <div class="sidebar">
             <div class="sidebar-buttons">
                 <div class="sidebar-button">
-                    <img src="../../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                    <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
                     <p><a href="dashboardGestor.html">Dashboard</a></p>
                     <!-- <p onclick="mudarDash()">Dashboard</p> -->
                 </div>
                 <div class="sidebar-button">
-                    <img src="../../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+                    <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
                     <p><a href="dashServidor.html">Servidores</a></p>
                     <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button">
-                    <img src="../../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
+                    <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
                     <p><a href="dashboardAlertas.html">Alertas</a></p>
                     <!-- <p onclick="mudarAlerta()">Alerta</p> -->
                 </div>
                 <div class="sidebar-button-select">
-                    <img src="../../assets/dashboard-icons/icon_form_branco.svg" alt="">
+                    <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
                     <p><a href="dashServidor.html">Funcionários</a></p>
                     <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
                 </div>
                 <div class="sidebar-button">
-                    <img src="../../assets/dashboard-icons/icon_config_branco.svg" alt="">
+                    <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
                     <p><a href="dashServidor.html">Configurações</a></p>
                     <!-- <p onclick="mudarConfig()">Configurações</p> -->
                 </div>
@@ -84,13 +83,13 @@
                     <p class="kpi_ativos">Funcionários ativos</p>
                     <h2 id="kpi_ativos">0</h2>
                     <h4 id="kpi_inativos">0 Inativos</h4>
-                    <img src="./../../assets/img-funcionario/docs.png">
+                    <img src="./../assets/img-funcionario/docs.png">
                 </div>
             </div>
 
             <div class="card_busca">
                 <div class="busca">
-                    <img src="../../assets/img-funcionario/lupa.png">
+                    <img src="../assets/img-funcionario/lupa.png">
                     <input type="text" class="busca_input" placeholder="Buscar Funcionário...">
                 </div>
                 <button class="busca_botao_buscar">Buscar</button>

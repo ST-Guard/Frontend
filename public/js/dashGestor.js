@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const data = {
         
-        labels: ['23/03', '24/03', '25/03', '26/03', '27/03', '28/03', '29/03'],
+        labels: ['', '', '', '', '', '', ''],
         datasets: [
             {
                 label: 'RAM',
@@ -63,13 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 borderColor: '#f54d4d',
                 backgroundColor: '#f54d4d',
                 tension: 0.4
-            },
-            {
-                label: 'Temperatura', 
-                data: [45, 38, 72, 85, 92, 68, 55],
-                borderColor: '#F5CC4D',
-                backgroundColor: '#F5CC4D',
-                tension: 0.4
             }
         ]
     };
@@ -83,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             plugins: { 
                 title: {
                     display: true,
-                    text: 'Uso médio de Recursos (Diário)',
+                    text: 'Comparando Ram e CPU',
                     font: { size: 18 }
                 },
                 legend: {
