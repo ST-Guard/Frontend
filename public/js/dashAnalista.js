@@ -14,7 +14,7 @@ function validarSessao() {
         b_usuario.innerHTML = nome;
     } else {
         console.log("AAAAAAAA");
-        window.location.href = "/pages/loginlogout/login.html";
+        window.location.href = "login.html";
     }
 }
 

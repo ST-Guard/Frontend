@@ -68,12 +68,12 @@
         </div>
         <div class="sidebar-button">
           <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
-          <p><a href="dashboardAlertas.html">Alertas</a></p>
+          <p><a href="dashAlertas.html">Alertas</a></p>
           <!-- <p onclick="mudarAlerta()">Alerta</p> -->
         </div>
         <div class="sidebar-button">
           <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
-          <p><a href="dashServidor.html">Funcionários</a></p>
+          <p><a href="dashFuncionario.html">Funcionários</a></p>
           <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
         </div>
         <div class="sidebar-button">
@@ -83,6 +83,7 @@
         </div>
       </div>
     </div>
+
 
     <div class="SubcorpoPagina">
       <!-- <div class="container-dashboards">
@@ -96,7 +97,7 @@
 
           <div class="info_kpi">
             <div class="containerTitulo">
-              <h3>COMPONENTE SOBRECARREGADO</h3>
+              <h3>PROCESSO COM MAIOR CONSUMO</h3>
             </div>
 
             <h1>3</h1>
@@ -113,7 +114,7 @@
 
           <div class="info_kpi">
             <div class="containerTitulo">
-              <h3>PROCESSO COM MAIOR CONSUMO P/ COMPONENTE</h3>
+              <h3>ÍNDICE DE SERVIDORES QUE APRESENTARAM ALERTAS NOS ULTIMOS DIAS(%)</h3>
             </div>
             <div class="div_situacao">
               <h1>90%</h1>
@@ -131,7 +132,7 @@
 
           <div class="info_kpi">
             <div class="containerTitulo">
-              <h3>COMPONENTE MAIS INTENSO NA SEMANA </h3>
+              <h3>SERVIDORES ATIVOS</h3>
             </div>
             <div class="div_situacao">
               <h1>75%</h1>
@@ -147,7 +148,7 @@
         <div class="div_kpi kpi4">
           <div class="info_kpi">
             <div class="containerTitulo">
-              <h3>TEMPO DE RESPOSTA</h3>
+              <h3>SERVIDORES INATIVOS</h3>
             </div>
             <div class="div_situacao">
               <h1>93%</h1>
@@ -157,5 +158,25 @@
             <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
                 47</span><span id="unMedida">TB </h4>
           </div>
+        </div>
+      </div>
+
+      <div class="grafico-ServidorAlerta">
+        <div class="header-graficoServer">
+          <div class="texto-tituloServer">
+            <h3>Comparação dos servidores que mais receberam alertas</h3>
+            <span>Compara a quantidade de alertas por servidor</span>
+          </div>
+        </div>
+
+        <div class="canvas-containerServer">
+          <canvas id="chartServer"></canvas>
+        </div>
+
+      </div>
+
+      <div class="grafico-RamXCpu">
+        <div id="expandirRamxCpu">
+          <canvas id="chartRamxCpu"></canvas>
         </div>
       </div>
