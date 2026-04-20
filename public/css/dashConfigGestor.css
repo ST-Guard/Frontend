@@ -146,7 +146,9 @@ body {
     padding-top: 10px;
     padding-left: 15px;
     height: 160px;
+    min-height: 160px;
     max-height: 160px;
+    min-width: 1315px;
     max-width: 1315px;
 }
 
