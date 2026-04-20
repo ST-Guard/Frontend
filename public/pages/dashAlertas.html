@@ -64,7 +64,7 @@
                 </div>
                 <div class="sidebar-button">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
-                    <p><a href="dashServidor.html">Servidores</a></p>
+                    <p><a href="dashServidorGestor.html">Servidores</a></p>
                     <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button-select">
@@ -84,90 +84,82 @@
                 </div>
             </div>
         </div>
-
-        <div class="parte_branca">
+        <div class="SubcorpoPagina">
+            <div class="textoInicio">
+                <div class="div_titulo">
+                    <h1>Zona <span id="zonaTitulo"></span></h1>
+                </div>
+            </div>
             <div id="container_kpis">
                 <div class="div_kpi kpi1">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>SERVIDORES TOTAIS</h3>
+                            <h3>TOTAL DE SERVIDORES</h3>
                         </div>
-                        <h1>3</h1>
-                        <h4>3 ativos</h4>
-                    </div>
-                    <div class="icon_kpi">
-                        <img src="./../assets/dashboard-icons/icon_kpiServer.svg" alt="">
+                        <div class="div_situacao">
+                            <h1 id="qtdServidores">3</h1>
+                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+                        </div>
+                        <h4>Quantidade de servidores que estão ativos</h4>
                     </div>
                 </div>
-
                 <div class="div_kpi kpi2">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>USO MÉDIO DE RAM</h3>
+                            <h3>P99 RAM</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1>90%</h1>
-                            <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+                            <h1 id="kpiMedioRam">90%</h1>
+                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
                         </div>
-
                         <div class="status">
-                            <h4><span id="qntUsada">20</span><span id="qntTotal"><span id="unMedida">GB de <span
-                                            id="unMedida">23</span><span id="qntTotal"><span id="unMedida">GB </h4>
+                            <h4>Quantidade de servidores que estão inativos</h4>
                         </div>
                     </div>
-                    <div class="estado"></div>
                 </div>
-
                 <div class="div_kpi kpi3">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>USO MÉDIO DE CPU</h3>
+                            <h3>P99 CPU</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1>75%</h1>
-                            <img src="../assets/dashboard-icons/icon_impor.svg" alt="">
+                            <h1 id="kpiMedioCpu">75%</h1>
+                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
                         </div>
                         <div class="status">
-                            <h4><span id="valorPorcent">5</span>% vs última medição </h4>
+                            <h4>Processo consumindo mais CPU</h4>
                         </div>
                     </div>
-                </div>
+                </div>  
             </div>
-
-            <section class="grafico_alerta ">
+            <section class="grafico_alerta">
                 <div class="grafico">
                     <div class="grafico_titulo">
                         <h1>Alertas por semana</h1>
                         <h2>Distribuição de alertas por severidade(último mês)</h2>
                     </div>
                     <div class="grafico_chart">
-
                         <canvas id="myChart"></canvas>
                     </div>
                     <div class="grafico_legendas">
                         <div class="legenda1">
                             <div class="quadrado_legenda1">
-
                             </div>
                             <h1>Críticos</h1>
                         </div>
                         <div class="legenda2">
                             <div class="quadrado_legenda2">
-
                             </div>
                             <h1>Atenção</h1>
                         </div>
                         <div class="legenda3">
                             <div class="quadrado_legenda3">
-
                             </div>
                             <h1>Info</h1>
                         </div>
                     </div>
                     <div class="linha_referencia_grafico">
-
                     </div>
-
                     <div class="grafico_kpis">
                         <div class="grafico_kp1">
                             <h1>Total Alertas</h1>

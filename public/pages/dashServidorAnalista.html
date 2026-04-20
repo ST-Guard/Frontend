@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Data | Servidores</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./../js/dashServidor.js"></script>
+    <script src="./../js/dashServidorAnalista.js"></script>
     <script src="./../js/sessao.js"></script>
     <link rel="icon" href="./../assets/icon/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/dashServidor.css" />
+    <link rel="stylesheet" href="../css/dashServidorAnalista.css" />
 
 </head>
 
@@ -59,27 +59,17 @@
             <div class="sidebar-buttons">
                 <div class="sidebar-button">
                     <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p><a href="dashGestor.html">Dashboard</a></p>
+                    <p><a href="dashAnalista.html">Dashboard</a></p>
                     <!-- <p onclick="mudarDash()">Dashboard</p> -->
                 </div>
                 <div class="sidebar-button-select">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
-                    <p><a href="dashServidor.html">Servidores</a></p>
+                    <p><a href="dashServidorAnalista.html">Servidores</a></p>
                     <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button">
-                    <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
-                    <p><a href="dashAlertas.html">Alertas</a></p>
-                    <!-- <p onclick="mudarAlerta()">Alerta</p> -->
-                </div>
-                <div class="sidebar-button">
-                    <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
-                    <p><a href="dashFuncionario.html">Funcionários</a></p>
-                    <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
-                </div>
-                <div class="sidebar-button">
                     <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
-                    <p><a href="dashServidor.html">Configurações</a></p>
+                    <p><a href="dashServidorAnalista.html">Configurações</a></p>
                     <!-- <p onclick="mudarConfig()">Configurações</p> -->
                 </div>
             </div>
@@ -318,7 +308,11 @@
                     </div>
                 </div>
             </div>
-
+            <div class="textoInicio">
+                <div class="div_titulo">
+                    <h1>Zona <span id="zonaTitulo"></span></h1>
+                </div>
+            </div>
             <div id="container_kpis">
                 <div class="div_kpi kpi1">
                     <div class="info_kpi">
@@ -327,7 +321,7 @@
                         </div>
                         <div class="div_situacao">
                             <h1 id="qtdServidores">3</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
                         </div>
                         <h4>Quantidade de servidores que estão ativos</h4>
                     </div>
@@ -338,7 +332,7 @@
                             <h3>P99 RAM</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioRam">90%</h1>
+                            <h1 id="kpiMedioRam">65%</h1>
                             <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
                         </div>
                         <div class="status">

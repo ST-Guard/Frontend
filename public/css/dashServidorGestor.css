@@ -128,7 +128,6 @@ body {
 }
 
 /* KPI urgente */
-#container_kpis .kpi1,
 #container_kpis .kpi3,
 #container_kpis .kpi5 {
     border-color: var(--KPI-urgente);
@@ -141,6 +140,14 @@ body {
     color: var(--KPI-urgente);
 }
 
+#container_kpis .kpi1 {
+    border-color: var(--KPI-normal);
+}
+
+#container_kpis .kpi1 h1 {
+    color: var(--KPI-normal);
+}
+
 .SubcorpoPagina{
     width: 82%;
     display: flex;
@@ -148,6 +155,31 @@ body {
     flex-direction: column;
     justify-content: baseline;
     align-items: center;
+}
+
+.textoInicio {
+  display: flex;
+  margin-right: auto;
+  padding-top: 2%;
+  padding-left: 5%;
+}
+
+.div_titulo{
+    display: flex;
+    align-items: flex-start;
+    padding-left: 2%;
+    flex-direction: column;
+    padding-top: 3%;
+}
+
+.div_titulo h1{
+    color: #1c4886;
+}
+
+.div_titulo h2{
+    color: var(--corFonteTexto);
+    font-size: 1.4rem;
+    font-weight: 400;
 }
 
 .boxBusca {

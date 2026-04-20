@@ -1,0 +1,811 @@
+* {
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+body {
+    background-color: #EDEDED;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --tituloKPI: #9A9A9A;
+    --Cpu: #00b68bb0;
+    --Ram: #461ea49b;
+    --Disco: #4c6ef5;
+    --KPI-urgente: #FF5252;
+    --KPI-importante: #F5CC4D;
+    --KPI-normal: #23B26D;
+    --azulClarinho: #66C0F4;
+    --corDaFonte: #0F1C2E;
+    --corFonteTexto: #6B7280;
+}
+
+#container_kpis {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 16px;
+    padding: 2% 2% 0;
+    color: var(--corDaFonte);
+    box-sizing: border-box;
+    margin-bottom: 50px;
+}
+
+#container_kpis .div_kpi {
+    flex: 1 1 220px;
+    min-width: 220px;
+    max-width: 246px;
+    min-height: 13rem;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    border: 1px solid #9c9a9a;
+    box-shadow: 1.5px 1px 2px 1px #9c9a9a, 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.info_kpi {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.containerTitulo {
+    display: flex;
+}
+
+#container_kpis .div_kpi h1,
+#container_kpis .div_kpi h2,
+#container_kpis .div_kpi h3,
+#container_kpis .div_kpi h4 {
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+#container_kpis .div_kpi h3 {
+    color: var(--tituloKPI);
+    font-weight: 500;
+    font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+}
+
+#container_kpis .div_kpi h1 {
+    font-size: clamp(1.5rem, 2vw, 2.3rem);
+    font-weight: 600;
+}
+
+#container_kpis .div_kpi h2 {
+    font-size: 1.3rem;
+    color: var(--tituloKPI);
+    font-weight: 500;
+}
+
+#container_kpis .div_kpi h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--corFonteTexto);
+    line-height: 1.4;
+}
+
+#container_kpis img {
+    display: block;
+}
+
+.status,
+.div_situacao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.div_situacao img {
+    width: 25px;
+    height: 25px;
+}
+
+/* KPI importante */
+#container_kpis .kpi2 {
+    border-color: var(--KPI-importante);
+    box-shadow: 1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#container_kpis .kpi2 h1 {
+    color: var(--KPI-importante);
+}
+
+/* KPI normal */
+#container_kpis .kpi4 {
+    border-color: var(--KPI-normal);
+    box-shadow: 1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#container_kpis .kpi4 h1 {
+    color: var(--KPI-normal);
+}
+
+/* KPI urgente */
+#container_kpis .kpi3,
+#container_kpis .kpi5 {
+    border-color: var(--KPI-urgente);
+    box-shadow: 1.5px 1px 2px 1px var(--KPI-urgente), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#container_kpis .kpi1 h1,
+#container_kpis .kpi3 h1,
+#container_kpis .kpi5 h1 {
+    color: var(--KPI-urgente);
+}
+
+#container_kpis .kpi1 {
+    border-color: var(--KPI-normal);
+}
+
+#container_kpis .kpi1 h1 {
+    color: var(--KPI-normal);
+}
+
+.SubcorpoPagina{
+    width: 82%;
+    display: flex;
+    min-height: 90vh;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.boxBusca {
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid #E5E7EB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 10%;
+}
+
+.textoInicio {
+  display: flex;
+  margin-right: auto;
+  padding-top: 2%;
+  padding-left: 5%;
+}
+
+.div_titulo{
+    display: flex;
+    align-items: flex-start;
+    padding-left: 2%;
+    flex-direction: column;
+    padding-top: 3%;
+}
+
+.div_titulo h1{
+    color: #1c4886;
+}
+
+.div_titulo h2{
+    color: var(--corFonteTexto);
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.busca {
+    display: flex;
+    width: 55%;
+    margin-right: 10px;
+}
+
+.busca img {
+    z-index: 10;
+    align-self: center;
+    margin-right: -20px;
+    height: 12px;
+}
+
+.busca input {
+    border: none;
+    border-radius: 10px;
+    background-color: #E5E7EB;
+    color: #5c5d5f;
+    display: flex;
+    padding-left: 28px;
+    width: 100%;
+    height: 4.5vh;
+    font-size: 17px;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.botoes button {
+    background-color: #66C0F4;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    height: 40px;
+    cursor: pointer;
+}
+
+.botaoCadastro button{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.boxServidor {
+    background-color: #66C0F418;
+    border: #66C0F4 1px solid;
+    border-radius: 10px;
+    width: 80%;
+    margin-top: 40px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.servidor {
+    background-color: #F9FAFB;
+    border: #E5E7EB solid 1px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; 
+    min-height: 160px; 
+    height: auto;      
+    margin: 20px 40px 0;
+    padding: 10px 15px;
+}
+
+.inicioServidor {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.inicioServidor h3 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-left: 10px;
+}
+
+.inicioServidor img {
+    width: 24px;
+    height: 24px;
+}
+
+.estadoServidor {
+    align-items: center;
+    background-color: #FF525220;
+    border-radius: 20px;
+    color: #FF5252;
+    display: flex;
+    justify-content: center;
+    height: 75%;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 20px;
+    padding: 6px 14px;
+    width: fit-content;
+}
+
+.gridCompo {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(250px, 1fr);
+    overflow-x: auto;
+    gap: 20px;
+}
+
+.boxCpu,
+.boxRam,
+.boxDisco,
+.boxRede {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 30px;
+}
+
+.inicioCpu,
+.inicioRam,
+.inicioDisco,
+.inicioRede {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    margin-top: 15px;
+    width: 80%;
+}
+
+.inicioCpu img,
+.inicioRam img,
+.inicioDisco img,
+.inicioRede img {
+    width: 5%;
+}
+
+.inicioCpu span,
+.inicioRam span,
+.inicioDisco span,
+.inicioRede span {
+    color: #A38F8B;
+}
+
+.infoSistema {
+    align-items: center;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    display: flex;
+    font-size: 12px;
+    justify-content: center;
+    margin-left: 15px;
+    padding: 4px 10px;
+    width: fit-content;
+}
+
+.porcentagemCpu,
+.porcentagemRam,
+.porcentagemDisco,
+.porcentagemRede {
+    color: #244770;
+    display: flex;
+    font-family: "Inter", sans-serif;
+    width: 80%;
+    height: 42%;
+}
+
+.porcentagemCpu h2,
+.porcentagemRam h2,
+.porcentagemDisco h2,
+.porcentagemRede h2 {
+    font-size: 24px;
+}
+
+.porcentagemCpu span,
+.porcentagemRam span,
+.porcentagemDisco span,
+.porcentagemRede {
+    margin-top: 15px;
+}
+
+.barraCpu,
+.barraRam,
+.barraDisco,
+.barraRede {
+    width: 80%;
+    height: 8px;
+    background-color: #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.barraPreenchimentoCpu {
+    height: 100%;
+    width: 0%;
+    background-color: #2469F0;
+    border-radius: 10px;
+    transition: 0.4s ease;
+}
+
+.barraPreenchimentoRam {
+    height: 100%;
+    width: 0%;
+    background-color: #23B26D;
+    border-radius: 10px;
+    transition: 0.4s ease;
+}
+
+.barraPreenchimentoDisco {
+    height: 100%;
+    width: 0%;
+    background-color: #F2B547;
+    border-radius: 10px;
+    transition: 0.4s ease;
+}
+
+.barraPreenchimentoRede {
+    height: 100%;
+    width: 0%;
+    background-color: #02b8f0;
+    border-radius: 10px;
+    transition: 0.4s ease;
+}
+
+.porcentagemLadoCpu,
+.porcentagemLadoRam,
+.porcentagemLadoDisco,
+.porcentagemLadoRede {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.porcentagemLadoCpu img,
+.porcentagemLadoRam img,
+.porcentagemLadoDisco img,
+.porcentagemLadoRede img {
+    width: 12%;
+    margin-right: 5px;
+}
+
+.usuarioPorcentagem,
+.configPorcentagem {
+    display: flex;
+    align-items: center;
+}
+
+.containerCadastro {
+    position: fixed;
+    inset: 0;
+    background-color: #00000005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.boxCadastroCss {
+    background-color: #ffffff;
+    border: #E5E7EB solid 1px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    overflow-y: auto;
+    width: 40%;
+}
+
+.boxContinuarCpu,
+.boxContinuarRam,
+.boxContinuarDisco,
+.boxContinuarRede {
+    background-color: #ffffff;
+    border: #E5E7EB solid 1px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    overflow-y: auto;
+    width: 40%;
+}
+
+.inicioCadastro {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 40px;
+}
+
+.inicioCadastro h1{
+    font-size: 36px;
+}
+
+.inicioCadastro button {
+    background-color: #244770;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    height: 60px;
+    width: 15%;
+}
+
+.partesCadastro {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 40px;
+}
+
+.imagemPartes {
+    width: 70px;
+    height: 70px;
+    background-color: #6B7280;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.imagemPartes:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    width: 40px;
+    height: 4px;
+    background-color: #D1D5DB;
+}
+
+.imagemPartes img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.imagemPartes:hover img {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.componenteCadastro {
+    align-items: center;
+    display: flex;
+    margin: 0 80px;
+    font-size: 20px;
+}
+
+.imagemPartes-select {
+    width: 70px;
+    height: 70px;
+    background-color: #244770;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.imagemPartes-select:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    width: 40px;
+    height: 4px;
+    background-color: #244770;
+}
+
+.imagemPartes-select img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.imagemPartes-select:hover img {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.componenteCadastro {
+    align-items: center;
+    display: flex;
+    margin: 0 80px;
+    font-size: 20px;
+}
+
+.inputServidor {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    margin: 0px 50px;
+    gap: 20px;
+}
+
+.inputServidor input {
+    border: 1px solid #6B7280;
+    border-radius: 20px;
+    height: 50px;
+    padding-left: 20px;
+    font-size: 16px;
+    width: 98%;
+}
+
+.inputIndividual {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGrupo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
+}
+
+.selectServidor {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    margin: 0px 50px;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.selectServidor select {
+    font-size: 16px;
+    border: 1px solid #6B7280;
+    border-radius: 20px;
+    height: 50px;
+    padding-left: 20px;
+    font-size: 16px;
+    width: 98%;
+}
+
+.selectIndividual {
+    display: flex;
+    flex-direction: column;
+}
+
+.botaoZonas {
+    display: flex;
+    margin-top: 20px;
+}
+
+.botaoZonas button{
+    background-color: #494B4E;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    height: 50px;
+    width: 40%;
+}
+
+.botaoContinuar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.botaoContinuar button{
+    background-color: #2469F0;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    height: 50px;
+    width: 40%;
+}
+
+.botoesCpu {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.botoesCpu button {
+    background-color: #2469F0;
+    border: 1px solid #6B7280;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    font-size: 16px;
+    width: 20%;
+}
+
+@media (max-width: 768px) {
+
+    .container_kpis {
+        flex-wrap: wrap;
+        gap: 15px;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .container_kpis .div_kpi {
+        width: 45%;
+        height: 7rem;
+    }
+
+    .boxBusca {
+        width: 90%;
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .busca {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .botoes {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .botoes button {
+        width: 88%;
+    }
+
+    .boxServidor {
+        width: 90%;
+        margin-top: 40px;
+    }
+
+    .servidor {
+        margin: 25px;
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    .gridCompo {
+        gap: 50px;
+        grid-template-columns: 1fr;
+    }
+
+    .boxCpu,
+    .boxRam,
+    .boxDisco {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .inicioServidor h3 {
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+
+    .porcentagemCpu h2,
+    .porcentagemRam h2,
+    .porcentagemDisco h2 {
+        font-size: 24px;
+    }
+
+    .barraCpu,
+    .barraRam,
+    .barraDisco {
+        width: 100%;
+    }
+
+    .porcentagemCpu,
+    .porcentagemRam,
+    .porcentagemDisco {
+        width: 100%;
+    }
+
+    .inicioCpu,
+    .inicioRam,
+    .inicioDisco {
+        width: 100%;
+    }
+
+    .inicioCpu img,
+    .inicioRam img,
+    .inicioDisco img {
+        width: 20px;
+    }
+
+    .porcentagemLadoCpu img,
+    .porcentagemLadoRam img,
+    .porcentagemLadoDisco img {
+        width: 8%;
+    }
+
+    .boxCadastroCss {
+        width: 95vw;
+        height: 90vh;
+        border-radius: 15px;
+    }
+
+    #container_kpis {
+        gap: 20px;
+        justify-content: center;
+    }
+
+    #container_kpis .div_kpi {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    
+}
