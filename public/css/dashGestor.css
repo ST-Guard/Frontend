@@ -19,9 +19,19 @@ body {
   --KPI2-icon: #ff52527a;
   --KPI3-icon: #f5cc4d7a;
   --KPI4-icon: #4caf507a;
+
+  --tituloKPI: #494B4E;
+  --Cpu: #00b68bb0;
+  --Ram: #461ea49b;
+  --Disco: #4c6ef5;
+  --KPI-urgente: #e30000;
+  --KPI-importante: #f4b805;
+  --KPI-normal: #027806;
+  --azulClarinho: #66C0F4;
+  --corDaFonte: #0F1C2E;
 }
 
-/* MEXENDO NA SIDEBAR E NO NAV BAR PARA FICAREM ESTATICO NA TELA */
+/* HEADER E SIDEBAR */
 header {
   width: 100%;
   height: 10vh;
@@ -56,8 +66,7 @@ header {
   max-width: 100%;
 }
 
-/* BOTOÊS PARA TROCA DE DASH */
-
+/* SELECT */
 .corpoPagina .SubcorpoPagina .conteiner_select {
   width: 100%;
   display: flex;
@@ -74,29 +83,131 @@ header {
   border: 2px solid #aeddfa;
 }
 
+/* CONTAINER KPIs */
+#container_kpis * {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
 #container_kpis {
   width: 100%;
   height: auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* border: solid 2px red; */
+  gap: 16px;
+  padding: 2%;
+  flex-wrap: wrap;
+  color: var(--corDaFonte);
+}
+
+/* CARDS KPI */
+#container_kpis .div_kpi {
+  width: 20.5%;
+  height: 100%;
+  background-color: #F4FBFF;
+  border-radius: 12px;
+  padding: 1%;
   display: flex;
-  gap: 1%;
+  border: 2px solid #0073b65a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
 }
 
+/* TEXTO KPI */
 #container_kpis .div_kpi h3 {
-    color: #494B4E;
-    font-weight: 400;
-    font-size: clamp(0.9rem, 1vw, 1.3rem);
-    width: 14rem;
-    height: 100%;
-    padding-right: 9px;
-    padding-bottom: 2px;
+  color: #494B4E;
+  font-weight: 400;
+  font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+  width: 22rem;
+  height: 100%;
+  padding-right: 9px;
+  padding-bottom: 2px;
 }
 
-/* GRAFICO USO MEDIO DE RECUSOOOOOOOOOSSSSSSSSSSS */
+#container_kpis .div_kpi h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw, 2.2rem);
+}
 
+#container_kpis .div_kpi h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--tituloKPI);
+  font-weight: 500;
+}
+
+#container_kpis .div_kpi h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #0F1C2E;
+}
+
+.info_kpi {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.containerTitulo {
+  display: flex;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+#circuloStatus {
+  border-radius: 50%;
+  background-color: var(--tituloKPI);
+  width: 10px;
+  height: 10px;
+}
+
+/* CORES KPI */
+#container_kpis .kpi2,
+#container_kpis .kpi4 {
+  border: 2px solid var(--KPI-urgente);
+}
+
+#container_kpis .kpi2 h1,
+#container_kpis .kpi4 h1 {
+  color: #c62222;
+}
+
+#container_kpis .kpi3,
+#container_kpis .kpi5 {
+  border: 2px solid var(--KPI-importante);
+}
+
+#container_kpis .kpi3 h1,
+#container_kpis .kpi5 h1 {
+  color: #e9cd00;
+}
+
+#container_kpis .kpi5 {
+  border: 2px solid var(--KPI-normal);
+}
+
+#container_kpis .kpi5 h1 {
+  color: #027823;
+}
+
+.div_situacao {
+  display: flex;
+  gap: 5%;
+}
+
+.div_situacao img {
+  width: 12%;
+}
+
+/* GRÁFICOS */
 .SubcorpoPagina {
   width: 100%;
   height: auto;
@@ -108,11 +219,10 @@ header {
   align-items: center;
 }
 
-.grafico-usoMedioRecursos {
+.grafico-RamXCpu {
   position: relative;
   width: 80%;
   height: auto;
-  /* background: red; */
   margin-top: 1rem;
   border: solid #e5e7eb 3px;
   box-shadow: 3px 5px 10px 1px rgba(112, 112, 112, 0.305);
@@ -120,14 +230,11 @@ header {
   border-radius: 15px;
 }
 
-#chartusomedio {
+#chartRamxCpu {
   height: 40vh;
 }
 
-/* GRAFICO USO PICO DE USO SEMANAAAAAAAAL */
-
-.grafico-PicoUsoSemanal {
-
+.grafico-ServidorAlerta {
   width: 80%;
   margin: 1rem auto;
   border: solid #e5e7eb 2px;
@@ -138,26 +245,24 @@ header {
   font-family: sans-serif;
 }
 
-
-.header-grafico {
+.header-graficoServer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.texto-titulo h3 {
+.texto-tituloServer h3 {
   margin: 0;
   font-size: 1.1rem;
 }
 
-.texto-titulo span {
+.texto-tituloServer span {
   font-size: 0.8rem;
   color: #888;
 }
 
-
-#select-componente {
+#select-Server {
   background: #f0f7ff;
   border: 1px solid #cce5ff;
   border-radius: 8px;
@@ -165,14 +270,12 @@ header {
   outline: none;
 }
 
-
-.canvas-container {
+.canvas-containerServer {
   height: 35vh;
   width: 100%;
 }
 
-
-.footer-grafico {
+.footer-Server{
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
@@ -181,150 +284,15 @@ header {
   text-align: center;
 }
 
-.stat p {
+.statServer p {
   margin: 0;
   font-size: 0.75rem;
   color: #888;
   text-transform: uppercase;
 }
 
-.stat b {
+.statServer b {
   font-size: 1.2rem;
-}
-
-
-
-:root {
-    --tituloKPI: #494B4E;
-    --Cpu: #00b68bb0;
-    --Ram: #461ea49b;
-    --Disco: #4c6ef5;
-    --KPI-urgente: #e30000;
-    --KPI-importante: #f4b805;
-    --KPI-normal: #027806;
-    --azulClarinho: #66C0F4;
-    --corDaFonte: #0F1C2E;
-}
-
-#container_kpis * {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    box-sizing: border-box;
-}
-
-#container_kpis {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 16px;
-    padding: 2%;
-    flex-wrap: wrap;
-    color: var(--corDaFonte);
-}
-
-#container_kpis .div_kpi {
-    width: 18.5%;
-    /* width: 22%;
-    width: 25%;*/
-    height: 100%;
-    background-color: #F4FBFF;
-    border-radius: 12px;
-    padding: 1%;
-    display: flex;
-    border: 2px solid #0073b65a;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
-}
-
-
-.info_kpi {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.containerTitulo {
-    display: flex;
-}
-
-#container_kpis .div_kpi h3 {
-    color: #494B4E;
-    font-weight: 400;
-    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
-    width: 14rem;
-    height: 100%;
-}
-
-#container_kpis .div_kpi h1 {
-    margin: 0;
-    font-size: clamp(1.5rem, 2vw, 2.2rem);
-}
-
-#container_kpis .div_kpi h2 {
-    margin: 0;
-    font-size: 1.3rem;
-    color: var(--tituloKPI);
-    font-weight: 500;
-}
-
-#container_kpis .div_kpi h4 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #0F1C2E;
-}
-
-.status {
-    display: flex;
-    align-items: center;
-    gap: 2%;
-}
-
-#circuloStatus {
-    border-radius: 50%;
-    background-color: var(--tituloKPI);
-    width: 10px;
-    height: 10px;
-}
-
-#container_kpis .kpi2,
-#container_kpis .kpi4 {
-    border: 2px solid var(--KPI-urgente);
-}
-
-#container_kpis .kpi2 h1,
-#container_kpis .kpi4 h1 {
-    color: #c62222;
-}
-
-#container_kpis .kpi3,
-#container_kpis .kpi5 {
-    border: 2px solid var(--KPI-importante);
-}
-
-#container_kpis .kpi3 h1,
-#container_kpis .kpi5 h1 {
-    color: #e9cd00;
-}
-
-#container_kpis .kpi5 {
-    border: 2px solid var(--KPI-normal);
-}
-
-#container_kpis .kpi5 h1 {
-    color: #027823;
-}
-
-.div_situacao {
-    display: flex;
-    gap: 5%;
-}
-
-.div_situacao img {
-    width: 12%;
 }
 
 /* RESPONSIVIDADEEEEEEEEEEEEEEEEEEEEEEEEEEE */
@@ -371,11 +339,11 @@ header {
     font-size: 1.2rem;
   }
 
-  .grafico-usoMedioRecursos {
+  .grafico-RamXCpu {
     width: 90%;
   }
 
-  .grafico-PicoUsoSemanal {
+  .grafico-ServidorAlerta {
     width: 90%;
   }
 }
@@ -455,25 +423,25 @@ header {
   }
 
 
-  .grafico-usoMedioRecursos {
+  .grafico-RamXCpu {
     width: 95%;
     padding: 15px;
   }
 
-  .grafico-PicoUsoSemanal {
+  .grafico-ServidorAlerta {
     width: 95%;
     padding: 15px;
   }
 
 
-  .header-grafico {
+  .header-graficoServer {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
   }
 
 
-  .footer-grafico {
+  .footer-Server{
     flex-direction: column;
     gap: 15px;
   }

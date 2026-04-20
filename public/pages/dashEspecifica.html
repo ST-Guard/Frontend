@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Data | Analista Esp</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./../js/sessao.js"></script>
+  <script src="./../js/dashAnalistaEspecifica.js"></script>
+  <link rel="icon" href="./../assets/icon/icon.png" />
+  <link rel="stylesheet" href="./../css/dashboard.css" />
+  <link rel="stylesheet" href="./../css/dashAnalistaEspecifica.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-nav" onclick="fnNavegar('/')">
+        <img src="./../assets/logos/smart data branco.png" alt="" />
+      </div>
+
+      <div class="right-nav">
+        <div class="logo-notificao">
+          <div class="icon-notificao">
+            <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+          </div>
+
+          <div class="qtd-notificao">
+            <img src="./../assets/dashboard-icons/circulo.svg" alt="" />
+            <p class="qtd-notificao">10</p>
+          </div>
+        </div>
+
+        <div class="separacao"></div>
+
+        <div class="logo-usuario">
+          <div class="userImg">
+            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="" />
+          </div>
+          <div class="userInfo">
+            <h2 class="user-name">Matheus Valle</h2>
+            <h3 class="user-cargo">Analista de operações</h3>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="corpoPagina">
+    <div class="sidebar">
+      <div class="sidebar-buttons">
+        <div class="sidebar-button-select">
+          <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+          <p><a href="dashboardGestor.html">Dashboard</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+          <p><a href="dashServidor.html">Servidores</a></p>
+          <!-- <p onclick="mudarServidor()">Servidores</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
+          <p><a href="dashboardAlertas.html">Alertas</a></p>
+          <!-- <p onclick="mudarAlerta()">Alerta</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
+          <p><a href="dashFuncionario.html">Funcionários</a></p>
+          <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
+          <p><a href="dashServidor.html">Configurações</a></p>
+          <!-- <p onclick="mudarConfig()">Configurações</p> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="SubcorpoPagina">
+      <!-- <div class="container-dashboards">
+        <div class="btn-option-dashboard">1° Dashboard</div>
+        <div class="btn-option-dashboard-desable" onclick="fnNavegar('/pages/dashboard/dashboardAnalista.html')">2°
+          Dashboard</div>
+      </div> -->
+
+      <div id="container_kpis">
+        <div class="linha_kpis linha_cima">
+          <div class="div_kpi kpi1">
+            <div class="info_kpi">
+              <div class="containerTitulo">
+                <h3>COMPONENTE SOBRECARREGADO</h3>
+              </div>
+
+              <h1>3</h1>
+              <h4>3 ativos</h4>
+            </div>
+
+            <div class="icon_kpi">
+              <img src="./../assets/dashboard-icons/icon_kpiServer.svg" alt="">
+            </div>
+          </div>
+
+          <div class="div_kpi kpi2">
+            <div class="info_kpi">
+              <div class="containerTitulo">
+                <h3>PROCESSO COM MAIOR CONSUMO E COMPONENTE CONSUMIDO</h3>
+              </div>
+              <div class="div_situacao">
+                <h1>90%</h1>
+                <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+              </div>
+
+              <div class="status">
+                <h4><span id="qntUsada">20</span><span id="qntTotal"><span id="unMedida">GB de <span
+                      id="unMedida">23</span><span id="qntTotal"><span id="unMedida">GB </h4>
+              </div>
+            </div>
+            <div class="estado"></div>
+          </div>
+
+          <div class="div_kpi kpi3">
+            <div class="info_kpi">
+              <div class="containerTitulo">
+                <h3>COMPONENTE QUE MAIS SUBIU NA ÚLTIMA SEMANA</h3>
+              </div>
+              <div class="div_situacao">
+                <h1>75%</h1>
+                <img src="../assets/dashboard-icons/icon_impor.svg" alt="">
+              </div>
+
+              <div class="status">
+                <h4><span id="valorPorcent">5</span>% vs última medição </h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="div_kpi kpi4">
+            <div class="info_kpi">
+              <div class="containerTitulo">
+                <h3>TEMPO DE RESPOSTA</h3>
+              </div>
+              <div class="div_situacao">
+                <h1>93%</h1>
+                <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+              </div>
+
+              <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
+                  47</span><span id="unMedida">TB </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="linha_kpis linha_baixo">
+          <div class="div_kpi kpi5">
+            <div class="info_kpi">
+              <div class="containerTitulo">
+                <h3>USO DE RAM</h3>
+              </div>
+              <div class="div_situacao">
+                <h1>93%</h1>
+                <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+              </div>
+
+              <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
+                  47</span><span id="unMedida">TB </h4>
+            </div>
+          </div>
+
+          <div class="div_kpi kpi6">
+            <div class="info_kpi">
+              <div class="containerTitulo">
+                <h3>USO DE CPU</h3>
+              </div>
+              <div class="div_situacao">
+                <h1>93%</h1>
+                <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+              </div>
+
+              <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
+                  47</span><span id="unMedida">TB </h4>
+            </div>
+          </div>
+
+          <div class="div_kpi kpi7">
+            <div class="info_kpi">
+              <div class="containerTitulo">
+                <h3>USO DE DISCO</h3>
+              </div>
+              <div class="div_situacao">
+                <h1>93%</h1>
+                <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+              </div>
+
+              <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
+                  47</span><span id="unMedida">TB </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grafico-usoMedioRecursos">
+        <div id="expandirRamxCpu">
+          <canvas id="chartusomedio"></canvas>
+        </div>
+      </div>

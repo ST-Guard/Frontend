@@ -18,3 +18,165 @@
   <link rel="stylesheet" href="./../css/dashboard.css" />
   <link rel="stylesheet" href="./../css/dashGestor.css" />
 </head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-nav" onclick="fnNavegar('/')">
+        <img src="./../assets/logos/smart data branco.png" alt="" />
+      </div>
+
+      <div class="right-nav">
+        <div class="logo-notificao">
+          <div class="icon-notificao">
+            <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+          </div>
+
+          <div class="qtd-notificao">
+            <img src="./../assets/dashboard-icons/circulo.svg" alt="" />
+            <p class="qtd-notificao">10</p>
+          </div>
+        </div>
+
+        <div class="separacao"></div>
+
+        <div class="logo-usuario">
+          <div class="userImg">
+            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="" />
+          </div>
+          <div class="userInfo">
+            <h2 class="user-name">Matheus Valle</h2>
+            <h3 class="user-cargo">Analista de operações</h3>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="corpoPagina">
+    <div class="sidebar">
+      <div class="sidebar-buttons">
+        <div class="sidebar-button-select">
+          <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+          <p><a href="dashboardGestor.html">Dashboard</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+          <p><a href="dashServidor.html">Servidores</a></p>
+          <!-- <p onclick="mudarServidor()">Servidores</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
+          <p><a href="dashAlertas.html">Alertas</a></p>
+          <!-- <p onclick="mudarAlerta()">Alerta</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
+          <p><a href="dashFuncionario.html">Funcionários</a></p>
+          <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
+        </div>
+        <div class="sidebar-button">
+          <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
+          <p><a href="dashServidor.html">Configurações</a></p>
+          <!-- <p onclick="mudarConfig()">Configurações</p> -->
+        </div>
+      </div>
+    </div>
+
+
+    <div class="SubcorpoPagina">
+      <!-- <div class="container-dashboards">
+        <div class="btn-option-dashboard">1° Dashboard</div>
+        <div class="btn-option-dashboard-desable" onclick="fnNavegar('/pages/dashboard/dashboardAnalista.html')">2°
+          Dashboard</div>
+      </div> -->
+
+      <div id="container_kpis">
+        <div class="div_kpi kpi1">
+
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>PROCESSO COM MAIOR CONSUMO</h3>
+            </div>
+
+            <h1>3</h1>
+            <h4>3 ativos</h4>
+          </div>
+
+          <div class="icon_kpi">
+            <img src="./../assets/dashboard-icons/icon_kpiServer.svg" alt="">
+          </div>
+
+        </div>
+
+        <div class="div_kpi kpi2">
+
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>ÍNDICE DE SERVIDORES QUE APRESENTARAM ALERTAS NOS ULTIMOS DIAS(%)</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>90%</h1>
+              <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+            </div>
+
+            <div class="status">
+              <h4><span id="qntUsada">20</span><span id="qntTotal"><span id="unMedida">GB de <span
+                      id="unMedida">23</span><span id="qntTotal"><span id="unMedida">GB </h4>
+            </div>
+          </div>
+          <div class="estado"></div>
+        </div>
+        <div class="div_kpi kpi3">
+
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>SERVIDORES ATIVOS</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>75%</h1>
+              <img src="../assets/dashboard-icons/icon_impor.svg" alt="">
+            </div>
+
+            <div class="status">
+              <h4><span id="valorPorcent">5</span>% vs última medição </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="div_kpi kpi4">
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>SERVIDORES INATIVOS</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>93%</h1>
+              <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+            </div>
+
+            <h4><span id="qntUsada">43</span><span id="unMedida">TB</span> de <span id="qntTotal">
+                47</span><span id="unMedida">TB </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="grafico-ServidorAlerta">
+        <div class="header-graficoServer">
+          <div class="texto-tituloServer">
+            <h3>Comparação dos servidores que mais receberam alertas</h3>
+            <span>Compara a quantidade de alertas por servidor</span>
+          </div>
+        </div>
+
+        <div class="canvas-containerServer">
+          <canvas id="chartServer"></canvas>
+        </div>
+
+      </div>
+
+      <div class="grafico-RamXCpu">
+        <div id="expandirRamxCpu">
+          <canvas id="chartRamxCpu"></canvas>
+        </div>
+      </div>

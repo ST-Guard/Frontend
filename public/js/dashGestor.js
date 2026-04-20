@@ -44,7 +44,7 @@ function mudarConfig() {
 
 // Precisa do DOMcontentLoaded, pq garante que os elementos do html carreguem antes de pegar o id do char, saco?
 document.addEventListener('DOMContentLoaded', () => {
-    const ctx = document.getElementById('chartusomedio');
+    const ctx = document.getElementById('chartRamxCpu');
 
     const data = {
         
@@ -108,73 +108,69 @@ document.addEventListener('DOMContentLoaded', () => {
     // SEGUNDO GRAFICOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
     
-    const ctxBar = document.getElementById('chartpicousosemanal');
-    const selectComponente = document.getElementById('select-componente');
-    
-    let meuGraficoBarra;
+    const ctxBar = document.getElementById('chartServer');
+
+    let graficoBarraServer;
 
     const dadosPico = {
-        'CPU': [78, 82, 91, 75, 88, 65, 58],
-        'RAM': [45, 50, 55, 60, 58, 52, 48],
-        'DISCO': [20, 22, 25, 30, 28, 26, 24]
+    Server_1: [4, 5, 5, 0, 8, 2, 8],
+    Server_2: [2, 2, 2, 3, 5, 6, 4],
+    Server_3: [2, 5, 1, 5, 8, 6, 8],
     };
 
-    
-    function atualizarGrafico(componente) {
-        const dataArray = dadosPico[componente];
-        
-        if (meuGraficoBarra) {
-            meuGraficoBarra.destroy();
-        }
+    function somarAlertas(lista) {
+    let total = 0;
 
-        meuGraficoBarra = new Chart(ctxBar, {
-            type: 'bar',
-            data: {
-                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                datasets: [{
-                    label: `Pico de ${componente}`,
-                    data: dataArray,
-                    backgroundColor: '#000000', 
-                    borderRadius: 5,
-                    barThickness: 30 
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false } 
-                },
-                scales: {
-                    x: { 
-                        grid: { display: false } 
-                    },
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            callback: function(value) { return value + '%'; }
-                        }
-                    }
-                }
-            }
-        });
+    for (let i = 0; i < lista.length; i++) {
+        total += lista[i];
     }
 
-   
-    atualizarGrafico('CPU');
-    selectComponente.addEventListener('change', (e) => {
-    atualizarGrafico(e.target.value);
-});
+    return total;
+    }
 
-    
+    function atualizarGrafico() {
 
+    const totalServer1 = somarAlertas(dadosPico.Server_1);
+    const totalServer2 = somarAlertas(dadosPico.Server_2);
+    const totalServer3 = somarAlertas(dadosPico.Server_3);
 
+    if (graficoBarraServer) {
+        graficoBarraServer.destroy();
+    }
 
+    graficoBarraServer = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+        labels: ['Servidor 1', 'Servidor 2', 'Servidor 3'],
+        datasets: [{
+            label: 'Quantidade de Alertas',
+            data: [totalServer1, totalServer2, totalServer3],
+            backgroundColor: ['#5dade2', '#2ecc71', '#f54d4d'],
+            borderRadius: 5,
+            barThickness: 40
+        }]
+        },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+            display: false
+            }
+        },
+        scales: {
+            x: {
+            grid: {
+                display: false
+            }
+            },
+            y: {
+            beginAtZero: true
+            }
+        }
+        }
+    });
+    }
 
-
-
-
-
-
-});
+    atualizarGrafico();
+})
