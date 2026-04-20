@@ -44,71 +44,11 @@ function mudarConfig() {
 
 // Precisa do DOMcontentLoaded, pq garante que os elementos do html carreguem antes de pegar o id do char, saco?
 document.addEventListener('DOMContentLoaded', () => {
-    const ctx = document.getElementById('chartRamxCpu');
 
-    const data = {
-        
-        labels: ['', '', '', '', '', '', ''],
-        datasets: [
-            {
-                label: 'RAM',
-                data: [40, 35, 50, 70, 50, 20, 30],
-                borderColor: '#23B26D',
-                backgroundColor: '#23B26D',
-                tension: 0.4 
-            },
-            {
-                label: 'CPU',
-                data: [30, 85, 20, 56, 90, 100, 20],
-                borderColor: '#f54d4d',
-                backgroundColor: '#f54d4d',
-                tension: 0.4
-            }
-        ]
-    };
-
-    const config = {
-        type: 'line',
-        data: data,
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { 
-                title: {
-                    display: true,
-                    text: 'Comparando Ram e CPU',
-                    font: { size: 18 }
-                },
-                legend: {
-                    position: 'bottom'
-                }
-            },
-            scales: {
-                x: { 
-                    title: {
-                        display: true,
-                        text: 'Dias'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    title: {
-                        display: true,
-                        text: 'Uso (%)'
-                    }
-                }
-            }
-        }
-    };
-
-    new Chart(ctx, config);
-
-
-    // SEGUNDO GRAFICOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-
-    
-    const ctxBar = document.getElementById('chartServer');
+    const ctxServer = document.getElementById('chartServer');
+    const ctxRamCpu = document.getElementById('chartRamxCpu');
+    const ctxDiskLat = document.getElementById('chartDiskxLat');
+    const ctxAlerta = document.getElementById('chartAlerta');
 
     let graficoBarraServer;
 
@@ -138,16 +78,16 @@ document.addEventListener('DOMContentLoaded', () => {
         graficoBarraServer.destroy();
     }
 
-    graficoBarraServer = new Chart(ctxBar, {
+    graficoBarraServer = new Chart(ctxServer, {
         type: 'bar',
         data: {
-        labels: ['Servidor 1', 'Servidor 2', 'Servidor 3'],
+        labels: ['SERVIDOR-DC01', 'SERVIDOR-DC02', 'SERVIDOR-DC03'],
         datasets: [{
             label: 'Quantidade de Alertas',
             data: [totalServer1, totalServer2, totalServer3],
-            backgroundColor: ['#5dade2', '#2ecc71', '#f54d4d'],
+            backgroundColor: ['#F2B547', '#66C0F4', '#F54D4D'],
             borderRadius: 5,
-            barThickness: 40
+            barThickness: 100
         }]
         },
         options: {
@@ -156,6 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
         plugins: {
             legend: {
             display: false
+            },
+            title: {
+                display: true,
+                text: 'Comparação dos servidores que mais receberam alertas',
+                align: 'start',
+                font: {
+                    size: 18
+                },
+                padding: {
+                    top: 10,
+                    bottom: 30
+                }
             }
         },
         scales: {
@@ -171,6 +123,189 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     }
+
+    new Chart(ctxAlerta, {
+    type: 'bar',
+    data: {
+        labels: ['SERVIDOR-DC01', 'SERVIDOR-DC02', 'SERVIDOR-DC03'],
+        datasets: [
+        {
+            label: 'Alto',
+            data: [7, 4, 3],
+            backgroundColor: '#0F9D8F'
+        },
+        {
+            label: 'Baixo',
+            data: [4, 4, 3],
+            backgroundColor: '#174A5B'
+        },
+        {
+            label: 'Crítico',
+            data: [2, 1, 0],
+            backgroundColor: '#F45B2A'
+        },
+        {
+            label: 'Médio',
+            data: [6, 5, 3],
+            backgroundColor: '#F4B400'
+        }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+        legend: {
+            position: 'bottom',
+            labels: {
+            boxWidth: 14
+            }
+        },
+        title: {
+            display: true,
+            text: 'Quantidade de alertas por servidor',
+            align: 'start',
+            font: {
+                size: 18
+            },
+            padding: {
+                top: 10,
+                bottom: 30,
+            }
+        }
+        },
+        scales: {
+        x: {
+            stacked: true,
+            grid: {
+            display: false
+            }
+        },
+        y: {
+            stacked: true,
+            beginAtZero: true,
+            max: 60,
+            ticks: {
+            stepSize: 15
+            }
+        }
+        }
+    }
+    });
+
+    new Chart(ctxRamCpu, {
+    type: 'bar',
+    data: {
+        labels: ["04:00", "08:00", "12:00", "16:00", "20:00"],
+        datasets: [
+        {
+            label: 'RAM',
+            data: [35, 61, 50, 68, 51],
+            backgroundColor: '#244770',
+            order: 2
+        },
+        {
+            label: 'CPU',
+            data: [45, 52, 70, 73, 37],
+            backgroundColor: '#C95050',
+            order: 2
+        },
+        {
+            label: 'Previsibilidade',
+            data: [40, 55, 60, 70, 44],
+            type: 'line',
+            borderColor: '#6B7280',
+            backgroundColor: '#ffffff',
+            tension: 0.5,
+            order: 1
+        },
+        
+        ]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Comparando Ram e CPU com índice de previsibilidade',
+                align: 'start',
+                font: {
+                    size: 18
+                },
+                padding: {
+                    top: 20,
+                    bottom: 30,
+                }
+            }
+        },
+        responsive: true,
+        scales: {
+        y: {
+            beginAtZero: true,
+            title: {
+            display: true,
+            text: 'Uso (%)'
+            }
+        },
+        }
+    }
+    }),
+
+    new Chart(ctxDiskLat, {
+    type: 'bar',
+    data: {
+        labels: ["04:00", "08:00", "12:00", "16:00", "20:00"],
+        datasets: [
+        {
+            label: 'Disco',
+            data: [25.5, 40, 48, 51, 38],
+            backgroundColor: '#23B26D',
+            order: 2
+        },
+        {
+            label: 'Latencia',
+            data: [23, 40, 51, 52, 38],
+            backgroundColor: '#1D85C2',
+            order: 2
+        },
+        {
+            label: 'Previsibilidade',
+            data: [24, 40, 50, 51.5, 38],
+            type: 'line',
+            borderColor: '#6B7280',
+            backgroundColor: '#ffffff',
+            tension: 0.5,
+            order: 1
+        },
+        
+        ]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Comparando Disco e Latencia com índice de previsibilidade',
+                align: 'start',
+                font: {
+                    size: 18
+                },
+                padding: {
+                    top: 20,
+                    bottom: 30,
+                }
+            }
+        },
+        responsive: true,
+        scales: {
+        y: {
+            beginAtZero: true,
+            title: {
+            display: true,
+            text: 'Uso (%)'
+            }
+        },
+        }
+    }
+    }),
 
     atualizarGrafico();
 })
