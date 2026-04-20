@@ -140,16 +140,16 @@
                     </div>
                     <div class="partesCadastro">
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconCpu.png" alt="">
+                            <img src="../assets/dashboard-servidor/cpu.png" alt="">
                         </div>
                         <div class="imagemPartes">
-                            <img src="../assets/dashboard-servidor/iconRam.png" alt="">
+                            <img src="../assets/dashboard-servidor/ram.png" alt="">
                         </div>
                         <div class="imagemPartes">
-                            <img src="../assets/dashboard-servidor/iconCache.png" alt="">
+                            <img src="../assets/dashboard-servidor/cache.png" alt="">
                         </div>
                         <div class="imagemPartes">
-                            <img src="../assets/dashboard-servidor/iconWeb.png" alt="">
+                            <img src="../assets/dashboard-servidor/rede.png" alt="">
                         </div>
                     </div>
                     <div class="inputServidor">
@@ -186,16 +186,16 @@
                     </div>
                     <div class="partesCadastro">
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconCpu.png" alt="">
+                            <img src="../assets/dashboard-servidor/cpu.png" alt="">
                         </div>
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconRam.png" alt="">
+                            <img src="../assets/dashboard-servidor/ram.png" alt="">
                         </div>
                         <div class="imagemPartes">
-                            <img src="../assets/dashboard-servidor/iconCache.png" alt="">
+                            <img src="../assets/dashboard-servidor/cache.png" alt="">
                         </div>
                         <div class="imagemPartes">
-                            <img src="../assets/dashboard-servidor/iconWeb.png" alt="">
+                            <img src="../assets/dashboard-servidor/rede.png" alt="">
                         </div>
                     </div>
                     <div class="inputServidor">
@@ -232,16 +232,16 @@
                     </div>
                     <div class="partesCadastro">
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconCpu.png" alt="">
+                            <img src="../assets/dashboard-servidor/cpu.png" alt="">
                         </div>
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconRam.png" alt="">
+                            <img src="../assets/dashboard-servidor/ram.png" alt="">
                         </div>
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconCache.png" alt="">
+                            <img src="../assets/dashboard-servidor/cache.png" alt="">
                         </div>
                         <div class="imagemPartes">
-                            <img src="../assets/dashboard-servidor/iconWeb.png" alt="">
+                            <img src="../assets/dashboard-servidor/rede.png" alt="">
                         </div>
                     </div>
                     <div class="inputServidor">
@@ -278,16 +278,16 @@
                     </div>
                     <div class="partesCadastro">
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconCpu.png" alt="">
+                            <img src="../assets/dashboard-servidor/cpu.png" alt="">
                         </div>
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconRam.png" alt="">
+                            <img src="../assets/dashboard-servidor/ram.png" alt="">
                         </div>
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconCache.png" alt="">
+                            <img src="../assets/dashboard-servidor/cache.png" alt="">
                         </div>
                         <div class="imagemPartes-select">
-                            <img src="../assets/dashboard-servidor/iconWeb.png" alt="">
+                            <img src="../assets/dashboard-servidor/rede.png" alt="">
                         </div>
                     </div>
                     <div class="inputServidor">
@@ -325,56 +325,66 @@
                         <div class="containerTitulo">
                             <h3>TOTAL DE SERVIDORES</h3>
                         </div>
-                        <h1 id="qtdServidores">3</h1>
+                        <div class="div_situacao">
+                            <h1 id="qtdServidores">3</h1>
+                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+                        </div>
+                        <h4>Quantidade de servidores que estão ativos</h4>
                     </div>
-                    <div class="icon_kpi">
-                        <img src="./../assets/dashboard-icons/icon_kpiServer.svg" alt="">
-                    </div>
-
                 </div>
                 <div class="div_kpi kpi2">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>USO MÉDIO DE RAM</h3>
+                            <h3>P99 RAM</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 id="kpiMedioRam">90%</h1>
-                            <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
+                        </div>
+                        <div class="status">
+                            <h4>Quantidade de servidores que estão inativos</h4>
                         </div>
                     </div>
-                    <div class="estado"></div>
                 </div>
                 <div class="div_kpi kpi3">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>USO MÉDIO DE CPU</h3>
+                            <h3>P99 CPU</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 id="kpiMedioCpu">75%</h1>
-                            <img src="../assets/dashboard-icons/icon_impor.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
                         </div>
-
+                        <div class="status">
+                            <h4>Processo consumindo mais CPU</h4>
+                        </div>
                     </div>
                 </div>
                 <div class="div_kpi kpi4">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>USO DO DISCO</h3>
+                            <h3>P99 Disco</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 id="kpiMedioDisco">93%</h1>
-                            <img src="../assets/dashboard-icons/icon_urgent.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+                        </div>
+                        <div class="status">
+                            <h4>SERVIDOR-DC02</h4>
                         </div>
                     </div>
                 </div>
                 <div class="div_kpi kpi5">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>LATÊNCIA MÉDIA PING</h3>
+                            <h3>P99 LATÊNCIA</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 id="kpiMedioRede">20 ms</h1>
-                            <img src="../assets/dashboard-icons/circle-check.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+                        </div>
+                        <div class="status">
+                            <h4>SERVIDOR-DC02</h4>
                         </div>
                     </div>
                 </div>
