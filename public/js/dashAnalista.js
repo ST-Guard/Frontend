@@ -2,6 +2,8 @@ function fnNavegar(local) {
     window.location.href = local
 }
 
+
+
 //validarSessao();
 function validarSessao() {
 
