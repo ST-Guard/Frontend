@@ -144,14 +144,7 @@ new Chart(graficoUsoG, {
                 tension: 0.4,
                 pointRadius: 4
             },
-            {
-                label: 'CPU',
-                data: [35, 40, 52, 65, 70, 60, 45],
-                borderColor: '#66C0F4',
-                backgroundColor: '#66C0F4',
-                tension: 0.4,
-                pointRadius: 4
-            },
+           
             {
                 label: 'DISCO',
                 data: [30, 43, 45, 65, 70, 67, 54],
@@ -159,15 +152,8 @@ new Chart(graficoUsoG, {
                 backgroundColor: '#F5CC4D',
                 tension: 0.4,
                 pointRadius: 4
-            },
-            {
-                label: 'LATÊNCIA',
-                data: [15, 25, 23, 20, 21, 31, 10],
-                borderColor: '#400094c0',
-                backgroundColor: '#400094c0',
-                tension: 0.4,
-                pointRadius: 4
             }
+            
         ]
     },
     options: {
