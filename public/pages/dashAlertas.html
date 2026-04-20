@@ -13,6 +13,7 @@
         rel="stylesheet">
         <script src="./../js/sessao.js"></script>
         <script src="./../js/dashAlertas.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link rel="icon" href="./../assets/icon/icon.png">
         <link rel="stylesheet" href="../css/dashboard.css">
         <link rel="stylesheet" href="../css/dashAlertas.css" />
@@ -94,113 +95,105 @@
                 <div class="div_kpi kpi1">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>TOTAL DE SERVIDORES</h3>
+                            <h3>Criticos Abertos</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="qtdServidores">3</h1>
+                            <h1 id="qtdCriticos">3</h1>
                             <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
                         </div>
-                        <h4>Quantidade de servidores que estão ativos</h4>
+                        <h4>Requerem ação imediata</h4>
                     </div>
                 </div>
                 <div class="div_kpi kpi2">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>P99 RAM</h3>
+                            <h3>Severidade Media</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioRam">90%</h1>
+                            <h1 id="qtdMedios">2</h1>
                             <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
                         </div>
                         <div class="status">
-                            <h4>Quantidade de servidores que estão inativos</h4>
+                            <h4>Em monitoramento</h4>
                         </div>
                     </div>
                 </div>
                 <div class="div_kpi kpi3">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>P99 CPU</h3>
+                            <h3>Severidade Baixa</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioCpu">75%</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+                            <h1 id="qtdMedios">3</h1>
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
                         </div>
                         <div class="status">
                             <h4>Processo consumindo mais CPU</h4>
                         </div>
                     </div>
                 </div>  
+                <div class="div_kpi kpi4">
+                    <div class="info_kpi">
+                        <div class="containerTitulo">
+                            <h3>Resolvidos (24h)</h3>
+                        </div>
+                        <div class="div_situacao">
+                            <h1 id="qtdMedios">3</h1>
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+                        </div>
+                        <div class="status">
+                            <h4>SLA dentro do esperado</h4>
+                        </div>
+                    </div>
+                </div>  
             </div>
-            <section class="grafico_alerta">
-                <div class="grafico">
-                    <div class="grafico_titulo">
-                        <h1>Alertas por semana</h1>
-                        <h2>Distribuição de alertas por severidade(último mês)</h2>
-                    </div>
-                    <div class="grafico_chart">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                    <div class="grafico_legendas">
-                        <div class="legenda1">
-                            <div class="quadrado_legenda1">
+            <div class="parte1">
+                <section class="grafico_alerta">
+                    <div class="grafico">
+                        <div class="grafico_chart">
+                            <canvas id="Alerta"></canvas>
+                        </div>
+    
+                        <div class="grafico_kpis">
+                            <div class="grafico_kp1">
+                                <h1>Total Alertas</h1>
+                                <p>80</p>
                             </div>
-                            <h1>Críticos</h1>
-                        </div>
-                        <div class="legenda2">
-                            <div class="quadrado_legenda2">
+                            <div class="grafico_kp2">
+                                <h1>Semana mais crítica</h1>
+                                <p>Semana 1</p>
                             </div>
-                            <h1>Atenção</h1>
-                        </div>
-                        <div class="legenda3">
-                            <div class="quadrado_legenda3">
+                            <div class="grafico_kp3">
+                                <h1>Severidade dominante</h1>
+                                <p>Baixa</p>
                             </div>
-                            <h1>Info</h1>
+                            <div class="grafico_kp4">
+                                <h1>Total alertas dominante</h1>
+                                <p>42</p>
+                            </div>
+                        </div>
+    
+                        <div class="boxTendencia">
+                            <div class="tendencia">
+                                <img src="../assets/icone_certo.png" alt="">
+                                <div class="textos">
+                                    <h1>Tendência Positiva</h1>
+                                    <p>Alertas Criticos com queda significativa.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="linha_referencia_grafico">
+                </section>
+                <div class="grafico_pizza_card">
+                    <div class="grafico_pizza_canvas">
+                        <canvas id="distribuicao"></canvas>
                     </div>
-                    <div class="grafico_kpis">
-                        <div class="grafico_kp1">
-                            <h1>Total Alertas</h1>
-                            <p>214</p>
-                        </div>
-                        <div class="grafico_kp2">
-                            <h1>Média de Críticas</h1>
-                            <p>11</p>
-                        </div>
-                        <div class="grafico_kp3">
-                            <h1>Média Atenção</h1>
-                            <p>26</p>
-                        </div>
-                        <div class="grafico_kp4">
-                            <h1>Média Info</h1>
-                            <p>17</p>
-                        </div>
-                    </div>
-
-                    <div class="tendencia">
-
-                        <img src="../assets/icone_certo.png" alt="">
-
-                        <div class="textos">
-                            <h1>Tendência Positiva</h1>
-                            <p>Redução de 33% nos alertas críticos comparado ao início do mês. Continue monitorando.
-                            </p>
-                        </div>
-                    </div>
-
-
                 </div>
-            </section>
-
+            </div>
             <section class="lista_alertas">
                 <div class="div_lista_alertas">
                     <div class="card_alerta">
-
                         <div class="titulo_card_alerta">
-
-
                             <div class="cards1">
                                 <div class="icon_titulo_card_alerta">
                                     <img src="../assets/Icon_alerta.png" alt="">
@@ -208,10 +201,7 @@
                                 <div class="titulo_texto_card_alerta">
                                     <h1>CPU ACIMA DE 90%</h1>
                                 </div>
-
                             </div>
-
-
                             <div class="cards">
                                 <div class="status_titulo_card_alerta">
                                     <h1>Crítico</h1>
@@ -220,23 +210,13 @@
                                     <h1>CPU</h1>
                                 </div>
                             </div>
-
                         </div>
-
-
                         <div class="identificação_servidor">
                             <img src="../assets/icon_servidor.png" alt="">
                             <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
                         </div>
-
-                        <div class="linha_referencia">
-
-                        </div>
-
-
                         <div class="botoes_card_alerta">
-
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
+                            <button style="background-color: #6B7280; color: white; font-weight: 550;" onclick="detalhes()">Ver
                                 detalhe</button>
                         </div>
 
@@ -612,63 +592,9 @@
                 </div>
             </section>
 
+
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </body>
 
 </html>
-
-<script>
-    const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'],
-            datasets: [{
-                label: 'Alertas',
-
-                data: [10, 8, 12, 13, 7, 7],
-                borderWidth: 1,
-                borderRadius: 8
-            }]
-
-
-
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: "Quantidade"
-                    }
-
-                },
-                x: {
-                    grid: {
-                        display: false
-                    }
-                }
-
-
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-
-
-    });
-</script>

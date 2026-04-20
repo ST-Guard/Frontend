@@ -129,50 +129,45 @@ document.addEventListener('DOMContentLoaded', () => {
     data: {
         labels: ['SERVIDOR-DC01', 'SERVIDOR-DC02', 'SERVIDOR-DC03'],
         datasets: [
-        {
-            label: 'Alto',
-            data: [7, 4, 3],
-            backgroundColor: '#0F9D8F'
-        },
-        {
-            label: 'Baixo',
-            data: [4, 4, 3],
-            backgroundColor: '#174A5B'
-        },
-        {
-            label: 'Crítico',
-            data: [2, 1, 0],
-            backgroundColor: '#F45B2A'
-        },
-        {
-            label: 'Médio',
-            data: [6, 5, 3],
-            backgroundColor: '#F4B400'
-        }
+            {
+                label: 'Baixo',
+                data: [8, 6, 6],
+                backgroundColor: '#174A5B'
+            },
+            {
+                label: 'Médio',
+                data: [7, 6, 4],
+                backgroundColor: '#F4B400'
+            },
+            {
+                label: 'Crítico',
+                data: [2, 3, 1],
+                backgroundColor: '#F45B2A'
+            },
         ]
     },
     options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-        legend: {
-            position: 'bottom',
-            labels: {
-            boxWidth: 14
-            }
-        },
-        title: {
-            display: true,
-            text: 'Quantidade de alertas por servidor',
-            align: 'start',
-            font: {
-                size: 18
+            legend: {
+                position: 'bottom',
+                labels: {
+                boxWidth: 14
+                }
             },
-            padding: {
-                top: 10,
-                bottom: 30,
+            title: {
+                display: true,
+                text: 'Quantidade de alertas por servidor',
+                align: 'start',
+                font: {
+                    size: 18
+                },
+                padding: {
+                    top: 10,
+                    bottom: 30,
+                }
             }
-        }
         },
         scales: {
         x: {
