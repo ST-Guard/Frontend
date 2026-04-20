@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Data | Analista</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./../assets/icon/icon.png">
+    <link rel="stylesheet" href="./../css/dashboard.css" />
+    <link rel="stylesheet" href="./../css/dashConfigAnalista.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./../js/sessao.js"></script>
+    <script src="./../js/dashConfigAnalista.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav>
+<div class="logo-nav" onclick="fnNavegar('/')">
+    <img src="./../assets/logos/smart data branco.png" alt="Logo Smart Data">
+</div>
+
+<div class="right-nav">
+    <div class="logo-notificao">
+        <div class="icon-notificao">
+            <img src="./../assets/dashboard-icons/notificao.svg" alt="Notificações">
+        </div>
+        <div class="qtd-notificao">
+            <img src="./../assets/dashboard-icons/circulo.svg" alt="">
+            <p class="qtd-notificao">10</p>
+        </div>
+    </div>
+
+    <div class="separacao"></div>
+
+    <div class="logo-usuario">
+        <div class="userImg">
+            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário">
+        </div>
+        <div class="userInfo">
+            <h2 class="user-name">Matheus Valle</h2>
+            <h3 class="user-cargo">Analista de operações</h3>
+        </div>
+    </div>
+</div>
+</nav>
+</header>
+
+<div class="corpoPagina">
+    <div class="sidebar">
+        <div class="sidebar-buttons">
+            <div class="sidebar-button-select">
+                <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                <p><a href="">Dashboard</a></p>
+            </div>
+            <div class="sidebar-button">
+                <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
+                <p><a href="dashServidorAnalista.html">Servidores</a></p>
+            </div>
+            <div class="sidebar-button">
+                <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
+                <p><a href="dashConfigAnalista.html">Configurações</a></p>
+            </div>
+        </div>
+    </div>
+</div>
