@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 title: {
                     display: true,
-                    text: 'Distribuição atual',
+                    text: 'Distribuição na semana',
                     align: 'start',
                     font: {
                         size: 18
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 subtitle: {
                     display: true,
-                    text: 'Total de alertas ativos por severidade',
+                    text: 'Total de alertas por severidade',
                     align: 'start',
                     font: {
                         size: 18
