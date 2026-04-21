@@ -55,6 +55,7 @@ function listarFuncionarios() {
                                     <h3 class="funcionario_nome">${f.nome}</h3>
                                     <p class="funcionario_email">${f.email}</p>
                                     <p class="funcionario_telefone">${f.telefone || '(11) 99999-8888'}</p>
+                                    <p class="funcionario_zona">${f.zona || "Sem zona"}</p>
                                 </div>
                                 <div class="funcionario_acoes">
                                     ${botaoHTML}
@@ -110,14 +111,15 @@ function cadastrar() {
     var cpfVar = input_cpf_cadastro.value;
     var telefoneVar = input_telefone_cadastro.value; 
     var cargoVar = select_cargo_cadastro.value;
+    var zonaVar = select_zona_cadastro.value;
 
-    if (nomeVar == "" || emailVar == "" || senhaVar == "" || cpfVar == "" || telefoneVar == "" || cargoVar == "") {
+    if (nomeVar == "" || emailVar == "" || senhaVar == "" || cpfVar == "" || telefoneVar == "" || cargoVar == "" || zonaVar == "") {
         alert("Preencha todos os campos!");
         return;
     }
 
     fetch("/usuarios/cadastrar", {
-        method: "POST",
+        method: "POST", 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             nomeServer: nomeVar,
@@ -125,7 +127,8 @@ function cadastrar() {
             senhaServer: senhaVar,
             cpfServer: cpfVar,
             telefoneServer: telefoneVar, 
-            cargoServer: cargoVar
+            cargoServer: cargoVar,
+            zonaServer : zonaVar
         })
     }).then(function (resposta) {
         if (resposta.ok) {
@@ -139,4 +142,33 @@ function cadastrar() {
     });
 }
 
-window.onload = listarFuncionarios;
+
+
+function carregarZonas() {
+    fetch("/zonas/listar")
+        .then(res => {
+            if (!res.ok) throw new Error("Erro na rota: " + res.status);
+            return res.json();
+        })
+        .then(zonas => {
+
+            const select = document.getElementById("select_zona_cadastro");
+
+            select.innerHTML = `<option value="">Selecione</option>`;
+
+            zonas.forEach(z => {
+                select.innerHTML += `
+                    <option value="${z.idZona}">${z.nome}</option>
+                `;
+            });
+
+        })
+        .catch(erro => {
+            console.log("Erro ao carregar zonas:", erro);
+        });
+}
+
+window.onload = function () {
+    listarFuncionarios();
+    carregarZonas();
+};

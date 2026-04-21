@@ -16,6 +16,11 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var falecosnosRouter = require("./src/routes/faleconosco")
 var servidorRouter = require("./src/routes/servidor")
+var zonaRouter = require("./src/routes/zona");
+
+
+
+
 
 
 // middlewares
@@ -29,6 +34,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/enviar", falecosnosRouter)
 app.use("/servidor", servidorRouter)
+app.use("/zonas", zonaRouter);
 
 
 // inicia o servidor
