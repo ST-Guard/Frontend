@@ -50,7 +50,9 @@ function listarFuncionarios() {
                     container.innerHTML += `
                         <div class="card_funcionario">
                             <div class="funcionario">
-                                <div class="funcionario_avatar"></div>
+                                <div class="funcionario_avatar">
+                                <img src="./../assets/img-funcionario/avatar.png" alt="Ícone" class="avatar_icone">
+                                </div>
                                 <div class="funcionario_info">
                                     <h3 class="funcionario_nome">${f.nome}</h3>
                                     <p class="funcionario_email">${f.email}</p>
@@ -102,6 +104,13 @@ function abrirModal() {
 
 function fecharModal() {
     document.getElementById("modal_cadastro").style.display = "none";
+    
+    document.getElementById("input_nome_cadastro").value = "";
+    document.getElementById("input_email_cadastro").value = "";
+    document.getElementById("input_telefone_cadastro").value = "";
+    document.getElementById("input_senha_cadastro").value = "";
+    document.getElementById("input_cpf_cadastro").value = "";
+    document.getElementById("select_zona_cadastro").value = "";
 }
 
 function cadastrar() {
@@ -110,10 +119,9 @@ function cadastrar() {
     var senhaVar = input_senha_cadastro.value;
     var cpfVar = input_cpf_cadastro.value;
     var telefoneVar = input_telefone_cadastro.value; 
-    var cargoVar = select_cargo_cadastro.value;
     var zonaVar = select_zona_cadastro.value;
 
-    if (nomeVar == "" || emailVar == "" || senhaVar == "" || cpfVar == "" || telefoneVar == "" || cargoVar == "" || zonaVar == "") {
+    if (nomeVar == "" || emailVar == "" || senhaVar == "" || cpfVar == "" || telefoneVar == "" || zonaVar == "") {
         alert("Preencha todos os campos!");
         return;
     }
@@ -127,7 +135,6 @@ function cadastrar() {
             senhaServer: senhaVar,
             cpfServer: cpfVar,
             telefoneServer: telefoneVar, 
-            cargoServer: cargoVar,
             zonaServer : zonaVar
         })
     }).then(function (resposta) {

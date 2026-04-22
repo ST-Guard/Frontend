@@ -26,6 +26,7 @@ body {
     padding-bottom: 2rem;
     margin: 0;
     padding: 0;
+    
 }
 
 .corpoPagina {
@@ -196,6 +197,14 @@ body {
     border-radius: 50%;
     background-color: var(--azul-claro);
     margin-right: 20px;
+    display: flex;
+    align-items: center;     
+    justify-content: center;
+}
+
+.avatar_icone {
+    width: 20 px; 
+    height: 20px;
 }
 
 .funcionario_info {
@@ -205,6 +214,10 @@ body {
 .funcionario_nome {
     margin: 0;
     color: var(--azul-mais-escuro);
+}
+
+.funcionario_zona{
+    color: #66C0F4;
 }
 
 .funcionario_email,

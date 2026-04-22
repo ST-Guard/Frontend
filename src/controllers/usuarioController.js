@@ -46,7 +46,7 @@ function cadastrar(req, res) {
     var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
     var telefone = req.body.telefoneServer;
-    var fkPapel = req.body.cargoServer;
+    var fkPapel = 2;
     var fkZona = req.body.zonaServer;
 
 
