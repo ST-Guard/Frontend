@@ -1,6 +1,8 @@
 if (!sessionStorage.ID_USUARIO) {
-  alert("Você precisa estar logado!");
-  window.location = "login.html";
+    modal.style.display = "flex"
+    conteiner_msg.innerHTML = `Você precisa estar logado!`
+    loadingModal()
+    window.location = "login.html";
 }
 
 function mascaraTel(i) {

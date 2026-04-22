@@ -10,12 +10,13 @@
     height: 100vh;
     background-color: transparent;
     display: flex;
-    align-items: start;
-    justify-content: right;
+    align-items: end;
+    justify-content: left;
     position: absolute;
+    padding: 20px;
     top: 0;
     left: 0;
-    z-index: 99;
+    z-index: 100;
 }
 
 #modal * {
@@ -23,7 +24,7 @@
 }
 
 .conteiner_modal {
-    background-color: #f5cb4d;
+    background-color: #ffffff;
     width: 25%;
     height: 22vh;
     display: flex;
@@ -32,6 +33,7 @@
     align-items: center;
     border-radius: 10px;
     z-index: 99;
+    border: 0.2px solid black;
 }
 
 .conteiner_modal header {
@@ -49,7 +51,7 @@
 }
 
 .conteiner_modal #conteiner_msg {
-    background-color: rgba(255, 255, 255, 0.400);
+    background-color: rgba(0, 0, 0, 0.122);
     width: 95%;
     height: 25%;
     display: flex;
