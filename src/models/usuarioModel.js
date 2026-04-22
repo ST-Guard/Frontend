@@ -12,24 +12,33 @@ function autenticar(emailVar, senhaVar) {
     return database.executar(instrucaoSql);
 }
 
-function cadastrar(nome, email, cpf, telefone, senha, fkPapel) {
+function cadastrar(nome, email, cpf, telefone, senha, fkPapel, fkZona) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Função cadastrar():", nome, email);
     
     
     var instrucaoSql = `
-        INSERT INTO usuario (nome, email, cpf, telefone, senha, fkPapel, status) 
-        VALUES ('${nome}', '${email}', '${cpf}', '${telefone}', '${senha}', ${fkPapel}, 'Ativo');
+        INSERT INTO usuario (nome, email, cpf, telefone, senha, fkPapel, fkZona, status) 
+        VALUES ('${nome}', '${email}', '${cpf}', '${telefone}', '${senha}', ${fkPapel}, ${fkZona}, 'Ativo');
     `;
     
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
+
 function listar() {
     
     var instrucao = `
-        SELECT idUsuario, nome, email, telefone, fkPapel, status FROM usuario 
-        WHERE fkPapel = 2;
+        SELECT 
+            u.idUsuario,
+            u.nome,
+            u.email,
+            u.telefone,
+            u.status,
+            z.nome AS zona
+        FROM usuario u
+        LEFT JOIN zona z ON u.fkZona = z.idZona
+        WHERE u.fkPapel = 2;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

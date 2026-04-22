@@ -45,9 +45,8 @@ function cadastrar(req, res) {
     var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
     var telefone = req.body.telefoneServer;
-    var fkPapel = req.body.cargoServer;
-    // var dt = req.body.dtServer;
-    // var servidor = req.body.servidorServer;
+    var fkPapel = 2;
+    var fkZona = req.body.zonaServer;
 
 
     
@@ -63,14 +62,12 @@ function cadastrar(req, res) {
         res.status(400).send("Seu telefone está undefined!");
     } else if (fkPapel == undefined) {
         res.status(400).send("Seu cargo está undefined!");
-    // else if (dt == undefined) {
-    //     res.status(400).send("Seu DataCenter está undefined!");
-    // } else if (servidor == undefined) {
-    //     res.status(400).send("Seu Servidor está undefined!");
-    // } 
+    } else if (fkZona == undefined) {
+        res.status(400).send("Sua zona está undefined!");    
+    
     }else {
         
-        usuarioModel.cadastrar(nome, email, cpf, telefone, senha, fkPapel)
+        usuarioModel.cadastrar(nome, email, cpf, telefone, senha, fkPapel, fkZona)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -102,6 +99,7 @@ function listar(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
 
 function mudarStatus(req, res) {
     var idUsuario = req.params.idUsuario;

@@ -50,22 +50,22 @@
                 <div class="sidebar-button">
                     <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
                     <p><a href="dashGestor.html">Dashboard</a></p>
-                    <!-- <p onclick="mudarDash()">Dashboard</p> -->
+                    
                 </div>
                 <div class="sidebar-button">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
                     <p><a href="dashServidorGestor.html">Servidores</a></p>
-                    <!-- <p onclick="mudarServidor()">Servidores</p> -->
+                   
                 </div>
                 <div class="sidebar-button">
                     <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
                     <p><a href="dashAlertas.html">Alertas</a></p>
-                    <!-- <p onclick="mudarAlerta()">Alerta</p> -->
+                   
                 </div>
                 <div class="sidebar-button-select">
                     <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
                     <p><a href="dashFuncionario.html">Funcionários</a></p>
-                    <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
+                  
                 </div>
                 <div class="sidebar-button">
                     <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
@@ -83,7 +83,7 @@
                     <p class="kpi_ativos">Funcionários ativos</p>
                     <h2 id="kpi_ativos">0</h2>
                     <h4 id="kpi_inativos">0 Inativos</h4>
-                    <img src="./../assets/img-funcionario/docs.png">
+                    <img src="./../assets/img-funcionario/pessoas.png">
                 </div>
             </div>
 
@@ -123,11 +123,9 @@
                 <label>CPF</label>
                 <input id="input_cpf_cadastro" placeholder="000.000.000-00">
 
-                <label>Selecione o cargo</label>
-                <select id="select_cargo_cadastro">
+                <label>Selecione a zona</label>
+                <select id="select_zona_cadastro" required>
                     <option value="">Selecione</option>
-                    <option value="2">Analista de Suporte</option>
-                    <option value="1">Gestor de Infraestrutura</option>
                 </select>
 
                 <button onclick="cadastrar()" class="botao-cadastrar-modal">Cadastrar</button>
