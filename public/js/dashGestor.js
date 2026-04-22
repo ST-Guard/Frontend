@@ -1,46 +1,7 @@
-// function fnNavegar(local) {
-//   window.location.href = local;
-// }
-// document.addEventListener('DOMContentLoaded', () => {
-
-// validarSessao();
-//     function validarSessao() {
-//     var email = sessionStorage.EMAIL_USUARIO ? sessionStorage.EMAIL_USUARIO : null ;
-//     var nome = sessionStorage.NOME_USUARIO ? sessionStorage.NOME_USUARIO : null;
-
-//     var b_usuario = document.getElementById("b_usuario");
-
-//     if (email != null && nome != null) {
-//         b_usuario.innerHTML = nome;
-//     } else {
-//         console.log("AAAAAAAA");
-//         window.location.href = "/pages/loginlogout/login.html";
-//     }
-//     }
-// })
-
-function mudarDash() {
-    window.location = "dashGestor_modelo.html"
+if (!sessionStorage.ID_USUARIO) {
+  alert("Você precisa estar logado!");
+  window.location = "login.html";
 }
-
-function mudarServidor() {
-    window.location = "dashServidor.html"
-}
-
-function mudarAlerta() {
-    window.location = "dashboardAlertas.html"
-}
-
-function mudarFuncionario() {
-    window.location = "cadastroFuncionario.html"
-}
-
-function mudarConfig() {
-    window.location = "config.html"
-}
-
-// DASHBOARD
-
 
 // Precisa do DOMcontentLoaded, pq garante que os elementos do html carreguem antes de pegar o id do char, saco?
 document.addEventListener('DOMContentLoaded', () => {
@@ -85,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         datasets: [{
             label: 'Quantidade de Alertas',
             data: [totalServer1, totalServer2, totalServer3],
-            backgroundColor: ['#F2B547', '#66C0F4', '#F54D4D'],
+            backgroundColor: ['#F5CC4D', '#23B26D', '#FF5252'],
             borderRadius: 5,
-            barThickness: 100
+            barThickness: 60
         }]
         },
         options: {
@@ -132,17 +93,17 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 label: 'Baixo',
                 data: [8, 6, 6],
-                backgroundColor: '#174A5B'
+                backgroundColor: '#23B26D'
             },
             {
                 label: 'Médio',
                 data: [7, 6, 4],
-                backgroundColor: '#F4B400'
+                backgroundColor: '#F5CC4D'
             },
             {
                 label: 'Crítico',
                 data: [2, 3, 1],
-                backgroundColor: '#F45B2A'
+                backgroundColor: '#FF5252'
             },
         ]
     },
@@ -218,6 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             title: {
                 display: true,
@@ -275,6 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             title: {
                 display: true,

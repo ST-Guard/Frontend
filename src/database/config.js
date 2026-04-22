@@ -20,27 +20,18 @@ function executar(instrucao, parametros = []) {
     }
 
     return new Promise(function (resolve, reject) {
-
         var conexao = mysql.createConnection(mySqlConfig);
         conexao.connect();
-
-        const metodo = parametros.length > 0 ? "execute" : "query";
-
-        conexao[metodo](instrucao, parametros, function (erro, resultados) {
-
+        conexao.query(instrucao, parametros, function (erro, resultados) {
             conexao.end();
-
             if (erro) {
                 reject(erro);
-                return;
             }
-
             console.log(resultados);
             resolve(resultados);
         });
-
         conexao.on('error', function (erro) {
-            console.log("ERRO NO MySQL SERVER:", erro.sqlMessage);
+            return ("ERRO NO MySQL SERVER: ", erro.sqlMessage);
         });
     });
 }

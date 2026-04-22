@@ -1,3 +1,8 @@
+if (!sessionStorage.ID_USUARIO) {
+  alert("Você precisa estar logado!");
+  window.location = "login.html";
+}
+
 function mascaraTel(i) {
     var celular = i.value.replace(/\D/g, "");
 

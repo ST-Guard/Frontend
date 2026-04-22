@@ -1,5 +1,5 @@
 * {
-  font-family: "IBM Plex Sans", sans-serif !important;
+  font-family: "IBM Plex Sans", sans-serif ;
   border: 0;
   padding: 0;
   margin: 0;
@@ -222,85 +222,60 @@ header {
 /* GRÁFICOS */
 .SubcorpoPagina {
   width: 100%;
-  height: auto;
+  min-height: 100vh;
   margin-left: 18%;
   margin-top: 10vh;
   display: flex;
   flex-direction: column;
-  justify-content: baseline;
   align-items: center;
+  box-sizing: border-box;
 }
 
-.parte1 {
-  display: flex;
-  gap: 30px;
-  padding: 0 80px;
-  width: 100%;
-}
-
+.parte1,
 .parte2 {
   display: flex;
-  gap: 30px;
-  padding: 0 80px;
+  gap: 24px;
+  padding: 0 24px;
   width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .grafico-ServidorAlerta,
-.grafico-Alerta {
-  width: 50%;
-  margin: 1rem auto;
+.grafico-Alerta,
+.grafico-RamXCpu,
+.grafico-DiscoXLatencia {
+  flex: 1 1 480px;
+  width: 100%;
+  max-width: 100%;
+  margin: 1rem 0;
   border: solid #e5e7eb 2px;
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 16px;
   border-radius: 15px;
   background-color: white;
-  font-family: sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .canvas-containerServer,
-.canvas-containerAlerta {
-  height: 35vh;
+.canvas-containerAlerta,
+#expandirRamxCpu,
+#expandirDiscoxLatencia {
+  position: relative;
   width: 100%;
-}
-
-.grafico-RamXCpu,
-.grafico-DiscoXLatencia {
-  position: relative;
-  height: auto;
-  margin-top: 1rem;
-  border: solid #e5e7eb 3px;
-  box-shadow: 3px 5px 10px 1px rgba(112, 112, 112, 0.305);
-  padding: 5px;
-  border-radius: 15px;
-  width: 50%;
+  height: 350px;
+  min-height: 250px;
 }
 
 #chartRamxCpu,
 #chartDiskxLat {
-  height: auto;
+  width: 100% ;
+  height: 100% ;
+  display: block;
 }
-
-.grafico-RamXCpu,
-.grafico-DiscoXLatencia {
-  position: relative;
-  height: auto;
-  margin-top: 1rem;
-  border: solid #e5e7eb 3px;
-  box-shadow: 3px 5px 10px 1px rgba(112, 112, 112, 0.305);
-  padding: 5px;
-  border-radius: 15px;
-  width: 80%;
-}
-
-#chartRamxCpu,
-#chartDiskxLat {
-  height: auto;
-}
-
 
 /* RESPONSIVIDADEEEEEEEEEEEEEEEEEEEEEEEEEEE */
-
-
 
 @media (max-width: 1024px) {
 
@@ -318,46 +293,33 @@ header {
 
   #container_kpis {
     flex-wrap: wrap;
-    height: auto;
     gap: 15px;
-    padding: 15px 0;
+    padding: 15px;
   }
 
   #container_kpis .div_kpi {
-    width: 45%;
+    flex: 1 1 calc(50% - 15px);
+    max-width: calc(50% - 15px);
   }
 
-  .container-dashboards {
-    justify-content: center;
-    padding-left: 0;
+  .parte1,
+  .parte2 {
+    padding: 0 16px;
+    gap: 16px;
   }
 
-  .btn-option-dashboard {
-    width: 30%;
-    font-size: 1.2rem;
-  }
-
-  .btn-option-dashboard-desable {
-    width: 30%;
-    font-size: 1.2rem;
-  }
-
-  .grafico-RamXCpu {
-    width: 90%;
-  }
-
+  .grafico-ServidorAlerta,
+  .grafico-Alerta,
+  .grafico-RamXCpu,
   .grafico-DiscoXLatencia {
-    width: 90%;
+    flex: 1 1 100%;
   }
 
-  .grafico-ServidorAlerta {
-    width: 90%;
-  }
-
+  .canvas-containerServer,
+  .canvas-containerAlerta,
   #expandirRamxCpu,
   #expandirDiscoxLatencia {
-    height: 360px;
-    min-height: 320px;
+    height: 320px;
   }
 
 }
@@ -365,19 +327,22 @@ header {
 
 
 @media (max-width: 768px) {
-
-  .userInfo {
+  .userInfo,
+  .separacao {
     display: none;
   }
 
-  .separacao {
-    display: none;
+  .corpoPagina {
+    flex-direction: column;
   }
 
   .sidebar {
     width: 100%;
     height: 70px;
     margin-top: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
     top: auto;
     bottom: 0;
     flex-direction: row;
@@ -395,89 +360,98 @@ header {
     margin-top: 0;
   }
 
-  .sidebar-button-select {
-    padding: 10px;
-    margin: 0;
-  }
-
+  .sidebar-button-select,
   .sidebar-button {
     padding: 10px;
     margin: 0;
   }
 
-  .sidebar-button-select img {
-    width: 25px;
-  }
-
+  .sidebar-button-select img,
   .sidebar-button img {
     width: 25px;
   }
 
   .SubcorpoPagina {
+    width: 100%;
     margin-left: 0;
-    margin-bottom: 80px;
+    margin-top: 70px;
+    margin-bottom: 90px;
+    padding: 0;
   }
 
-  .btn-option-dashboard {
-    width: 45%;
-    font-size: 1rem;
-    height: 5vh;
+  .textoInicio {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
-  .btn-option-dashboard-desable {
-    width: 45%;
-    font-size: 1rem;
-    height: 5vh;
+  .div_titulo {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
   }
 
-
-  #container_kpis .div_kpi {
-    width: 90%;
-    margin-bottom: 5px;
+  .corpoPagina .SubcorpoPagina .conteiner_select {
+    padding: 16px;
   }
 
-
-  .grafico-RamXCpu {
-    width: 95%;
-    padding: 15px;
-  }
-
-  .grafico-DiscoXLatencia {
-    width: 95%;
-    padding: 15px;
-  }
-
-  .grafico-ServidorAlerta {
-    width: 95%;
-    padding: 15px;
-  }
-
-
-  .header-graficoServer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-
-  .footer-Server{
-    flex-direction: column;
-    gap: 15px;
+  .corpoPagina .SubcorpoPagina .conteiner_select select {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
   }
 
   #container_kpis {
-      gap: 20px;
-      justify-content: center;
+    gap: 16px;
+    justify-content: center;
+    padding: 16px;
   }
 
   #container_kpis .div_kpi {
-      flex: 1 1 100%;
-      max-width: 100%;
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
+  .parte1,
+  .parte2 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  .grafico-ServidorAlerta,
+  .grafico-Alerta,
+  .grafico-RamXCpu,
+  .grafico-DiscoXLatencia {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 14px;
+    box-sizing: border-box;
+  }
+
+  .canvas-containerServer,
+  .canvas-containerAlerta,
   #expandirRamxCpu,
   #expandirDiscoxLatencia {
-    height: 330px;
-    min-height: 320px;
+    width: 100%;
+    height: 280px;
+    min-height: 280px;
+  }
+
+  #chartRamxCpu,
+  #chartDiskxLat {
+    width: 100% ;
+    height: 100% ;
+    display: block;
+  }
+
+  .header-graficoServer,
+  .footer-Server {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
   }
 }

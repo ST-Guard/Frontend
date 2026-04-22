@@ -1,26 +1,11 @@
+if (!sessionStorage.ID_USUARIO) {
+  alert("Você precisa estar logado!");
+  window.location = "login.html";
+}
+
 function fnNavegar(local) {
     window.location.href = local
 }
-
-
-
-//validarSessao();
-function validarSessao() {
-
-    var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
-
-    var b_usuario = document.getElementById("b_usuario");
-
-    if (email != null && nome != null) {
-        b_usuario.innerHTML = nome;
-    } else {
-        console.log("AAAAAAAA");
-        window.location.href = "login.html";
-    }
-}
-
-
 
 const graficoTop3Ram = document.getElementById('graficoTopProcRAM');
 new Chart(graficoTop3Ram, {

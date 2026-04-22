@@ -1,31 +1,11 @@
+if (!sessionStorage.ID_USUARIO) {
+  alert("Você precisa estar logado!");
+  window.location = "login.html";
+}
+
 let idDataCenterSelecionado = null;
 
 window.onload = mostrarServidores()
-
-function mudarDash() {
-    window.location = "dashboardGestor.html"
-}
-
-function mudarServidor() {
-    window.location = "dashServidor.html"
-}
-
-function mudarAlerta() {
-    window.location = "dashboardAlertas.html"
-}
-
-function mudarFuncionario() {
-    window.location = "cadastroFuncionario.html"
-}
-
-function mudarConfig() {
-    window.location = "config.html"
-}
-
-function abrirComponente(idServidor) {
-    idServidorSelecionado = idServidor;
-    boxComponente.style.display = "flex"
-}
 
 function fecharComponente() {
     boxComponente.style.display = "none"

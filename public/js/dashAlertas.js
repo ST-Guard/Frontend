@@ -1,3 +1,8 @@
+if (!sessionStorage.ID_USUARIO) {
+  alert("Você precisa estar logado!");
+  window.location = "login.html";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const alerta = document.getElementById("Alerta");
     const distribuicao = document.getElementById("distribuicao");
@@ -10,19 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     label: "Baixo",
                     data: [9, 8, 12, 13],
-                    backgroundColor: "#174A5B",
+                    backgroundColor: "#23B26D",
                     borderRadius: 6
                 },
                 {
                     label: "Medio",
                     data: [6, 7, 9, 8],
-                    backgroundColor: "#F4B400",
+                    backgroundColor: "#F5CC4D",
                     borderRadius: 6
                 },
                 {
                     label: "Crítico",
                     data: [3, 2, 2, 1],
-                    backgroundColor: "#F45B2A",
+                    backgroundColor: "#FF5252",
                     borderRadius: 6
                 },
             ]
@@ -74,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
             labels: ["Crítico", "Médio", "Baixo"],
             datasets: [{
                 data: [8, 30, 42],
-                backgroundColor: ["#F45B2A", "#F4B400", "#174A5B"],
+                backgroundColor: ["#FF5252", "#F5CC4D", "#23B26D"],
                 borderColor: "#ffffff",
                 borderWidth: 3,
                 hoverOffset: 4
