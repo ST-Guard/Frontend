@@ -191,13 +191,14 @@ body {
     justify-content: center;
     align-items: center;
     width: 70%;
-    height: 10%;
+    height: 100px;
 }
 
 .busca {
     display: flex;
-    width: 55%;
-    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
 }
 
 .busca img {
@@ -695,6 +696,10 @@ body {
 }
 
 @media (max-width: 768px) {
+
+    .SubcorpoPagina {
+        width: 100%;
+    }
 
     .container_kpis {
         flex-wrap: wrap;

@@ -242,13 +242,13 @@ nav {
 
     .corpoPagina {
         flex-direction: column;
-        height: auto;
+        min-height: auto;
     }
 
 
     .sidebar {
         width: 100%;
-        height: auto;
+        min-height: auto;
         border-top: none;
         border-bottom: 1px solid var(--azul-escuro);
     }

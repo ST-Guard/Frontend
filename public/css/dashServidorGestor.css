@@ -191,7 +191,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 70%;
-    height: 10%;
+    height: 100px;
 }
 
 .busca {
@@ -234,9 +234,15 @@ body {
     cursor: pointer;
 }
 
+.botaoCadastro img {
+    margin-left: 10px;
+}
+
 .botaoCadastro button{
     display: flex;
     align-items: center;
+    margin-right: 10px;
+    width: 160px;
     gap: 5px;
 }
 
@@ -695,6 +701,10 @@ body {
 }
 
 @media (max-width: 768px) {
+
+    .SubcorpoPagina {
+        width: 100%;
+    }
 
     .container_kpis {
         flex-wrap: wrap;
