@@ -1,26 +1,77 @@
+window.onload = () => {
+    buscarDados()
+    listarFuncionarios();
+    carregarZonas();
+}
+
 if (!sessionStorage.ID_USUARIO) {
   alert("Você precisa estar logado!");
   window.location = "login.html";
 }
 
-function mudarDash() {
-    window.location = "dashboardGestor.html"
+function buscarDados() {
+    const idUsuario = sessionStorage.ID_USUARIO
+    
+    fetch(`/sessao/buscarUsuario/${idUsuario}`, {
+    })
+      .then(function (resposta) {
+        return resposta.json();
+    })
+    .then(function (dados) {
+        dados = dados[0]
+
+        username.innerHTML = dados.nomePessoa
+        cargoname.innerHTML = dados.cargo
+        if (dados.imagem) {
+            imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
+        } else {
+            imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
+        }
+    })
 }
 
-function mudarServidor() {
-    window.location = "dashServidor.html"
+function mascaraTel(cel) {
+    var celular = cel.value.replace(/\D/g, "");
+
+    if (celular.length > 11) celular = celular.slice(0, 11);
+
+    if (celular.length > 0) {
+        celular = celular.replace(/^(\d{2})(\d)/g, "($1) $2");
+    }
+
+    if (celular.length > 10) {
+        celular = celular.replace(/(\d{5})(\d)/, "$1-$2");
+    }
+
+    cel.value = celular;
 }
 
-function mudarAlerta() {
-    window.location = "dashboardAlertas.html"
+function limparTelefone(cel) {
+    return cel.replace(/\D/g, "");
 }
 
-function mudarFuncionario() {
-    window.location = "cadastroFuncionario.html"
+function mascaraCPF(cpfInput) {
+    var cpf = cpfInput.value.replace(/\D/g, "");
+
+    if (cpf.length > 11) cpf = cpf.slice(0, 11);
+
+    if (cpf.length > 3) {
+        cpf = cpf.replace(/^(\d{3})(\d)/, "$1.$2");
+    }
+
+    if (cpf.length > 6) {
+        cpf = cpf.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3");
+    }
+
+    if (cpf.length > 9) {
+        cpf = cpf.replace(/\.(\d{3})(\d)/, ".$1-$2");
+    }
+
+    cpfInput.value = cpf;
 }
 
-function mudarConfig() {
-    window.location = "config.html"
+function limparCPF(cpf) {
+    return cpf.replace(/\D/g, "");
 }
 
 function listarFuncionarios() {
@@ -124,6 +175,9 @@ function cadastrar() {
     var cpfVar = input_cpf_cadastro.value;
     var telefoneVar = input_telefone_cadastro.value; 
     var zonaVar = select_zona_cadastro.value;
+    
+    telefoneVar = limparTelefone(telefoneVar)
+    cpfVar = limparCPF(cpfVar)
 
     if (nomeVar == "" || emailVar == "" || senhaVar == "" || cpfVar == "" || telefoneVar == "" || zonaVar == "") {
         alert("Preencha todos os campos!");
@@ -153,8 +207,6 @@ function cadastrar() {
     });
 }
 
-
-
 function carregarZonas() {
     fetch("/zonas/listar")
         .then(res => {
@@ -178,8 +230,3 @@ function carregarZonas() {
             console.log("Erro ao carregar zonas:", erro);
         });
 }
-
-window.onload = function () {
-    listarFuncionarios();
-    carregarZonas();
-};

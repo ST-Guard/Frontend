@@ -1,3 +1,7 @@
+window.onload = () => {
+    buscarDados()
+    mostrarServidores()
+}
 
 if (!sessionStorage.ID_USUARIO) {
     conteiner_msg.innerHTML = "Você precisa estar logado!"
@@ -7,7 +11,27 @@ if (!sessionStorage.ID_USUARIO) {
 
 let idDataCenterSelecionado = null;
 
-window.onload = mostrarServidores()
+function buscarDados() {
+    const idUsuario = sessionStorage.ID_USUARIO
+    
+    fetch(`/sessao/buscarUsuario/${idUsuario}`, {
+    })
+      .then(function (resposta) {
+        return resposta.json();
+    })
+    .then(function (dados) {
+        dados = dados[0]
+
+        username.innerHTML = dados.nomePessoa
+        cargoname.innerHTML = dados.cargo
+        dataCenterTitulo.innerHTML = dados.nomeDataCenter
+        if (dados.imagem) {
+            imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
+        } else {
+            imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
+        }
+    })
+}
 
 function fecharComponente() {
     boxComponente.style.display = "none"

@@ -13,16 +13,29 @@ function autenticar(emailVar, senhaVar) {
 }
 
 function cadastrar(nome, email, cpf, telefone, senha, fkPapel, fkZona) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Função cadastrar():", nome, email);
-    
-    
+    console.log("ACESSEI O USUARIO MODEL \n\n\t\t >> Função cadastrar():", nome, email);
+
     var instrucaoSql = `
-        INSERT INTO usuario (nome, email, cpf, telefone, senha, fkPapel, fkZona, status) 
-        VALUES ('${nome}', '${email}', '${cpf}', '${telefone}', '${senha}', ${fkPapel}, ${fkZona}, 'Ativo');
+        INSERT INTO usuario (nome, email, cpf, telefone, senha, fkPapel, status) 
+        VALUES (?, ?, ?, ?, ?, ?, 'Ativo');
     `;
-    
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+
+    return database.executar(instrucaoSql, [nome, email, cpf, telefone, senha, fkPapel])
+        .then(function (resultado) {
+            var idUsuario = resultado.insertId;
+
+            var instrucaoZona = `
+                UPDATE zona
+                SET fkUsuarioZona = ?
+                WHERE idZona = ?;
+            `;
+
+            console.log("Executando a instrução SQL da zona: \n" + instrucaoZona);
+
+            return database.executar(instrucaoZona, [idUsuario, fkZona]);
+        });
 }
 
 
@@ -37,7 +50,8 @@ function listar() {
             u.status,
             z.nome AS zona
         FROM usuario u
-        LEFT JOIN zona z ON u.fkZona = z.idZona
+        LEFT JOIN zona z 
+            ON u.idUsuario = z.fkUsuarioZona
         WHERE u.fkPapel = 2;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);

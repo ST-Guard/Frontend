@@ -17,11 +17,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var falecosnosRouter = require("./src/routes/faleconosco")
 var servidorRouter = require("./src/routes/servidor")
 var zonaRouter = require("./src/routes/zona");
-
-
-
-
-
+var sessaoRouter = require("./src/routes/sessao");
 
 // middlewares
 app.use(express.json());
@@ -35,6 +31,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/enviar", falecosnosRouter)
 app.use("/servidor", servidorRouter)
 app.use("/zonas", zonaRouter);
+app.use("/sessao", sessaoRouter);
 
 
 // inicia o servidor

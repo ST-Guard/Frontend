@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./../css/dashFuncionario.css">
 </head>
 
-<body>
+<body onload="mascaraTel(document.getElementById('input_telefone_cadastro')), mascaraCPF(document.getElementById('input_cpf_cadastro'))" >
     <header>
         <nav>
             <div class="logo-nav" onclick="fnNavegar('/')">
@@ -23,7 +23,9 @@
             <div class="right-nav">
                 <div class="logo-notificao">
                     <div class="icon-notificao">
-                        <img src="./../assets/dashboard-icons/notificao.svg" alt="">
+                        <a href="dashAlertas.html">
+                        <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                        </a>
                     </div>
                     <div class="qtd-notificao">
                         <img src="./../assets/dashboard-icons/circulo.svg" alt="">
@@ -35,11 +37,13 @@
 
                 <div class="logo-usuario">
                     <div class="userImg">
-                        <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="User Icon">
+                        <a href="dashConfigGestor.html">
+                            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+                        </a>
                     </div>
                     <div class="userInfo">
-                        <h2 class="user-name">Matheus Valle</h2>
-                        <h3 class="user-cargo">Gestor de operações</h3>
+                        <h2 class="user-name" id="username">Matheus Valle</h2>
+                        <h3 class="user-cargo" id="cargoname">Analista de operações</h3>
                     </div>
                 </div>
             </div>
@@ -117,13 +121,13 @@
                 <input id="input_email_cadastro" placeholder="matheus@gmail.com">
 
                 <label>Telefone</label>
-                <input id="input_telefone_cadastro" placeholder="(11) 99999-8888">
+                <input id="input_telefone_cadastro" placeholder="(11) 99999-8888" oninput="mascaraTel(this)" maxlength="15">
 
                 <label>Senha</label>
                 <input id="input_senha_cadastro" type="password" placeholder="******">
 
                 <label>CPF</label>
-                <input id="input_cpf_cadastro" placeholder="000.000.000-00">
+                <input id="input_cpf_cadastro" placeholder="000.000.000-00" oninput="mascaraCPF(this)" maxlength="14">
 
                 <label>Selecione a zona</label>
                 <select id="select_zona_cadastro" required>

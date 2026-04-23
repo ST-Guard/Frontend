@@ -53,9 +53,9 @@
             </div>
             <div class="right-nav">
                 <div class="logo-notificao">
-                    <div class="icon-notificao">
-                        <img src="./../assets/dashboard-icons/notificao.svg" alt="">
-                    </div>
+                    <a href="dashAlertas.html">
+                    <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                    </a>
                     <div class="qtd-notificao">
                         <img src="./../assets/dashboard-icons/circulo.svg" alt="">
                         <p class="qtd-notificao">10</p>
@@ -64,11 +64,13 @@
                 <div class="separacao"></div>
                 <div class="logo-usuario">
                     <div class="userImg">
-                        <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="">
+                        <a href="dashConfigGestor.html">
+                            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+                        </a>
                     </div>
                     <div class="userInfo">
-                        <h2 class="user-name">Matheus Valle</h2>
-                        <h3 class="user-cargo">Analista de operações</h3>
+                        <h2 class="user-name" id="username">Matheus Valle</h2>
+                        <h3 class="user-cargo" id="cargoname">Analista de operações</h3>
                     </div>
                 </div>
             </div>
@@ -344,7 +346,7 @@
             </div>
             <div class="textoInicio">
                 <div class="div_titulo">
-                    <h1>Zona <span id="zonaTitulo"></span></h1>
+                    <h1>Data Center <span id="dataCenterTitulo"></span></h1>
                 </div>
             </div>
             <div id="container_kpis">

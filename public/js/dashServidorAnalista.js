@@ -1,11 +1,36 @@
+window.onload = () => {
+    buscarDados()
+    mostrarServidores()
+}
+
+let idDataCenterSelecionado = null;
+
 if (!sessionStorage.ID_USUARIO) {
   alert("Você precisa estar logado!");
   window.location = "login.html";
 }
 
-let idDataCenterSelecionado = null;
+function buscarDados() {
+    const idUsuario = sessionStorage.ID_USUARIO
+    
+    fetch(`/sessao/buscarUsuario/${idUsuario}`, {
+    })
+      .then(function (resposta) {
+        return resposta.json();
+    })
+    .then(function (dados) {
+        dados = dados[0]
 
-window.onload = mostrarServidores()
+        username.innerHTML = dados.nomePessoa
+        cargoname.innerHTML = dados.cargo
+        zonaTitulo.innerHTML = dados.nomeZona
+        if (dados.imagem) {
+            imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
+        } else {
+            imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
+        }
+    })
+}
 
 function abrirComponente(idServidor) {
     idServidorSelecionado = idServidor;

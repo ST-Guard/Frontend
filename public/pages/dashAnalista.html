@@ -9,10 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="./../assets/icon/icon.png">
     <link rel="stylesheet" href="./../css/dashboard.css" />
     <link rel="stylesheet" href="./../css/dashAnalista.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashAnalista.js"></script>
+    <script src="../js/sessao.js"></script>
 </head>
 
 <body>
@@ -40,11 +42,13 @@
 
     <div class="logo-usuario">
         <div class="userImg">
-            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário">
+          <a href="dashConfigAnalista.html">
+            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+          </a>
         </div>
         <div class="userInfo">
-            <h2 class="user-name">Matheus Valle</h2>
-            <h3 class="user-cargo">Analista de operações</h3>
+            <h2 class="user-name" id="username">Matheus Valle</h2>
+            <h3 class="user-cargo" id="cargoname">Analista de operações</h3>
         </div>
     </div>
 </div>
@@ -456,7 +460,6 @@
 </div>
 </div>
 
-<script src="../js/dashAnalista.js"></script>
 <script>
     function verTodosServidores() {
         console.log("Ver todos os servidores");

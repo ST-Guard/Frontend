@@ -120,9 +120,15 @@ nav {
 }
 
 .userImg {
-    width: 45px;
-    height: 45px;
+    max-width: 55px;
+    max-height: 55px;
+    object-fit: cover;
     border-radius: 50%;
+}
+
+.userImg img {
+    border-radius: 50%;
+    width: 100%;
 }
 
 .userInfo {

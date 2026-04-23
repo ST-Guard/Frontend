@@ -1,6 +1,31 @@
+window.onload = () => {
+    buscarDados()
+}
+
 if (!sessionStorage.ID_USUARIO) {
   alert("Você precisa estar logado!");
   window.location = "login.html";
+}
+
+function buscarDados() {
+    const idUsuario = sessionStorage.ID_USUARIO
+    
+    fetch(`/sessao/buscarUsuario/${idUsuario}`, {
+    })
+      .then(function (resposta) {
+        return resposta.json();
+    })
+    .then(function (dados) {
+        dados = dados[0]
+
+        username.innerHTML = dados.nomePessoa
+        cargoname.innerHTML = dados.cargo
+        if (dados.imagem) {
+            imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
+        } else {
+            imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
+        }
+    })
 }
 
 // Precisa do DOMcontentLoaded, pq garante que os elementos do html carreguem antes de pegar o id do char, saco?
