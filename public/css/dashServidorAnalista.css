@@ -151,21 +151,11 @@ body {
 .SubcorpoPagina{
     width: 82%;
     display: flex;
-    min-height: 90vh;
     flex-direction: column;
-    justify-content: baseline;
+    justify-content: flex-start;
     align-items: center;
-}
-
-.boxBusca {
-    background-color: white;
-    border-radius: 20px;
-    border: 2px solid #E5E7EB;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-    height: 10%;
+    box-sizing: border-box;
+    padding-bottom: 40px;
 }
 
 .textoInicio {
@@ -191,6 +181,17 @@ body {
     color: var(--corFonteTexto);
     font-size: 1.4rem;
     font-weight: 400;
+}
+
+.boxBusca {
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid #E5E7EB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 10%;
 }
 
 .busca {
@@ -245,8 +246,9 @@ body {
     border-radius: 10px;
     width: 80%;
     margin-top: 40px;
-    flex: 1;
-    overflow-y: auto;
+    height: auto;
+    min-height: fit-content;
+    overflow: visible;
 }
 
 .servidor {

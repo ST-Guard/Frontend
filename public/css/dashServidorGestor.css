@@ -151,10 +151,11 @@ body {
 .SubcorpoPagina{
     width: 82%;
     display: flex;
-    min-height: 90vh;
     flex-direction: column;
-    justify-content: baseline;
+    justify-content: flex-start;
     align-items: center;
+    box-sizing: border-box;
+    padding-bottom: 40px;
 }
 
 .textoInicio {
@@ -245,8 +246,9 @@ body {
     border-radius: 10px;
     width: 80%;
     margin-top: 40px;
-    flex: 1;
-    overflow-y: auto;
+    height: auto;
+    min-height: fit-content;
+    overflow: visible;
 }
 
 .servidor {
