@@ -1,6 +1,9 @@
 function loadingModal() {
     const barra = document.getElementById("preenchimento");
-    const modal = document.getElementById("modal");
+    const modal = document.getElementById("modal"); 
+    
+    modal.style.display = "flex"; 
+    
     let progresso = 0;
     const timer = setInterval(() => {
         progresso++;
@@ -12,7 +15,3 @@ function loadingModal() {
         }
     }, 30);
 }
-
-
-
-

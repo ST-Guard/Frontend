@@ -1,6 +1,8 @@
+
 if (!sessionStorage.ID_USUARIO) {
-  alert("Você precisa estar logado!");
-  window.location = "login.html";
+    conteiner_msg.innerHTML = "Você precisa estar logado!"
+    loadingModal()
+    window.location = "login.html";
 }
 
 let idDataCenterSelecionado = null;
@@ -78,15 +80,20 @@ function verificar() {
     const capRede = document.getElementById("capRede").value;
 
     if (!nomeServidor) {
-        alert("Nome de servidor invalido")
+        conteiner_msg.innerHTML = "Nome do servidor inválido!"
+        loadingModal()
     } else if (!tipoServidor) {
-        alert("Tipo de servidor invalido")
+        conteiner_msg.innerHTML = "Tipo de servidor inválido!"
+        loadingModal()
     } else if (estadoServidor == "Selecione") {
-        alert("Selecione um estado de servidor")
+        conteiner_msg.innerHTML = "Selecione um estado de servidor!"
+        loadingModal()
     } else if (!zona) {
-        alert("Selecione uma zona!")
+        conteiner_msg.innerHTML = "Selecione uma zona!"
+        loadingModal()
     } else if (!capCpu || !capRam || !capDisco || !capRede) {
-        alert("Tipo de Capacidade invalida")
+        conteiner_msg.innerHTML = "Tipo de capacidade inválida!"
+        loadingModal()
     } else {
         cadastrarServidor()
     }
@@ -127,7 +134,8 @@ function adicionarComponente() {
     const capacidadeInput = document.getElementById("capCompoBox").value;
 
     if (!nome || !tipo || !unidade || !capacidadeInput) {
-        alert("Preencha todos os campos!");
+        conteiner_msg.innerHTML = "Preencha todos os campos!"
+        loadingModal()
         return;
     }
     const capacidade = Number(capacidadeInput);
@@ -151,7 +159,8 @@ function adicionarComponente() {
             if (!res.ok) {
                 throw data.message || "Erro ao cadastrar componente";
             }
-            alert("Componente adicionado!");
+            conteiner_msg.innerHTML = "Componente adicionado com sucesso!"
+            loadingModal()
             fecharComponente();
             mostrarServidores();
         })
@@ -308,7 +317,7 @@ function mostrarServidores() {
                 </div>
                 `;
             }
-            
+
             boxServidores.innerHTML = mensagem;
 
             let totalServidor = 0
@@ -319,12 +328,12 @@ function mostrarServidores() {
 
             for (let i = 0; i < servidores.length; i++) {
                 const idServidor = servidores[i].idServidor
-                
+
                 const cpuValor = document.getElementById("cpuValor" + idServidor);
                 const cpuUso = document.getElementById("cpuUso" + idServidor);
                 const cpuLivre = document.getElementById("cpuLivre" + idServidor);
                 const barraCpu = document.getElementById("cpuBarra" + idServidor);
-                
+
                 const ramValor = document.getElementById("ramValor" + idServidor);
                 const ramUso = document.getElementById("ramUso" + idServidor);
                 const ramLivre = document.getElementById("ramLivre" + idServidor);
@@ -349,17 +358,17 @@ function mostrarServidores() {
                 const discoPorcentagem = (aleatorioDisco / servidores[i].limiteDisco) * 100
                 const redePorcentagem = (aleatorioRede / servidores[i].limiteRede) * 100
 
-                const cpuUsoValor =  100 - aleatorioCpu
-                const ramUsoValor =  servidores[i].limiteRam - aleatorioRam
-                const discoUsoValor =  servidores[i].limiteDisco - aleatorioDisco
-                const redeUsoValor =  servidores[i].limiteRede - aleatorioRede
+                const cpuUsoValor = 100 - aleatorioCpu
+                const ramUsoValor = servidores[i].limiteRam - aleatorioRam
+                const discoUsoValor = servidores[i].limiteDisco - aleatorioDisco
+                const redeUsoValor = servidores[i].limiteRede - aleatorioRede
 
                 totalServidor += 1
                 somaCpu += aleatorioCpu
                 somaRam += ramPorcentagem
                 somaDisco += discoPorcentagem
                 somaRede += aleatorioRede
-                
+
                 cpuUso.innerHTML = `Em Uso ${aleatorioCpu}%`
                 cpuLivre.innerHTML = `Sobrando ${cpuUsoValor}%`
 
@@ -494,21 +503,23 @@ function cadastrarServidor() {
             componentes: componentes
         })
     })
-    .then(res => {
-        if (res.ok) {
-            alert("Servidor cadastrado com sucesso!");
-            location.reload();
-        } else {
-            throw "Erro ao cadastrar";
-        }
-    })
-    .catch(err => console.log(err));
+        .then(res => {
+            if (res.ok) {
+                conteiner_msg.innerHTML = "Servidor cadastrado com sucesso!"
+                loadingModal()
+                location.reload();
+            } else {
+                throw "Erro ao cadastrar";
+            }
+        })
+        .catch(err => console.log(err));
 }
 
 function carregarZonas() {
 
     if (!idDataCenterSelecionado) {
-        alert("Selecione primeiro uma DataBase!");
+        conteiner_msg.innerHTML = "Selecione um database primeiro!"
+        loadingModal()
         return;
     }
 
@@ -579,6 +590,7 @@ function carregarComponentes(idServidor) {
             grid.innerHTML = html;
         });
 }
+
 
 //  Usar quando for puxar os dados, e arrumar o carregar componentes, sem funcionar por agora -->
 //     function mostrarServidores() {

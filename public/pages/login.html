@@ -123,8 +123,7 @@
           <div class="box_input">
             <img src="../assets/icon/password_icon.png" alt="" class="icon">
             <input type="password" name="senha" id="senha_input" placeholder="*********">
-            <img src="../assets/icon/closed_eye_icon.png" alt="" class="eye" id="eye_closed"
-              onclick="mostrarSenha()">
+            <img src="../assets/icon/closed_eye_icon.png" alt="" class="eye" id="eye_closed" onclick="mostrarSenha()">
             <img src="../assets/icon/eye_icon.png" alt="" class="eye" id="eye" onclick="ocultarSenha()"
               style="display: none;">
           </div>
@@ -169,7 +168,7 @@
   }
 
   function entrar() {
-    var email_input = document.getElementById("email_input"); 
+    var email_input = document.getElementById("email_input");
     var senha_input = document.getElementById("senha_input");
 
     var senhaVar = senha_input.value;
@@ -222,21 +221,22 @@
           }*/
 
           if (json.fkPapel == 1) {
-             window.location.href = 'dashGestor.html';
+            window.location.href = 'dashGestor.html';
           } else {
-             window.location.href = 'dashAnalista.html';
+            window.location.href = 'dashAnalista.html';
           }
         });
 
-        
+
       } else {
 
         //console.log("Houve um erro ao tentar realizar o login!");
 
         resposta.text().then(texto => {
           console.error("ERRO VINDO DO SERVIDOR: ", texto);
-          alert("Erro no servidor! Verifique o console do VS Code.");
-
+          modal.style.display = "flex"
+          conteiner_msg.innerHTML = `Houve um erro ao tentar realizar o login!`
+          loadingModal()
         });
       }
 
