@@ -3,10 +3,15 @@ window.onload = () => {
     mostrarServidores()
 }
 
+// if (!sessionStorage.ID_USUARIO) {
+//     conteiner_msg.innerHTML = "Você precisa estar logado!"
+//     loadingModal()
+//     window.location = "login.html";
+// }
+
 if (!sessionStorage.ID_USUARIO) {
-    conteiner_msg.innerHTML = "Você precisa estar logado!"
-    loadingModal()
-    window.location = "login.html";
+  alert("Você precisa estar logado!");
+  window.location = "login.html";
 }
 
 let idDataCenterSelecionado = null;
@@ -96,6 +101,7 @@ function verificar() {
     const nomeServidor = nomeServ.value.trim();
     const tipoServidor = tipoServ.value.trim();
     const estadoServidor = document.getElementById("estadoServidor").value;
+    const database = document.getElementById("selectDataBase").value;
     const zona = document.getElementById("zonaServidor").value;
 
     const capCpu = document.getElementById("capCpu").value;
@@ -112,10 +118,13 @@ function verificar() {
     } else if (estadoServidor == "Selecione") {
         conteiner_msg.innerHTML = "Selecione um estado de servidor!"
         loadingModal()
-    } else if (!zona) {
-        conteiner_msg.innerHTML = "Selecione uma zona!"
+    } else if (zona == "Selecione a zona"|| database == "Selecione a DataBase") {
+        conteiner_msg.innerHTML = "Selecione um datacenter e zona!"
         loadingModal()
     } else if (!capCpu || !capRam || !capDisco || !capRede) {
+        conteiner_msg.innerHTML = "Tipo de capacidade inválida!"
+        loadingModal()
+    } else if (capCpu <= 0 || capRam <= 0 || capDisco <= 0 || capRede <= 0) {
         conteiner_msg.innerHTML = "Tipo de capacidade inválida!"
         loadingModal()
     } else {
@@ -613,6 +622,10 @@ function carregarComponentes(idServidor) {
 
             grid.innerHTML = html;
         });
+}
+
+function limparSessao() {
+    sessionStorage.clear();
 }
 
 

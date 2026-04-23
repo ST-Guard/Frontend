@@ -345,3 +345,7 @@ new Chart(donutDisco, {
     },
     plugins: [textoNoCentroDonutDisco]
 });
+
+function limparSessao() {
+    sessionStorage.clear();
+}

@@ -1,10 +1,15 @@
 window.onload = buscarDados()
 
+// if (!sessionStorage.ID_USUARIO) {
+//     modal.style.display = "flex"
+//     conteiner_msg.innerHTML = `Você precisa estar logado!`
+//     loadingModal()
+//     window.location = "login.html";
+// }
+
 if (!sessionStorage.ID_USUARIO) {
-    modal.style.display = "flex"
-    conteiner_msg.innerHTML = `Você precisa estar logado!`
-    loadingModal()
-    window.location = "login.html";
+  alert("Você precisa estar logado!");
+  window.location = "login.html";
 }
 
 function buscarDados() {
@@ -127,4 +132,8 @@ function salvar() {
         buscarDados();
     })
     .catch(err => console.log(err));
+}
+
+function limparSessao() {
+    sessionStorage.clear();
 }

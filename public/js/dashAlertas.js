@@ -176,3 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function detalhes() {
     window.location = "dashServidorGestor.html"
 }
+
+function limparSessao() {
+    sessionStorage.clear();
+}

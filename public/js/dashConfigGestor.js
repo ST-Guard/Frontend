@@ -125,3 +125,7 @@ function salvar() {
     })
     .catch(err => console.log(err));
 }
+
+function limparSessao() {
+    sessionStorage.clear();
+}

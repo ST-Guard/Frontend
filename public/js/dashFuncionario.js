@@ -230,3 +230,7 @@ function carregarZonas() {
             console.log("Erro ao carregar zonas:", erro);
         });
 }
+
+function limparSessao() {
+    sessionStorage.clear();
+}

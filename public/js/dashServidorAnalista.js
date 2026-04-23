@@ -100,6 +100,7 @@ function verificar() {
     const nomeServidor = nomeServ.value.trim();
     const tipoServidor = tipoServ.value.trim();
     const estadoServidor = document.getElementById("estadoServidor").value;
+    const database = document.getElementById("selectDataBase").value;
     const zona = document.getElementById("zonaServidor").value;
 
     const capCpu = document.getElementById("capCpu").value;
@@ -108,15 +109,23 @@ function verificar() {
     const capRede = document.getElementById("capRede").value;
 
     if (!nomeServidor) {
-        alert("Nome de servidor invalido")
+        conteiner_msg.innerHTML = "Nome do servidor inválido!"
+        loadingModal()
     } else if (!tipoServidor) {
-        alert("Tipo de servidor invalido")
+        conteiner_msg.innerHTML = "Tipo de servidor inválido!"
+        loadingModal()
     } else if (estadoServidor == "Selecione") {
-        alert("Selecione um estado de servidor")
-    } else if (!zona) {
-        alert("Selecione uma zona!")
+        conteiner_msg.innerHTML = "Selecione um estado de servidor!"
+        loadingModal()
+    } else if (zona == "Selecione a zona"|| database == "Selecione a DataBase") {
+        conteiner_msg.innerHTML = "Selecione um datacenter e zona!"
+        loadingModal()
     } else if (!capCpu || !capRam || !capDisco || !capRede) {
-        alert("Tipo de Capacidade invalida")
+        conteiner_msg.innerHTML = "Tipo de capacidade inválida!"
+        loadingModal()
+    } else if (capCpu <= 0 || capRam <= 0 || capDisco <= 0 || capRede <= 0) {
+        conteiner_msg.innerHTML = "Tipo de capacidade inválida!"
+        loadingModal()
     } else {
         cadastrarServidor()
     }
@@ -608,6 +617,10 @@ function carregarComponentes(idServidor) {
 
             grid.innerHTML = html;
         });
+}
+
+function limparSessao() {
+    sessionStorage.clear();
 }
 
 //  Usar quando for puxar os dados, e arrumar o carregar componentes, sem funcionar por agora -->

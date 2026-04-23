@@ -294,3 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     atualizarGrafico();
 })
+
+function limparSessao() {
+    sessionStorage.clear();
+}
