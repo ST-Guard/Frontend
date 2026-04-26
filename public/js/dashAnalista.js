@@ -31,7 +31,7 @@ function buscarDados() {
 function fnNavegar(local) {
     window.location.href = local
 }
-
+document.addEventListener('DOMContentLoaded', () => {
 const graficoTop3Ram = document.getElementById('graficoTopProcRAM');
 new Chart(graficoTop3Ram, {
     type: 'bar',
@@ -344,6 +344,7 @@ new Chart(donutDisco, {
         }
     },
     plugins: [textoNoCentroDonutDisco]
+});
 });
 
 function limparSessao() {
