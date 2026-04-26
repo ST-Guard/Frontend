@@ -66,9 +66,22 @@ function mudarStatus(idUsuario, novoStatus) {
     return database.executar(instrucaoSql);
 }
 
+function deletar(idUsuario) {
+    console.log("Deletando usuário:", idUsuario);
+
+    var instrucaoSql = `
+        DELETE FROM usuario 
+        WHERE idUsuario = ?;
+    `;
+
+    return database.executar(instrucaoSql, [idUsuario]);
+}
+
+
 module.exports = {
     autenticar,
     cadastrar,
     listar,
-    mudarStatus
+    mudarStatus,
+    deletar
 };

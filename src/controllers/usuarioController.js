@@ -85,7 +85,7 @@ function cadastrar(req, res) {
     }
 }
 
-var usuarioModel = require("../models/usuarioModel");
+
 
 function listar(req, res) {
     usuarioModel.listar().then(function (resultado) {
@@ -114,13 +114,24 @@ function mudarStatus(req, res) {
         });
 }
 
+function deletar(req, res) {
+    var idUsuario = req.params.idUsuario;
 
-
+    usuarioModel.deletar(idUsuario)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
 
 
 module.exports = {
     autenticar,
     cadastrar,
     listar,
-    mudarStatus
+    mudarStatus,
+    deletar
 }

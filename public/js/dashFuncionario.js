@@ -99,9 +99,11 @@ function listarFuncionarios() {
 
                     var botaoHTML = "";
                     if (f.status == 'Ativo' || f.status == 1) {
-                        botaoHTML = `<button class="funcionario_desativar" onclick="mudarStatus(${f.idUsuario}, 'Inativo')">Desativar Funcionário</button>`;
+                        botaoHTML = `<button class="funcionario_desativar" onclick="mudarStatus(${f.idUsuario}, 'Inativo')">Desativar Funcionário</button>
+                                     <button class="funcionario_deletar"onclick="deletarUsuario(${f.idUsuario})">Excluir Funcionário</button>`;
                     } else {
-                        botaoHTML = `<button class="funcionario_ativar" onclick="mudarStatus(${f.idUsuario}, 'Ativo')">Ativar Funcionário</button>`;
+                        botaoHTML = `<button class="funcionario_ativar" onclick="mudarStatus(${f.idUsuario}, 'Ativo')">Ativar Funcionário</button>
+                                    <button class="funcionario_deletar" onclick="deletarUsuario(${f.idUsuario})">Excluir Funcionário</button>`;
                     }
 
                     
@@ -232,6 +234,27 @@ function carregarZonas() {
         .catch(erro => {
             console.log("Erro ao carregar zonas:", erro);
         });
+}
+
+function deletarUsuario(idUsuario) {
+    if (!confirm("Tem certeza que deseja excluir este usuário?")) {
+        return;
+    }
+
+    fetch(`/usuarios/deletar/${idUsuario}`, {
+        method: "DELETE"
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Erro ao deletar");
+        return res.json();
+    })
+    .then(() => {
+        alert("Usuário excluído com sucesso!");
+        listarFuncionarios(); 
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }
 
 function limparSessao() {
