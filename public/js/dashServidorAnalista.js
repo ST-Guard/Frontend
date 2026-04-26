@@ -5,12 +5,18 @@ window.onload = () => {
 function fnNavegar(caminho){
     window.location.href = caminho
 }
-let idDataCenterSelecionado = null;
+if (!sessionStorage.ID_USUARIO) {
+    conteiner_msg.innerHTML = "Você precisa estar logado!"
+    loadingModal()
+    window.location = "login.html";
+}
 
 if (!sessionStorage.ID_USUARIO) {
   alert("Você precisa estar logado!");
   window.location = "login.html";
 }
+
+let idDataCenterSelecionado = null;
 
 function buscarDados() {
     const idUsuario = sessionStorage.ID_USUARIO
@@ -25,18 +31,13 @@ function buscarDados() {
 
         username.innerHTML = dados.nomePessoa
         cargoname.innerHTML = dados.cargo
-        zonaTitulo.innerHTML = dados.nomeZona
+        dataCenterTitulo.innerHTML = dados.nomeDataCenter
         if (dados.imagem) {
             imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
         } else {
             imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
         }
     })
-}
-
-function abrirComponente(idServidor) {
-    idServidorSelecionado = idServidor;
-    boxComponente.style.display = "flex"
 }
 
 function fecharComponente() {
@@ -119,7 +120,7 @@ function verificar() {
     } else if (estadoServidor == "Selecione") {
         conteiner_msg.innerHTML = "Selecione um estado de servidor!"
         loadingModal()
-    } else if (zona == "Selecione a zona"|| database == "Selecione a DataBase") {
+    } else if (zona == "Selecione a zona"|| database == "Selecione um DataCenter") {
         conteiner_msg.innerHTML = "Selecione um datacenter e zona!"
         loadingModal()
     } else if (!capCpu || !capRam || !capDisco || !capRede) {
@@ -140,7 +141,7 @@ function carregarDatabases() {
         .then(resposta => resposta.json())
         .then(lista => {
             const selectDatabase = document.getElementById("selectDataBase");
-            selectDatabase.innerHTML = `<option disabled selected>Selecione a database</option>`;
+            selectDatabase.innerHTML = `<option disabled selected>Selecione um datacenter</option>`;
 
             for (let i = 0; i < lista.length; i++) {
                 selectDatabase.innerHTML += `
@@ -168,7 +169,8 @@ function adicionarComponente() {
     const capacidadeInput = document.getElementById("capCompoBox").value;
 
     if (!nome || !tipo || !unidade || !capacidadeInput) {
-        alert("Preencha todos os campos!");
+        conteiner_msg.innerHTML = "Preencha todos os campos!"
+        loadingModal()
         return;
     }
     const capacidade = Number(capacidadeInput);
@@ -192,7 +194,8 @@ function adicionarComponente() {
             if (!res.ok) {
                 throw data.message || "Erro ao cadastrar componente";
             }
-            alert("Componente adicionado!");
+            conteiner_msg.innerHTML = "Componente adicionado com sucesso!"
+            loadingModal()
             fecharComponente();
             mostrarServidores();
         })
@@ -209,7 +212,7 @@ function carregarDatabases() {
         .then(resposta => resposta.json())
         .then(lista => {
             const selectDatabase = document.getElementById("selectDataBase");
-            selectDatabase.innerHTML = `<option disabled selected>Selecione a database</option>`;
+            selectDatabase.innerHTML = `<option disabled selected>Selecione um datacenter</option>`;
 
             for (let i = 0; i < lista.length; i++) {
                 selectDatabase.innerHTML += `
@@ -349,23 +352,23 @@ function mostrarServidores() {
                 </div>
                 `;
             }
-            
+
             boxServidores.innerHTML = mensagem;
 
             let totalServidor = 0
-            let somaCpu = 0
-            let somaRam = 0
-            let somaDisco = 0
-            let somaRede = 0
+            let somaCpu = []
+            let somaRam = []
+            let somaDisco = []
+            let somaRede = []
 
             for (let i = 0; i < servidores.length; i++) {
                 const idServidor = servidores[i].idServidor
-                
+
                 const cpuValor = document.getElementById("cpuValor" + idServidor);
                 const cpuUso = document.getElementById("cpuUso" + idServidor);
                 const cpuLivre = document.getElementById("cpuLivre" + idServidor);
                 const barraCpu = document.getElementById("cpuBarra" + idServidor);
-                
+
                 const ramValor = document.getElementById("ramValor" + idServidor);
                 const ramUso = document.getElementById("ramUso" + idServidor);
                 const ramLivre = document.getElementById("ramLivre" + idServidor);
@@ -390,17 +393,17 @@ function mostrarServidores() {
                 const discoPorcentagem = (aleatorioDisco / servidores[i].limiteDisco) * 100
                 const redePorcentagem = (aleatorioRede / servidores[i].limiteRede) * 100
 
-                const cpuUsoValor =  100 - aleatorioCpu
-                const ramUsoValor =  servidores[i].limiteRam - aleatorioRam
-                const discoUsoValor =  servidores[i].limiteDisco - aleatorioDisco
-                const redeUsoValor =  servidores[i].limiteRede - aleatorioRede
+                const cpuUsoValor = 100 - aleatorioCpu
+                const ramUsoValor = servidores[i].limiteRam - aleatorioRam
+                const discoUsoValor = servidores[i].limiteDisco - aleatorioDisco
+                const redeUsoValor = servidores[i].limiteRede - aleatorioRede
 
                 totalServidor += 1
-                somaCpu += aleatorioCpu
-                somaRam += ramPorcentagem
-                somaDisco += discoPorcentagem
-                somaRede += aleatorioRede
-                
+                somaCpu.push(aleatorioCpu)
+                somaRam.push(ramPorcentagem)
+                somaDisco.push(redePorcentagem)
+                somaRede.push(aleatorioRede)
+
                 cpuUso.innerHTML = `Em Uso ${aleatorioCpu}%`
                 cpuLivre.innerHTML = `Sobrando ${cpuUsoValor}%`
 
@@ -465,21 +468,93 @@ function mostrarServidores() {
             }
 
             const qtdServidores = document.getElementById("qtdServidores");
-            const kpiMedioCpu = document.getElementById("kpiMedioCpu");
-            const kpiMedioRam = document.getElementById("kpiMedioRam");
-            const kpiMedioDisco = document.getElementById("kpiMedioDisco");
-            const kpiMedioRede = document.getElementById("kpiMedioRede");
+            const kpiP99Cpu = document.getElementById("kpiP99Cpu");
+            const kpiP99Ram = document.getElementById("kpiP99Ram");
+            const kpiP99Disco = document.getElementById("kpiP99Disco");
+            const kpiP99Rede = document.getElementById("kpiP99Rede");
 
-            const mediaCpu = somaCpu / totalServidor
-            const mediaRam = somaRam / totalServidor
-            const mediaDisco = somaDisco / totalServidor
-            const mediaRede = somaRede / totalServidor
+            const ordenadoCpu = [...somaCpu].sort((a, b) => a - b);
+            const P99Cpu = ordenadoCpu[Math.floor(ordenadoCpu.length * 0.99)];
+            const ordenadoRam = [...somaRam].sort((a, b) => a - b);
+            const P99Ram = ordenadoRam[Math.floor(ordenadoRam.length * 0.99)];
+            const ordenadoDisco = [...somaDisco].sort((a, b) => a - b);
+            const P99Disco = ordenadoDisco[Math.floor(ordenadoDisco.length * 0.99)];
+            const ordenadoRede = [...somaRede].sort((a, b) => a - b);
+            const P99Rede = ordenadoRede[Math.floor(ordenadoRede.length * 0.99)];
 
             qtdServidores.innerHTML = totalServidor
-            kpiMedioCpu.innerHTML = mediaCpu.toFixed(1) + "%"
-            kpiMedioRam.innerHTML = mediaRam.toFixed(1) + "%"
-            kpiMedioDisco.innerHTML = mediaDisco.toFixed(1) + "%"
-            kpiMedioRede.innerHTML = mediaRede.toFixed(1)
+            kpiP99Cpu.innerHTML = P99Cpu.toFixed(1) + "%"
+            kpiP99Ram.innerHTML = P99Ram.toFixed(1) + "%"
+            kpiP99Disco.innerHTML = P99Disco.toFixed(1) + "%"
+            kpiP99Rede.innerHTML = P99Rede.toFixed(1)
+
+            if (P99Cpu >= 75) {
+                document.querySelector('#container_kpis .kpi3').style.borderColor = '#FF5252';
+                document.querySelector('#container_kpis .kpi3 h1').style.color = '#FF5252';
+                document.querySelector('#container_kpis .kpi3').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi3.src = "../assets/dashboard-icons/icon_alerta.svg"
+            } else if (P99Cpu >= 60) {
+                document.querySelector('#container_kpis .kpi3').style.borderColor = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi3 h1').style.color = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi3').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi3.src = "../assets/dashboard-icons/icon_atencao.svg"
+            } else {
+                document.querySelector('#container_kpis .kpi3').style.borderColor = '#23B26D';
+                document.querySelector('#container_kpis .kpi3 h1').style.color = '#23B26D';
+                document.querySelector('#container_kpis .kpi3').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi3.src = "../assets/dashboard-icons/icon_Check.svg"
+            }
+
+            if (P99Ram >= 75) {
+                document.querySelector('#container_kpis .kpi2').style.borderColor = '#FF5252';
+                document.querySelector('#container_kpis .kpi2 h1').style.color = '#FF5252';
+                document.querySelector('#container_kpis .kpi2').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi2.src = "../assets/dashboard-icons/icon_Alerta.svg"
+            } else if (P99Ram >= 60) {
+                document.querySelector('#container_kpis .kpi2').style.borderColor = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi2 h1').style.color = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi2').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;   
+                imgKpi2.src = "../assets/dashboard-icons/icon_Atencao.svg"        
+            } else {
+                document.querySelector('#container_kpis .kpi2').style.borderColor = '#23B26D';
+                document.querySelector('#container_kpis .kpi2 h1').style.color = '#23B26D';
+                document.querySelector('#container_kpis .kpi2').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi2.src = "../assets/dashboard-icons/icon_Check.svg"
+            }
+
+            if (P99Disco >= 75) {
+                document.querySelector('#container_kpis .kpi4').style.borderColor = '#FF5252';
+                document.querySelector('#container_kpis .kpi4 h1').style.color = '#FF5252';
+                document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi4.src = "../assets/dashboard-icons/icon_alerta.svg"
+            } else if (P99Disco >= 60) {
+                document.querySelector('#container_kpis .kpi4').style.borderColor = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi4 h1').style.color = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi4.src = "../assets/dashboard-icons/icon_Atencao.svg"        
+            } else {
+                document.querySelector('#container_kpis .kpi4').style.borderColor = '#23B26D';
+                document.querySelector('#container_kpis .kpi4 h1').style.color = '#23B26D';
+                document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi4.src = "../assets/dashboard-icons/icon_Check.svg"
+            }
+
+            if (P99Rede >= 35) {
+                document.querySelector('#container_kpis .kpi5').style.borderColor = '#FF5252';
+                document.querySelector('#container_kpis .kpi5 h1').style.color = '#FF5252';
+                document.querySelector('#container_kpis .kpi5').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi5.src = "../assets/dashboard-icons/icon_alerta.svg"
+            } else if (P99Rede >= 30) {
+                document.querySelector('#container_kpis .kpi5').style.borderColor = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi5 h1').style.color = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi5').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;     
+                imgKpi5.src = "../assets/dashboard-icons/icon_atencao.svg"     
+            } else {
+                document.querySelector('#container_kpis .kpi5').style.borderColor = '#23B26D';
+                document.querySelector('#container_kpis .kpi5 h1').style.color = '#23B26D';
+                document.querySelector('#container_kpis .kpi5').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi5.src = "../assets/dashboard-icons/icon_Check.svg"
+            }
 
             // for (var i = 0; i < servidores.length; i++) {
             //     carregarComponentes(servidores[i].idServidor);
@@ -535,21 +610,23 @@ function cadastrarServidor() {
             componentes: componentes
         })
     })
-    .then(res => {
-        if (res.ok) {
-            alert("Servidor cadastrado com sucesso!");
-            location.reload();
-        } else {
-            throw "Erro ao cadastrar";
-        }
-    })
-    .catch(err => console.log(err));
+        .then(res => {
+            if (res.ok) {
+                conteiner_msg.innerHTML = "Servidor cadastrado com sucesso!"
+                loadingModal()
+                location.reload();
+            } else {
+                throw "Erro ao cadastrar";
+            }
+        })
+        .catch(err => console.log(err));
 }
 
 function carregarZonas() {
 
     if (!idDataCenterSelecionado) {
-        alert("Selecione primeiro uma DataBase!");
+        conteiner_msg.innerHTML = "Selecione um dataCenter primeiro!"
+        loadingModal()
         return;
     }
 
@@ -599,31 +676,10 @@ function carregarComponentes(idServidor) {
         });
 }
 
-function carregarComponentes(idServidor) {
-
-    cpu = []
-    disco = []
-    ram = []
-
-    fetch(`/servidor/listarComponentes/${idServidor}`)
-        .then(res => res.json())
-        .then(componentes => {
-
-            var grid = document.getElementById(`gridCompo${idServidor}`);
-
-            var html = "";
-
-            for (var i = 0; i < componentes.length; i++) {
-                html += `<p>${componentes[i].nome}</p>`;
-            }
-
-            grid.innerHTML = html;
-        });
-}
-
 function limparSessao() {
     sessionStorage.clear();
 }
+
 
 //  Usar quando for puxar os dados, e arrumar o carregar componentes, sem funcionar por agora -->
 //     function mostrarServidores() {

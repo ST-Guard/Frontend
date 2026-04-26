@@ -177,11 +177,21 @@
       </div>
       <div class="parte2">
         <div class="grafico-RamXCpu">
+          <select id="selectPeriodoCpuxRam" class="selectPeriodo">
+            <option value="hoje">Período: 24h</option>
+            <option value="ontem">Período: 48h</option>
+            <option value="semana">Período: ULTIMOS 7 DIAS</option>
+          </select>
           <div id="expandirRamxCpu">
             <canvas id="chartRamxCpu"></canvas>
           </div>
         </div>
         <div class="grafico-DiscoXLatencia">
+          <select id="selectPeriodoCpuxRam" class="selectPeriodo">
+            <option value="hoje">Período: 24h</option>
+            <option value="ontem">Período: 48h</option>
+            <option value="semana">Período: ULTIMOS 7 DIAS</option>
+          </select>
           <div id="expandirDiscoxLatencia">
             <canvas id="chartDiskxLat"></canvas>
           </div>

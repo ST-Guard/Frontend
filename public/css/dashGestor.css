@@ -233,29 +233,33 @@ header {
 
 .parte1,
 .parte2 {
+  box-sizing: border-box;
   display: flex;
   gap: 24px;
   padding: 0 24px;
-  width: 100%;
-  box-sizing: border-box;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+.parte1 {
+  margin-top: 30px;
 }
 
 .grafico-ServidorAlerta,
 .grafico-Alerta,
 .grafico-RamXCpu,
 .grafico-DiscoXLatencia {
-  flex: 1 1 480px;
-  width: 100%;
-  max-width: 100%;
-  margin: 1rem 0;
   border: solid #e5e7eb 2px;
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
-  padding: 16px;
   border-radius: 15px;
   background-color: white;
   box-sizing: border-box;
+  flex: 1 1 480px;
+  padding: 16px;
+  margin: 1rem 0;
+  max-width: 100%;
   overflow: hidden;
+  width: 100%;
 }
 
 .canvas-containerServer,
@@ -266,6 +270,21 @@ header {
   width: 100%;
   height: 350px;
   min-height: 250px;
+}
+
+.selectPeriodo {
+  display: flex;
+  margin-left: auto;
+  margin-bottom: -40px;
+}
+
+.selectPeriodo {
+  border: 2px solid #1c4886;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  width: 20%;
+  z-index: 9999;
 }
 
 #chartRamxCpu,

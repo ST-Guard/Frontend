@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new Chart(ctxRamCpu, {
     type: 'bar',
     data: {
-        labels: ["04:00", "08:00", "12:00", "16:00", "20:00"],
+        labels: ["DC01", "DB-01", "WEB-01", "APP-01", "CACHE"],
         datasets: [
         {
             label: 'RAM',
@@ -196,10 +196,19 @@ document.addEventListener('DOMContentLoaded', () => {
             order: 2
         },
         {
-            label: 'Previsibilidade',
-            data: [40, 55, 60, 70, 44],
+            label: 'Comparação Ram Anterior',
+            data: [51, 35, 61, 50, 68],
             type: 'line',
-            borderColor: '#6B7280',
+            borderColor: '#5d7cb9',
+            backgroundColor: '#ffffff',
+            tension: 0.5,
+            order: 1
+        },
+        {
+            label: 'Comparação Cpu Anterior',
+            data: [37, 45, 52, 70, 73],
+            type: 'line',
+            borderColor: '#855151',
             backgroundColor: '#ffffff',
             tension: 0.5,
             order: 1
@@ -213,13 +222,23 @@ document.addEventListener('DOMContentLoaded', () => {
         plugins: {
             title: {
                 display: true,
-                text: 'Comparando Ram e CPU com índice de previsibilidade',
+                text: 'P99 Saturação: CPU vs RAM',
                 align: 'start',
                 font: {
                     size: 18
                 },
                 padding: {
                     top: 20,
+                }
+            },
+            subtitle: {
+                display: true,
+                text: 'Piores picos registrados no periodo selecionado',
+                align: 'start',
+                font: {
+                    size: 12
+                },
+                padding: {
                     bottom: 30,
                 }
             }
@@ -230,7 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
             beginAtZero: true,
             title: {
             display: true,
-            text: 'Uso (%)'
+            text: 'Uso %'
+            },
+            max: 100,
+            ticks: {
+                stepSize: 20
             }
         },
         }
@@ -240,30 +263,38 @@ document.addEventListener('DOMContentLoaded', () => {
     new Chart(ctxDiskLat, {
     type: 'bar',
     data: {
-        labels: ["04:00", "08:00", "12:00", "16:00", "20:00"],
+        labels: ["DC01", "DB-01", "WEB-01", "APP-01", "CACHE"],
         datasets: [
-        {
-            label: 'Disco',
-            data: [25.5, 40, 48, 51, 38],
-            backgroundColor: '#23B26D',
-            order: 2
-        },
-        {
-            label: 'Latencia',
-            data: [23, 40, 51, 52, 38],
-            backgroundColor: '#1D85C2',
-            order: 2
-        },
-        {
-            label: 'Previsibilidade',
-            data: [24, 40, 50, 51.5, 38],
-            type: 'line',
-            borderColor: '#6B7280',
-            backgroundColor: '#ffffff',
-            tension: 0.5,
-            order: 1
-        },
-        
+            {
+                label: 'Disco',
+                data: [25.5, 40, 48, 51, 38],
+                backgroundColor: '#23B26D',
+                order: 2
+            },
+            {
+                label: 'Latencia',
+                data: [23, 40, 51, 52, 38],
+                backgroundColor: '#1D85C2',
+                order: 2
+            },
+            {
+                label: 'Comparação Disco Anterior',
+                data: [68, 25.5, 40, 48, 51],
+                type: 'line',
+                borderColor: '#7cc472',
+                backgroundColor: '#ffffff',
+                tension: 0.5,
+                order: 1
+            },
+            {
+                label: 'Comparação Latencia Anterior',
+                data: [51, 23, 40, 51, 52],
+                type: 'line',
+                borderColor: '#9eb3dd',
+                backgroundColor: '#ffffff',
+                tension: 0.5,
+                order: 1
+            },
         ]
     },
     options: {
@@ -272,13 +303,23 @@ document.addEventListener('DOMContentLoaded', () => {
         plugins: {
             title: {
                 display: true,
-                text: 'Comparando Disco e Latencia com índice de previsibilidade',
+                text: 'P99 Saturação: Disco vs Latencia',
                 align: 'start',
                 font: {
                     size: 18
                 },
                 padding: {
                     top: 20,
+                }
+            },
+            subtitle: {
+                display: true,
+                text: 'Piores picos registrados no periodo selecionado',
+                align: 'start',
+                font: {
+                    size: 12
+                },
+                padding: {
                     bottom: 30,
                 }
             }
@@ -289,7 +330,11 @@ document.addEventListener('DOMContentLoaded', () => {
             beginAtZero: true,
             title: {
             display: true,
-            text: 'Uso (%)'
+            text: 'Uso %'
+            },
+            max: 100,
+            ticks: {
+                stepSize: 20
             }
         },
         }

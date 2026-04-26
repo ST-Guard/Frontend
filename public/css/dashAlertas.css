@@ -309,7 +309,8 @@
 .lista_alertas {
     width: 90%;
     border-radius: 16px;
-    margin-top: 40px;
+    margin-top: 70px;
+    margin-bottom: 40px;
     padding: 2%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
     background-color: rgba(102, 192, 244, 10%);
@@ -355,6 +356,17 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.checkBox {
+    display: flex;
+    margin-left: auto;
+}
+
+.checkBox button{
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .titulo_card_alerta {
