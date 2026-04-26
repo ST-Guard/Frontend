@@ -9,9 +9,11 @@
     <link rel="icon" href="./../assets/icon/icon.png">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="./../css/dashFuncionario.css">
+    <script src="./../js/subMenu.js"></script>
 </head>
 
-<body onload="mascaraTel(document.getElementById('input_telefone_cadastro')), mascaraCPF(document.getElementById('input_cpf_cadastro'))" >
+<body
+    onload="mascaraTel(document.getElementById('input_telefone_cadastro')), mascaraCPF(document.getElementById('input_cpf_cadastro'))">
     <header>
         <nav>
             <div class="logo-nav" onclick="fnNavegar('/')">
@@ -24,7 +26,7 @@
                 <div class="logo-notificao">
                     <div class="icon-notificao">
                         <a href="dashAlertas.html">
-                        <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                            <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
                         </a>
                     </div>
                     <div class="qtd-notificao">
@@ -53,27 +55,36 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-                <div class="sidebar-button" onclick="fnNavegar('../pages/dashGestor.html')">
-                    <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p><a href="dashGestor.html">Dashboard</a></p>
-                    
+                 <div class="sidebar-button dashboard-group">
+                    <div class="dashboard-main" onclick="toggleDashboardMenu(event)">
+                        <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                        <p>Dashboards</p>
+                    </div>
+                    <div class="submenu-dashboard" id="submenuDashboard">
+                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashGestor.html')">
+                            <p>Dashboard 1</p>
+                        </div>
+                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashOutra.html')">
+                            <p>Dashboard 2</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
                     <p><a href="dashServidorGestor.html">Servidores</a></p>
-                   
+
                 </div>
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashAlertas.html')">
                     <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
                     <p><a href="dashAlertas.html">Alertas</a></p>
-                   
+
                 </div>
                 <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashFuncionario.html')">
                     <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
                     <p><a href="dashFuncionario.html">Funcionários</a></p>
-                  
+
                 </div>
-                <div class="sidebar-button"  onclick="fnNavegar('../pages/dashConfigGestor.html')">
+                <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigGestor.html')">
                     <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
                     <p><a href="dashConfigGestor.html">Configurações</a></p>
                     <!-- <p onclick="mudarConfig()">Configurações</p> -->
@@ -81,8 +92,8 @@
                 <div class="sidebar-button-sair">
                     <div class="saindo">
                         <a href="login.html" onclick="limparSessao()" class="sair">
-                        <img src="../assets/dashboard-icons/sair.svg" alt="">
-                        <p>Sair</p>
+                            <img src="../assets/dashboard-icons/sair.svg" alt="">
+                            <p>Sair</p>
                         </a>
                     </div>
                 </div>
@@ -129,7 +140,8 @@
                 <input id="input_email_cadastro" placeholder="matheus@gmail.com">
 
                 <label>Telefone</label>
-                <input id="input_telefone_cadastro" placeholder="(11) 99999-8888" oninput="mascaraTel(this)" maxlength="15">
+                <input id="input_telefone_cadastro" placeholder="(11) 99999-8888" oninput="mascaraTel(this)"
+                    maxlength="15">
 
                 <label>Senha</label>
                 <input id="input_senha_cadastro" type="password" placeholder="******">
