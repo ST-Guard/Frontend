@@ -2,7 +2,9 @@ window.onload = () => {
     buscarDados()
     mostrarServidores()
 }
-
+function fnNavegar(caminho){
+    window.location.href = caminho
+}
 // if (!sessionStorage.ID_USUARIO) {
 //     conteiner_msg.innerHTML = "Você precisa estar logado!"
 //     loadingModal()

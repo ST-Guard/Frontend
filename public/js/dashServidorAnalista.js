@@ -2,7 +2,9 @@ window.onload = () => {
     buscarDados()
     mostrarServidores()
 }
-
+function fnNavegar(caminho){
+    window.location.href = caminho
+}
 let idDataCenterSelecionado = null;
 
 if (!sessionStorage.ID_USUARIO) {

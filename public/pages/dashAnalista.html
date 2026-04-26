@@ -58,15 +58,15 @@
 <div class="corpoPagina">
 <div class="sidebar">
 <div class="sidebar-buttons">
-    <div class="sidebar-button-select">
+    <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashAnalista.html')">
         <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
         <p><a href="">Dashboard</a></p>
     </div>
-    <div class="sidebar-button">
+    <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorAnalista.html')">
         <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
         <p><a href="dashServidorAnalista.html">Servidores</a></p>
     </div>
-    <div class="sidebar-button">
+    <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigAnalista.html')">
         <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
         <p><a href="dashConfigAnalista.html">Configurações</a></p>
     </div>
@@ -345,7 +345,7 @@
         <div class="div_relatorios">
             <div class="div_relatorio">
                 <div class="div_conteudoRel">
-                    <div class="conteudoRelatorio">
+                    <div class="conteudoRelatorio" >
                         <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
                         <h3><u>RelatorioDia-30-04-2006</u></h3>
                     </div>
@@ -473,9 +473,7 @@
         console.log("Ver todos os servidores");
     }
     
-    function fnNavegar(path) {
-        console.log("Navegar para:", path);
-    }
+
 </script>
 </body>
 

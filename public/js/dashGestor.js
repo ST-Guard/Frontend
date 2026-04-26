@@ -1,3 +1,7 @@
+function fnNavegar(caminho){
+    window.location.href = caminho
+}
+
 window.onload = () => {
     buscarDados()
 }

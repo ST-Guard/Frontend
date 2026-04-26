@@ -1,3 +1,6 @@
+function fnNavegar(caminho){
+    window.location.href = caminho
+}
 window.onload = buscarDados()
 
 if (!sessionStorage.ID_USUARIO) {

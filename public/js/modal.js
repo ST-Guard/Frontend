@@ -1,3 +1,4 @@
+
 function loadingModal() {
     const barra = document.getElementById("preenchimento");
     const modal = document.getElementById("modal"); 

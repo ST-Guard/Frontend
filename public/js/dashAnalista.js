@@ -1,3 +1,6 @@
+function fnNavegar(caminho){
+    window.location.href = caminho
+}
 window.onload = () => {
     buscarDados()
 }
@@ -28,9 +31,7 @@ function buscarDados() {
     })
 }
 
-function fnNavegar(local) {
-    window.location.href = local
-}
+
 document.addEventListener('DOMContentLoaded', () => {
 const graficoTop3Ram = document.getElementById('graficoTopProcRAM');
 new Chart(graficoTop3Ram, {

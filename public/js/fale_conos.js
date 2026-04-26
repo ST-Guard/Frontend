@@ -1,3 +1,6 @@
+function fnNavegar(caminho){
+    window.location.href = caminho
+}
 function enviar_mensagem(){
     
     var nome_usuario  = input_nome.value
