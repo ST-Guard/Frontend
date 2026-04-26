@@ -11,12 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
-        <script src="./../js/sessao.js"></script>
-        <script src="./../js/dashAlertas.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <link rel="icon" href="./../assets/icon/icon.png">
-        <link rel="stylesheet" href="../css/dashboard.css">
-        <link rel="stylesheet" href="../css/dashAlertas.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="./../assets/icon/icon.png">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/dashAlertas.css" />
     <!-- <link rel="stylesheet" href="../css/reset.css"> -->
 </head>
 
@@ -31,7 +29,7 @@
             <div class="right-nav">
                 <div class="logo-notificao">
                     <a href="dashAlertas.html">
-                    <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                        <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
                     </a>
 
                     <div class="qtd-notificao">
@@ -62,10 +60,19 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-                <div class="sidebar-button" onclick="fnNavegar('../pages/dashGestor.html')">
-                    <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p><a href="dashGestor.html">Dashboard</a></p>
-                    <!-- <p onclick="mudarDash()">Dashboard</p> -->
+                <div class="sidebar-button dashboard-group">
+                    <div class="dashboard-main" onclick="toggleDashboardMenu(event)">
+                        <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                        <p>Dashboards</p>
+                    </div>
+                    <div class="submenu-dashboard" id="submenuDashboard">
+                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashGestor.html')">
+                            <p>Dashboard 1</p>
+                        </div>
+                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashOutra.html')">
+                            <p>Dashboard 2</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
@@ -82,7 +89,7 @@
                     <p><a href="dashFuncionario.html">Funcionários</a></p>
                     <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
                 </div>
-                <div class="sidebar-button"  onclick="fnNavegar('../pages/dashConfigGestor.html')">
+                <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigGestor.html')">
                     <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
                     <p><a href="dashConfigGestor.html">Configurações</a></p>
                     <!-- <p onclick="mudarConfig()">Configurações</p> -->
@@ -90,8 +97,8 @@
                 <div class="sidebar-button-sair">
                     <div class="saindo">
                         <a href="login.html" onclick="limparSessao()" class="sair">
-                        <img src="../assets/dashboard-icons/sair.svg" alt="">
-                        <p>Sair</p>
+                            <img src="../assets/dashboard-icons/sair.svg" alt="">
+                            <p>Sair</p>
                         </a>
                     </div>
                 </div>
@@ -143,7 +150,7 @@
                             <h4>Processo consumindo mais CPU</h4>
                         </div>
                     </div>
-                </div>  
+                </div>
                 <div class="div_kpi kpi4">
                     <div class="info_kpi">
                         <div class="containerTitulo">
@@ -157,7 +164,7 @@
                             <h4>SLA dentro do esperado</h4>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
             <div class="parte1">
                 <section class="grafico_alerta">
@@ -165,7 +172,7 @@
                         <div class="grafico_chart">
                             <canvas id="Alerta"></canvas>
                         </div>
-    
+
                         <div class="grafico_kpis">
                             <div class="grafico_kp1">
                                 <h1>Total Alertas</h1>
@@ -184,7 +191,7 @@
                                 <p>42</p>
                             </div>
                         </div>
-    
+
                         <div class="boxTendencia">
                             <div class="tendencia">
                                 <img src="../assets/icone_certo.png" alt="">
@@ -233,7 +240,8 @@
                             <h1>SRV-DC01-WEB-05 - 7 minutos atrás </h1>
                         </div>
                         <div class="botoes_card_alerta">
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;" onclick="detalhes()">Ver
+                            <button style="background-color: #6B7280; color: white; font-weight: 550;"
+                                onclick="detalhes()">Ver
                                 detalhe</button>
                         </div>
                     </div>
@@ -317,5 +325,8 @@
         </div>
     </div>
 </body>
+<script src="./../js/sessao.js"></script>
+<script src="./../js/subMenu.js"></script>
+<script src="./../js/dashAlertas.js"></script>
 
 </html>

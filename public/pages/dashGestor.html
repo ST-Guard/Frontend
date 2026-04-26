@@ -12,20 +12,27 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
     rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="./../js/sessao.js"></script>
-  <script src="./../js/dashGestor.js"></script>
   <link rel="icon" href="./../assets/icon/icon.png" />
   <link rel="stylesheet" href="./../css/dashboard.css" />
   <link rel="stylesheet" href="./../css/dashGestor.css" />
 </head>
 
 <body>
+  <div id="modalGrafico" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="fecharModal()">
+        &times;
+      </span>
+      <h2 id="tituloModal"></h2>
+      <div id="conteudoModal"></div>
+    </div>
+  </div>
   <header>
     <nav>
       <div class="logo-nav" onclick="fnNavegar('/')">
-          <a href="../pages/index.html">
-              <img src="./../assets/logos/smart data branco.png" alt="">
-          </a>
+        <a href="../pages/index.html">
+          <img src="./../assets/logos/smart data branco.png" alt="">
+        </a>
       </div>
 
       <div class="right-nav">
@@ -45,12 +52,12 @@
         <div class="separacao"></div>
 
         <div class="logo-usuario">
-        <div class="userImg">
-          <a href="dashConfigGestor.html">
+          <div class="userImg">
+            <a href="dashConfigGestor.html">
 
-            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
-          </a>
-        </div>
+              <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+            </a>
+          </div>
           <div class="userInfo">
             <h2 class="user-name" id="username">Matheus Valle</h2>
             <h3 class="user-cargo" id="cargoname">Analista de operações</h3>
@@ -62,14 +69,40 @@
 
   <div class="corpoPagina">
     <div class="sidebar">
+
+
       <div class="sidebar-buttons">
-        <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashGestor.html')">
-          <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-          <p><a href="../pages/dashGestor.html">Dashboard</a></p>
-          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        <div class="sidebar-button dashboard-group">
+
+          <!-- BOTÃO DASHBOARD -->
+          <div class="dashboard-main" onclick="toggleDashboardMenu()">
+
+            <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+            <p>Dashboards</p>
+
+          </div>
+
+          <!-- SUBMENU -->
+          <div class="submenu-dashboard" id="submenuDashboard">
+
+            <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dash1.html')">
+
+              <p>Dashboard 1</p>
+
+            </div>
+
+            <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dash2.html')">
+
+              <p>Dashboard 2</p>
+
+            </div>
+
+          </div>
+
         </div>
-        <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')" >
-          <img src="../assets/dashboard-icons/icon_servidores_branco.svg"alt="">
+
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
+          <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
           <p><a href="../pages/dashServidorGestor.html">Servidores</a></p>
           <!-- <p onclick="mudarServidor()">Servidores</p> -->
         </div>
@@ -103,68 +136,68 @@
     <div class="SubcorpoPagina">
       <div class="textoInicio">
         <div class="div_titulo">
-            <h1>Panaroma Geral - Gestor</h1>
-            <h2>Visão consolidada de toda a sua infraestrutura.</h2>    
+          <h1>Panaroma Geral - Gestor</h1>
+          <h2>Visão consolidada de toda a sua infraestrutura.</h2>
         </div>
       </div>
       <div id="container_kpis">
-          <div class="div_kpi kpi1">
-              <div class="info_kpi">
-                  <div class="containerTitulo">
-                      <h3>SERVIDORES ATIVOS</h3>
-                  </div>
-                   <div class="div_situacao">
-                      <h1>1/3</h1>
-                      <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
-                  </div>
-                  <h4>Quantidade de servidores que estão ativos</h4>
-              </div>
+        <div class="div_kpi kpi1">
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>SERVIDORES ATIVOS</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>1/3</h1>
+              <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+            </div>
+            <h4>Quantidade de servidores que estão ativos</h4>
           </div>
-          <div class="div_kpi kpi4">
-              <div class="info_kpi">
-                  <div class="containerTitulo">
-                      <h3>Jogadores Ativos</h3>
-                  </div>
-                  <div class="div_situacao">
-                      <h1>35.578.991</h1>
-                      <img src="../assets/dashboard-icons/icon_check.svg" alt="">
-                  </div>
-                  <div class="status">
-                      <h4>Quantidade de jogadores ativos nesse momento</h4>
-                  </div>
-              </div>
+        </div>
+        <div class="div_kpi kpi4">
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>Jogadores Ativos</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>35.578.991</h1>
+              <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+            </div>
+            <div class="status">
+              <h4>Quantidade de jogadores ativos nesse momento</h4>
+            </div>
           </div>
-          <div class="div_kpi kpi2">
-              <div class="info_kpi">
-                  <div class="containerTitulo">
-                      <h3>PROCESSO COM MAIOR CONSUMO</h3>
-                  </div>
-                  <div class="div_situacao">
-                      <h1>MySql</h1>
-                      <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
-                  </div>
-                  <div class="status">
-                      <h4>Processo consumindo mais CPU</h4>
-                  </div>
-              </div>
+        </div>
+        <div class="div_kpi kpi2">
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>PROCESSO COM MAIOR CONSUMO</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>MySql</h1>
+              <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
+            </div>
+            <div class="status">
+              <h4>Processo consumindo mais CPU</h4>
+            </div>
           </div>
-           <div class="div_kpi kpi4">
-              <div class="info_kpi">
-                  <div class="containerTitulo">
-                      <h3>SERVIDORES QUE APRESENTARAM ALERTAS NOS ULTIMOS DIAS (%)</h3>
-                  </div>
-                  <div class="div_situacao">
-                      <h1>SERVIDOR-DC01</h1>
-                      <img src="../assets/dashboard-icons/icon_check.svg" alt="">
-                  </div>
-                  <div class="status">
-                      <h4>SERVIDOR-DC02</h4>
-                  </div>
-              </div>
+        </div>
+        <div class="div_kpi kpi4">
+          <div class="info_kpi">
+            <div class="containerTitulo">
+              <h3>SERVIDORES QUE APRESENTARAM ALERTAS NOS ULTIMOS DIAS (%)</h3>
+            </div>
+            <div class="div_situacao">
+              <h1>SERVIDOR-DC01</h1>
+              <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+            </div>
+            <div class="status">
+              <h4>SERVIDOR-DC02</h4>
+            </div>
           </div>
+        </div>
       </div>
       <div class="parte1">
-        <div class="grafico-ServidorAlerta">
+        <div class="grafico-ServidorAlerta" id="teste">
           <div class="canvas-containerServer">
             <canvas id="chartServer"></canvas>
           </div>
@@ -199,4 +232,10 @@
       </div>
     </div>
   </div>
+
+  <script src="./../js/sessao.js"></script>
+  <script src="./../js/dashGestor.js"></script>
+  <script src="./../js/subMenu.js"></script>
+  <script src="./../js/modaisInfos.js"></script>  
 </body>
+</html>
