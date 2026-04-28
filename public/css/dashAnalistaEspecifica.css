@@ -158,148 +158,263 @@ body {
     padding-bottom: 40px;
 }
 
-.SubcorpoPagina .conteiner_graficos_parte1 {
+.parte1,
+.parte2,
+.parte3 {
+  display: flex;
+  gap: 24px;
+  padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.conteinerRam,
+.conteinerCpu,
+.conteinerDisco {
+    width: 30%;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 16px;
+    padding: 20px 20px 16px;
+}
+
+.grafico,
+.graficoP3 {
     width: 100%;
-    min-height: 65vh;
-    margin: 0% 5% 0% 0%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0% 3% 0% 3%;
-    ;
+    height: 380px;
+    margin-top: 10px;
+}
+.conteinerRam,
+.conteinerCpu,
+.conteinerDisco {
+    flex: 1 1 280px;
+    min-width: 260px;
+    max-width: 380px;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 16px;
+    padding: 20px 20px 16px;
+    box-sizing: border-box;
 }
 
-.SubcorpoPagina .conteiner_graficos_parte1 .conteiner_latencia {
-    width: 52%;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
-    padding: 3%;
+.grafico-RamXCpu,
+.grafico-DiscoXLatencia,
+.conteinerComponentes {
+  flex: 1 1 480px;
+  width: 100%;
+  max-width: 100%;
+  margin: 1rem 0;
+  border: solid #e5e7eb 2px;
+  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 15px;
+  background-color: white;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.SubcorpoPagina .conteiner_graficos_parte1 .conteiner_uso {
-    width: 47%;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 3%;
+#expandirRamxCpu,
+#expandirDiscoxLatencia {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  min-height: 250px;
 }
 
-/* .SubcorpoPagina .conteiner_graficos_parte1 .conteiner_uso  .grafico {
-    width: 80% !important;
-    height: 80% !important;
-    display: flex;
-    justify-content: center;
-} */
+#chartRamxCpu,
+#chartDiskxLat {
+  width: 100% ;
+  height: 100% ;
+  display: block;
+}
 
-.SubcorpoPagina .conteiner_graficos_parte1 .conteiner_uso .total {
+.conteinerComponentes {
+    display: flex;
+    width: 80%;
+}
+
+
+@media (max-width: 1024px) {
+
+  .sidebar {
+    width: 80px;
+  }
+
+  .sidebar p {
+    display: none;
+  }
+
+  .SubcorpoPagina {
+    margin-left: 80px;
+  }
+
+  #container_kpis {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  #container_kpis .div_kpi {
+    flex: 1 1 calc(50% - 15px);
+    max-width: calc(50% - 15px);
+  }
+
+  .parte1,
+  .parte2,
+  .parte3 {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .grafico-RamXCpu,
+  .grafico-DiscoXLatencia {
+    flex: 1 1 100%;
+  }
+
+  #expandirRamxCpu,
+  #expandirDiscoxLatencia {
+    height: 320px;
+  }
+
+  .conteinerComponentes {
+    flex: 1 1 480px;
     width: 100%;
-    text-align: center;
-    margin-top: 4%;
-    font-size: 17px;
+    max-width: 100%;
+    margin: 1rem 0;
+    border: solid #e5e7eb 2px;
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    border-radius: 15px;
+    background-color: white;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .conteinerRam,
+  .conteinerCpu,
+  .conteinerDisco {
+    min-width: 320px;
+    max-width: 380px;
+  }
+
 }
 
-.titulo {
-    font-size: 27px;
-    padding: 5%;
-}
-
-
-.SubcorpoPagina .conteiner_graficos_parte1 .conteiner_latencia .grafico {
-    width: 100% !important;
-    height: 80% !important;
-    display: flex;
-    justify-content: center;
-}
-
-.SubcorpoPagina .conteiner_graficos_parte1 .conteiner_latencia .total {
-    width: 100%;
-    text-align: center;
-    font-size: 17px;
-}
-
-/* ----------------------------------------------------------------------------------- */
-.SubcorpoPagina .conteiner_grafico_parte2 {
-    width: 94%;
-    min-height: 65vh;
-    margin: 3% 3% 0% 3%;
-    margin-right: 10%;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
-    padding: 3%;
-}
-
-.SubcorpoPagina .conteiner_grafico_parte2 .grafico {
-    width: 100% !important;
-    height: 70% !important;
-    display: flex;
-    justify-content: center;
-}
-
-.titulo2 {
-    font-size: 27px;
-    padding: 2%;
-}
 
 
 @media (max-width: 768px) {
+  .userInfo,
+  .separacao {
+    display: none;
+  }
 
-    .SubcorpoPagina {
-        width: 100%;
-    }
+  .corpoPagina {
+    flex-direction: column;
+  }
 
-    /* ------------------------------------------------------------------- */
-    /* SELECT */
+  .sidebar {
+    width: 100%;
+    height: 70px;
+    margin-top: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    flex-direction: row;
+    border-top: 2px solid var(--azul-escuro);
+    z-index: 1000;
+  }
 
-    .SubcorpoPagina .conteiner_select select {
-        width: 40%;
-        text-align: center;
-        background-color: #E0F2FD;
-        padding: 1%;
-        border-radius: 3px;
-        border: 2px solid #aeddfa;
-    }
+  .sidebar-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+  }
 
-    /* ------------------------------------------------------------------- */
-    /* KPI */
-    .SubcorpoPagina .conteiner_kpis {
-        flex-wrap: wrap;
-        gap: 22px;
-    }
+  .sidebar-button-select,
+  .sidebar-button {
+    padding: 10px;
+    margin: 0;
+  }
 
-    .SubcorpoPagina .conteiner_kpis .kpi {
-        width: 45%;
-    }
+  .sidebar-button-select img,
+  .sidebar-button img {
+    width: 25px;
+  }
 
-    /* ------------------------------------------------------------------- */
-    /* GRÁFICOS */
-    .SubcorpoPagina .conteiner_graficos_parte1 {
-        width: 100%;
-        flex-direction: column;
-        min-height: 65vh;
-    }
+  .SubcorpoPagina {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 70px;
+    margin-bottom: 90px;
+    padding: 0;
+  }
 
-    .SubcorpoPagina .conteiner_graficos_parte1 .conteiner_latencia {
-        width: 100%;
-        max-height: 50vh;
-        margin-bottom: 5%;
-    }
+  .textoInicio {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-    .SubcorpoPagina .conteiner_graficos_parte1 .conteiner_uso {
-        width: 100%;
-        min-height: 50vh;
-    }
+  .div_titulo {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+  }
 
-    .SubcorpoPagina .conteiner_grafico_parte2 .grafico {
-        width: 100% !important;
-        height: 50vh !important;
-        display: flex;
-        justify-content: center;
-    }
+  #container_kpis {
+    gap: 16px;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  #container_kpis .div_kpi {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .parte1,
+  .parte2,
+  .parte3 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  .grafico-RamXCpu,
+  .grafico-DiscoXLatencia {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 14px;
+    box-sizing: border-box;
+  }
+
+  #expandirRamxCpu,
+  #expandirDiscoxLatencia {
+    width: 100%;
+    height: 280px;
+    min-height: 280px;
+  }
+
+  #chartRamxCpu,
+  #chartDiskxLat {
+    width: 100% ;
+    height: 100% ;
+    display: block;
+  }
+
+  .header-graficoServer,
+  .footer-Server {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
 }

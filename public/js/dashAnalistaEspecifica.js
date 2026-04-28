@@ -2,6 +2,11 @@ function fnNavegar(local) {
     window.location.href = local
 }
 
+if (!sessionStorage.ID_USUARIO) {
+  alert("Você precisa estar logado!");
+  window.location = "login.html";
+}
+
 function buscarDados() {
     const idUsuario = sessionStorage.ID_USUARIO
     
@@ -26,76 +31,25 @@ function buscarDados() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const ctxLatencia = document.getElementById('graficoLatencia');
-    const ctxUso = document.getElementById('graficoDonut');
-    const ctxMediaDia = document.getElementById('graficoMediaDia');
-    const ctxLatenciaRede = document.getElementById('graficoLatenciaRede');
+    const ctxUsoRam = document.getElementById('graficoRam');
+    const ctxUsoCpu = document.getElementById('graficoCpu');
+    const ctxUsoDisco = document.getElementById('graficoDisco');
+    const ctxRamCpu = document.getElementById('chartRamxCpu');
+    const ctxDiskLat = document.getElementById('chartDiskxLat');
+    const ctxComponentes = document.getElementById('graficoComponentes');
 
-    new Chart(ctxLatencia, {
-        type: 'bar',
+    new Chart(ctxUsoRam, {
+        type: 'doughnut',
         data: {
-            labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+            labels: ['Disponível: ', 'Em uso: '],
             datasets: [{
-                label: 'Pacotes enviados    ',
-                data: [700, 980, 867, 408, 1098, 640, 580],
-                borderColor: '#22C55E',
-                backgroundColor: '#8B5CF6',
-                tension: 0.5,
-                fill: true,
-                pointRadius: 3
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Latência de rede',
-                    align: 'start',
-                    font: {
-                        size: 18
-                    },
-                },
-                // subtitle: {
-                //     display: true,
-                //     text: '',
-                //     align: 'start',
-                //     font: {
-                //         size: 18
-                //     },
-                // }
-            },
-            scales: {
-            x: {
-                stacked: true,
-                grid: {
-                display: false
-                }
-            },
-            y: {
-                stacked: true,
-                beginAtZero: true,
-                max: 60,
-                ticks: {
-                stepSize: 15
-                }
-            }
-            }
-        }
-    });
-
-    new Chart(ctxLatencia, {
-        type: "doughnut",
-        data: {
-            labels: ["Crítico", "Médio", "Baixo"],
-            datasets: [{
-                data: [8, 30, 42],
-                backgroundColor: ["#FF5252", "#F5CC4D", "#23B26D"],
-                borderColor: "#ffffff",
-                borderWidth: 3,
-                hoverOffset: 4
+                data: [22, 78],
+                backgroundColor: [
+                    '#22C55E',
+                    '#EF4444',
+                ],
+                borderWidth: 5,
+                hoverOffset: 20
             }]
         },
         options: {
@@ -106,58 +60,305 @@ document.addEventListener("DOMContentLoaded", () => {
                 legend: {
                     display: true,
                     position: 'bottom',
-                    labels: {
-                        generateLabels(chart) {
-                            const data = chart.data;
-                            const labels = [];
-
-                            labels.push({
-                                text: `${data.labels[0]} ${data.datasets[0].data[0]}`,
-                                fillStyle: data.datasets[0].backgroundColor[0],
-                                index: 0
-                            });
-                            labels.push({
-                                text: `${data.labels[1]} ${data.datasets[0].data[1]}`,
-                                fillStyle: data.datasets[0].backgroundColor[1],
-                                index: 1
-                            });
-                            labels.push({
-                                text: `${data.labels[2]} ${data.datasets[0].data[2]}`,
-                                fillStyle: data.datasets[0].backgroundColor[2],
-                                index: 2
-                            });
-                            return labels;
+                    },
+                    title: {
+                        display: true,
+                        text: 'Uso de RAM',
+                        align: 'start',
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            top: 10,
                         }
                     },
+                    // subtitle: {
+                    //     display: true,
+                    //     text: 'Total de alertas por severidade',
+                    //     align: 'start',
+                    //     font: {
+                    //         size: 18
+                    //     },
+                    //     padding: {
+                    //         bottom: 30,
+                    //     }
+                    // },
+                    tooltip: {
+                        enabled: true
+                    }
+                },
+            }
+        
+    }),
+
+    new Chart(ctxUsoCpu, {
+        type: 'doughnut',
+        data: {
+            labels: ['Disponível: ', 'Em uso: '],
+            datasets: [{
+                data: [37, 63],
+                backgroundColor: [
+                    '#22C55E',
+                    '#EF4444',
+                ],
+                borderWidth: 5,
+                hoverOffset: 20
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "48%",
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Uso de CPU',
+                        align: 'start',
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            top: 10,
+                        }
+                    },
+                    // subtitle: {
+                    //     display: true,
+                    //     text: 'Total de alertas por severidade',
+                    //     align: 'start',
+                    //     font: {
+                    //         size: 18
+                    //     },
+                    //     padding: {
+                    //         bottom: 30,
+                    //     }
+                    // },
+                    tooltip: {
+                        enabled: true
+                    }
+                },
+            }
+        
+    }),
+
+    new Chart(ctxUsoDisco, {
+        type: 'doughnut',
+        data: {
+            labels: ['Disponível: ', 'Em uso: '],
+            datasets: [{
+                data: [43, 57],
+                backgroundColor: [
+                    '#22C55E',
+                    '#EF4444',
+                ],
+                borderWidth: 5,
+                hoverOffset: 20
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "48%",
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Uso de Disco',
+                        align: 'start',
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            top: 10,
+                        }
+                    },
+                    // subtitle: {
+                    //     display: true,
+                    //     text: 'Total de alertas por severidade',
+                    //     align: 'start',
+                    //     font: {
+                    //         size: 18
+                    //     },
+                    //     padding: {
+                    //         bottom: 30,
+                    //     }
+                    // },
+                    tooltip: {
+                        enabled: true
+                    }
+                },
+            }
+        
+    }),
+
+    new Chart(ctxRamCpu, {
+    type: 'bar',
+    data: {
+        labels: ["04:00", "08:00", "12:00", "16:00", "20:00"],
+        datasets: [
+        {
+            label: 'RAM',
+            data: [35, 61, 50, 68, 51],
+            backgroundColor: '#244770',
+            order: 2
+        },
+        {
+            label: 'CPU',
+            data: [45, 52, 70, 73, 37],
+            backgroundColor: '#C95050',
+            order: 2
+        },
+    
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Comparando Ram e CPU',
+                align: 'start',
+                font: {
+                    size: 18
+                },
+                padding: {
+                    top: 20,
+                    bottom: 30,
+                }
+            }
+        },
+        responsive: true,
+        scales: {
+        y: {
+            beginAtZero: true,
+            title: {
+            display: true,
+            text: 'Uso (%)'
+            }
+        },
+        }
+    }
+    }),
+
+    new Chart(ctxDiskLat, {
+    type: 'bar',
+    data: {
+        labels: ["04:00", "08:00", "12:00", "16:00", "20:00"],
+        datasets: [
+        {
+            label: 'Disco',
+            data: [25.5, 40, 48, 51, 38],
+            backgroundColor: '#23B26D',
+            order: 2
+        },
+        {
+            label: 'Latencia',
+            data: [23, 40, 51, 52, 38],
+            backgroundColor: '#1D85C2',
+            order: 2
+        },  
+        
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Comparando Disco e Latencia',
+                align: 'start',
+                font: {
+                    size: 18
+                },
+                padding: {
+                    top: 20,
+                    bottom: 30,
+                }
+            }
+        },
+        responsive: true,
+        scales: {
+        y: {
+            beginAtZero: true,
+            title: {
+            display: true,
+            text: 'Uso (%)'
+            }
+        },
+        }
+    }
+    }),
+
+    new Chart(ctxComponentes, {
+        type: 'bar',
+        data: {
+            labels: [
+                'RAM',
+                'CPU',
+                'DISCO',
+                'LATENCIA',
+            ],
+            datasets: [{
+                data: [78, 63, 57, 37],
+                backgroundColor: [
+                    '#FF1F35',
+                    '#FF1F35',
+                    '#EAB308',
+                    '#45B84E'
+                ],
+                borderRadius: 6,
+                barThickness: 38
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
                 },
                 title: {
                     display: true,
-                    text: 'Distribuição na semana',
+                    text: 'Ranking de componentes críticos',
                     align: 'start',
+                    color: '#000',
                     font: {
-                        size: 18
+                        size: 16,
+                        weight: 'bold'
                     },
                     padding: {
-                        top: 10,
+                        bottom: 30
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: {
+                        color: '#E5EAF3',
+                        borderDash: [4, 4]
                     }
                 },
-                subtitle: {
-                    display: true,
-                    text: 'Total de alertas por severidade',
-                    align: 'start',
-                    font: {
-                        size: 18
-                    },
-                    padding: {
-                        bottom: 30,
+                y: {
+                    grid: {
+                        color: '#E5EAF3',
+                        borderDash: [4, 4]
                     }
-                },
-                tooltip: {
-                    enabled: true
                 }
             }
         }
     });
+
 });
 
 function detalhes() {
