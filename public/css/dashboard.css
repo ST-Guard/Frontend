@@ -271,6 +271,10 @@ nav {
     background-color: var(--azul-escuro);
 }
 
+.sidebar-subbutton:hover{
+    background-color: var(--azul-claro);
+}
+
 
 /* ---- MODAIS INFOS ---- */
 .modal {
