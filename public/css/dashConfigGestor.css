@@ -45,11 +45,12 @@ body {
 
 .containerConfig {
     background-color: white;
-    border: solid #e5e7eb 2px;
+    border: solid #1c4886 6px;
     border-radius: 20px;
     width: 90%;
     max-width: 100%;
     overflow: hidden;
+    margin-bottom: 40px;
 }
 
 .boxInicio {
@@ -62,10 +63,11 @@ body {
 .boxInicio span {
     font-size: 24px;
     height: 16px;
+    color: #1c4886;
 }
 
-.boxInicio h4 {
-    color: #62748e;
+.boxInicio h3 {
+    color:  #1c4886;
     font-weight: normal;
 }
 
@@ -87,7 +89,8 @@ body {
 }
 
 .boxImagem button {
-    background-color: #ffffff;
+    background-color: #1c4886;
+    color: white;
     border: solid #e5e7eb 2px;
     border-radius: 10px;
     cursor: pointer;
@@ -138,13 +141,15 @@ body {
 }
 
 .boxInput input {
-    border: solid #e5e7eb 2px;
+    border: solid gray 1px;
+    background-color: rgb(231, 231, 231);
     border-radius: 10px;
     padding-left: 15px;
     height: 40px;
     width: 100%;
     max-width: 650px;
     min-width: 0;
+    color: black;
 }
 
 .boxTextArea {
@@ -163,7 +168,7 @@ body {
 
 .boxTextArea textarea {
     align-items: center;
-    border: solid #e5e7eb 2px;
+    border: solid gray 1px;
     border-radius: 10px;
     padding-top: 10px;
     padding-left: 15px;
@@ -173,6 +178,8 @@ body {
     width: 100%;
     min-width: 0;
     max-width: 100%;
+    background-color: rgb(231, 231, 231);
+    color: black;
 }
 
 .botaoSalvar {
