@@ -574,10 +574,15 @@ input {
   font-size: 18px;
   padding: 10px 15px;
   color: white;
-  background-color: #ED145B;
+  background-color: #F5CC4D;
   width: 120px;
   align-self: center;
   margin-top: 5px;
+}
+
+.btn:hover{
+    transform: translateY(-1px);
+  filter: brightness(1.2);
 }
 
 .loading-div {
@@ -787,7 +792,7 @@ input {
 }
 
 
-.fale_conosco {
+#fale_conosco {
   min-height: 90vh;
   display: flex;
   flex-direction: column;
