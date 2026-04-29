@@ -1,4 +1,3 @@
-
 main {
     width: 100%;
     height: 100vh;
@@ -48,6 +47,13 @@ main .conteiner_kpis .conteiner_boxes {
     flex-wrap: wrap;
     height: 35%;
     gap: 5%;
+
+}
+
+main .conteiner_kpis .conteiner_boxes .box:hover,
+main .conteiner_forms button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.2);
 }
 
 main .conteiner_kpis .conteiner_boxes .box {
@@ -56,7 +62,7 @@ main .conteiner_kpis .conteiner_boxes .box {
     width: 35%;
     margin: 0.5%;
     border-radius: 5px;
-  
+
 }
 
 main .conteiner_kpis .conteiner_boxes .box .icon {
@@ -203,9 +209,7 @@ main .conteiner_forms button {
     border-radius: 5px;
 }
 
-main .conteiner_forms button:hover {
-    background-color: #f5cb4dd1;
-}
+
 
 main .conteiner_forms .divisoria {
     display: flex;
@@ -250,7 +254,7 @@ main .conteiner_forms p a {
         height: 100vh;
     }
 
-     main .conteiner_kpis .conteiner_boxes {
+    main .conteiner_kpis .conteiner_boxes {
         justify-content: center;
     }
 
@@ -258,8 +262,8 @@ main .conteiner_forms p a {
         width: 45%;
     }
 
-     main .conteiner_kpis .conteiner_titulo {
+    main .conteiner_kpis .conteiner_titulo {
         width: 100%;
-    }  
+    }
 
 }
