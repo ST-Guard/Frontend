@@ -404,17 +404,17 @@ document.addEventListener("DOMContentLoaded", function () {
         alertServer.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Histórico de Instabilidade",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Exibe o servidor que registrou o maior volume de notificações, avisos ou falhas críticas em um período determinado.
                 </p>
 
                 <p>
-                utilidade x
+                Facilitar a manutenção preventiva ao destacar máquinas reincidentes que podem precisar de upgrade, revisão de configuração ou substituição de peças antes de uma queda total.
                 </p>
                 `
             );
@@ -430,17 +430,17 @@ document.addEventListener("DOMContentLoaded", function () {
         procConsumo.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Alocação Crítica de Recursos",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Identifica o serviço ou processo do sistema que apresenta a maior demanda atual sobre o hardware (CPU, Memória RAM ou Disco).
                 </p>
 
                 <p>
-                utilidade x
+                Localizar gargalos operacionais e identificar comportamentos anômalos (como vazamento de memória ou loops de processamento) para garantir a estabilidade do servidor.       
                 </p>
                 `
             );
@@ -456,17 +456,17 @@ document.addEventListener("DOMContentLoaded", function () {
         jogAtivos.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Volume de Usuários Online",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Contagem instantânea de usuários com sessão ativa e interação direta com a plataforma.
                 </p>
 
                 <p>
-                utilidade x
+                Mensurar o engajamento e a carga de tráfego atual, auxiliando em decisões de escalonamento de recursos e análise de horários de pico.
                 </p>
                 `
             );
@@ -482,17 +482,17 @@ document.addEventListener("DOMContentLoaded", function () {
         serveAtivos.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Status da Infraestrutura",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Monitoramento em tempo real da disponibilidade dos servidores físicos ou virtuais que sustentam a aplicação.
                 </p>
 
                 <p>
-                utilidade x
+                Identificar quedas parciais de serviço para agir rapidamente na recuperação de nós offline, evitando a sobrecarga dos servidores remanescentes.
                 </p>
                 `
             );
@@ -748,3 +748,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 });
+
+/* =============================================== */
+/* ---- GRÁFICOS NA DASH DE ALERTAS DO GESTOR ---- */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const Alerta =
+        document.getElementById("Alerta");
+
+    if (Alerta) {
+
+        Alerta.addEventListener("click", function () {
+
+            abrirModal(
+                "Gráfico x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const distribuicao =
+        document.getElementById("distribuicao");
+
+    if (distribuicao) {
+
+        distribuicao.addEventListener("click", function () {
+
+            abrirModal(
+                "Gráfico x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+});
+
+
