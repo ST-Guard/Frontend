@@ -822,8 +822,8 @@
         display: flex;
         gap: 10px;
         width: 100%;
-    background-color: #f1f1f179;
-        border:1px solid #E5E7EB;    
+        background-color: #f1f1f179;
+        border: 1px solid #E5E7EB;
         border-radius: 5px;
         font-size: 1rem;
         height: 4rem;
@@ -844,8 +844,8 @@
     }
 
 
-   
-    #btn_Relatorio{
+
+    #btn_Relatorio {
         width: 100%;
         height: 4rem;
         display: flex;
@@ -858,10 +858,16 @@
         font-size: 1.2rem;
         cursor: pointer;
 
-        
+
     }
 
-
+#btn_Relatorio:hover {
+   
+    background-color: #F5CC4D;
+    color: #244770;
+        transform: translateY(-1px);
+    
+}
 
     /*Responsividade Extra*/
 

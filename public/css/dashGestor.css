@@ -246,9 +246,7 @@ header {
 }
 
 .grafico-ServidorAlerta,
-.grafico-Alerta,
-.grafico-RamXCpu,
-.grafico-DiscoXLatencia {
+.grafico-Alerta {
   border: solid #e5e7eb 2px;
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
@@ -263,14 +261,175 @@ header {
 }
 
 .canvas-containerServer,
-.canvas-containerAlerta,
-#expandirRamxCpu,
-#expandirDiscoxLatencia {
+.canvas-containerAlerta {
   position: relative;
   width: 100%;
   height: 350px;
   min-height: 250px;
 }
+
+#container_graficosP2 {
+    display: flex;
+    gap: 5px;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 2%;
+}
+
+#container_graficosP2 .parte2 {
+    flex: 1 1 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.grafico-RamXCpu,
+.grafico-DiscoXLatencia {
+    border: solid #e5e7eb 2px;
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background-color: white;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 16px;
+    overflow: hidden;
+}
+
+#expandirRamxCpu,
+#expandirDiscoxLatencia {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    min-height: 250px;
+}
+
+.selectPeriodo {
+    display: flex;
+    margin-left: auto;
+    margin-bottom: -40px;
+    border: 2px solid #1c4886;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    width: 20%;
+    z-index: 9999;
+}
+
+#chartRamxCpu,
+#chartDiskxLat {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* relatórios */
+#container_graficosP2 .div_relatorios-mae {
+    flex: 0 0 30%;
+    border-radius: 16px;
+    padding: 2%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    background-color: white;
+    position: sticky;
+    top: 20px;
+}
+
+.div_relatorio-conteudo {
+    border: 2px solid #e3e3e4;
+    width: 100%;
+    max-height: 600px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 3%;
+    padding-left: 6%;
+    margin-bottom: 10%;
+    box-sizing: border-box;
+    color: var(--corFonteTexto);
+}
+
+.div_relatorio-conteudo h1{
+  font-size: 1.5rem;
+}
+.div_relatorios {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    gap: 40px;
+}
+
+.div_relatorio {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.div_conteudoRel {
+    margin-top: 6%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    color: var(--corFonteTexto);
+    padding-bottom: 10%;
+}
+
+
+.conteudoRelatorio {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    background-color: #f1f1f179;
+    border: 1px solid #E5E7EB;
+    border-radius: 5px;
+    font-size: 1rem;
+    height: 4rem;
+    align-items: center;
+    padding-left: 5%;
+    box-sizing: border-box;
+}
+.conteudoRelatorio:hover{
+  border: 1px solid var(--azulClarinho);
+      transform: translateY(-1px);
+
+}
+.conteudoRelatorio img {
+    width: 22px;
+    height: 22px;
+}
+
+.conteudoRelatorio h3 {
+    cursor: pointer;
+    font-weight: 600;
+    color: #1c4886;
+    font-size: 1.3rem;
+}
+
+#btn_Relatorio {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #244770;
+    color: #F5CC4D;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+}
+
+#btn_Relatorio:hover {
+   
+    background-color: #F5CC4D;
+    color: #244770;
+        transform: translateY(-1px);
+    
+}
+
 
 .selectPeriodo {
   display: flex;
@@ -294,10 +453,9 @@ header {
   display: block;
 }
 
-/* RESPONSIVIDADEEEEEEEEEEEEEEEEEEEEEEEEEEE */
+/* RESPONSIVIDADE */
 
 @media (max-width: 1024px) {
-
   .sidebar {
     width: 80px;
   }
@@ -338,12 +496,24 @@ header {
   .canvas-containerAlerta,
   #expandirRamxCpu,
   #expandirDiscoxLatencia {
-    height: 320px;
+    height: 300px;
   }
 
+  #container_graficosP2 {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+  #container_graficosP2 .parte2 {
+    flex: 1 1 100%;
+  }
+
+  #container_graficosP2 .div_relatorios-mae {
+    flex: 1 1 100%;
+    width: 100%;
+    position: static;
+  }
 }
-
-
 
 @media (max-width: 768px) {
   .userInfo,
@@ -462,8 +632,8 @@ header {
 
   #chartRamxCpu,
   #chartDiskxLat {
-    width: 100% ;
-    height: 100% ;
+    width: 100% !important;
+    height: 100% !important;
     display: block;
   }
 
@@ -472,5 +642,58 @@ header {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
+  }
+
+  /* Container gráficos + relatórios */
+  #container_graficosP2 {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+  #container_graficosP2 .div_relatorios-mae {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+
+  #container_graficosP2 .div_relatorio-conteudo {
+    width: 100%;
+    padding: 5%;
+  }
+
+  #container_graficosP2 .conteudoRelatorio {
+    width: 100%;
+    padding: 12px;
+  }
+
+  #container_graficosP2 .conteudoRelatorio h3 {
+    font-size: 0.9rem;
+  }
+
+  #container_graficosP2 #btn_Relatorio {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+/* Breakpoint: 480px */
+@media (max-width: 480px) {
+  #container_graficosP2 .div_relatorios-mae {
+    width: 100% !important;
+  }
+
+  #container_graficosP2 .conteudoRelatorio {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 10px;
+  }
+
+  #container_graficosP2 .conteudoRelatorio img {
+    width: 18px;
+    height: 18px;
+  }
+
+  #container_graficosP2 .conteudoRelatorio h3 {
+    font-size: 0.8rem;
   }
 }
