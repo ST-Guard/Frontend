@@ -72,33 +72,10 @@
 
 
       <div class="sidebar-buttons">
-        <div class="sidebar-button dashboard-group">
-
-          <!-- BOTÃO DASHBOARD -->
-          <div class="dashboard-main" onclick="toggleDashboardMenu()">
-
-            <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-            <p>Dashboards</p>
-
-          </div>
-
-          <!-- SUBMENU -->
-          <div class="submenu-dashboard" id="submenuDashboard">
-
-            <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dash1.html')">
-
-              <p>Dashboard 1</p>
-
-            </div>
-
-            <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dash2.html')">
-
-              <p>Dashboard 2</p>
-
-            </div>
-
-          </div>
-
+        <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashGestor.html')">
+          <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+          <p><a href="../pages/dashGestor.html">Dashboard</a></p>
+          <!-- <p onclick="mudarServidor()">Servidores</p> -->
         </div>
 
         <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
@@ -235,7 +212,7 @@
 
   <script src="./../js/sessao.js"></script>
   <script src="./../js/dashGestor.js"></script>
-  <script src="./../js/subMenu.js"></script>
-  <script src="./../js/modaisInfos.js"></script>  
+  <script src="./../js/modaisInfos.js"></script>
 </body>
+
 </html>

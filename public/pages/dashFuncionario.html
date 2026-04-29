@@ -53,19 +53,10 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-                <div class="sidebar-button dashboard-group">
-                    <div class="dashboard-main" onclick="toggleDashboardMenu(event)">
-                        <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                        <p>Dashboards</p>
-                    </div>
-                    <div class="submenu-dashboard" id="submenuDashboard">
-                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashGestor.html')">
-                            <p>Dashboard 1</p>
-                        </div>
-                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashOutra.html')">
-                            <p>Dashboard 2</p>
-                        </div>
-                    </div>
+                <div class="sidebar-button" onclick="fnNavegar('../pages/dashGestor.html')">
+                    <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                    <p><a href="../pages/dashGestor.html">Dashboard</a></p>
+                    <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
@@ -158,6 +149,4 @@
     </div>
 </body>
 <script src="./../js/dashFuncionario.js" defer></script>
-<script src="./../js/subMenu.js"></script>
-
 </html>

@@ -55,7 +55,7 @@
             <div class="right-nav">
                 <div class="logo-notificao">
                     <a href="dashAlertas.html">
-                    <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                        <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
                     </a>
                     <div class="qtd-notificao">
                         <img src="./../assets/dashboard-icons/circulo.svg" alt="">
@@ -80,19 +80,10 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-                 <div class="sidebar-button dashboard-group">
-                    <div class="dashboard-main" onclick="toggleDashboardMenu(event)">
-                        <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                        <p>Dashboards</p>
-                    </div>
-                    <div class="submenu-dashboard" id="submenuDashboard">
-                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashGestor.html')">
-                            <p>Dashboard 1</p>
-                        </div>
-                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashOutra.html')">
-                            <p>Dashboard 2</p>
-                        </div>
-                    </div>
+                <div class="sidebar-button" onclick="fnNavegar('../pages/dashGestor.html')">
+                    <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                    <p><a href="../pages/dashGestor.html">Dashboard</a></p>
+                    <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashServidorGestor.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
@@ -109,7 +100,7 @@
                     <p><a href="dashFuncionario.html">Funcionários</a></p>
                     <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
                 </div>
-                <div class="sidebar-button"  onclick="fnNavegar('../pages/dashConfigGestor.html')">
+                <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigGestor.html')">
                     <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
                     <p><a href="dashConfigGestor.html">Configurações</a></p>
                     <!-- <p onclick="mudarConfig()">Configurações</p> -->
@@ -117,8 +108,8 @@
                 <div class="sidebar-button-sair">
                     <div class="saindo">
                         <a href="login.html" onclick="limparSessao()" class="sair">
-                        <img src="../assets/dashboard-icons/sair.svg" alt="">
-                        <p>Sair</p>
+                            <img src="../assets/dashboard-icons/sair.svg" alt="">
+                            <p>Sair</p>
                         </a>
                     </div>
                 </div>
@@ -377,7 +368,7 @@
                             <h1 id="qtdServidores">3</h1>
                             <img src="../assets/dashboard-icons/icon_check.svg" alt="">
                         </div>
-                        <h4>Quantidade de servidores que estão ativos</h4>
+                        <h4>Quantidade de servidores</h4>
                     </div>
                 </div>
                 <div class="div_kpi kpi2">
@@ -390,7 +381,7 @@
                             <img src="../assets/dashboard-icons/icon_atencao.svg" alt="" id="imgKpi2">
                         </div>
                         <div class="status">
-                            <h4>Quantidade de servidores que estão inativos</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -404,7 +395,7 @@
                             <img src="../assets/dashboard-icons/icon_alerta.svg" alt="" id="imgKpi3">
                         </div>
                         <div class="status">
-                            <h4>Processo consumindo mais CPU</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -418,7 +409,7 @@
                             <img src="../assets/dashboard-icons/icon_check.svg" alt="" id="imgKpi4">
                         </div>
                         <div class="status">
-                            <h4>SERVIDOR-DC02</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -432,7 +423,7 @@
                             <img src="../assets/dashboard-icons/icon_check.svg" alt="" id="imgKpi5">
                         </div>
                         <div class="status">
-                            <h4>SERVIDOR-DC02</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
