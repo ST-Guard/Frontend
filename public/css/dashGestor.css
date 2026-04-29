@@ -222,8 +222,7 @@ header {
 /* GRÁFICOS */
 .SubcorpoPagina {
   width: 100%;
-  max-height: 90vh;
-  overflow: scroll;
+  min-height: 100vh;
   margin-left: 18%;
   margin-top: 10vh;
   display: flex;
@@ -234,71 +233,190 @@ header {
 
 .parte1,
 .parte2 {
-  box-sizing: border-box;
   display: flex;
   gap: 24px;
   padding: 0 24px;
-  flex-wrap: wrap;
   width: 100%;
-}
-
-.parte1 {
-  margin-top: 30px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .grafico-ServidorAlerta,
-.grafico-Alerta,
+.grafico-Alerta {
+    flex: 1 1 48%;  
+    min-width: 400px;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0;
+    border: solid #e5e7eb 2px;
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    border-radius: 15px;
+    background-color: white;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#container_graficosP2 {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 0 2px;
+    padding-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#container_graficosP2 .parte2 {
+    flex: 1 1 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
 .grafico-RamXCpu,
 .grafico-DiscoXLatencia {
-  border: solid #e5e7eb 2px;
-  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  background-color: white;
-  box-sizing: border-box;
-  flex: 1 1 480px;
-  padding: 16px;
-  margin: 1rem 0;
-  max-width: 100%;
-  overflow: hidden;
-  width: 100%;
+    border: solid #e5e7eb 2px;
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background-color: white;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 16px;
+    overflow: hidden;
 }
 
-.canvas-containerServer,
-.canvas-containerAlerta,
 #expandirRamxCpu,
 #expandirDiscoxLatencia {
-  position: relative;
-  width: 100%;
-  height: 350px;
-  min-height: 250px;
+    position: relative;
+    width: 100%;
+    height: 350px;
+    min-height: 250px;
 }
 
 .selectPeriodo {
-  display: flex;
-  margin-left: auto;
-  margin-bottom: -40px;
-}
-
-.selectPeriodo {
-  border: 2px solid #1c4886;
-  border-radius: 20px;
-  text-align: center;
-  position: relative;
-  width: 20%;
-  z-index: 9999;
+    display: flex;
+    margin-left: auto;
+    margin-bottom: -40px;
+    border: 2px solid #1c4886;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    width: 20%;
+    z-index: 9999;
 }
 
 #chartRamxCpu,
 #chartDiskxLat {
-  width: 100% ;
-  height: 100% ;
-  display: block;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
 }
 
-/* RESPONSIVIDADEEEEEEEEEEEEEEEEEEEEEEEEEEE */
+/* Área de relatórios */
+#container_graficosP2 .div_relatorios-mae {
+    flex: 0 0 30%;
+    border-radius: 16px;
+    padding: 2%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    background-color: white;
+    position: sticky;
+    top: 20px;
+}
+
+.div_relatorio-conteudo {
+    border: 2px solid #e3e3e4;
+    width: 100%;
+    max-height: 600px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 3%;
+    padding-left: 6%;
+    margin-bottom: 10%;
+    box-sizing: border-box;
+}
+
+.div_relatorios {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    gap: 40px;
+}
+
+.div_relatorio {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.div_conteudoRel {
+    margin-top: 6%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    color: var(--corDaFonte);
+    padding-bottom: 10%;
+}
+
+.conteudoRelatorio {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    background-color: #f1f1f179;
+    border: 1px solid #E5E7EB;
+    border-radius: 5px;
+    font-size: 1rem;
+    height: 4rem;
+    align-items: center;
+    padding-left: 5%;
+    box-sizing: border-box;
+}
+
+.conteudoRelatorio img {
+    width: 22px;
+    height: 22px;
+}
+
+.conteudoRelatorio:hover{
+  border: 1px solid #66C0F4;
+  background-color: #c2e4f8;
+}
+
+.conteudoRelatorio h3 {
+    cursor: pointer;
+    font-weight: 600;
+    color: #1c4886;
+    font-size: 1.3rem;
+}
+
+#btn_Relatorio {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #244770;
+    color: #F5CC4D;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+}
+
+
+#btn_Relatorio:hover {
+    background-color: #F5CC4D;
+    color: #0F1C2E;
+}
+/* RESPONSIVIDADE  */
+
 
 @media (max-width: 1024px) {
-
   .sidebar {
     width: 80px;
   }
@@ -321,12 +439,15 @@ header {
     flex: 1 1 calc(50% - 15px);
     max-width: calc(50% - 15px);
   }
+  
 
   .parte1,
   .parte2 {
     padding: 0 16px;
     gap: 16px;
   }
+
+  
 
   .grafico-ServidorAlerta,
   .grafico-Alerta,
@@ -339,13 +460,40 @@ header {
   .canvas-containerAlerta,
   #expandirRamxCpu,
   #expandirDiscoxLatencia {
-    height: 320px;
+    height: 700px;
   }
 
+  #container_graficosP2 {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+  #container_graficosP2 .parte2 {
+    flex: 1 1 100%;
+  }
+
+  #container_graficosP2 .div_relatorios-mae {
+    flex: 1 1 100%;
+    width: 100%;
+    position: static;
+  }
 }
 
 
+.canvas-containerServer,
+.canvas-containerAlerta {
+    position: relative;
+    width: 100%;
+    height: 400px;  /* ALTURA AQUI */
+    min-height: 300px;
+}
 
+#chartServer,
+#chartAlerta {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
 @media (max-width: 768px) {
   .userInfo,
   .separacao {
@@ -463,8 +611,8 @@ header {
 
   #chartRamxCpu,
   #chartDiskxLat {
-    width: 100% ;
-    height: 100% ;
+    width: 100% !important;
+    height: 100% !important;
     display: block;
   }
 
@@ -473,5 +621,56 @@ header {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
+  }
+
+  #container_graficosP2 {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+  #container_graficosP2 .div_relatorios-mae {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+
+  #container_graficosP2 .div_relatorio-conteudo {
+    width: 100%;
+    padding: 5%;
+  }
+
+  #container_graficosP2 .conteudoRelatorio {
+    width: 100%;
+    padding: 12px;
+  }
+
+  #container_graficosP2 .conteudoRelatorio h3 {
+    font-size: 0.9rem;
+  }
+
+  #container_graficosP2 #btn_Relatorio {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  #container_graficosP2 .div_relatorios-mae {
+    width: 100% !important;
+  }
+
+  #container_graficosP2 .conteudoRelatorio {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 10px;
+  }
+
+  #container_graficosP2 .conteudoRelatorio img {
+    width: 18px;
+    height: 18px;
+  }
+
+  #container_graficosP2 .conteudoRelatorio h3 {
+    font-size: 0.8rem;
   }
 }
