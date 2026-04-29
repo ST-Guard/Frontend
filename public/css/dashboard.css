@@ -125,12 +125,16 @@ nav {
     max-height: 55px;
     object-fit: cover;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .userImg img {
     border-radius: 50%;
     width: 100%;
 }
+
 
 .userInfo {
     margin-left: 15px;

@@ -14,6 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="./../assets/icon/icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+        
+    
     <link rel="stylesheet" href="../css/dashboard.css" />
     <link rel="stylesheet" href="../css/dashAnalistaEspecifica.css">
 </head>
@@ -21,38 +24,33 @@
 <body>
     <header>
 
-        <nav>
+       <nav>
             <div class="logo-nav" onclick="fnNavegar('/')">
-                <img src="./../assets/logos/smart data branco.png" alt="">
+                <a href="../pages/index.html">
+                    <img src="./../assets/logos/smart data branco.png" alt="">
+                </a>
             </div>
-
             <div class="right-nav">
-
                 <div class="logo-notificao">
-
                     <div class="icon-notificao">
                         <img src="./../assets/dashboard-icons/notificao.svg" alt="">
                     </div>
-
                     <div class="qtd-notificao">
                         <img src="./../assets/dashboard-icons/circulo.svg" alt="">
                         <p class="qtd-notificao">10</p>
                     </div>
-
-
                 </div>
-
                 <div class="separacao"></div>
-
                 <div class="logo-usuario">
                     <div class="userImg">
-                        <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="">
+                        <a href="dashConfigAnalista.html">
+                            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+                        </a>
                     </div>
                     <div class="userInfo">
-                        <h2 class="user-name">Matheus Valle</h2>
-                        <h3 class="user-cargo">Analista de operações</h3>
+                        <h2 class="user-name" id="username">Matheus Valle</h2>
+                        <h3 class="user-cargo" id="cargoname">Analista de operações</h3>
                     </div>
-
                 </div>
             </div>
         </nav>

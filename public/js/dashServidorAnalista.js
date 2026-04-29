@@ -31,7 +31,7 @@ function buscarDados() {
 
         username.innerHTML = dados.nomePessoa
         cargoname.innerHTML = dados.cargo
-        dataCenterTitulo.innerHTML = dados.nomeDataCenter
+        //dataCenterTitulo.innerHTML = dados.nomeDataCenter
         if (dados.imagem) {
             imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
         } else {
