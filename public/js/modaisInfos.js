@@ -1,4 +1,5 @@
-/* ----- MODAIS DOS GRÁFICOS ----- */
+/* =========================================== */
+/* ----- ABRI MODAIS DOS GRÁFICOS E KPIs ----- */
 
 function abrirModal(titulo, conteudo) {
     document.getElementById("tituloModal").innerHTML = titulo;
@@ -12,10 +13,9 @@ function fecharModal() {
         .classList.remove("ativo");
 }
 
+/* =============================== */
+/* ---- INFOS GRÁFICOS GESTOR ---- */
 
-/* ---- INFOS MODAIS GESTOR ---- */
-
-// 📊 chartServer
 const chartServer = document.getElementById("chartServer");
 
 if (chartServer) {
@@ -45,9 +45,6 @@ if (chartServer) {
 
 }
 
-
-
-// 📊 chartAlerta
 const chartAlerta = document.getElementById("chartAlerta");
 
 if (chartAlerta) {
@@ -76,9 +73,6 @@ if (chartAlerta) {
 
 }
 
-
-
-// 📊 chartRamxCpu
 const chartRamxCpu = document.getElementById("chartRamxCpu");
 
 if (chartRamxCpu) {
@@ -108,8 +102,6 @@ if (chartRamxCpu) {
 }
 
 
-
-// 📊 chartDiskxLat
 const chartDiskxLat = document.getElementById("chartDiskxLat");
 
 if (chartDiskxLat) {
@@ -137,7 +129,9 @@ if (chartDiskxLat) {
     });
 
 }
-/* ----- GRÁFICOS DA DASH DE ANALISTA ----- */
+
+/* ============================================== */
+/* ----- GRÁFICOS DA DASH DE ANALISTA GERAL ----- */
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -222,4 +216,535 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+});
+
+/* =================================================== */
+/* ----- GRÁFICOS DA DASH DE ANALISTA ESPECIFICA ----- */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const graficoRam =
+        document.getElementById("graficoRam");
+
+    if (graficoRam) {
+
+        graficoRam.addEventListener("click", function () {
+
+            abrirModal(
+                "Gráfico de uso da RAM",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Este gráfico mostra a utilização de RAM do servidor selecionado.
+                </p>
+
+                <p>
+                Útil para saber como esta o componente no presente momento.
+                </p>
+                `
+            );
+
+        });
+
+    }
+
+
+
+    const graficoCpu =
+        document.getElementById("graficoCpu");
+
+    if (graficoCpu) {
+
+        graficoCpu.addEventListener("click", function () {
+
+            abrirModal(
+                "Gráfico de uso da CPU",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Este gráfico mostra a utilização de CPU do servidor selecionado.
+                </p>
+
+                <p>
+                Útil para saber como esta o componente no presente momento.
+                </p>
+                `
+            );
+
+        });
+
+    }
+
+
+
+    const graficoDisco =
+        document.getElementById("graficoDisco");
+
+    if (graficoDisco) {
+
+        graficoDisco.addEventListener("click", function () {
+
+            abrirModal(
+                "Gráfico de uso do Disco",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Este gráfico mostra a utilização de Disco do servidor selecionado.
+                </p>
+
+                <p>
+                Útil para saber como esta o componente no presente momento.
+                </p>
+                `
+            );
+
+        });
+
+    }
+
+
+    const chartRamxCpu =
+        document.getElementById("chartRamxCpu");
+
+    if (chartRamxCpu) {
+
+        chartRamxCpu.addEventListener("click", function () {
+
+            abrirModal(
+                "Gráfico de uso da RAM x CPU em horários do dia",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Este gráfico traz a comparação do uso da RAM e CPU no dia atual
+                </p>
+
+                <p>
+                Não pensei(ajuste)
+                </p>
+                `
+            );
+
+        });
+
+    }
+
+    const chartDiskxLat =
+        document.getElementById("chartDiskxLat");
+
+    if (chartDiskxLat) {
+
+        chartDiskxLat.addEventListener("click", function () {
+
+            abrirModal(
+                "Gráfico de uso do Disco x Latência de rede",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Este gráfico traz a comparação do uso da Disco e com a latência em diferentes horários do dia
+                </p>
+
+                <p>
+                Não pensei(ajuste)
+                </p>
+                `
+            );
+
+        });
+
+    }
+
+    const graficoComponentes =
+        document.getElementById("graficoComponentes");
+
+    if (graficoComponentes) {
+
+        graficoComponentes.addEventListener("click", function () {
+
+            abrirModal(
+                "Gráfico de uso de todos os componetes",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Este gráfico traz o uso de todos os 4 componentes do servidor
+                </p>
+
+                <p>
+                Não pensei(ajuste)
+                </p>
+                `
+            );
+
+        });
+
+    }
+
+});
+
+/* ============================= */
+/* ---- KPIs DA DASH GESTOR ---- */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const alertServer =
+        document.getElementById("alertServer");
+
+    if (alertServer) {
+
+        alertServer.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const procConsumo =
+        document.getElementById("procConsumo");
+
+    if (procConsumo) {
+
+        procConsumo.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const jogAtivos =
+        document.getElementById("jogAtivos");
+
+    if (jogAtivos) {
+
+        jogAtivos.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const serveAtivos =
+        document.getElementById("serveAtivos");
+
+    if (serveAtivos) {
+
+        serveAtivos.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+});
+
+/* ============================================== */
+/* ---- KPIs NA DASH DE SERVIDORES DO GESTOR ---- */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const p99cpu =
+        document.getElementById("p99cpu");
+
+    if (p99cpu) {
+
+        p99cpu.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const p99ram =
+        document.getElementById("p99ram");
+
+    if (p99ram) {
+
+        p99ram.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const p99latencia =
+        document.getElementById("p99latencia");
+
+    if (p99latencia) {
+
+        p99latencia.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const p99disco =
+        document.getElementById("p99disco");
+
+    if (p99disco) {
+
+        p99disco.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+
+    const totalServer =
+        document.getElementById("totalServer");
+
+    if (totalServer) {
+
+        totalServer.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+});
+
+/* =========================================== */
+/* ---- KPIs NA DASH DE ALERTAS DO GESTOR ---- */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const severa =
+        document.getElementById("severa");
+
+    if (severa) {
+
+        severa.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const media =
+        document.getElementById("media");
+
+    if (media) {
+
+        media.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const baixa =
+        document.getElementById("baixa");
+
+    if (baixa) {
+
+        baixa.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const resolvidos =
+        document.getElementById("resolvidos");
+
+    if (resolvidos) {
+
+        resolvidos.addEventListener("click", function () {
+
+            abrirModal(
+                "KPI x",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                descrição X
+                </p>
+
+                <p>
+                utilidade x
+                </p>
+                `
+            );
+
+        });
+
+    }
 });

@@ -15,10 +15,19 @@
     <link rel="icon" href="./../assets/icon/icon.png">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/dashAlertas.css" />
-    <!-- <link rel="stylesheet" href="../css/reset.css"> -->
 </head>
 
 <body>
+    <div id="modalGrafico" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal()">
+                &times;
+            </span>
+            <h2 id="tituloModal"></h2>
+            <div id="conteudoModal"></div>
+        </div>
+    </div>
+
     <header>
         <nav>
             <div class="logo-nav" onclick="fnNavegar('/')">
@@ -102,7 +111,7 @@
                 </div>
             </div>
             <div id="container_kpis">
-                <div class="div_kpi kpi1">
+                <div class="div_kpi kpi1" id="severa">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>CRITICOS ABERTOS</h3>
@@ -114,7 +123,7 @@
                         <h4>Requerem ação imediata</h4>
                     </div>
                 </div>
-                <div class="div_kpi kpi2">
+                <div class="div_kpi kpi2" id="media">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>SEVERIDADE MEDIA</h3>
@@ -128,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="div_kpi kpi3">
+                <div class="div_kpi kpi3" id="baixa">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>SEVERIDADE BAIXA</h3>
@@ -138,11 +147,11 @@
                             <img src="../assets/dashboard-icons/icon_check.svg" alt="">
                         </div>
                         <div class="status">
-                            <h4>Processo consumindo mais CPU</h4>
+                            <h4>Resolvido/baixa importância</h4>
                         </div>
                     </div>
                 </div>
-                <div class="div_kpi kpi4">
+                <div class="div_kpi kpi4" id="resolvidos">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>RESOLVIDOS (24h)</h3>
@@ -220,7 +229,7 @@
                                     <h1>RAM</h1>
                                 </div>
                             </div>
-                            <div class="checkBox" >
+                            <div class="checkBox">
                                 <button onclick="mudarAlerta1()">
                                     <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox1">
                                 </button>
@@ -255,11 +264,11 @@
                                     <h1>CPU</h1>
                                 </div>
                             </div>
-                            <div class="checkBox" >
+                            <div class="checkBox">
                                 <button onclick="mudarAlerta2()">
                                     <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox2">
                                 </button>
-                            </div>                            
+                            </div>
 
                         </div>
                         <div class="identificação_servidor">
@@ -292,11 +301,11 @@
                                     <h1>CPU</h1>
                                 </div>
                             </div>
-                            <div class="checkBox" >
+                            <div class="checkBox">
                                 <button onclick="mudarAlerta3()">
                                     <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox3">
                                 </button>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="identificação_servidor">
                             <img src="../assets/icon_servidor.png" alt="">
@@ -311,12 +320,11 @@
                     </div>
                 </div>
             </section>
-
-
         </div>
     </div>
 </body>
 <script src="./../js/sessao.js"></script>
 <script src="./../js/dashAlertas.js"></script>
+<script src="../js/modaisInfos.js"></script>
 
 </html>

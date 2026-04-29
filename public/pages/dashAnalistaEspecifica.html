@@ -19,9 +19,21 @@
     
     <link rel="stylesheet" href="../css/dashboard.css" />
     <link rel="stylesheet" href="../css/dashAnalistaEspecifica.css">
+
 </head>
 
 <body>
+
+    <div id="modalGrafico" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal()">
+                &times;
+            </span>
+            <h2 id="tituloModal"></h2>
+            <div id="conteudoModal"></div>
+        </div>
+    </div>
+
     <header>
 
        <nav>
@@ -60,7 +72,7 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-                 <div class="sidebar-button-select dashboard-group">
+                <div class="sidebar-button-select dashboard-group">
                     <div class="dashboard-main" onclick="toggleDashboardMenu(event)">
                         <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
                         <p>Dashboards</p>
@@ -87,8 +99,8 @@
                 <div class="sidebar-button-sair">
                     <div class="saindo">
                         <a href="login.html" onclick="limparSessao()" class="sair">
-                        <img src="../assets/dashboard-icons/sair.svg" alt="">
-                        <p>Sair</p>
+                            <img src="../assets/dashboard-icons/sair.svg" alt="">
+                            <p>Sair</p>
                         </a>
                     </div>
                 </div>
@@ -238,5 +250,6 @@
 
 <script src="../js/dashAnalistaEspecifica.js"></script>
 <script src="../js/subMenu.js"></script>
+<script src="../js/modaisInfos.js"></script>
 
 </html>
