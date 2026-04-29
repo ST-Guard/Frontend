@@ -9,6 +9,7 @@
     <script src="./../js/modal.js"></script>
     <script src="./../js/dashServidorGestor.js"></script>
     <script src="./../js/sessao.js"></script>
+    <script src="./../js/subMenu.js"></script>
     <link rel="icon" href="./../assets/icon/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +55,7 @@
             <div class="right-nav">
                 <div class="logo-notificao">
                     <a href="dashAlertas.html">
-                    <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                        <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
                     </a>
                     <div class="qtd-notificao">
                         <img src="./../assets/dashboard-icons/circulo.svg" alt="">
@@ -81,8 +82,8 @@
             <div class="sidebar-buttons">
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashGestor.html')">
                     <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p><a href="dashGestor.html">Dashboard</a></p>
-                    <!-- <p onclick="mudarDash()">Dashboard</p> -->
+                    <p><a href="../pages/dashGestor.html">Dashboard</a></p>
+                    <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashServidorGestor.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
@@ -99,7 +100,7 @@
                     <p><a href="dashFuncionario.html">Funcionários</a></p>
                     <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
                 </div>
-                <div class="sidebar-button"  onclick="fnNavegar('../pages/dashConfigGestor.html')">
+                <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigGestor.html')">
                     <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
                     <p><a href="dashConfigGestor.html">Configurações</a></p>
                     <!-- <p onclick="mudarConfig()">Configurações</p> -->
@@ -107,8 +108,8 @@
                 <div class="sidebar-button-sair">
                     <div class="saindo">
                         <a href="login.html" onclick="limparSessao()" class="sair">
-                        <img src="../assets/dashboard-icons/sair.svg" alt="">
-                        <p>Sair</p>
+                            <img src="../assets/dashboard-icons/sair.svg" alt="">
+                            <p>Sair</p>
                         </a>
                     </div>
                 </div>
@@ -144,9 +145,9 @@
                             </select>
                         </div>
                         <div class="selectIndividual">
-                            <span>DataBase</span>
+                            <span>DataCenter</span>
                             <select id="selectDataBase">
-                                <option disabled selected>Selecione a DataBase</option>
+                                <option disabled selected>Selecione a DataCenter</option>
                             </select>
                             <div class="botaoZonas">
                                 <button onclick="carregarZonas()" id="carregandoZonas">Carregar Zonas</button>
@@ -367,7 +368,7 @@
                             <h1 id="qtdServidores">3</h1>
                             <img src="../assets/dashboard-icons/icon_check.svg" alt="">
                         </div>
-                        <h4>Quantidade de servidores que estão ativos</h4>
+                        <h4>Quantidade de servidores</h4>
                     </div>
                 </div>
                 <div class="div_kpi kpi2">
@@ -376,11 +377,11 @@
                             <h3>P99 RAM</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioRam">65%</h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
+                            <h1 id="kpiP99Ram">65%</h1>
+                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="" id="imgKpi2">
                         </div>
                         <div class="status">
-                            <h4>Quantidade de servidores que estão inativos</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -390,11 +391,11 @@
                             <h3>P99 CPU</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioCpu">75%</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+                            <h1 id="kpiP99Cpu">75%</h1>
+                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="" id="imgKpi3">
                         </div>
                         <div class="status">
-                            <h4>Processo consumindo mais CPU</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -404,11 +405,11 @@
                             <h3>P99 DISCO</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioDisco">93%</h1>
-                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+                            <h1 id="kpiP99Disco">93%</h1>
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="" id="imgKpi4">
                         </div>
                         <div class="status">
-                            <h4>SERVIDOR-DC02</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -418,11 +419,11 @@
                             <h3>P99 LATÊNCIA</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioRede">20 ms</h1>
-                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+                            <h1 id="kpiP99Rede">20 ms</h1>
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="" id="imgKpi5">
                         </div>
                         <div class="status">
-                            <h4>SERVIDOR-DC02</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>

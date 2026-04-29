@@ -244,6 +244,15 @@ body {
     cursor: pointer;
 }
 
+.funcionario_deletar {
+    background-color: rgb(212, 63, 63);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
 .modal-container {
     position: fixed;
     top: 0; left: 0;

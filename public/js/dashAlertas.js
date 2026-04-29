@@ -32,6 +32,30 @@ function buscarDados() {
     })
 }
 
+function mudarAlerta1() {
+    if (checkBox1.src.includes("checkAlerta.png")) {
+        checkBox1.src = "../assets/dashboard-icons/checkPositivo.png"
+    } else {
+        checkBox1.src = "../assets/dashboard-icons/checkAlerta.png"
+    }
+}
+
+function mudarAlerta2() {
+    if (checkBox2.src.includes("checkAlerta.png")) {
+        checkBox2.src = "../assets/dashboard-icons/checkPositivo.png"
+    } else {
+        checkBox2.src = "../assets/dashboard-icons/checkAlerta.png"
+    }
+}
+
+function mudarAlerta3() {
+    if (checkBox3.src.includes("checkAlerta.png")) {
+        checkBox3.src = "../assets/dashboard-icons/checkPositivo.png"
+    } else {
+        checkBox3.src = "../assets/dashboard-icons/checkAlerta.png"
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const alerta = document.getElementById("Alerta");
     const distribuicao = document.getElementById("distribuicao");

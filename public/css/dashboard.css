@@ -221,10 +221,11 @@ nav {
 }
 
 .corpoPagina .sidebar .sidebar-buttons .sidebar-button p a,
-.corpoPagina .sidebar .sidebar-buttons .sidebar-button-select p a{
+.corpoPagina .sidebar .sidebar-buttons .sidebar-button-select p a {
     text-decoration: none;
-    color:#fff;
+    color: #fff;
 }
+
 .sidebar-button-select img,
 .sidebar-button img {
     width: 24px;
@@ -234,6 +235,119 @@ nav {
     align-items: center;
     cursor: pointer;
     display: flex;
+}
+
+.dashboard-group {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding-left: 0;
+}
+
+.dashboard-main {
+    width: 100%;
+    height: 8vh;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.submenu-dashboard {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+}
+
+.submenu-dashboard.ativo {
+    display: flex;
+}
+
+.sidebar-subbutton {
+    width: 100%;
+    padding: 8px 0 8px 55px;
+    cursor: pointer;
+    background-color: var(--azul-escuro);
+}
+
+.sidebar-subbutton:hover{
+    background-color: var(--azul-claro);
+}
+
+
+/* ---- MODAIS INFOS ---- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.ativo {
+    display: flex;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 28, 46, 0.65); 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    width: 500px;
+    max-width: 90%;
+    padding: 25px 30px;
+    border-radius: 16px;
+    border: 1px solid #E5E7EB;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative;
+    animation: aparecerModal 0.25s ease;
+}
+
+#tituloModal {
+    font-size: 1.6rem;
+    color: #1c4886; 
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+#conteudoModal {
+    font-size: 1rem;
+    color: #6B7280;
+    line-height: 1.6;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #9A9A9A;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-modal:hover {
+    color: #FF5252;
+    transform: scale(1.1);
 }
 
 /* ######## (MOBILE E TABLETS) ######## */
@@ -320,8 +434,3 @@ nav {
 
 
 }
-
-
-
-
-

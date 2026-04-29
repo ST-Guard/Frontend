@@ -11,12 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
-        <script src="./../js/sessao.js"></script>
-        <script src="./../js/dashAlertas.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <link rel="icon" href="./../assets/icon/icon.png">
-        <link rel="stylesheet" href="../css/dashboard.css">
-        <link rel="stylesheet" href="../css/dashAlertas.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="./../assets/icon/icon.png">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/dashAlertas.css" />
     <!-- <link rel="stylesheet" href="../css/reset.css"> -->
 </head>
 
@@ -31,7 +29,7 @@
             <div class="right-nav">
                 <div class="logo-notificao">
                     <a href="dashAlertas.html">
-                    <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                        <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
                     </a>
 
                     <div class="qtd-notificao">
@@ -64,8 +62,8 @@
             <div class="sidebar-buttons">
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashGestor.html')">
                     <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p><a href="dashGestor.html">Dashboard</a></p>
-                    <!-- <p onclick="mudarDash()">Dashboard</p> -->
+                    <p><a href="../pages/dashGestor.html">Dashboard</a></p>
+                    <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
@@ -82,7 +80,7 @@
                     <p><a href="dashFuncionario.html">Funcionários</a></p>
                     <!-- <p onclick="mudarFuncionario()">Funcionarios</p> -->
                 </div>
-                <div class="sidebar-button"  onclick="fnNavegar('../pages/dashConfigGestor.html')">
+                <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigGestor.html')">
                     <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
                     <p><a href="dashConfigGestor.html">Configurações</a></p>
                     <!-- <p onclick="mudarConfig()">Configurações</p> -->
@@ -90,8 +88,8 @@
                 <div class="sidebar-button-sair">
                     <div class="saindo">
                         <a href="login.html" onclick="limparSessao()" class="sair">
-                        <img src="../assets/dashboard-icons/sair.svg" alt="">
-                        <p>Sair</p>
+                            <img src="../assets/dashboard-icons/sair.svg" alt="">
+                            <p>Sair</p>
                         </a>
                     </div>
                 </div>
@@ -143,7 +141,7 @@
                             <h4>Processo consumindo mais CPU</h4>
                         </div>
                     </div>
-                </div>  
+                </div>
                 <div class="div_kpi kpi4">
                     <div class="info_kpi">
                         <div class="containerTitulo">
@@ -157,7 +155,7 @@
                             <h4>SLA dentro do esperado</h4>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
             <div class="parte1">
                 <section class="grafico_alerta">
@@ -165,7 +163,7 @@
                         <div class="grafico_chart">
                             <canvas id="Alerta"></canvas>
                         </div>
-    
+
                         <div class="grafico_kpis">
                             <div class="grafico_kp1">
                                 <h1>Total Alertas</h1>
@@ -184,7 +182,7 @@
                                 <p>42</p>
                             </div>
                         </div>
-    
+
                         <div class="boxTendencia">
                             <div class="tendencia">
                                 <img src="../assets/icone_certo.png" alt="">
@@ -211,8 +209,43 @@
                                     <img src="../assets/Icon_alerta.png" alt="">
                                 </div>
                                 <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
+                                    <h1>RAM ACIMA DE 86%</h1>
                                 </div>
+                            </div>
+                            <div class="cards">
+                                <div class="status_titulo_card_alerta">
+                                    <h1>Crítico</h1>
+                                </div>
+                                <div class="componente_titulo_card_alerta">
+                                    <h1>RAM</h1>
+                                </div>
+                            </div>
+                            <div class="checkBox" >
+                                <button onclick="mudarAlerta1()">
+                                    <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox1">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="identificação_servidor">
+                            <img src="../assets/icon_servidor.png" alt="">
+                            <h1>SRV-DC01-WEB-05 - 7 minutos atrás </h1>
+                        </div>
+                        <div class="botoes_card_alerta">
+                            <button style="background-color: #6B7280; color: white; font-weight: 550;"
+                                onclick="detalhes()">Ver
+                                detalhe</button>
+                        </div>
+                    </div>
+                    <div class="card_alerta">
+                        <div class="titulo_card_alerta">
+                            <div class="cards1">
+                                <div class="icon_titulo_card_alerta">
+                                    <img src="../assets/Icon_alerta.png" alt="">
+                                </div>
+                                <div class="titulo_texto_card_alerta">
+                                    <h1>CPU ACIMA DE 84%</h1>
+                                </div>
+
                             </div>
                             <div class="cards">
                                 <div class="status_titulo_card_alerta">
@@ -222,23 +255,27 @@
                                     <h1>CPU</h1>
                                 </div>
                             </div>
+                            <div class="checkBox" >
+                                <button onclick="mudarAlerta2()">
+                                    <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox2">
+                                </button>
+                            </div>                            
+
                         </div>
                         <div class="identificação_servidor">
                             <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
+                            <h1>SRV-DC01-WEB-05 - 19 minutos atrás </h1>
+                        </div>
+                        <div class="linha_referencia">
                         </div>
                         <div class="botoes_card_alerta">
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;" onclick="detalhes()">Ver
+                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
                                 detalhe</button>
                         </div>
-
                     </div>
 
                     <div class="card_alerta">
-
                         <div class="titulo_card_alerta">
-
-
                             <div class="cards1">
                                 <div class="icon_titulo_card_alerta">
                                     <img src="../assets/Icon_alerta.png" alt="">
@@ -246,10 +283,7 @@
                                 <div class="titulo_texto_card_alerta">
                                     <h1>CPU ACIMA DE 90%</h1>
                                 </div>
-
                             </div>
-
-
                             <div class="cards">
                                 <div class="status_titulo_card_alerta">
                                     <h1>Crítico</h1>
@@ -258,348 +292,22 @@
                                     <h1>CPU</h1>
                                 </div>
                             </div>
-
+                            <div class="checkBox" >
+                                <button onclick="mudarAlerta3()">
+                                    <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox3">
+                                </button>
+                            </div>                            
                         </div>
-
-
                         <div class="identificação_servidor">
                             <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
+                            <h1>SRV-DC01-WEB-05 - 27 minutos atrás </h1>
                         </div>
-
                         <div class="linha_referencia">
-
                         </div>
-
-
                         <div class="botoes_card_alerta">
-
                             <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
                                 detalhe</button>
                         </div>
-
-                    </div>
-
-                    <div class="card_alerta">
-
-                        <div class="titulo_card_alerta">
-
-
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
-                                </div>
-
-                            </div>
-
-
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
-                        </div>
-
-                        <div class="linha_referencia">
-
-                        </div>
-
-
-                        <div class="botoes_card_alerta">
-
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
-
-                    </div>
-
-                    <div class="card_alerta">
-
-                        <div class="titulo_card_alerta">
-
-
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
-                                </div>
-
-                            </div>
-
-
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
-                        </div>
-
-                        <div class="linha_referencia">
-
-                        </div>
-
-
-                        <div class="botoes_card_alerta">
-
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
-
-                    </div>
-
-                    <div class="card_alerta">
-
-                        <div class="titulo_card_alerta">
-
-
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
-                                </div>
-
-                            </div>
-
-
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
-                        </div>
-
-                        <div class="linha_referencia">
-
-                        </div>
-
-
-                        <div class="botoes_card_alerta">
-
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
-
-                    </div>
-
-                    <div class="card_alerta">
-
-                        <div class="titulo_card_alerta">
-
-
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
-                                </div>
-
-                            </div>
-
-
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
-                        </div>
-
-                        <div class="linha_referencia">
-
-                        </div>
-
-
-                        <div class="botoes_card_alerta">
-
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
-
-                    </div>
-
-                    <div class="card_alerta">
-
-                        <div class="titulo_card_alerta">
-
-
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
-                                </div>
-
-                            </div>
-
-
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
-                        </div>
-
-                        <div class="linha_referencia">
-
-                        </div>
-
-
-                        <div class="botoes_card_alerta">
-
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
-
-                    </div>
-
-                    <div class="card_alerta">
-
-                        <div class="titulo_card_alerta">
-
-
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
-                                </div>
-
-                            </div>
-
-
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
-                        </div>
-
-                        <div class="linha_referencia">
-
-                        </div>
-
-
-                        <div class="botoes_card_alerta">
-
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
-
-                    </div>
-
-                    <div class="card_alerta">
-
-                        <div class="titulo_card_alerta">
-
-
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
-                                </div>
-
-                            </div>
-
-
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 2 minutos atrás </h1>
-                        </div>
-
-                        <div class="linha_referencia">
-
-                        </div>
-
-
-                        <div class="botoes_card_alerta">
-
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
-
                     </div>
                 </div>
             </section>
@@ -608,5 +316,7 @@
         </div>
     </div>
 </body>
+<script src="./../js/sessao.js"></script>
+<script src="./../js/dashAlertas.js"></script>
 
 </html>

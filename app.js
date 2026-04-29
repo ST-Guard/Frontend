@@ -34,6 +34,7 @@ app.use("/zonas", zonaRouter);
 app.use("/sessao", sessaoRouter);
 
 
+
 // inicia o servidor
 app.listen(PORT, function () {
   console.log(`Servidor rodando em http://${HOST}:${PORT}`);

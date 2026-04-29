@@ -9,6 +9,7 @@
     <script src="./../js/dashServidorAnalista.js"></script>
     <script src="./../js/sessao.js"></script>
     <script src="./../js/modal.js"></script>
+    <script src="./../js/subMenu.js"></script>
     <link rel="icon" href="./../assets/icon/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,10 +64,19 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-                <div class="sidebar-button" onclick="fnNavegar('dashAnalista.html')">
-                    <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p><a href="dashAnalista.html">Dashboard</a></p>
-                    <!-- <p onclick="mudarDash()">Dashboard</p> -->
+                 <div class="sidebar-button dashboard-group">
+                    <div class="dashboard-main" onclick="toggleDashboardMenu(event)">
+                        <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+                        <p>Dashboards</p>
+                    </div>
+                    <div class="submenu-dashboard" id="submenuDashboard">
+                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashGestor.html')">
+                            <p>Dashboard Geral</p>
+                        </div>
+                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashOutra.html')">
+                            <p>Dashboard Específica servidores</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="sidebar-button-select" onclick="fnNavegar('dashServidorAnalista.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
@@ -114,11 +124,11 @@
                             <h3>P99 RAM</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioRam">65%</h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
+                            <h1 id="kpiP99Ram">65%</h1>
+                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="" id="imgKpi2">
                         </div>
                         <div class="status">
-                            <h4>Quantidade de servidores que estão inativos</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -128,11 +138,11 @@
                             <h3>P99 CPU</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioCpu">75%</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+                            <h1 id="kpiP99Cpu">75%</h1>
+                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="" id="imgKpi3">
                         </div>
                         <div class="status">
-                            <h4>Processo consumindo mais CPU</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -142,11 +152,11 @@
                             <h3>P99 DISCO</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioDisco">93%</h1>
-                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+                            <h1 id="kpiP99Disco">93%</h1>
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="" id="imgKpi4">
                         </div>
                         <div class="status">
-                            <h4>SERVIDOR-DC02</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
@@ -156,11 +166,11 @@
                             <h3>P99 LATÊNCIA</h3>
                         </div>
                         <div class="div_situacao">
-                            <h1 id="kpiMedioRede">20 ms</h1>
-                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+                            <h1 id="kpiP99Rede">20 ms</h1>
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="" id="imgKpi5">
                         </div>
                         <div class="status">
-                            <h4>SERVIDOR-DC02</h4>
+                            <h4>Ultimos 7 dias</h4>
                         </div>
                     </div>
                 </div>
