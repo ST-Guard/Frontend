@@ -650,17 +650,17 @@ document.addEventListener("DOMContentLoaded", function () {
         severa.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Incidentes de Alta Prioridade",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Alertas que indicam falhas graves, interrupções de serviço ou riscos iminentes à estabilidade do sistema.
                 </p>
 
                 <p>
-                utilidade x
+                Direcionam a atenção imediata da equipe técnica para problemas que impactam diretamente a disponibilidade e exigem correção urgente.
                 </p>
                 `
             );
@@ -676,17 +676,17 @@ document.addEventListener("DOMContentLoaded", function () {
         media.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Alertas de Atenção",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Registros de comportamentos anômalos ou degradação de performance que ainda não causaram a queda do serviço.
                 </p>
 
                 <p>
-                utilidade x
+                Permitem a intervenção preventiva antes que o problema se torne crítico, garantindo a continuidade operacional sem sustos.
                 </p>
                 `
             );
@@ -702,17 +702,17 @@ document.addEventListener("DOMContentLoaded", function () {
         baixa.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Notificações Informativas",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Eventos de rotina ou pequenos desvios que não comprometem o funcionamento principal da plataforma.
                 </p>
 
                 <p>
-                utilidade x
+                Mantem um histórico de eventos para análises futuras e ajustes finos de configuração, sem necessidade de ação imediata
                 </p>
                 `
             );
@@ -728,17 +728,17 @@ document.addEventListener("DOMContentLoaded", function () {
         resolvidos.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Histórico de Eficiência (SLA)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Volume de chamados ou alertas que foram solucionados e encerrados nas últimas 24 horas.
                 </p>
 
                 <p>
-                utilidade x
+                Monitorar a agilidade da equipe de suporte e validar o cumprimento dos acordos de nível de serviço (SLA) estabelecidos.
                 </p>
                 `
             );
