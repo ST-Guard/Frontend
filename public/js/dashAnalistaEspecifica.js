@@ -8,6 +8,7 @@ if (!sessionStorage.ID_USUARIO) {
 }
 
 function buscarDados() {
+    
     const idUsuario = sessionStorage.ID_USUARIO
     
     fetch(`/sessao/buscarUsuario/${idUsuario}`, {
@@ -17,11 +18,13 @@ function buscarDados() {
     })
     .then(function (dados) {
         dados = dados[0]
-
+        
         username.innerHTML = dados.nomePessoa
         cargoname.innerHTML = dados.cargo
-        dataCenterTitulo.innerHTML = dados.nomeDataCenter
+        //dataCenterTitulo.innerHTML = dados.nomeDataCenter
+        console.log("Teste")
         if (dados.imagem) {
+            console.log(dados.imagem)
             imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
         } else {
             imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
@@ -30,7 +33,7 @@ function buscarDados() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
+    buscarDados()
     const ctxUsoRam = document.getElementById('graficoRam');
     const ctxUsoCpu = document.getElementById('graficoCpu');
     const ctxUsoDisco = document.getElementById('graficoDisco');
