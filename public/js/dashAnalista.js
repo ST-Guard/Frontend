@@ -148,7 +148,7 @@ new Chart(graficoUsoG, {
         labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '23:59'],
         datasets: [
             {
-                label: 'RAM',
+                label: 'Sobrecarregados',
                 data: [40, 35, 60, 75, 70, 65, 50],
                 borderColor: '#244770',
                 backgroundColor: '#244770',
@@ -157,7 +157,7 @@ new Chart(graficoUsoG, {
             },
            
             {
-                label: 'DISCO',
+                label: 'Estressados',
                 data: [30, 43, 45, 65, 70, 67, 54],
                 borderColor: '#F5CC4D',
                 backgroundColor: '#F5CC4D',
