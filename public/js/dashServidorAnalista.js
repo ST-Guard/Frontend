@@ -11,11 +11,6 @@ if (!sessionStorage.ID_USUARIO) {
     window.location = "login.html";
 }
 
-if (!sessionStorage.ID_USUARIO) {
-  alert("Você precisa estar logado!");
-  window.location = "login.html";
-}
-
 let idDataCenterSelecionado = null;
 
 function buscarDados() {
@@ -29,8 +24,10 @@ function buscarDados() {
     .then(function (dados) {
         dados = dados[0]
 
+        console.log(dados)
         username.innerHTML = dados.nomePessoa
         cargoname.innerHTML = dados.cargo
+        zonaTitulo.innerHTML = dados.nomeZona
         //dataCenterTitulo.innerHTML = dados.nomeDataCenter
         if (dados.imagem) {
             imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
@@ -126,7 +123,7 @@ function verificar() {
     } else if (!capCpu || !capRam || !capDisco || !capRede) {
         conteiner_msg.innerHTML = "Tipo de capacidade inválida!"
         loadingModal()
-    } else if (capCpu <= 0 || capRam <= 0 || capDisco <= 0 || capRede <= 0) {
+    } else if (capCpu <= 20 || capRam <= 20 || capDisco <= 20 || capRede <= 10) {
         conteiner_msg.innerHTML = "Tipo de capacidade inválida!"
         loadingModal()
     } else {
@@ -242,6 +239,114 @@ function mostrarServidores() {
             var mensagem = "";
             for (var i = 0; i < servidores.length; i++) {
                 mensagem += `
+                <div class="servidor">
+                    <div class="inicioServidor">
+                        <img src="../assets/dashboard-servidor/IconServidor.png">
+                        <h3>SRV-DC01-E1-06</h3>
+                        <div class="estadoServidor">
+                            Ativo
+                        </div>
+                    </div>
+
+                    <div class="gridCompo" id="gridCompo0">
+                        <div class="boxCpu">
+                            <div class="inicioCpu">
+                                <img src="../assets/dashboard-servidor/iconCpu.png">
+                                <span>CPU USO TOTAL</span>
+                                <span class="infoSistema">8 nucleos</span>
+                            </div>
+                            <div class="porcentagemCpu">
+                                <h2 id="cpuValor0"></h2>
+                                <span>%</span>
+                            </div>
+                            <div class="barraCpu">
+                                <div class="barraPreenchimentoCpu" id="cpuBarra0"></div>
+                            </div>
+                            <div class="porcentagemLadoCpu">
+                                <div class="usuarioPorcentagem">
+                                    <img src="../assets/dashboard-servidor/user.png" alt="">
+                                    <span id="cpuUso0">Usuario </span>
+                                </div>
+                                <div class="configPorcentagem">
+                                    <img src="../assets/dashboard-servidor/iconConfig.jpg" alt="">
+                                    <span id="cpuLivre0">Sistema </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxRam">
+                            <div class="inicioRam">
+                                <img src="../assets/dashboard-servidor/iconRam.png">
+                                <span>RAM - 32 GB</span>
+                                <span class="infoSistema">GB</span>
+                            </div>
+                            <div class="porcentagemRam">
+                                <h2 id="ramValor0"></h2>
+                                <span>GB</span>
+                            </div>
+                            <div class="barraRam">
+                                <div class="barraPreenchimentoRam" id="ramBarra0"></div>
+                            </div>
+                            <div class="porcentagemLadoRam">
+                                <div class="usuarioPorcentagem">
+                                    <img src="../assets/dashboard-servidor/iconBd.png" alt="">
+                                    <span id="ramUso0">Em cache </span>
+                                </div>
+                                <div class="configPorcentagem">
+                                    <img src="../assets/dashboard-servidor/iconCheck.png" alt="">
+                                    <span id="ramLivre0">Livre </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxDisco">
+                            <div class="inicioDisco">
+                                <img src="../assets/dashboard-servidor/iconCache.png">
+                                <span>DISCO - 512 GB</span>
+                                <span class="infoSistema">GB</span>
+                            </div>
+                            <div class="porcentagemDisco">
+                                <h2 id="discoValor0"></h2>
+                                <span>GB</span>
+                            </div>
+                            <div class="barraDisco">
+                                <div class="barraPreenchimentoDisco" id="discoBarra0"></div>
+                            </div>
+                            <div class="porcentagemLadoDisco">
+                                <div class="usuarioPorcentagem">
+                                    <img src="../assets/dashboard-servidor/iconFolder.png" alt="">
+                                    <span id="discoUso0">Em uso </span>
+                                </div>
+                                <div class="configPorcentagem">
+                                    <img src="../assets/dashboard-servidor/iconFolder.png" alt="">
+                                    <span id="discoLivre0">Livre </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxRede">
+                            <div class="inicioRede">
+                                <img src="../assets/dashboard-servidor/iconWeb.png">
+                                <span>REDE - 60</span>
+                                <span class="infoSistema">ms</span>
+                            </div>
+                            <div class="porcentagemRede">
+                                <h2 id="redeValor0"></h2>
+                                <span>ms</span>
+                            </div>
+                            <div class="barraRede">
+                                <div class="barraPreenchimentoRede" id="redeBarra0"></div>
+                            </div>
+                            <div class="porcentagemLadoDisco">
+                                <div class="usuarioPorcentagem">
+                                    <img src="../assets/dashboard-servidor/iconRede.png" alt="">
+                                    <span id="redeUso0">Em uso </span>
+                                </div>
+                                <div class="configPorcentagem">
+                                    <img src="../assets/dashboard-servidor/iconPerda.png" alt="">
+                                    <span id="redeLivre0">Livre </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="servidor">
                     <div class="inicioServidor">
                         <img src="../assets/dashboard-servidor/IconServidor.png">
@@ -364,6 +469,35 @@ function mostrarServidores() {
             for (let i = 0; i < servidores.length; i++) {
                 const idServidor = servidores[i].idServidor
 
+                const cpuValor0 = document.getElementById("cpuValor" + 0);
+                const cpuUso0 = document.getElementById("cpuUso" + 0);
+                const cpuLivre0 = document.getElementById("cpuLivre" + 0);
+                const barraCpu0 = document.getElementById("cpuBarra" + 0);
+                
+                const ramValor0 = document.getElementById("ramValor" + 0);
+                const ramUso0 = document.getElementById("ramUso" + 0);
+                const ramLivre0 = document.getElementById("ramLivre" + 0);
+                const barraRam0 = document.getElementById("ramBarra" + 0);
+
+                const discoValor0 = document.getElementById("discoValor" + 0);
+                const discoUso0 = document.getElementById("discoUso" + 0);
+                const discoLivre0 = document.getElementById("discoLivre" + 0);
+                const barraDisco0 = document.getElementById("discoBarra" + 0);
+
+                const redeValor = document.getElementById("redeValor" + 0);
+                const redeUso = document.getElementById("redeUso" + 0);
+                const redeLivre = document.getElementById("redeLivre" + 0);
+                const barraRede = document.getElementById("redeBarra" + 0);
+
+                cpuUso0 = 95.7
+                cpuLivre0 = 4.3
+                ramUso0 = 65.3
+                ramLivre0 = 34.7
+                discoUso0 = 14.1
+                discoLivre0 = 85.9
+                redeUso0
+                redeLivr0e
+                
                 const cpuValor = document.getElementById("cpuValor" + idServidor);
                 const cpuUso = document.getElementById("cpuUso" + idServidor);
                 const cpuLivre = document.getElementById("cpuLivre" + idServidor);

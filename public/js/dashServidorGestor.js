@@ -11,11 +11,6 @@ if (!sessionStorage.ID_USUARIO) {
     window.location = "login.html";
 }
 
-if (!sessionStorage.ID_USUARIO) {
-  alert("Você precisa estar logado!");
-  window.location = "login.html";
-}
-
 let idDataCenterSelecionado = null;
 
 function buscarDados() {
@@ -28,7 +23,7 @@ function buscarDados() {
     })
     .then(function (dados) {
         dados = dados[0]
-
+        console.log(dados)
         username.innerHTML = dados.nomePessoa
         cargoname.innerHTML = dados.cargo
         dataCenterTitulo.innerHTML = dados.nomeDataCenter

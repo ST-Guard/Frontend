@@ -36,8 +36,8 @@ body {
 
 #container_kpis .div_kpi {
     flex: 1 1 220px;
-    min-width: 220px;
-    max-width: 246px;
+    min-width: 160px;
+    max-width: 186px;
     min-height: 13rem;
     border-radius: 12px;
     padding: 16px;
@@ -150,14 +150,14 @@ body {
 
 .SubcorpoPagina{
     width: 82%;
+    max-height: 90vh;
+    overflow: scroll;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     box-sizing: border-box;
     padding-bottom: 40px;
-    max-height: 90vh;
-    overflow: scroll;
 }
 
 .textoInicio {
@@ -194,13 +194,15 @@ body {
     justify-content: center;
     align-items: center;
     width: 70%;
-    height: 100px;
+    min-height: 70px;
 }
 
 .busca {
     display: flex;
-    width: 55%;
-    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+    padding-right: 20px;
+    width: 80%;
 }
 
 .busca img {
@@ -237,15 +239,9 @@ body {
     cursor: pointer;
 }
 
-.botaoCadastro img {
-    margin-left: 10px;
-}
-
 .botaoCadastro button{
     display: flex;
     align-items: center;
-    margin-right: 10px;
-    width: 160px;
     gap: 5px;
 }
 
@@ -253,7 +249,7 @@ body {
     background-color: #66C0F418;
     border: #66C0F4 1px solid;
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
     margin-top: 40px;
     height: auto;
     min-height: fit-content;

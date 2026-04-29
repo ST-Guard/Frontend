@@ -36,8 +36,8 @@ body {
 
 #container_kpis .div_kpi {
     flex: 1 1 220px;
-    min-width: 220px;
-    max-width: 246px;
+    min-width: 160px;
+    max-width: 186px;
     min-height: 13rem;
     border-radius: 12px;
     padding: 16px;
@@ -194,14 +194,15 @@ body {
     justify-content: center;
     align-items: center;
     width: 70%;
-    height: 100px;
+    min-height: 70px;
 }
 
 .busca {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90%;
+    padding-right: 20px;
+    width: 80%;
 }
 
 .busca img {
@@ -248,7 +249,7 @@ body {
     background-color: #66C0F418;
     border: #66C0F4 1px solid;
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
     margin-top: 40px;
     height: auto;
     min-height: fit-content;
