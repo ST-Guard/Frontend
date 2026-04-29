@@ -872,6 +872,15 @@
 }
 
 
+.div_relatorio-mae{
+        width: 100%;
+        border-radius: 16px;
+        min-height: px;
+        padding: 2%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+}
+
+
     /*Responsividade Extra*/
 
     @media (max-width: 768px) {
@@ -936,3 +945,4 @@
             font-size: 0.8rem;
         }
     }
+

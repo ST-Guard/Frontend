@@ -404,17 +404,17 @@ document.addEventListener("DOMContentLoaded", function () {
         alertServer.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Histórico de Instabilidade",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Exibe o servidor que registrou o maior volume de notificações, avisos ou falhas críticas em um período determinado.
                 </p>
 
                 <p>
-                utilidade x
+                Facilitar a manutenção preventiva ao destacar máquinas reincidentes que podem precisar de upgrade, revisão de configuração ou substituição de peças antes de uma queda total.
                 </p>
                 `
             );
@@ -430,17 +430,17 @@ document.addEventListener("DOMContentLoaded", function () {
         procConsumo.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Alocação Crítica de Recursos",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Identifica o serviço ou processo do sistema que apresenta a maior demanda atual sobre o hardware (CPU, Memória RAM ou Disco).
                 </p>
 
                 <p>
-                utilidade x
+                Localizar gargalos operacionais e identificar comportamentos anômalos (como vazamento de memória ou loops de processamento) para garantir a estabilidade do servidor.       
                 </p>
                 `
             );
@@ -456,17 +456,17 @@ document.addEventListener("DOMContentLoaded", function () {
         jogAtivos.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Volume de Usuários Online",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Contagem instantânea de usuários com sessão ativa e interação direta com a plataforma.
                 </p>
 
                 <p>
-                utilidade x
+                Mensurar o engajamento e a carga de tráfego atual, auxiliando em decisões de escalonamento de recursos e análise de horários de pico.
                 </p>
                 `
             );
@@ -482,17 +482,17 @@ document.addEventListener("DOMContentLoaded", function () {
         serveAtivos.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Status da Infraestrutura",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Monitoramento em tempo real da disponibilidade dos servidores físicos ou virtuais que sustentam a aplicação.
                 </p>
 
                 <p>
-                utilidade x
+                Identificar quedas parciais de serviço para agir rapidamente na recuperação de nós offline, evitando a sobrecarga dos servidores remanescentes.
                 </p>
                 `
             );
@@ -513,18 +513,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         p99cpu.addEventListener("click", function () {
 
-            abrirModal(
-                "KPI x",
+              abrirModal(
+                "Pico de Consumo (P99)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Representa o valor de utilização que 99% dos casos não ultrapassam, isolando picos extremos de uso de hardware.
                 </p>
 
                 <p>
-                utilidade x
+                Analisa o comportamento do servidor sob carga severa para dimensionar upgrades, garantindo que o sistema suporte momentos de estresse sem travar.
                 </p>
                 `
             );
@@ -540,17 +540,17 @@ document.addEventListener("DOMContentLoaded", function () {
         p99ram.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Pico de Consumo (P99)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Representa o valor de utilização que 99% dos casos não ultrapassam, isolando picos extremos de uso de hardware.
                 </p>
 
                 <p>
-                utilidade x
+                Analisa o comportamento do servidor sob carga severa para dimensionar upgrades, garantindo que o sistema suporte momentos de estresse sem travar.
                 </p>
                 `
             );
@@ -565,19 +565,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         p99latencia.addEventListener("click", function () {
 
-            abrirModal(
-                "KPI x",
+              abrirModal(
+                "Latência Crítica (P99)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Indica o tempo máximo de resposta experimentado pelos usuários mais afetados (o 1% com maior lentidão).
                 </p>
 
                 <p>
-                utilidade x
-                </p>
+                Util para medir a qualidade real da experiência do usuário; se o P99 de latência estiver alto, significa que parte do seu público está enfrentando travamentos severos, mesmo que a média pareça boa.</p>
                 `
             );
 
@@ -592,17 +591,17 @@ document.addEventListener("DOMContentLoaded", function () {
         p99disco.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Pico de Consumo (P99)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Representa o valor de utilização que 99% dos casos não ultrapassam, isolando picos extremos de uso de hardware.
                 </p>
 
                 <p>
-                utilidade x
+                Analisa o comportamento do servidor sob carga severa para dimensionar upgrades, garantindo que o sistema suporte momentos de estresse sem travar.
                 </p>
                 `
             );
@@ -619,17 +618,17 @@ document.addEventListener("DOMContentLoaded", function () {
         totalServer.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Escopo da Infraestrutura",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Quantidade total de máquinas (nós) cadastradas e monitoradas pelo sistema.
                 </p>
 
                 <p>
-                utilidade x
+                Fornece uma visão rápida da dimensão do parque tecnológico sob gestão atual.
                 </p>
                 `
             );
@@ -651,17 +650,17 @@ document.addEventListener("DOMContentLoaded", function () {
         severa.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Incidentes de Alta Prioridade",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Alertas que indicam falhas graves, interrupções de serviço ou riscos iminentes à estabilidade do sistema.
                 </p>
 
                 <p>
-                utilidade x
+                Direcionam a atenção imediata da equipe técnica para problemas que impactam diretamente a disponibilidade e exigem correção urgente.
                 </p>
                 `
             );
@@ -677,17 +676,17 @@ document.addEventListener("DOMContentLoaded", function () {
         media.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Alertas de Atenção",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Registros de comportamentos anômalos ou degradação de performance que ainda não causaram a queda do serviço.
                 </p>
 
                 <p>
-                utilidade x
+                Permitem a intervenção preventiva antes que o problema se torne crítico, garantindo a continuidade operacional sem sustos.
                 </p>
                 `
             );
@@ -703,17 +702,17 @@ document.addEventListener("DOMContentLoaded", function () {
         baixa.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Notificações Informativas",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Eventos de rotina ou pequenos desvios que não comprometem o funcionamento principal da plataforma.
                 </p>
 
                 <p>
-                utilidade x
+                Mantem um histórico de eventos para análises futuras e ajustes finos de configuração, sem necessidade de ação imediata
                 </p>
                 `
             );
@@ -729,17 +728,17 @@ document.addEventListener("DOMContentLoaded", function () {
         resolvidos.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Histórico de Eficiência (SLA)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Volume de chamados ou alertas que foram solucionados e encerrados nas últimas 24 horas.
                 </p>
 
                 <p>
-                utilidade x
+                Monitorar a agilidade da equipe de suporte e validar o cumprimento dos acordos de nível de serviço (SLA) estabelecidos.
                 </p>
                 `
             );
@@ -748,3 +747,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 });
+
+/* =============================================== */
+/* ---- GRÁFICOS NA DASH DE ALERTAS DO GESTOR ---- */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const Alerta =
+        document.getElementById("Alerta");
+
+    if (Alerta) {
+
+        Alerta.addEventListener("click", function () {
+
+            abrirModal(
+                "Tendência Temporal de Alertas",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Demonstra a evolução do volume de incidentes ao longo das últimas quatro semanas, segmentados por nível de severidade.
+                </p>
+
+                <p>
+                Identifica padrões de instabilidade ou melhoria na saúde do sistema ao longo do mês, permitindo avaliar se atualizações recentes causaram aumento ou redução de falhas.
+                </p>
+                `
+            );
+
+        });
+
+    }
+    const distribuicao =
+        document.getElementById("distribuicao");
+
+    if (distribuicao) {
+
+        distribuicao.addEventListener("click", function () {
+
+            abrirModal(
+                "Mix de Severidade Semanal",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Apresenta a proporção exata entre alertas críticos, médios e baixos registrados no período de sete dias.
+                </p>
+
+                <p>
+                Fornece uma visão macro da "qualidade" dos erros; ajuda a entender se a maioria dos alertas são apenas ruídos informativos ou se há uma concentração perigosa de problemas críticos que demandam mudança de estratégia.
+                </p>
+                `
+            );
+
+        });
+
+    }
+});
+
+
