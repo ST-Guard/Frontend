@@ -12,20 +12,28 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
     rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="./../js/sessao.js"></script>
-  <script src="./../js/dashGestor.js"></script>
   <link rel="icon" href="./../assets/icon/icon.png" />
   <link rel="stylesheet" href="./../css/dashboard.css" />
   <link rel="stylesheet" href="./../css/dashGestor.css" />
 </head>
 
 <body>
+
+  <div id="modalGrafico" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="fecharModal()">
+        &times;
+      </span>
+      <h2 id="tituloModal"></h2>
+      <div id="conteudoModal"></div>
+    </div>
+  </div>
   <header>
     <nav>
       <div class="logo-nav" onclick="fnNavegar('/')">
-          <a href="../pages/index.html">
-              <img src="./../assets/logos/smart data branco.png" alt="">
-          </a>
+        <a href="../pages/index.html">
+          <img src="./../assets/logos/smart data branco.png" alt="">
+        </a>
       </div>
 
       <div class="right-nav">
@@ -45,12 +53,12 @@
         <div class="separacao"></div>
 
         <div class="logo-usuario">
-        <div class="userImg">
-          <a href="dashConfigGestor.html">
+          <div class="userImg">
+            <a href="dashConfigGestor.html">
 
-            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
-          </a>
-        </div>
+              <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+            </a>
+          </div>
           <div class="userInfo">
             <h2 class="user-name" id="username">Matheus Valle</h2>
             <h3 class="user-cargo" id="cargoname">Analista de operações</h3>
@@ -68,8 +76,8 @@
           <p><a href="../pages/dashGestor.html">Dashboard</a></p>
           <!-- <p onclick="mudarDash()">Dashboard</p> -->
         </div>
-        <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')" >
-          <img src="../assets/dashboard-icons/icon_servidores_branco.svg"alt="">
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
+          <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
           <p><a href="../pages/dashServidorGestor.html">Servidores</a></p>
           <!-- <p onclick="mudarServidor()">Servidores</p> -->
         </div>
@@ -103,12 +111,12 @@
     <div class="SubcorpoPagina">
       <div class="textoInicio">
         <div class="div_titulo">
-            <h1>Panaroma Geral - Gestor</h1>
-            <h2>Visão consolidada de toda a sua infraestrutura.</h2>    
+          <h1>Panaroma Geral - Gestor</h1>
+          <h2>Visão consolidada de toda a sua infraestrutura.</h2>
         </div>
       </div>
       <div id="container_kpis">
-        <div class="div_kpi kpi1">
+        <div class="div_kpi kpi1" id="serveAtivos">
           <div class="info_kpi">
             <div class="containerTitulo">
               <h3>SERVIDORES ATIVOS</h3>
@@ -120,7 +128,7 @@
             <h4>Quantidade de servidores que estão ativos</h4>
           </div>
         </div>
-        <div class="div_kpi kpi4">
+        <div class="div_kpi kpi4" id="jogAtivos">
           <div class="info_kpi">
             <div class="containerTitulo">
               <h3>Jogadores Ativos</h3>
@@ -134,7 +142,7 @@
             </div>
           </div>
         </div>
-        <div class="div_kpi kpi2">
+        <div class="div_kpi kpi2" id="procConsumo">
           <div class="info_kpi">
             <div class="containerTitulo">
               <h3>PROCESSO COM MAIOR CONSUMO</h3>
@@ -148,7 +156,7 @@
             </div>
           </div>
         </div>
-        <div class="div_kpi kpi4">
+        <div class="div_kpi kpi4" id="alertServer">
           <div class="info_kpi">
             <div class="containerTitulo">
               <h3>SERVIDORES QUE APRESENTARAM ALERTAS NOS ULTIMOS DIAS (%)</h3>
@@ -176,66 +184,69 @@
         </div>
       </div>
       <div id="container_graficosP2">
-    <div class="parte2">
-        <div class="grafico-RamXCpu">
+        <div class="parte2">
+          <div class="grafico-RamXCpu">
             <select id="selectPeriodoCpuxRam" class="selectPeriodo">
-                <option value="hoje">Período: 24h</option>
-                <option value="ontem">Período: 48h</option>
-                <option value="semana">Período: ULTIMOS 7 DIAS</option>
+              <option value="hoje">Período: 24h</option>
+              <option value="ontem">Período: 48h</option>
+              <option value="semana">Período: ULTIMOS 7 DIAS</option>
             </select>
             <div id="expandirRamxCpu">
-                <canvas id="chartRamxCpu"></canvas>
+              <canvas id="chartRamxCpu"></canvas>
             </div>
-        </div>
-        <div class="grafico-DiscoXLatencia">
+          </div>
+          <div class="grafico-DiscoXLatencia">
             <select id="selectPeriodoDiscoxLat" class="selectPeriodo">
-                <option value="hoje">Período: 24h</option>
-                <option value="ontem">Período: 48h</option>
-                <option value="semana">Período: ULTIMOS 7 DIAS</option>
+              <option value="hoje">Período: 24h</option>
+              <option value="ontem">Período: 48h</option>
+              <option value="semana">Período: ULTIMOS 7 DIAS</option>
             </select>
             <div id="expandirDiscoxLatencia">
-                <canvas id="chartDiskxLat"></canvas>
+              <canvas id="chartDiskxLat"></canvas>
             </div>
+          </div>
         </div>
-    </div>
 
-    <div class="div_relatorios-mae">
-        <div class="div_relatorio-conteudo">
+        <div class="div_relatorios-mae">
+          <div class="div_relatorio-conteudo">
             <h1>Relatórios</h1>
             <div class="div_relatorios">
-                <div class="div_relatorio">
-                    <div class="div_conteudoRel">
-                        <div class="conteudoRelatorio">
-                            <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
-                            <h3><u>RelatorioDia-30-04-2026</u></h3>
-                        </div>
-                        <div class="conteudoRelatorio">
-                            <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
-                            <h3><u>RelatorioDia-28-04-2026</u></h3>
-                        </div>
-                        <div class="conteudoRelatorio">
-                            <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
-                            <h3><u>RelatorioDia-27-04-2026</u></h3>
-                        </div>
-                        <div class="conteudoRelatorio">
-                            <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
-                            <h3><u>Relatorio-Semana3-04-2026</u></h3>
-                        </div>
-                        <div class="conteudoRelatorio">
-                            <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
-                            <h3><u>Relatorio-Semana2-04-2026</u></h3>
-                        </div>
-                        <div class="conteudoRelatorio">
-                            <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
-                            <h3><u>Relatorio-Semana1-04-2026</u></h3>
-                        </div>
-                    </div>
+              <div class="div_relatorio">
+                <div class="div_conteudoRel">
+                  <div class="conteudoRelatorio">
+                    <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
+                    <h3><u>RelatorioDia-30-04-2026</u></h3>
+                  </div>
+                  <div class="conteudoRelatorio">
+                    <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
+                    <h3><u>RelatorioDia-28-04-2026</u></h3>
+                  </div>
+                  <div class="conteudoRelatorio">
+                    <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
+                    <h3><u>RelatorioDia-27-04-2026</u></h3>
+                  </div>
+                  <div class="conteudoRelatorio">
+                    <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
+                    <h3><u>Relatorio-Semana3-04-2026</u></h3>
+                  </div>
+                  <div class="conteudoRelatorio">
+                    <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
+                    <h3><u>Relatorio-Semana2-04-2026</u></h3>
+                  </div>
+                  <div class="conteudoRelatorio">
+                    <img src="../assets/dashboard-icons/icon_relatorio.svg" alt="">
+                    <h3><u>Relatorio-Semana1-04-2026</u></h3>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+          <button id="btn_Relatorio">Gerar Relatório</button>
         </div>
-        <button id="btn_Relatorio">Gerar Relatório</button>
-    </div>
-</div>
+      </div>
     </div>
   </div>
+  <script src="./../js/sessao.js"></script>
+  <script src="./../js/dashGestor.js"></script>
+  <script src="../js/modaisInfos.js"></script>
 </body>

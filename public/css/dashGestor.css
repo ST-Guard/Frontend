@@ -222,7 +222,8 @@ header {
 /* GRÁFICOS */
 .SubcorpoPagina {
   width: 100%;
-  min-height: 100vh;
+  max-height: 90vh;
+  overflow: scroll;
   margin-left: 18%;
   margin-top: 10vh;
   display: flex;
