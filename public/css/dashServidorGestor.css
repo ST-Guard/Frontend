@@ -156,6 +156,8 @@ body {
     align-items: center;
     box-sizing: border-box;
     padding-bottom: 40px;
+    max-height: 90vh;
+    overflow: scroll;
 }
 
 .textoInicio {
