@@ -68,13 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     label: "Baixo",
                     data: [9, 8, 12, 13],
-                    backgroundColor: "#23B26D",
+                    backgroundColor: "#ffff00",
                     borderRadius: 6
                 },
                 {
                     label: "Medio",
                     data: [6, 7, 9, 8],
-                    backgroundColor: "#F5CC4D",
+                    backgroundColor: "#FFA500",
                     borderRadius: 6
                 },
                 {
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             labels: ["Crítico", "Médio", "Baixo"],
             datasets: [{
                 data: [8, 30, 42],
-                backgroundColor: ["#FF5252", "#F5CC4D", "#23B26D"],
+                backgroundColor: ["#FF5252", "#FFA500", "#ffff00"],
                 borderColor: "#ffffff",
                 borderWidth: 3,
                 hoverOffset: 4

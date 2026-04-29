@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         datasets: [{
             label: 'Quantidade de Alertas',
             data: [totalServer1, totalServer2, totalServer3],
-            backgroundColor: ['#F5CC4D', '#23B26D', '#FF5252'],
+            backgroundColor: ['#FFA500', '#ffff00', '#FF5252'],
             borderRadius: 5,
             barThickness: 60
         }]
@@ -122,12 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 label: 'Baixo',
                 data: [8, 6, 6],
-                backgroundColor: '#23B26D'
+                backgroundColor: '#ffff00'
             },
             {
                 label: 'Médio',
                 data: [7, 6, 4],
-                backgroundColor: '#F5CC4D'
+                backgroundColor: '#FFA500'
             },
             {
                 label: 'Crítico',
