@@ -513,18 +513,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         p99cpu.addEventListener("click", function () {
 
-            abrirModal(
-                "KPI x",
+              abrirModal(
+                "Pico de Consumo (P99)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Representa o valor de utilização que 99% dos casos não ultrapassam, isolando picos extremos de uso de hardware.
                 </p>
 
                 <p>
-                utilidade x
+                Analisa o comportamento do servidor sob carga severa para dimensionar upgrades, garantindo que o sistema suporte momentos de estresse sem travar.
                 </p>
                 `
             );
@@ -540,17 +540,17 @@ document.addEventListener("DOMContentLoaded", function () {
         p99ram.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Pico de Consumo (P99)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Representa o valor de utilização que 99% dos casos não ultrapassam, isolando picos extremos de uso de hardware.
                 </p>
 
                 <p>
-                utilidade x
+                Analisa o comportamento do servidor sob carga severa para dimensionar upgrades, garantindo que o sistema suporte momentos de estresse sem travar.
                 </p>
                 `
             );
@@ -565,19 +565,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         p99latencia.addEventListener("click", function () {
 
-            abrirModal(
-                "KPI x",
+              abrirModal(
+                "Latência Crítica (P99)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Indica o tempo máximo de resposta experimentado pelos usuários mais afetados (o 1% com maior lentidão).
                 </p>
 
                 <p>
-                utilidade x
-                </p>
+                Util para medir a qualidade real da experiência do usuário; se o P99 de latência estiver alto, significa que parte do seu público está enfrentando travamentos severos, mesmo que a média pareça boa.</p>
                 `
             );
 
@@ -592,17 +591,17 @@ document.addEventListener("DOMContentLoaded", function () {
         p99disco.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Pico de Consumo (P99)",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Representa o valor de utilização que 99% dos casos não ultrapassam, isolando picos extremos de uso de hardware.
                 </p>
 
                 <p>
-                utilidade x
+                Analisa o comportamento do servidor sob carga severa para dimensionar upgrades, garantindo que o sistema suporte momentos de estresse sem travar.
                 </p>
                 `
             );
@@ -619,17 +618,17 @@ document.addEventListener("DOMContentLoaded", function () {
         totalServer.addEventListener("click", function () {
 
             abrirModal(
-                "KPI x",
+                "Escopo da Infraestrutura",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Quantidade total de máquinas (nós) cadastradas e monitoradas pelo sistema.
                 </p>
 
                 <p>
-                utilidade x
+                Fornece uma visão rápida da dimensão do parque tecnológico sob gestão atual.
                 </p>
                 `
             );
