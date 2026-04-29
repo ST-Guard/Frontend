@@ -760,17 +760,17 @@ document.addEventListener("DOMContentLoaded", function () {
         Alerta.addEventListener("click", function () {
 
             abrirModal(
-                "Gráfico x",
+                "Tendência Temporal de Alertas",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Demonstra a evolução do volume de incidentes ao longo das últimas quatro semanas, segmentados por nível de severidade.
                 </p>
 
                 <p>
-                utilidade x
+                Identifica padrões de instabilidade ou melhoria na saúde do sistema ao longo do mês, permitindo avaliar se atualizações recentes causaram aumento ou redução de falhas.
                 </p>
                 `
             );
@@ -786,17 +786,17 @@ document.addEventListener("DOMContentLoaded", function () {
         distribuicao.addEventListener("click", function () {
 
             abrirModal(
-                "Gráfico x",
+                "Mix de Severidade Semanal",
 
                 `
                 <p><b>Descrição:</b></p>
 
                 <p>
-                descrição X
+                Apresenta a proporção exata entre alertas críticos, médios e baixos registrados no período de sete dias.
                 </p>
 
                 <p>
-                utilidade x
+                Fornece uma visão macro da "qualidade" dos erros; ajuda a entender se a maioria dos alertas são apenas ruídos informativos ou se há uma concentração perigosa de problemas críticos que demandam mudança de estratégia.
                 </p>
                 `
             );
