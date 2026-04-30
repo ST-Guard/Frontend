@@ -510,7 +510,7 @@
     background-color: #66C0F4;
 }
 
-/* ######## (MOBILE E TABLETS) ######## */
+/* Responsividade*/
 @media (max-width: 1024px) {
     .SubcorpoPagina {
         gap: 10px;
