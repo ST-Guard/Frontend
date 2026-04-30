@@ -173,7 +173,19 @@ INSERT INTO componentes_servidor (limite, fkServidor, fkComponentes) VALUES
 	(90, 1, 1),
 	(16, 1, 2),
 	(450, 1, 3),
-	(40, 1, 4);
+	(40, 1, 4),
+	(90, 2, 1),
+	(16, 2, 2),
+	(450, 2, 3),
+	(40, 2, 4),
+	(90, 3, 1),
+	(16, 3, 2),
+	(450, 3, 3),
+	(40, 3, 4),
+	(90, 4, 1),
+	(16, 4, 2),
+	(450, 4, 3),
+	(40, 4, 4);
     
 INSERT INTO registro (dataHora, valor, fkRegistroServidor, fkRegistroComponente) VALUES
     ('2025-08-19 10:00:00', 52, 1, 1),
@@ -205,4 +217,26 @@ create view vwBuscarDados AS
             
 select * from contato_inicial;
 
-select * from vwBuscarDados
+select * from vwBuscarDados;
+
+        SELECT
+            s.idServidor,
+            s.nome,
+            s.estado,
+
+            MAX(CASE WHEN c.nome = 'CPU' THEN cs.limite END) AS limiteCpu,
+            MAX(CASE WHEN c.nome = 'RAM' THEN cs.limite END) AS limiteRam,
+            MAX(CASE WHEN c.nome = 'DISCO' THEN cs.limite END) AS limiteDisco,
+            MAX(CASE WHEN c.nome = 'REDE' THEN cs.limite END) AS limiteRede
+
+        FROM servidor s JOIN zona z ON z.idZona = s.fkZona
+            JOIN datacenter d ON d.idDataCenter = z.fkDataCenter
+            JOIN usuario u ON u.idUsuario = d.fkUsuarioDataCenter
+            JOIN papel p ON p.idPapel = u.fkPapel
+            LEFT JOIN componentes_servidor cs ON cs.fkServidor = s.idServidor
+            LEFT JOIN componentes c ON c.idComponente = cs.fkComponentes
+
+        WHERE p.fkEmpresa = 1
+        GROUP BY s.idServidor, s.nome, s.estado
+        ORDER BY s.idServidor;
+
