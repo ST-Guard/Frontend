@@ -34,6 +34,7 @@ function executar(instrucao, parametros = []) {
             return ("ERRO NO MySQL SERVER: ", erro.sqlMessage);
         });
     });
+    
 }
 
 module.exports = {
