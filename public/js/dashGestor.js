@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoBarraServer = new Chart(ctxServer, {
         type: 'bar',
         data: {
-        labels: ['SERVIDOR-DC01', 'SERVIDOR-DC02', 'SERVIDOR-DC03'],
+        labels: ["DC01-WEB-05", "DC01-DB-12", "FK02-GM-02"],
         datasets: [{
             label: 'Quantidade de Alertas',
             data: [totalServer1, totalServer2, totalServer3],
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new Chart(ctxAlerta, {
     type: 'bar',
     data: {
-        labels: ['SERVIDOR-DC01', 'SERVIDOR-DC02', 'SERVIDOR-DC03'],
+        labels: ["DC01-WEB-05", "DC01-DB-12", "FK02-GM-02"],
         datasets: [
             {
                 label: 'Baixo',
