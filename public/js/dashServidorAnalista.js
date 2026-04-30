@@ -238,11 +238,11 @@ function mostrarServidores() {
             boxServidores.innerHTML = "";
             var mensagem = "";
             mensagem += `
-                <div class="servidor">
-                    <div class="inicioServidor">
+                <div class="servidorPrincipal">
+                    <div class="inicioServidorPrincipal">
                         <img src="../assets/dashboard-servidor/IconServidor.png">
                         <h3>SRV-DC01-E1-06</h3>
-                        <div class="estadoServidor">
+                        <div class="estadoServidorPrincipal">
                             Ativo
                         </div>
                     </div>

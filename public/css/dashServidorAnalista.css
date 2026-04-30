@@ -256,7 +256,8 @@ body {
     overflow: visible;
 }
 
-.servidor {
+.servidor,
+.servidorPrincipal {
     background-color: #F9FAFB;
     border: #E5E7EB solid 1px;
     border-radius: 20px;
@@ -269,25 +270,29 @@ body {
     padding: 10px 15px;
 }
 
-.inicioServidor {
+.inicioServidor,
+.inicioServidorPrincipal {
     align-items: center;
     display: flex;
     justify-content: flex-start;
     width: 100%;
 }
 
-.inicioServidor h3 {
+.inicioServidor h3,
+.inicioServidorPrincipal h3 {
     font-size: 18px;
     letter-spacing: 2px;
     margin-left: 10px;
 }
 
-.inicioServidor img {
+.inicioServidor img,
+.inicioServidorPrincipal img {
     width: 24px;
     height: 24px;
 }
 
-.estadoServidor {
+.estadoServidor,
+.estadoServidorPrincipal {
     align-items: center;
     background-color: #FF525220;
     border-radius: 20px;
