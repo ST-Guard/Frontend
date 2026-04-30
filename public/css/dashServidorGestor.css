@@ -202,7 +202,7 @@ body {
     align-items: center;
     justify-content: center;
     padding-right: 20px;
-    width: 80%;
+    width: 70%;
 }
 
 .busca img {
@@ -242,6 +242,7 @@ body {
 .botaoCadastro button{
     display: flex;
     align-items: center;
+    padding: 0 10px;
     gap: 5px;
 }
 
