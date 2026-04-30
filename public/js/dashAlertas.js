@@ -32,29 +32,53 @@ function buscarDados() {
     })
 }
 
+
+
 function mudarAlerta1() {
-    if (checkBox1.src.includes("checkAlerta.png")) {
-        checkBox1.src = "../assets/dashboard-icons/checkPositivo.png"
-    } else {
-        checkBox1.src = "../assets/dashboard-icons/checkAlerta.png"
+    const img = document.querySelector('.checkbox1 button img');
+    if (img && img.src.includes("checkAlerta.png")) {
+        img.src = "../assets/dashboard-icons/checkPositivo.png";
+    } else if (img) {
+        img.src = "../assets/dashboard-icons/checkAlerta.png";
     }
 }
 
 function mudarAlerta2() {
-    if (checkBox2.src.includes("checkAlerta.png")) {
-        checkBox2.src = "../assets/dashboard-icons/checkPositivo.png"
-    } else {
-        checkBox2.src = "../assets/dashboard-icons/checkAlerta.png"
+    const img = document.querySelector('.checkbox2 button img');
+    if (img && img.src.includes("checkAlerta.png")) {
+        img.src = "../assets/dashboard-icons/checkPositivo.png";
+    } else if (img) {
+        img.src = "../assets/dashboard-icons/checkAlerta.png";
     }
 }
 
 function mudarAlerta3() {
-    if (checkBox3.src.includes("checkAlerta.png")) {
-        checkBox3.src = "../assets/dashboard-icons/checkPositivo.png"
-    } else {
-        checkBox3.src = "../assets/dashboard-icons/checkAlerta.png"
+    const img = document.querySelector('.checkbox3 button img');
+    if (img && img.src.includes("checkAlerta.png")) {
+        img.src = "../assets/dashboard-icons/checkPositivo.png";
+    } else if (img) {
+        img.src = "../assets/dashboard-icons/checkAlerta.png";
     }
 }
+
+function mudarAlerta4() {
+    const img = document.querySelector('.checkbox4 button img');
+    if (img && img.src.includes("checkAlerta.png")) {
+        img.src = "../assets/dashboard-icons/checkPositivo.png";
+    } else if (img) {
+        img.src = "../assets/dashboard-icons/checkAlerta.png";
+    }
+}
+
+function mudarAlerta5() {
+    const img = document.querySelector('.checkbox5 button img');
+    if (img && img.src.includes("checkAlerta.png")) {
+        img.src = "../assets/dashboard-icons/checkPositivo.png";
+    } else if (img) {
+        img.src = "../assets/dashboard-icons/checkAlerta.png";
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const alerta = document.getElementById("Alerta");

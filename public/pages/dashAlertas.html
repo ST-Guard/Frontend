@@ -15,6 +15,7 @@
     <link rel="icon" href="./../assets/icon/icon.png">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/dashAlertas.css" />
+    
 </head>
 
 <body>
@@ -211,113 +212,178 @@
             </div>
             <section class="lista_alertas">
                 <div class="div_lista_alertas">
-                    <div class="card_alerta">
-                        <div class="titulo_card_alerta">
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>RAM ACIMA DE 86%</h1>
-                                </div>
-                            </div>
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>RAM</h1>
-                                </div>
-                            </div>
-                            <div class="checkBox">
-                                <button onclick="mudarAlerta1()">
-                                    <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox1">
-                                </button>
-                            </div>
-                        </div>
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 7 minutos atrás </h1>
-                        </div>
-                        <div class="botoes_card_alerta">
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;"
-                                onclick="detalhes()">Ver
-                                detalhe</button>
-                        </div>
+                    <div class="div_alertas-conteudo">
+    <div class="div_alertas">
+        
+        <div class="card_alerta">
+            <div class="titulo_card_alerta">
+                <div class="cards1">
+                    <div class="icon_titulo_card_alerta">
+                        <img src="../assets/Icon_alerta.png" alt="">
                     </div>
-                    <div class="card_alerta">
-                        <div class="titulo_card_alerta">
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 84%</h1>
-                                </div>
-
-                            </div>
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-                            <div class="checkBox">
-                                <button onclick="mudarAlerta2()">
-                                    <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox2">
-                                </button>
-                            </div>
-
-                        </div>
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 19 minutos atrás </h1>
-                        </div>
-                        <div class="linha_referencia">
-                        </div>
-                        <div class="botoes_card_alerta">
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
+                    <div class="titulo_texto_card_alerta">
+                        <h1>CPU ACIMA DE 95%</h1>
                     </div>
-
-                    <div class="card_alerta">
-                        <div class="titulo_card_alerta">
-                            <div class="cards1">
-                                <div class="icon_titulo_card_alerta">
-                                    <img src="../assets/Icon_alerta.png" alt="">
-                                </div>
-                                <div class="titulo_texto_card_alerta">
-                                    <h1>CPU ACIMA DE 90%</h1>
-                                </div>
-                            </div>
-                            <div class="cards">
-                                <div class="status_titulo_card_alerta">
-                                    <h1>Crítico</h1>
-                                </div>
-                                <div class="componente_titulo_card_alerta">
-                                    <h1>CPU</h1>
-                                </div>
-                            </div>
-                            <div class="checkBox">
-                                <button onclick="mudarAlerta3()">
-                                    <img src="../assets/dashboard-icons/checkAlerta.png" alt="" id="checkBox3">
-                                </button>
-                            </div>
-                        </div>
-                        <div class="identificação_servidor">
-                            <img src="../assets/icon_servidor.png" alt="">
-                            <h1>SRV-DC01-WEB-05 - 27 minutos atrás </h1>
-                        </div>
-                        <div class="linha_referencia">
-                        </div>
-                        <div class="botoes_card_alerta">
-                            <button style="background-color: #6B7280; color: white; font-weight: 550;">Ver
-                                detalhe</button>
-                        </div>
+                </div>
+                <div class="cards">
+                    <div class="status_titulo_card_alerta">
+                        <h1>Crítico</h1>
                     </div>
+                    <div class="componente_titulo_card_alerta">
+                        <h1>CPU</h1>
+                    </div>
+                </div>
+                <div class="checkBox checkbox1">
+                    <button onclick="mudarAlerta1()">
+                        <img src="../assets/dashboard-icons/checkAlerta.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="identificação_servidor">
+                <img src="../assets/icon_servidor.png" alt="">
+                <h1>SRV-DC01-WEB-06 - 2 min atrás</h1>
+            </div>
+            <div class="botoes_card_alerta">
+                <button style="background-color: #6B7280; color: white; font-weight: 550;" onclick="detalhes()">Ver detalhe</button>
+            </div>
+        </div>
+
+        <div class="card_alerta">
+            <div class="titulo_card_alerta">
+                <div class="cards1">
+                    <div class="icon_titulo_card_alerta">
+                        <img src="../assets/Icon_alerta.png" alt="">
+                    </div>
+                    <div class="titulo_texto_card_alerta">
+                        <h1>RAM ACIMA DE 92%</h1>
+                    </div>
+                </div>
+                <div class="cards">
+                    <div class="status_titulo_card_alerta">
+                        <h1>Crítico</h1>
+                    </div>
+                    <div class="componente_titulo_card_alerta">
+                        <h1>RAM</h1>
+                    </div>
+                </div>
+                <div class="checkBox checkbox2">
+                    <button onclick="mudarAlerta2()">
+                        <img src="../assets/dashboard-icons/checkAlerta.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="identificação_servidor">
+                <img src="../assets/icon_servidor.png" alt="">
+                <h1>SRV-DC02-DB-12 - 15 min atrás</h1>
+            </div>
+            <div class="botoes_card_alerta">
+                <button style="background-color: #6B7280; color: white; font-weight: 550;" onclick="detalhes()">Ver detalhe</button>
+            </div>
+        </div>
+
+        <div class="card_alerta">
+            <div class="titulo_card_alerta">
+                <div class="cards1">
+                    <div class="icon_titulo_card_alerta">
+                        <img src="../assets/Icon_alerta.png" alt="">
+                    </div>
+                    <div class="titulo_texto_card_alerta">
+                        <h1>RAM ACIMA DE 92%</h1>
+                    </div>
+                </div>
+                <div class="cards">
+                    <div class="status_titulo_card_alerta">
+                        <h1>Crítico</h1>
+                    </div>
+                    <div class="componente_titulo_card_alerta">
+                        <h1>RAM</h1>
+                    </div>
+                </div>
+                <div class="checkBox checkbox3">
+                    <button onclick="mudarAlerta3()">
+                        <img src="../assets/dashboard-icons/checkAlerta.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="identificação_servidor">
+                <img src="../assets/icon_servidor.png" alt="">
+                <h1>SRV-DC01-E1-06 - 20 min atrás</h1>
+            </div>
+            <div class="botoes_card_alerta">
+                <button style="background-color: #6B7280; color: white; font-weight: 550;" onclick="detalhes()">Ver detalhe</button>
+            </div>
+        </div>
+
+        <div class="card_alerta">
+            <div class="titulo_card_alerta">
+                <div class="cards1">
+                    <div class="icon_titulo_card_alerta">
+                        <img src="../assets/Icon_alerta.png" alt="">
+                    </div>
+                    <div class="titulo_texto_card_alerta">
+                        <h1>DISCO ACIMA DE 90%</h1>
+                    </div>
+                </div>
+                <div class="cards">
+                    <div class="status_titulo_card_alerta">
+                        <h1>Crítico</h1>
+                    </div>
+                    <div class="componente_titulo_card_alerta">
+                        <h1>DISCO</h1>
+                    </div>
+                </div>
+                <div class="checkBox checkbox4">
+                    <button onclick="mudarAlerta4()">
+                        <img src="../assets/dashboard-icons/checkAlerta.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="identificação_servidor">
+                <img src="../assets/icon_servidor.png" alt="">
+                <h1>SRV-DC01-WEB-08 - 24 min atrás</h1>
+            </div>
+            <div class="botoes_card_alerta">
+                <button style="background-color: #6B7280; color: white; font-weight: 550;" onclick="detalhes()">Ver detalhe</button>
+            </div>
+        </div>
+
+        <div class="card_alerta">
+            <div class="titulo_card_alerta">
+                <div class="cards1">
+                    <div class="icon_titulo_card_alerta">
+                        <img src="../assets/Icon_alerta.png" alt="">
+                    </div>
+                    <div class="titulo_texto_card_alerta">
+                        <h1>CPU ACIMA DE 85%</h1>
+                    </div>
+                </div>
+                <div class="cards">
+                    <div class="status_titulo_card_alerta">
+                        <h1>Atenção</h1>
+                    </div>
+                    <div class="componente_titulo_card_alerta">
+                        <h1>CPU</h1>
+                    </div>
+                </div>
+                <div class="checkBox checkbox5">
+                    <button onclick="mudarAlerta5()">
+                        <img src="../assets/dashboard-icons/checkAlerta.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="identificação_servidor">
+                <img src="../assets/icon_servidor.png" alt="">
+                <h1>SRV-FK02-GM-02 - 21 min atrás</h1>
+            </div>
+            <div class="botoes_card_alerta">
+                <button style="background-color: #6B7280; color: white; font-weight: 550;" onclick="detalhes()">Ver detalhe</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+                   
                 </div>
             </section>
         </div>
