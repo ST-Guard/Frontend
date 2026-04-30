@@ -20,7 +20,9 @@ body {
   --corDaFonte: #0F1C2E;
   --corFonteTexto: #6B7280;
 }
-
+h1{
+color:var(--corDaFonte)
+}
 #container_kpis {
   width: 100%;
   display: flex;
@@ -108,7 +110,8 @@ body {
 }
 
 /* KPI importante */
-#container_kpis .kpi2 {
+#container_kpis .kpi2,
+#container_kpis .kpi5 {
   border-color: var(--KPI-importante);
   box-shadow: 1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -128,8 +131,7 @@ body {
 }
 
 /* KPI urgente */
-#container_kpis .kpi3,
-#container_kpis .kpi5 {
+#container_kpis .kpi3 {
   border-color: var(--KPI-urgente);
   box-shadow: 1.5px 1px 2px 1px var(--KPI-urgente), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
