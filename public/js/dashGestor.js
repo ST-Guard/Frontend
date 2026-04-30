@@ -121,17 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
         datasets: [
             {
                 label: 'Baixo',
-                data: [8, 6, 6],
+                data: [13,14, 7],
                 backgroundColor: '#ffff00'
             },
             {
                 label: 'Médio',
-                data: [7, 6, 4],
+                data: [10, 7, 10],
                 backgroundColor: '#FFA500'
             },
             {
                 label: 'Crítico',
-                data: [2, 3, 1],
+                data: [8, 2, 18],
                 backgroundColor: '#FF5252'
             },
         ]
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new Chart(ctxRamCpu, {
     type: 'bar',
     data: {
-        labels: ["DC01", "DB-01", "WEB-01", "APP-01", "CACHE"],
+        labels: ["DC01-WEB-05", "DC01-DB-12", "FK02-GM-02", "DC01-WEB-08"],
         datasets: [
         {
             label: 'RAM',
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new Chart(ctxDiskLat, {
     type: 'bar',
     data: {
-        labels: ["DC01", "DB-01", "WEB-01", "APP-01", "CACHE"],
+        labels: ["DC01-WEB-05", "DC01-DB-12", "FK02-GM-02", "DC01-WEB-08"],
         datasets: [
             {
                 label: 'Disco',
