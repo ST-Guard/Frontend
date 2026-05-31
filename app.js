@@ -22,6 +22,7 @@ var financeira = require("./src/routes/financeiraRoute");
 var steamRouter = require("./src/routes/steam");
 var especificoRouter = require("./src/routes/especifico")
 var buscarzonasRouter = require("./src/routes/buscarzona")
+var dashOperacionalRouter = require("./src/routes/dashOperacional");
 
 // middlewares
 app.use(express.json());
