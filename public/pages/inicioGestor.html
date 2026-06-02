@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Aletas</title>
+    <title>Data Center Map</title>
     <link rel="stylesheet" href="../css/dashAlertas.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/dashMaps.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -51,7 +52,7 @@
 
         <div class="sidebar">
             <div class="sidebar-buttons">
-                <div class="sidebar-button" onclick="fnNavegar('../pages/inicioGestor.html')">
+                <div class="sidebar-button-select" onclick="fnNavegar('../pages/inicioGestor.html')">
                     <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
                     <p><a href="../pages/inicioGestor.html">Dashboard</a></p>
                     <!-- <p onclick="mudarServidor()">Servidores</p> -->
@@ -66,7 +67,7 @@
                     <p><a href="dashServidorGestor.html">Servidores</a></p>
                     <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
-                <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashAlertas.html')">
+                <div class="sidebar-button" onclick="fnNavegar('../pages/dashAlertas.html')">
                     <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
                     <p><a href="dashAlertas.html">Alertas</a></p>
                     <!-- <p onclick="mudarAlerta()">Alerta</p> -->
@@ -95,16 +96,16 @@
         <div class="SubcorpoPagina">
             <div class="textoInicio">
                 <div class="div_titulo">
-                    <h1>Data Center <span id="dataCenterTitulo"></span></h1>
+                    <h1>Regiões do Brasil <span id="dataCenterTitulo"></span></h1>
                 </div>
-                <div id="voltar" onclick="voltar()">
+                <div id="voltar" style="display: none;" onclick="voltar()">
                     Voltar
                 </div>
             </div>
 
-            <!-- <div class="conteiner_mapa" id="mapa">
+            <div class="conteiner_mapa" id="mapa">
                 <div class="titulo">
-                    Selecione o datacenter
+                    Selecione a região que deseja monitorar
                 </div>
 
                 <div class="box-mapa">
@@ -277,6 +278,7 @@
                                 <path id="shape_mg" class="shape"
                                     d="m 366.03943,309.83247 c 1.98769,-2.38743 4.89385,-3.81651 6.9863,-6.43444 1.81091,-2.26569 4.21981,-4.18486 4.39741,-7.07989 0.13453,-2.19288 -1.53622,-4.80922 -2.6712,-6.56061 2.6665,-0.80073 4.01571,-3.02441 1.48711,-4.57197 0.20128,-1.99946 1.09446,-3.55064 3.90956,-3.02944 1.49968,-3.73979 2.37497,-3.34247 4.42934,-2.9878 1.61713,0.49239 3.59842,1.36354 3.92352,0.91904 0.3251,-0.44454 -1.39778,-1.42109 -2.44335,-2.36016 -1.59437,-1.432 -2.77757,-3.98175 -2.63865,-6.46266 0.18181,-3.24693 9.04768,-8.36395 7.22657,-13.25227 -1.46588,-3.9348 -7.95227,-1.96742 -11.37768,-4.09103 -2.29938,-1.42552 -3.05014,-5.52065 -5.85625,-5.61939 -9.26595,-0.32603 -11.39621,-5.90751 -15.60316,-6.80987 -4.20696,-0.90236 -7.11895,-0.55997 -9.55306,-2.19656 -1.37556,-0.92489 -1.3548,-3.88369 -3.06656,-4.38176 -4.24572,-1.2354 -8.15181,3.42955 -12.24973,5.09072 -2.17961,0.88355 -1.42218,1.34648 -6.56175,2.59343 -1.7333,0.42053 -3.32435,-0.23408 -5.41794,-0.54861 -1.44684,-0.21736 -4.42782,-0.18526 -5.32944,0.78806 -2.29793,2.40703 1.37845,8.95934 -2.41712,10.44655 -3.47945,0.92574 -4.12288,1.74319 -4.41497,3.67715 -0.17292,1.14495 1.88674,4.64334 1.61355,7.14682 -0.23903,2.19045 -2.50535,3.37279 -2.66494,5.57046 -0.12064,1.6613 0.99899,2.5533 1.28916,5.07726 0.31446,2.73525 -0.90037,4.95018 -2.49232,6.35862 -2.36718,2.09429 -5.82764,3.29106 -8.90871,2.58633 -1.77117,-0.40512 -4.56712,-1.89432 -7.18438,-1.51861 -2.20114,0.31597 -4.77083,2.34579 -6.89894,2.99078 -2.61369,0.79216 -5.96762,0.0121 -8.41406,1.22615 -2.6093,1.29483 -4.72959,3.7538 -6.28143,6.21893 -1.09963,1.74677 -1.55538,2.81916 -2.53049,6.37357 2.14345,-0.62571 3.06272,-0.86702 4.63816,-0.92528 3.53343,-0.13065 8.16767,0.40476 10.52741,1.30131 2.70858,1.02908 6.14511,3.94174 8.99918,4.44143 2.4191,0.42353 5.11453,-0.6687 7.54148,-1.04469 2.56877,-0.39796 5.56129,-2.40623 7.88108,-1.23341 3.14767,2.61375 2.72808,4.78199 3.29308,8.25105 0.29373,1.78391 0.73161,5.47675 1.16591,7.23025 0.4343,1.7535 0.92659,3.47643 1.45227,5.13806 0.52568,1.66164 1.08474,3.26198 1.65259,4.7703 1.14572,3.04345 2.12994,7.80369 4.02198,8.88825 2.04246,1.17078 4.61128,-0.67552 6.9533,-1.23819 2.08441,-0.50078 6.29226,-2.15947 10.71511,-3.85239 4.54714,-1.84752 7.60381,-3.22523 11.48679,-3.49439 2.19751,-0.15233 4.43676,1.56035 6.59897,1.13948 2.89869,-0.56422 6.3632,-2.42159 7.2045,-4.20303 1.67082,-3.5379 3.76474,-9.60567 5.18727,-11.15764">
                                 </path>
+                                <circle id="icon_mg" class="icon_state" r="12" cx="338" cy="284"></circle>
                                 <text id="label_icon_state_mg" class="label_icon_state" x="331" y="288">MG</text>
                                 <text id="label_state_mg" class="label_state" x="369" y="15">Minas Gerais</text>
                             </a>
@@ -356,12 +358,7 @@
                                 <text id="label_state_pb" class="label_state" x="407" y="15">Paraíba</text>
                             </a>
 
-                            <a href="#" id="state_df" class="state" data-state="df" xlink:href="">
-                                <desc id="description_df">Distrito Federal</desc>
-                                <circle id="icon_df" class="icon_state" r="12" cx="301" cy="251"></circle>
-                                <text id="label_icon_state_df" class="label_icon_state" x="294" y="255">DF</text>
-                                <text id="label_state_df" class="label_state" x="350" y="15">Distrito Federal</text>
-                            </a>
+
 
                         </g>
                     </svg>
@@ -370,455 +367,40 @@
                 <div class="parca">
                     <select name="select" id="seletory">
                         <option value="rj" data-stado="rj">Rio de Janeiro</option>
-                        <option value="rs" data-stado="rs">Rio Grande do Sul</option>
+                        <option value="mg" data-stado="rs">Rio Grande do Sul</option>
                         <option value="sp" data-stado="sp">São Paulo</option>
                     </select>
 
                     <div id="box_sp" data-info="sp" class="estado">
-                        <h3>Datacenter São Paulo</h3>
+                        <h3>Região São Paulo</h3>
                         <ul>
-                            <li>Saúde do sistema - <span></span>%</li>
+                            <li>Saúde do região- <span class="valor-saude"></span>%</li>
                         </ul>
-                        <button onclick="selecionarAlerta(1)">Selecionar</button>
+                        <button onclick="selecionarDatacenters()">Visualizar datacenters</button>
+                        <button onclick="selecionarAlerta(1)">Visualizar alertas</button>
                     </div>
                     <div id="box_rj" data-info="rj" class="estado">
-                        <h3>Datacenter Rio de Janeiro</h3>
+                        <h3>Região Rio de Janeiro</h3>
                         <ul>
-                            <li>Saúde do sistema - <span></span>%</li>
+                            <li>Saúde do região- <span class="valor-saude"></span>%</li>
                         </ul>
-                        <button onclick="selecionarAlerta(2)">Selecionar</button>
+                        <button onclick="selecionarDatacenters()">Visualizar datacenters</button>
+                        <button onclick="selecionarAlerta(2)">Visualizar alertas</button>
                     </div>
-                    <div id="box_rs" data-info="rs" class="estado">
-                        <h3>Datacenter Rio Grande do Sul</h3>
+                    <div id="box_mg" data-info="rs" class="estado">
+                        <h3>Região Rio Grande do Sul</h3>
                         <ul>
-                            <li>Saúde do sistema - <span></span>%</li>
+                            <li>Saúde do região- <span class="valor-saude"></span>%</li>
                         </ul>
-                        <button onclick="selecionarAlerta(3)">Selecionar</button>
-                    </div>
-                </div>
-            </div> -->
-
-            <div id="container_kpis">
-                <div class="div_kpi kpi1" id="severa">
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3>ALERTAS CRITICOS ABERTOS</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1 id="qtdCriticos">3</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
-                        </div>
-                        <h4>Requerem ação imediata</h4>
-                    </div>
-                </div>
-                <div class="div_kpi kpi2" id="media">
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3>MÉDIOS ABERTOS</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1 id="qtdMedios">2</h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
-                        </div>
-                        <div class="status">
-                            <h4>Requerem atenção</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="div_kpi kpi3" id="baixa">
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3>BAIXOS ABERTOS</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1 id="qtdBaixos">3</h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
-                        </div>
-                        <div class="status">
-                            <h4>Relevância inferior</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="div_kpi kpi4" id="resolvidos">
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3>RESOLVIDOS (24h)</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1 id="qtdResolvidos">3</h1>
-                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
-                        </div>
-                        <div class="status">
-                            <h4></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="div_kpi kpi5" id="serverAlerta">
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3>Servidor com mais alertas ativos</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1 id="nomeServer">SERVIDOR-DH-01</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
-                        </div>
-                        <div class="status">
-                            <h4>
-                                <div id="qtdAlertaServer">12</div> Alertas
-                            </h4>
-                        </div>
+                        <button onclick="selecionarDatacenters()">Visualizar datacenters</button>
+                        <button onclick="selecionarAlerta(3)">Visualizar alertas</button>
                     </div>
                 </div>
             </div>
-
-            <div class="parte1">
-                <section class="grafico_alerta">
-                    <canvas id="Alerta"></canvas>
-                </section>
-                <div class="grafico_pizza_card">
-                    <canvas id="distribuicao"></canvas>
-                </div>
-            </div>
-
-            <section class="grafico_mttr">
-                <div class="grafico_chart">
-                    <canvas id="mttr"></canvas>
-                </div>
-
-                <div class="grafico_kpis">
-                    <div class="grafico_kp kp1">
-                        <h1>Maior MTTR para baixos</h1>
-                        <p id="maiorB">SERVIDOR-DH-08</p>
-                    </div>
-                    <div class="grafico_kp kp2">
-                        <h1>Maior MTTR para médios</h1>
-                        <p id="maiorM">SERVIDOR-DH-05</p>
-                    </div>
-                    <div class="grafico_kp kp3">
-                        <h1>Maior MTTR para críticos</h1>
-                        <p id="maiorC">SERVIDOR-DH-06</p>
-                    </div>
-                    <div class="grafico_kp kp4">
-                        <h1>Melhor MTTR para críticos</h1>
-                        <p id="melhor">SERVIDOR-DH-01</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slaArea" id="slaArea">
-                <div class="titulo">
-                    Verificação de responsáveis por servidor e seus MTTRs.
-                </div>
-                <div class="infos">
-                    <div class="coluna">
-                        <div class="subtitulo">Servidor:</div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/server.png"><span>Servidor-dh-01</span>
-                        </div>
-                    </div>
-
-                    <div class="coluna">
-                        <div class="subtitulo">Responsável:</div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                        <div class="item"><img src="../assets/dashAlerta/user.png"><span>Erick Santos</span>
-                        </div>
-                    </div>
-
-                    <div class="coluna">
-                        <div class="subtitulo">MTTR por alerta: (HRs)</div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                        <div class="item mttr-group">
-                            <img src="../assets/dashAlerta/baixo.png">
-                            <div class="baixo">20</div> |
-                            <img src="../assets/dashAlerta/medio.png">
-                            <div class="medio">5</div> |
-                            <img src="../assets/dashAlerta/critico.png">
-                            <div class="critico">1</div>
-                        </div>
-                    </div>
-
-                    <div class="coluna">
-                        <div class="subtitulo">SLA:</div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                        <div class="item"><img src="../assets/icon/icon.png" alt=""></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="lista_alertas" id="lista_alertas">
-                <div class="div_lista_alertas">
-                    <div class="div_alertas-conteudo">
-                        <div class="div_alertas">
-
-                            <div class="card_alerta">
-                                <div class="titulo_card_alerta">
-                                    <div class="cards1">
-                                        <div class="icon_titulo_card_alerta">
-                                            <img src="../assets/Icon_alerta.png" alt="">
-                                        </div>
-                                        <div class="titulo_texto_card_alerta">
-                                            <h1>CPU ACIMA DE 95%</h1>
-                                        </div>
-                                    </div>
-                                    <div class="cards">
-                                        <div class="status_titulo_card_alerta">
-                                            <h1>Crítico</h1>
-                                        </div>
-                                        <div class="componente_titulo_card_alerta">
-                                            <h1>CPU</h1>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="identificação_servidor">
-                                    <img src="../assets/icon_servidor.png" alt="">
-                                    <h1>SRV-DC01-WEB-06 - 2 min atrás</h1>
-                                </div>
-                                <div class="botoes_card_alerta">
-                                    <button style="background-color: #6B7280; color: white; font-weight: 550;"
-                                        onclick="">Ver detalhe</button>
-                                </div>
-                            </div>
-
-                            <div class="card_alerta">
-                                <div class="titulo_card_alerta">
-                                    <div class="cards1">
-                                        <div class="icon_titulo_card_alerta">
-                                            <img src="../assets/Icon_alerta.png" alt="">
-                                        </div>
-                                        <div class="titulo_texto_card_alerta">
-                                            <h1>RAM ACIMA DE 92%</h1>
-                                        </div>
-                                    </div>
-                                    <div class="cards">
-                                        <div class="status_titulo_card_alerta">
-                                            <h1>Crítico</h1>
-                                        </div>
-                                        <div class="componente_titulo_card_alerta">
-                                            <h1>RAM</h1>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="identificação_servidor">
-                                    <img src="../assets/icon_servidor.png" alt="">
-                                    <h1>SRV-DC02-DB-12 - 15 min atrás</h1>
-                                </div>
-                                <div class="botoes_card_alerta">
-                                    <button style="background-color: #6B7280; color: white; font-weight: 550;"
-                                        onclick="">Ver detalhe</button>
-                                </div>
-                            </div>
-
-                            <div class="card_alerta">
-                                <div class="titulo_card_alerta">
-                                    <div class="cards1">
-                                        <div class="icon_titulo_card_alerta">
-                                            <img src="../assets/Icon_alerta.png" alt="">
-                                        </div>
-                                        <div class="titulo_texto_card_alerta">
-                                            <h1>RAM ACIMA DE 92%</h1>
-                                        </div>
-                                    </div>
-                                    <div class="cards">
-                                        <div class="status_titulo_card_alerta">
-                                            <h1>Crítico</h1>
-                                        </div>
-                                        <div class="componente_titulo_card_alerta">
-                                            <h1>RAM</h1>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="identificação_servidor">
-                                    <img src="../assets/icon_servidor.png" alt="">
-                                    <h1>SRV-DC01-E1-06 - 20 min atrás</h1>
-                                </div>
-                                <div class="botoes_card_alerta">
-                                    <button style="background-color: #6B7280; color: white; font-weight: 550;"
-                                        onclick="">Ver detalhe</button>
-                                </div>
-                            </div>
-
-                            <div class="card_alerta">
-                                <div class="titulo_card_alerta">
-                                    <div class="cards1">
-                                        <div class="icon_titulo_card_alerta">
-                                            <img src="../assets/Icon_alerta.png" alt="">
-                                        </div>
-                                        <div class="titulo_texto_card_alerta">
-                                            <h1>DISCO ACIMA DE 90%</h1>
-                                        </div>
-                                    </div>
-                                    <div class="cards">
-                                        <div class="status_titulo_card_alerta">
-                                            <h1>Crítico</h1>
-                                        </div>
-                                        <div class="componente_titulo_card_alerta">
-                                            <h1>DISCO</h1>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="identificação_servidor">
-                                    <img src="../assets/icon_servidor.png" alt="">
-                                    <h1>SRV-DC01-WEB-08 - 24 min atrás</h1>
-                                </div>
-                                <div class="botoes_card_alerta">
-                                    <button style="background-color: #6B7280; color: white; font-weight: 550;"
-                                        onclick="">Ver detalhe</button>
-                                </div>
-                            </div>
-
-                            <div class="card_alerta">
-                                <div class="titulo_card_alerta">
-                                    <div class="cards1">
-                                        <div class="icon_titulo_card_alerta">
-                                            <img src="../assets/Icon_alerta.png" alt="">
-                                        </div>
-                                        <div class="titulo_texto_card_alerta">
-                                            <h1>CPU ACIMA DE 85%</h1>
-                                        </div>
-                                    </div>
-                                    <div class="cards">
-                                        <div class="status_titulo_card_alerta">
-                                            <h1>Atenção</h1>
-                                        </div>
-                                        <div class="componente_titulo_card_alerta">
-                                            <h1>CPU</h1>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="identificação_servidor">
-                                    <img src="../assets/icon_servidor.png" alt="">
-                                    <h1>SRV-FK02-GM-02 - 21 min atrás</h1>
-                                </div>
-                                <div class="botoes_card_alerta">
-                                    <button style="background-color: #6B7280; color: white; font-weight: 550;"
-                                        onclick="">Ver detalhe</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <div id="modalGrafico" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="fecharModal()">&times;</span>
-            <h2 id="tituloModal"></h2>
-            <div id="conteudoModal"></div>
-        </div>
-    </div>
-
 </body>
-<script src="../js/dashAlertas.js"></script>
+
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<!-- <script src="../js/scriptMaps.js"></script> -->
-<script src="../js/modaisInfos.js"></script>
-<script src="../buscar_dados/buscarDadosAlerta.js"></script>
 <script src="../js/funMapa.js"></script>
+<script src="../buscar_dados/buscarDadosAlerta.js"></script>
 
 </html>
