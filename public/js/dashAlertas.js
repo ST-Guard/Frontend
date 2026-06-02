@@ -7,10 +7,10 @@ window.onload = () => {
     carregarDadosDashAlerta2();
 }
 
-if (!sessionStorage.ID_USUARIO) {
-    alert("Você precisa estar logado!");
-    window.location = "login.html";
-}
+// if (!sessionStorage.ID_USUARIO) {
+//     alert("Você precisa estar logado!");
+//     window.location = "login.html";
+// }
 
 function buscarDados() {
     const idUsuario = sessionStorage.ID_USUARIO
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    max: 60,
+                    max: 40,
                     ticks: {
                         stepSize: 15
                     }
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    window.chartDistribuicao = new Chart(distribuicao, {
+    window.chartDistribuicao = new Chart(distribuicao, {    
         type: "doughnut",
         data: {
             labels: ["CPU", "Disco", "RAM", "REDE"],
@@ -224,9 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     align: 'start',
                     font: {
                         size: 18
-                    },
-                    padding: {
-                        top: 10,
                     }
                 },
                 subtitle: {
@@ -235,9 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     align: 'start',
                     font: {
                         size: 15
-                    },
-                    padding: {
-                        bottom: 30,
                     }
                 },
                 tooltip: {
@@ -247,8 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
-// const idUsuario = sessionStorage.ID_USUARIO;
 
 function detalhes() {
     window.location = "dashServidorGestor.html"

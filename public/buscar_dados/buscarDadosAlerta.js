@@ -81,14 +81,12 @@ async function renderizarDadosDash(dadosDashboard) {
         return;
     }
 
-    const empresa = dadosDashboard["região"];
-
-    if (!empresa || !empresa[regiao]) {
-        console.log("Dados da região não encontrados.");
+    if(!regiao){
+        console.log("Região não foi selecionada!");
         return;
     }
 
-    let caminho = empresa[regiao][data];
+    let caminho = dadosDashboard.região[regiao][data];
 
     /* ========================= GRÁFICOS =========================*/
     /* ======================== MTTR SERVER =======================*/
