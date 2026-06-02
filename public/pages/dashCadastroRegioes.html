@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Data | Cadastro Regiões</title>
+    <link rel="icon" href="./../assets/icon/icon.png">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="./../css/dashFuncionario.css">
+</head>
+
+<body
+    onload="mascaraTel(document.getElementById('input_telefone_cadastro')), mascaraCPF(document.getElementById('input_cpf_cadastro'))">
+    <header>
+        <nav>
+            <div class="logo-nav" onclick="fnNavegar('/')">
+                <a href="../pages/index.html">
+                    <img src="./../assets/logos/smart data branco.png" alt="">
+                </a>
+            </div>
+
+            <div class="right-nav">
+                <div class="logo-notificao">
+                    <div class="icon-notificao">
+                        <a href="dashAlertas.html">
+                            <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                        </a>
+                    </div>
+                    <div class="qtd-notificao">
+                        <img src="./../assets/dashboard-icons/circulo.svg" alt="">
+                        <p>10</p>
+                    </div>
+                </div>
+
+                <div class="separacao"></div>
+
+                <div class="logo-usuario">
+                    <div class="userImg">
+                        <a href="dashConfigGestor.html">
+                            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+                        </a>
+                    </div>
+                    <div class="userInfo">
+                        <h2 class="user-name" id="username">Matheus Valle</h2>
+                        <h3 class="user-cargo" id="cargoname">Analista de operações</h3>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="corpoPagina">
+        <div class="sidebar">
+      <div class="sidebar-buttons">
+        <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashSupervisoraRegional.html')">
+          <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+          <p><a href="../pages/dashSupervisoraRegional.html">Dashboard</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashCadastroRegioes.html')">
+          <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
+          <p><a href="../pages/dashCadastroRegioes.html">Regiões</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigSupervisora.html')">
+          <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
+          <p><a href="../pages/dashConfigSupervisora.html">Configurações</a></p>
+          <!-- <p onclick="mudarConfig()">Configurações</p> -->
+        </div>
+        <div class="sidebar-button-sair">
+          <div class="saindo">
+            <a href="login.html" onclick="limparSessao()" class="sair">
+              <img src="../assets/dashboard-icons/sair.svg" alt="">
+              <p>Sair</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="conteudo">
+            <div class="conteudo_cabecalho">
+                <h1 class="conteudo_titulo">Regiões</h1>
+
+                <div class="kpi">
+                    <p class="kpi_ativos">Regiões ativas</p>
+                    <h2 id="kpi_ativos">0</h2>
+                    <h4 id="kpi_inativos">0 Inativos</h4>
+                    <img src="./../assets/img-funcionario/pessoas.png">
+                </div>
+            </div>
+
+            <div class="card_busca">
+                <div class="busca">
+                    <img src="../assets/img-funcionario/lupa.png">
+                    <input type="text" class="busca_input" placeholder="Buscar Região...">
+                </div>
+                <button class="busca_botao_buscar">Buscar</button>
+                <button class="busca_botao_cadastrar" onclick="abrirModal()">Cadastrar Região +</button>
+            </div>
+
+            <div id="lista_funcionarios"></div>
+        </div>
+    </div>
+
+    <div id="modal_cadastro" class="modal-container" style="display: none;">
+        <div class="modal-conteudo">
+            <div class="modal-header">
+                <h2>Cadastro</h2>
+                <button onclick="fecharModal()" class="botao-fechar">Fechar</button>
+            </div>
+
+            <div class="modal-corpo">
+                <label>Nome da Região</label>
+                <input id="input_nomeRegião_cadastro" placeholder="Ex: São Paulo" value="--">
+
+                <label>País</label>
+                <input id="input_paisRegião_cadastro" placeholder="Brasil" value="--">
+
+                <label>Estado</label>
+                <input id="input_estadoRegiao_cadastro" placeholder="São Paulo" oninput="mascaraTel(this)"
+                    maxlength="2" value="--">
+
+                <label>Cidade (sigla)</label>
+                <input id="input_cidadeRegiao_cadastro" placeholder="SP" oninput="mascaraTel(this)"
+                    maxlength="2" value="--">
+
+                <label>Codigo da Região</label>
+                <input id="input_codigoRegiao_cadastro" placeholder="90102" value="--">
+
+
+                <button onclick="cadastrar()" class="botao-cadastrar-modal">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./../js/dashFuncionario.js" defer></script>
+</html>

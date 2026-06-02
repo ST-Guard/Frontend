@@ -224,13 +224,15 @@
             }, 200);
           }*/
 
-          if (json.fkPapel == 1) {
-            window.location.href = 'dashOperacionalGestor.html';
-          } else {
+       
+    if (json.fkPapel == 1) {
+            window.location.href = 'dashGestor.html';
+          }else if(json.fkPapel == 3) {
+            window.location.href = 'dashSupervisoraRegional.html';
+          }else {
             window.location.href = 'dashAnalista.html';
           }
         });
-
 
       } else {
 
