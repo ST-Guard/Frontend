@@ -81,20 +81,20 @@ async function renderizarDadosDash(dadosDashboard) {
         return;
     }
 
-    const regiao = dadosDashboard["regiões"];
+    const empresa = dadosDashboard["região"];
 
-    if (!regiao || !regiao[data]) {
-        console.log("Dados do regiao não encontrados.");
+    if (!empresa || !empresa[regiao]) {
+        console.log("Dados da região não encontrados.");
         return;
     }
 
-    let caminho = regiao[data][regiao];
+    let caminho = empresa[regiao][data];
 
     /* ========================= GRÁFICOS =========================*/
     /* ======================== MTTR SERVER =======================*/
     const mttrServer = window.chartMttr;
 
-    const dados = caminho.mttr_por_servidor || [];
+    const dados = caminho.mttr_por_servidor;
     const listaMttrBaixo = dados.map(item => Number((item.baixo / 60).toFixed(2)));
     const listaMttrMedio = dados.map(item => Number((item.medio / 60).toFixed(2)));
     const listaMttrCritico = dados.map(item => Number((item.critico / 60).toFixed(2)));
@@ -135,19 +135,19 @@ async function renderizarDadosDash2(dadosDashboard2) {
     let regiao = sessionStorage.getItem('REGIAO');
 
     if (!data) {
-        console.log("Região não selecionada.");
+        console.log("Datacenter não selecionada.");
         return;
     }
 
     if (!regiao) {
-        console.log("Datacenter não selecionada.");
+        console.log("Região não selecionada.");
         return;
     }
 
     const empresa = dadosDashboard2["Steam"];
 
-    if (!empresa || !empresa[data]) {
-        console.log("Dados do datacenter não encontrados.");
+    if (!empresa || !empresa[regiao]) {
+        console.log("Dados da região não encontrados.");
         return;
     }
 
@@ -168,7 +168,7 @@ async function renderizarDadosDash2(dadosDashboard2) {
 
     const contagemPorServidor = {};
 
-    const alertasAtivos = dadosDashboard2["SmartData Corp"][data].ALERTAS_ATIVOS;
+    const alertasAtivos = caminho.ALERTAS_ATIVOS;
 
     alertasAtivos.forEach(alerta => {
         const nomeServer = alerta.servidor;
@@ -229,13 +229,13 @@ async function renderizarDadosDash2(dadosDashboard2) {
 
     /* =========================================================*/
 
-    renderizarCardsAlertas(dadosDashboard2, data);
-    renderizarSla(dadosDashboard2, data);
+    renderizarCardsAlertas(dadosDashboard2, data, regiao);
+    renderizarSla(dadosDashboard2, data, regiao);
 }
 
-function renderizarCardsAlertas(dadosDashboard2, data) {
+function renderizarCardsAlertas(dadosDashboard2, data, regiao) {
     const listaAlertasContainer = document.querySelector(".div_alertas");
-    const alertasAtivos = dadosDashboard2["SmartData Corp"][data].ALERTAS_ATIVOS;
+    const alertasAtivos = dadosDashboard2["Steam"][regiao][data].ALERTAS_ATIVOS;
 
     listaAlertasContainer.innerHTML = "";
 

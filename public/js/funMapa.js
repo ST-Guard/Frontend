@@ -1,6 +1,5 @@
 console.log("FUNMAP.JS CARREGOU");
 
-
 if (!sessionStorage.ID_USUARIO) {
     conteiner_msg.innerHTML = "Você precisa estar logado!"
     loadingModal()
@@ -9,23 +8,23 @@ if (!sessionStorage.ID_USUARIO) {
 
 function buscarDados() {
     const idUsuario = sessionStorage.ID_USUARIO
-    
+
     fetch(`/sessao/buscarUsuario/${idUsuario}`, {
     })
-      .then(function (resposta) {
-        return resposta.json();
-    })
-    .then(function (dados) {
-        dados = dados[0]
+        .then(function (resposta) {
+            return resposta.json();
+        })
+        .then(function (dados) {
+            dados = dados[0]
 
-        username.innerHTML = dados.nomePessoa
-        cargoname.innerHTML = dados.cargo
-        if (dados.imagem) {
-            imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
-        } else {
-            imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
-        }
-    })
+            username.innerHTML = dados.nomePessoa
+            cargoname.innerHTML = dados.cargo
+            if (dados.imagem) {
+                imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
+            } else {
+                imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
+            }
+        })
 }
 const idUsuario = sessionStorage.getItem("ID_USUARIO");
 const idEmpresa = sessionStorage.getItem("FK_EMPRESA");
@@ -454,12 +453,42 @@ function fecharPopupRegiao() {
 
 function selecionarDatacenters() {
     window.location.href = "dashOperacionalGestor.html";
-
 }
 
-function selecionarAlerta() {
+function selecionarAlerta(data) {
     window.location.href = "dashAlertas.html";
- 
+
+    let nome;
+
+    sessionStorage.setItem('DATA', "")
+    sessionStorage.setItem('REGIAO', "")
+
+    if (data == 1) {
+        nome = "São Paulo"
+        sessionStorage.setItem('DATA', "DC-SP-01")
+        sessionStorage.setItem('REGIAO', "SP")
+    } else if (data == 2) {
+        nome = "Rio de Janeiro"
+        sessionStorage.setItem('DATA', "DC-RJ-01")
+        sessionStorage.setItem('REGIAO', "RJ")
+    } else {
+        nome = "Porto Alegre"
+        sessionStorage.setItem('DATA', "DC-RS-01")
+        sessionStorage.setItem('REGIAO', "RS")
+    }
+
+    titulo.innerHTML = nome
+
+    
+}
+
+function voltar() {
+    sessionStorage.setItem('DATA', "")
+    sessionStorage.setItem('REGIAO', "")
+
+    window.location.href = "dashAlertas.html";
+
+    titulo.innerHTML = ""
 }
 
 function limparSessao() {

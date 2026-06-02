@@ -1,16 +1,16 @@
 function fnNavegar(caminho) {
     window.location.href = caminho
 }
-window.onload = () => {
-    buscarDados(),
-        carregarRegioesDoGestor();
 
+window.onload = () => {
+    carregarDadosDashAlerta();
+    carregarDadosDashAlerta2();
 }
 
-// if (!sessionStorage.ID_USUARIO) {
-//   alert("Você precisa estar logado!");
-//   window.location = "login.html";
-// }
+if (!sessionStorage.ID_USUARIO) {
+    alert("Você precisa estar logado!");
+    window.location = "login.html";
+}
 
 function buscarDados() {
     const idUsuario = sessionStorage.ID_USUARIO
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
             labels: ["CPU", "Disco", "RAM", "REDE"],
             datasets: [{
                 data: [8, 19, 33, 30],
-                backgroundColor: ["#52ffeb", "#0008ff", "#7700ff", "#00ffe1"],
+                backgroundColor: ["#3c59ea", "#4b8ae1", "#64aee5", "#b3e2ec"],
                 borderColor: "#ffffff",
                 borderWidth: 3,
                 hoverOffset: 4
@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-const idUsuario = sessionStorage.ID_USUARIO;
+// const idUsuario = sessionStorage.ID_USUARIO;
 
 function detalhes() {
     window.location = "dashServidorGestor.html"
