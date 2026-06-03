@@ -1,15 +1,15 @@
 function fnNavegar(caminho) {
     window.location.href = caminho
 }
-window.onload = () => {
-    buscarDados(),
-        carregarRegioesDoGestor();
 
+window.onload = () => {
+    carregarDadosDashAlerta();
+    carregarDadosDashAlerta2();
 }
 
 // if (!sessionStorage.ID_USUARIO) {
-//   alert("Você precisa estar logado!");
-//   window.location = "login.html";
+//     alert("Você precisa estar logado!");
+//     window.location = "login.html";
 // }
 
 function buscarDados() {
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    max: 60,
+                    max: 40,
                     ticks: {
                         stepSize: 15
                     }
@@ -174,13 +174,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    window.chartDistribuicao = new Chart(distribuicao, {
+    window.chartDistribuicao = new Chart(distribuicao, {    
         type: "doughnut",
         data: {
             labels: ["CPU", "Disco", "RAM", "REDE"],
             datasets: [{
                 data: [8, 19, 33, 30],
-                backgroundColor: ["#52ffeb", "#0008ff", "#7700ff", "#00ffe1"],
+                backgroundColor: ["#3c59ea", "#4b8ae1", "#64aee5", "#b3e2ec"],
                 borderColor: "#ffffff",
                 borderWidth: 3,
                 hoverOffset: 4
@@ -224,9 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     align: 'start',
                     font: {
                         size: 18
-                    },
-                    padding: {
-                        top: 10,
                     }
                 },
                 subtitle: {
@@ -235,9 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     align: 'start',
                     font: {
                         size: 15
-                    },
-                    padding: {
-                        bottom: 30,
                     }
                 },
                 tooltip: {
@@ -248,65 +242,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-const idUsuario = sessionStorage.ID_USUARIO;
-
-
-function carregarRegioesDoGestor() {
-    fetch(`/dashOperacional/listarRegioes/${idUsuario}`)
-        .then(resposta => {
-            if (!resposta.ok) {
-                throw new Error("Erro ao buscar regiões do gestor");
-            }
-
-            return resposta.json();
-        })
-        .then(regioes => {
-            liberarRegioesNoMapa(regioes);
-            sessionStorage.ID_REGIAO = regioes.idRegiao;
-        })
-        .catch(erro => {
-            console.error("Erro ao carregar regiões:", erro);
-        });
-}
-
-function liberarRegioesNoMapa(regioesPermitidas) {
-    const regioesPermitidasFormatadas = regioesPermitidas.map(regiao => {
-        return {
-            idRegiao: regiao.idRegiao,
-            estado: regiao.estado.toLowerCase()
-        };
-    });
-
-    const todosEstadosDoMapa = document.querySelectorAll("#map .state");
-
-    todosEstadosDoMapa.forEach(estadoMapa => {
-        const ufMapa = estadoMapa.dataset.state;
-
-        const regiaoEncontrada = regioesPermitidasFormatadas.find(regiao => regiao.estado === ufMapa);
-
-        if (regiaoEncontrada) {
-            estadoMapa.classList.add("regiao-permitida");
-            estadoMapa.classList.remove("regiao-bloqueada");
-
-            estadoMapa.onclick = function (event) {
-                event.preventDefault();
-
-                const idRegiao = regiaoEncontrada.idRegiao;
-
-                carregarDatacentersDoGestor(idRegiao);
-            };
-        } else {
-            estadoMapa.classList.add("regiao-bloqueada");
-            estadoMapa.classList.remove("regiao-permitida");
-
-            estadoMapa.onclick = function (event) {
-                event.preventDefault();
-                alert("Você não possui acesso aos datacenters desta região.");
-            };
-        }
-    });
-}
 function detalhes() {
     window.location = "dashServidorGestor.html"
 }

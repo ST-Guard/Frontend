@@ -74,30 +74,29 @@ async function atualizarDados2() {
 
 async function renderizarDadosDash(dadosDashboard) {
     let data = sessionStorage.getItem('DATA');
+    let regiao = sessionStorage.getItem('REGIAO')
 
     if (!data) {
         console.log("Datacenter não selecionado.");
         return;
     }
 
-    const datacenter = dadosDashboard["datacenters"];
-
-    if (!datacenter || !datacenter[data]) {
-        console.log("Dados do datacenter não encontrados.");
+    if(!regiao){
+        console.log("Região não foi selecionada!");
         return;
     }
 
-    let caminho = datacenter[data];
+    let caminho = dadosDashboard.região[regiao][data];
 
     /* ========================= GRÁFICOS =========================*/
     /* ======================== MTTR SERVER =======================*/
     const mttrServer = window.chartMttr;
 
-    const dados = caminho.mttr_por_servidor || [];
+    const dados = caminho.mttr_por_servidor;
     const listaMttrBaixo = dados.map(item => Number((item.baixo / 60).toFixed(2)));
     const listaMttrMedio = dados.map(item => Number((item.medio / 60).toFixed(2)));
     const listaMttrCritico = dados.map(item => Number((item.critico / 60).toFixed(2)));
-    const listaMttrLabels = dados.map(item => item.nomeServidor);
+    const listaMttrLabels = dados.map(item => item.servidor);
 
     if (mttrServer) {
         mttrServer.data.labels = listaMttrLabels;
@@ -131,20 +130,26 @@ async function renderizarDadosDash(dadosDashboard) {
 
 async function renderizarDadosDash2(dadosDashboard2) {
     let data = sessionStorage.getItem('DATA');
+    let regiao = sessionStorage.getItem('REGIAO');
 
     if (!data) {
-        console.log("Datacenter não selecionado.");
+        console.log("Datacenter não selecionada.");
         return;
     }
 
-    const empresa = dadosDashboard2["SmartData Corp"];
-
-    if (!empresa || !empresa[data]) {
-        console.log("Dados do datacenter não encontrados.");
+    if (!regiao) {
+        console.log("Região não selecionada.");
         return;
     }
 
-    let caminho = empresa[data];
+    const empresa = dadosDashboard2["Steam"];
+
+    if (!empresa || !empresa[regiao]) {
+        console.log("Dados da região não encontrados.");
+        return;
+    }
+
+    let caminho = empresa[regiao][data];
     /* ========================== KPIs ========================== */
     const kpiCriticoAberto = document.getElementById("qtdCriticos");
     const kpiMedioAverto = document.getElementById("qtdMedios");
@@ -161,7 +166,7 @@ async function renderizarDadosDash2(dadosDashboard2) {
 
     const contagemPorServidor = {};
 
-    const alertasAtivos = dadosDashboard2["SmartData Corp"][data].ALERTAS_ATIVOS;
+    const alertasAtivos = caminho.ALERTAS_ATIVOS;
 
     alertasAtivos.forEach(alerta => {
         const nomeServer = alerta.servidor;
@@ -222,13 +227,13 @@ async function renderizarDadosDash2(dadosDashboard2) {
 
     /* =========================================================*/
 
-    renderizarCardsAlertas(dadosDashboard2, data);
-    renderizarSla(dadosDashboard2, data);
+    renderizarCardsAlertas(dadosDashboard2, data, regiao);
+    renderizarSla(dadosDashboard2, data, regiao);
 }
 
-function renderizarCardsAlertas(dadosDashboard2, data) {
+function renderizarCardsAlertas(dadosDashboard2, data, regiao) {
     const listaAlertasContainer = document.querySelector(".div_alertas");
-    const alertasAtivos = dadosDashboard2["SmartData Corp"][data].ALERTAS_ATIVOS;
+    const alertasAtivos = dadosDashboard2["Steam"][regiao][data].ALERTAS_ATIVOS;
 
     listaAlertasContainer.innerHTML = "";
 

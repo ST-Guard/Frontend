@@ -1,10 +1,10 @@
-<!doctype html>
+ <!doctype html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Data | Analista</title>
+    <title>Smart Data | Supervisor(a) Regional</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,59 +43,50 @@
 
                 <div class="logo-usuario">
                     <div class="userImg">
-                        <a href="dashConfigGestor.html">
+                        <a href="dashConfigSupervisora.html">
                             <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
                         </a>
                     </div>
                     <div class="userInfo">
-                        <h2 class="user-name" id="username">Matheus Valle</h2>
-                        <h3 class="user-cargo" id="cargoname">Analista de operações</h3>
+                        <h2 class="user-name" id="username"> Rebecca Salles</h2>
+                        <h3 class="user-cargo" id="cargoname">Supervisor(a) Regional</h3>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <div class="corpoPagina">
-        <div class="sidebar">
-            <div class="sidebar-buttons">
-                <div class="sidebar-button" onclick="fnNavegar('../pages/inicioGestor.html')">
-                    <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p><a href="../pages/inicioGestor.html">Dashboard</a></p>
-                    <!-- <p onclick="mudarServidor()">Servidores</p> -->
-                </div>
-                <div class="sidebar-button" onclick="fnNavegar('../pages/dashFinanceiro.html')">
-                  <img src="../assets/dashFinanceiro/coin-icon-white.svg" alt="">
-                  <p><a href="../pages/dashFinanceiro.html">Financeiro</a></p>
-                  <!-- <p onclick="mudarDash()">Dashboard</p> -->
-                </div>
-                <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
-                    <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
-                    <p><a href="dashServidorGestor.html">Servidores</a></p>
-                </div>
-                <div class="sidebar-button" onclick="fnNavegar('../pages/dashAlertas.html')">
-                    <img src="../assets/dashboard-icons/icon_alerta_branco.svg" alt="">
-                    <p><a href="dashAlertas.html">Alertas</a></p>
-                </div>
-                <div class="sidebar-button" onclick="fnNavegar('../pages/dashFuncionario.html')">
-                    <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
-                    <p><a href="dashFuncionario.html">Funcionários</a></p>
-                </div>
-                <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashConfigGestor.html')">
-                    <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
-                    <p><a href="dashConfigGestor">Configurações</a></p>
-                </div>
-                <div class="sidebar-button-sair">
-                    <div class="saindo">
-                        <a href="login.html" onclick="limparSessao()" class="sair">
-                            <img src="../assets/dashboard-icons/sair.svg" alt="">
-                            <p>Sair</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+  <div class="corpoPagina">
+    <div class="sidebar">
+      <div class="sidebar-buttons">
+        <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashSupervisoraRegional.html')">
+          <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+          <p><a href="../pages/dashSupervisoraRegional.html">Dashboard</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
         </div>
-        <div class="SubcorpoPagina">
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashCadastroRegioes.html')">
+          <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
+          <p><a href="../pages/dashCadastroRegioes.html">Regiões</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigSupervisora.html')">
+          <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
+          <p><a href="../pages/dashConfigSupervisora.html">Configurações</a></p>
+          <!-- <p onclick="mudarConfig()">Configurações</p> -->
+        </div>
+        <div class="sidebar-button-sair">
+          <div class="saindo">
+            <a href="login.html" onclick="limparSessao()" class="sair">
+              <img src="../assets/dashboard-icons/sair.svg" alt="">
+              <p>Sair</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>   
+
+
+ <div class="SubcorpoPagina">
             <div class="textoInicio">
                 <div class="div_titulo">
                     <h1>Configurações</h1>
@@ -103,7 +94,7 @@
             </div>
             <div class="containerConfig">
                 <div class="boxInicio">
-                    <h2>Perfil <span>Gestora</span></h2>
+                    <h2>Perfil <span>Supervisor(a) Regional</span></h2>
                     <h3>Atualize suas informações pessoais e de contato.</h3>
                 </div>
                 <div class="boxImagem">
@@ -117,7 +108,7 @@
                     <div class="input1">
                         <div class="boxInput">
                             <span>Nome completo</span>
-                            <input type="text" id="nome" value="Isabella Teixeira">
+                            <input type="text" id="nome" value="Rebecca Salles">
                         </div>
                         <div class="boxInput">
                             <span>Telefone</span>
@@ -128,11 +119,11 @@
                     <div class="input2">
                         <div class="boxInput">
                             <span>E-mail</span>
-                            <input type="text" id="email" value="mywtty@gmail.com" disabled>
+                            <input type="text" id="email" value="rebeccasalles@gmail.com" disabled>
                         </div>
                         <div class="boxInput">
                             <span>Cargo</span>
-                            <input type="text" id="cargo" value="Gestor" disabled>
+                            <input type="text" id="cargo" value="Supervisor(a)" disabled>
                         </div>
                     </div>
                 </div>
@@ -154,3 +145,4 @@
 <script src="./../js/sessao.js"></script>
 <script src="./../js/dashConfigGestor.js"></script>
 </html>
+

@@ -51,15 +51,15 @@
 
         <div class="sidebar">
             <div class="sidebar-buttons">
-                <div class="sidebar-button" onclick="fnNavegar('../pages/dashGestor.html')">
+                <div class="sidebar-button" onclick="fnNavegar('../pages/inicioGestor.html')">
                     <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                    <p><a href="../pages/dashOperacionalGestor.html">Dashboard</a></p>
+                    <p><a href="../pages/inicioGestor.html">Dashboard</a></p>
                     <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashFinanceiro.html')">
-                  <img src="../assets/dashFinanceiro/coin-icon-white.svg" alt="">
-                  <p><a href="../pages/dashFinanceiro.html">Financeiro</a></p>
-                  <!-- <p onclick="mudarDash()">Dashboard</p> -->
+                    <img src="../assets/dashFinanceiro/coin-icon-white.svg" alt="">
+                    <p><a href="../pages/dashFinanceiro.html">Financeiro</a></p>
+                    <!-- <p onclick="mudarDash()">Dashboard</p> -->
                 </div>
                 <div class="sidebar-button" onclick="fnNavegar('../pages/dashServidorGestor.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
@@ -97,12 +97,12 @@
                 <div class="div_titulo">
                     <h1>Data Center <span id="dataCenterTitulo"></span></h1>
                 </div>
-                <div id="voltar" style="display: none;" onclick="voltar()">
+                <div id="voltar" onclick="voltar()">
                     Voltar
                 </div>
             </div>
 
-            <div class="conteiner_mapa" id="mapa">
+            <!-- <div class="conteiner_mapa" id="mapa">
                 <div class="titulo">
                     Selecione o datacenter
                 </div>
@@ -396,13 +396,13 @@
                         <button onclick="selecionarAlerta(3)">Selecionar</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div id="container_kpis" style="display: none;">
+            <div id="container_kpis">
                 <div class="div_kpi kpi1" id="severa">
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>CRITICOS ABERTOS</h3>
+                            <h3>ALERTAS CRITICOS ABERTOS</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 id="qtdCriticos">3</h1>
@@ -471,56 +471,37 @@
                 </div>
             </div>
 
-            <div class="parte1" id="parte1" style="display: none;">
+            <div class="parte1">
                 <section class="grafico_alerta">
-                    <div class="grafico">
-                        <div class="grafico_chart">
-                            <canvas id="Alerta"></canvas>
-                        </div>
-                        <!-- <div class="boxTendencia">
-                            <div class="tendencia">
-                                <img src="../assets/icone_certo.png" alt="">
-                                <div class="textos">
-                                    <h1>Tendência Positiva</h1>
-                                    <p>Alertas Criticos com queda significativa.</p>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
+                    <canvas id="Alerta"></canvas>
                 </section>
                 <div class="grafico_pizza_card">
-                    <div class="grafico_pizza_canvas">
-                        <canvas id="distribuicao"></canvas>
-                    </div>
+                    <canvas id="distribuicao"></canvas>
                 </div>
             </div>
 
-            <section class="grafico_mttr" id="graficoMttr" style="display: none;">
-                <div class="grafico">
-                    <div class="grafico_chart">
-                        <canvas id="mttr"></canvas>
+            <section class="grafico_mttr">
+                <div class="grafico_chart">
+                    <canvas id="mttr"></canvas>
+                </div>
+
+                <div class="grafico_kpis">
+                    <div class="grafico_kp kp1">
+                        <h1>Maior MTTR para baixos</h1>
+                        <p id="maiorB">SERVIDOR-DH-08</p>
                     </div>
-
-                    <div class="grafico_kpis">
-                        <div class="grafico_kp1">
-                            <h1>Maior MTTR para baixos</h1>
-                            <p id="maiorB">SERVIDOR-DH-08</p>
-                        </div>
-                        <div class="grafico_kp2">
-                            <h1>Maior MTTR para médios</h1>
-                            <p id="maiorM">SERVIDOR-DH-05</p>
-                        </div>
-                        <div class="grafico_kp3">
-                            <h1>Maior MTTR para críticos</h1>
-                            <p id="maiorC">SERVIDOR-DH-06</p>
-                        </div>
-                        <div class="grafico_kp4">
-                            <h1>Melhor MTTR para críticos</h1>
-                            <p id="melhor">SERVIDOR-DH-01</p>
-                        </div>
+                    <div class="grafico_kp kp2">
+                        <h1>Maior MTTR para médios</h1>
+                        <p id="maiorM">SERVIDOR-DH-05</p>
                     </div>
-
-
+                    <div class="grafico_kp kp3">
+                        <h1>Maior MTTR para críticos</h1>
+                        <p id="maiorC">SERVIDOR-DH-06</p>
+                    </div>
+                    <div class="grafico_kp kp4">
+                        <h1>Melhor MTTR para críticos</h1>
+                        <p id="melhor">SERVIDOR-DH-01</p>
+                    </div>
                 </div>
             </section>
 
@@ -664,7 +645,7 @@
                 </div>
             </section>
 
-            <section class="lista_alertas" id="lista_alertas" style="display: none;">
+            <section class="lista_alertas" id="lista_alertas">
                 <div class="div_lista_alertas">
                     <div class="div_alertas-conteudo">
                         <div class="div_alertas">
@@ -835,8 +816,9 @@
 </body>
 <script src="../js/dashAlertas.js"></script>
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script src="../js/scriptMaps.js"></script>
+<!-- <script src="../js/scriptMaps.js"></script> -->
 <script src="../js/modaisInfos.js"></script>
 <script src="../buscar_dados/buscarDadosAlerta.js"></script>
+<script src="../js/funMapa.js"></script>
 
 </html>

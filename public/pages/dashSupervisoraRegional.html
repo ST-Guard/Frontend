@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Data | Supervisora Regional</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/dashSupervisoraRegional.js" defer></script>
+  <link rel="icon" href="./../assets/icon/icon.png" />
+  <link rel="stylesheet" href="./../css/dashboard.css" />
+  <link rel="stylesheet" href="./../css/dashSupervisoraRegioes.css" />
+    
+</head>
+
+<body>
+
+
+  <header>
+    <nav>
+      <div class="logo-nav" onclick="fnNavegar('/')">
+        <a href="../pages/index.html">
+          <img src="./../assets/logos/smart data branco.png" alt="">
+        </a>
+      </div>
+
+      <div class="right-nav">
+        <div class="logo-notificao">
+          <div class="icon-notificao">
+            <a href="dashAlertas.html">
+              <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+            </a>
+          </div>
+
+          <div class="qtd-notificao">
+            <img src="./../assets/dashboard-icons/circulo.svg" alt="" />
+            <p class="qtd-notificao">10</p>
+          </div>
+        </div>
+
+        <div class="separacao"></div>
+
+        <div class="logo-usuario">
+          <div class="userImg">
+            <a href="dashConfigGestor.html">
+
+              <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+            </a>
+          </div>
+          <div class="userInfo">
+            <h2 class="user-name" id="username"></h2>
+            <h3 class="user-cargo" id="cargoname">Supervisor(a) Regional</h3>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="corpoPagina">
+
+    <div class="sidebar">
+      <div class="sidebar-buttons">
+        <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashSupervisoraRegional.html')">
+          <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+          <p><a href="../pages/dashSupervisoraRegional.html">Dashboard</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashCadastroRegioes.html')">
+          <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
+          <p><a href="../pages/dashCadastroRegioes.html">Regiões</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigSupervisora.html')">
+          <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
+          <p><a href="../pages/dashConfigSupervisora.html">Configurações</a></p>
+          <!-- <p onclick="mudarConfig()">Configurações</p> -->
+        </div>
+        <div class="sidebar-button-sair">
+          <div class="saindo">
+            <a href="login.html" onclick="limparSessao()" class="sair">
+              <img src="../assets/dashboard-icons/sair.svg" alt="">
+              <p>Sair</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="SubcorpoPagina">
+          <div class="tituloPagina">
+        <div class="div_titulo">
+          <h1>Panorama Regional</h1>
+          <h2>Status operacional, evolução de alertas e eficiência das regiões. </h2>
+        </div>
+
+        </div>
+
+        <div class="container-kpis">
+
+            <div class="card-kpi" id="kpi_maior_risco_borda">
+                <div class="kpi-header">
+                    <span class="kpi-titulo">REGIÃO COM MAIOR RISCO</span>
+                </div>
+                <div class="kpi-body">
+                    <span class="kpi-valor" id="kpi_risco_regiao">--</span>
+                    <span class="kpi-sub-valor" id="kpi_risco_icone"></span>
+                </div>
+                <div class="kpi-footer">
+                    <p>Região com maior índice de risco operacional</p>
+                </div>
+            </div>
+
+            <div class="card-kpi" id="kpi_operando_borda">
+                <div class="kpi-header">
+                    <span class="kpi-titulo">REGIÕES INSTÁVEIS</span>
+                </div>
+                <div class="kpi-body">
+                    <span class="kpi-valor" id="kpi_regioes_instaveis_valor">--/--</span>
+                    <span class="kpi-sub-valor" id="kpi_instaveis_icone"></span>
+                </div>
+                    <div class="kpi-footer">
+                    <p>regiões que tiveram +30% das coletas em estado crítico</p>
+                </div>
+            </div>
+
+            <div class="card-kpi" id="kpi_uptime_borda">
+                <div class="kpi-header">
+                    <span class="kpi-titulo">MENOR CAPACIDADE DISPONÍVEL</span>
+                </div>
+                <div class="kpi-body">
+                    <span class="kpi-valor-longo" id="kpi_capacidade_valor">--</span>
+                    <span class="kpi-sub-valor" id="kpi_capacidade_icone"></span>
+                </div>
+                <div class="kpi-footer">
+                    <p><span id="kpi_capacidade_regiao">--</span> possui a menor margem operacional</p>
+                </div>
+            </div>
+
+            <div class="card-kpi" id="kpi_saturacao_borda">
+                <div class="kpi-header">
+                    <span class="kpi-titulo">REGIÃO PRÓXIMA DE SATURAÇÃO</span>
+                </div>
+                <div class="kpi-body">
+                    <span class="kpi-valor-longo" id="kpi_saturacao_valor">--</span>
+                    <span class="kpi-sub-valor" id="kpi_saturacao_icone"></span>
+                </div>
+                <div class="kpi-footer">
+                    <p>Previsão de <span id="kpi_saturacao_tempo">--</span> até saturação operacional</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-painel-regioes">
+            <div class="cabecalho-painel">
+                <h2 class="titulo-painel">Situação de cada uma das regiões</h2>
+                <button class="botao-cadastro">Cadastrar Região +</button>
+            </div>
+        
+            <div class="grade-regioes" id="gradeRegioes">
+
+                
+            </div>
+        </div>
+
+        <div class="conteiner-grafico">
+        
+            <div class="cabecalho-grafico">
+                <div class="bloco-titulo">
+                    <h2>Volume de alertas por região</h2>
+                    <p>Acumulado diário · identifica regiões em deterioração ou melhora</p>
+                </div>
+                
+                <select class="seletor-periodo">
+                    <option>Últimos 7 dias</option>
+                    <option>Últimos 15 dias</option>
+                    <option>Últimos 30 dias</option>
+                </select>
+            </div>
+
+            <div class="area-canvas">
+                <canvas id="graficoAlertas"></canvas>
+            </div>
+
+            <div class="rodape-grafico">
+            <p>Exibindo: últimos 7 dias · alertas por dia de cada região</p>
+            </div>
+        </div>
+
+        <div class="linha-dupla-painel">
+
+        <div class="card-painel-metade">
+            <div class="cabecalho-grafico">
+                <div class="bloco-titulo">
+                    <h2>Top problemas por região</h2>
+                    <p>Composição de incidentes por tipo em cada região</p>
+                    
+                    <div class="legenda-problemas">
+                        <span class="item-legenda-cor"><span class="quadradinho vermelho"></span> CPU alta</span>
+                        <span class="item-legenda-cor"><span class="quadradinho laranja"></span> Disco cheio</span>
+                        <span class="item-legenda-cor"><span class="quadradinho roxo"></span> RAM crítica</span>
+                        <span class="item-legenda-cor"><span class="quadradinho azul"></span> Latência alta</span>
+                        <span class="item-legenda-cor"><span class="quadradinho cinza"></span> Perda pct.</span>
+                    </div>
+                </div>
+                <select class="seletor-periodo">
+                    <option>Últimos 7 dias</option>
+                </select>
+            </div>
+
+            <div class="area-canvas-problemas">
+                <canvas id="graficoTopProblemas"></canvas>
+            </div>
+        </div>
+
+        <div class="card-painel-metade">
+            <div class="cabecalho-grafico">
+                <div class="bloco-titulo">
+                    <h2>Distribuição de Tráfego por Região</h2>
+                    <p>Identifica quais regiões concentram a maior parcela da carga operacional</p>
+                </div>
+                <select class="seletor-periodo">
+                    <option>Últimos 24 horas</option>
+                </select>
+            </div>
+
+            <div class="container-pizza" id="containerDistribuicaoTrafego">
+                <canvas id="graficoTrafego"></canvas>
+            </div>
+
+        <div id="modalRegiao" class="modal-regiao">
+            <div class="modal-conteudo">
+                <span class="fechar-modal" onclick="fecharModalRegiao()">×</span>
+
+                <h2 id="modalTituloRegiao">REGIÃO</h2>
+                
+
+                <div class="modal-info">
+                    <p>Saturação Atual</p>
+                    <strong id="modalSaturacaoAtual">--</strong>
+                </div>
+
+                <div class="modal-info">
+                    <p>Previsão de Saturação</p>
+                    <strong id="modalPrevisao">--</strong>
+                </div>
+
+                <div class="modal-info">
+                    <p>Componente Crítico</p>
+                    <strong id="modalComponenteCritico">--</strong>
+                </div>
+
+                <div class="modal-info">
+                    <p>Capacidade Disponível</p>
+                    <strong id="modalCapacidade">--</strong>
+                </div>
+            </div>
+        </div>
+
+
+</body>
+</html>

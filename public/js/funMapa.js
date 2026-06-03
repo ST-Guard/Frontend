@@ -1,6 +1,5 @@
 console.log("FUNMAP.JS CARREGOU");
 
-
 if (!sessionStorage.ID_USUARIO) {
     conteiner_msg.innerHTML = "Você precisa estar logado!"
     loadingModal()
@@ -9,23 +8,23 @@ if (!sessionStorage.ID_USUARIO) {
 
 function buscarDados() {
     const idUsuario = sessionStorage.ID_USUARIO
-    
+
     fetch(`/sessao/buscarUsuario/${idUsuario}`, {
     })
-      .then(function (resposta) {
-        return resposta.json();
-    })
-    .then(function (dados) {
-        dados = dados[0]
+        .then(function (resposta) {
+            return resposta.json();
+        })
+        .then(function (dados) {
+            dados = dados[0]
 
-        username.innerHTML = dados.nomePessoa
-        cargoname.innerHTML = dados.cargo
-        if (dados.imagem) {
-            imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
-        } else {
-            imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
-        }
-    })
+            username.innerHTML = dados.nomePessoa
+            cargoname.innerHTML = dados.cargo
+            if (dados.imagem) {
+                imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
+            } else {
+                imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
+            }
+        })
 }
 const idUsuario = sessionStorage.getItem("ID_USUARIO");
 const idEmpresa = sessionStorage.getItem("FK_EMPRESA");
@@ -121,7 +120,7 @@ function renderizarMapa() {
         return {
             idRegiao: regiao.idRegiao,
             uf: String(regiao.uf).toLowerCase(),
-            cidade: regiao.cidade
+            estado: regiao.estado
         };
     });
 
@@ -129,7 +128,7 @@ function renderizarMapa() {
         return {
             idRegiao: regiao.idRegiao,
             uf: String(regiao.uf).toLowerCase(),
-            cidade: regiao.cidade
+            estado: regiao.estado
         };
     });
 
@@ -196,7 +195,7 @@ function renderizarMapa() {
 
             sessionStorage.setItem("ID_REGIAO", regiaoDoGestor.idRegiao);
             sessionStorage.setItem("UF", regiaoDoGestor.uf);
-            sessionStorage.setItem("CIDADE", regiaoDoGestor.cidade);
+            sessionStorage.setItem("ESTADO", regiaoDoGestor.estado);
 
             abrirPopupEscolhaRegiao(regiaoDoGestor, scoreRegiao);
         };
@@ -315,16 +314,16 @@ function aplicarEstiloVisualDireto(estadoMapa, existeNaEmpresa, gestorTemAcesso,
     if (!existeNaEmpresa) {
         shape.style.setProperty("fill", "#d9d9d9", "important");
         shape.style.setProperty("opacity", "0.45", "important");
-        shape.style.setProperty("filter", "grayscale(1) brightness(1.08)", "important");
+        shape.style.setProperty("filter", "grayscale(3) brightness(1.08)", "important");
 
         if (icon) {
             icon.style.setProperty("opacity", "0.18", "important");
-            icon.style.setProperty("filter", "grayscale(1)", "important");
+            icon.style.setProperty("filter", "grayscale(3)", "important");
         }
 
         if (label) {
             label.style.setProperty("opacity", "0.25", "important");
-            label.style.setProperty("filter", "grayscale(1)", "important");
+            label.style.setProperty("filter", "grayscale(3)", "important");
         }
 
         return;
@@ -334,12 +333,12 @@ function aplicarEstiloVisualDireto(estadoMapa, existeNaEmpresa, gestorTemAcesso,
     if (!gestorTemAcesso) {
         shape.style.setProperty("fill", corEstado, "important");
         shape.style.setProperty("opacity", "0.32", "important");
-        shape.style.setProperty("filter", "grayscale(0.8) brightness(1.12)", "important");
+        shape.style.setProperty("filter", "grayscale(1) brightness(1.12)", "important");
 
         if (icon) {
             icon.style.setProperty("fill", corGlow, "important");
             icon.style.setProperty("opacity", "0.35", "important");
-            icon.style.setProperty("filter", "grayscale(0.8)", "important");
+            icon.style.setProperty("filter", "grayscale(1)", "important");
         }
 
         if (label) {
@@ -361,7 +360,7 @@ function aplicarEstiloVisualDireto(estadoMapa, existeNaEmpresa, gestorTemAcesso,
         icon.style.setProperty("opacity", "1", "important");
         icon.style.setProperty(
             "filter",
-            `drop-shadow(0 0 6px ${corGlow}) drop-shadow(0 0 14px ${corGlow}) drop-shadow(0 0 24px ${corGlow})`,
+            `drop-shadow(0 0 6px ${corGlow}) drop-shadow(0 0 10px ${corGlow}) drop-shadow(0 0 24px ${corGlow})`,
             "important"
         );
     }
@@ -454,12 +453,42 @@ function fecharPopupRegiao() {
 
 function selecionarDatacenters() {
     window.location.href = "dashOperacionalGestor.html";
-
 }
 
-function selecionarAlerta() {
+function selecionarAlerta(data) {
     window.location.href = "dashAlertas.html";
- 
+
+    let nome;
+
+    sessionStorage.setItem('DATA', "")
+    sessionStorage.setItem('REGIAO', "")
+
+    if (data == 1) {
+        nome = "São Paulo"
+        sessionStorage.setItem('DATA', "DC-SP-01")
+        sessionStorage.setItem('REGIAO', "SP")
+    } else if (data == 2) {
+        nome = "Rio de Janeiro"
+        sessionStorage.setItem('DATA', "DC-RJ-01")
+        sessionStorage.setItem('REGIAO', "RJ")
+    } else {
+        nome = "Porto Alegre"
+        sessionStorage.setItem('DATA', "DC-RS-01")
+        sessionStorage.setItem('REGIAO', "RS")
+    }
+
+    titulo.innerHTML = nome
+
+    
+}
+
+function voltar() {
+    sessionStorage.setItem('DATA', "")
+    sessionStorage.setItem('REGIAO', "")
+
+    window.location.href = "dashAlertas.html";
+
+    titulo.innerHTML = ""
 }
 
 function limparSessao() {
