@@ -32,19 +32,70 @@ function buscarDados() {
     })
 }
 
-function carregarDados() {
+async function puxarDadosAws() {
+    const BUCKET = 'smartdatabucket2'
+
+    return fetch("/especifico/puxarDadosEspecifico", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            bucket: BUCKET
+        })
+    })
+     .then(function (resposta) {
+        return resposta.json();
+    })
+    .then(function (dados) {
+        if(dados == [] || dados == null || dados == {}){
+          console.log("Dados não encontrados")
+          return
+        } else {
+            let kpiTrafego = document.getElementById('kpiVolumeDownload');
+
+            let kpiCpu = document.getElementById('kpiP99Cpu');
+            let kpiCpuDesc = document.getElementById('descKpiCpu');
+
+            let kpiDisco = document.getElementById('kpiP99Disco');
+            let kpiDiscoDesc = document.getElementById('descKpiDisco');
+
+            let kpiRam = document.getElementById('kpiP99Ram');
+            let kpiRamDesc = document.getElementById('descKpiRam');
+
+            let kpiLatencia = document.getElementById('kpiP99Latencia');
+            let kpiLatenciaDesc = document.getElementById('descKpiLatencia');
+
+            kpiCpu.innerHTML = dados.KPIS.P99CPUTotal.toFixed(1) + "%"
+            kpiCpuDesc.innerHTML = dados.KPIS.P99CPUTotal.toFixed(1) + "%"
+
+            kpiRam.innerHTML = dados.KPIS.P99RAMTotal.toFixed(1) + "%"
+            kpiRamDesc.innerHTML = dados.KPIS.P99RAMTotal.toFixed(1) + "%"
+
+            kpiDisco.innerHTML = dados.KPIS.P99DISCOTotal.toFixed(1) + "%"
+            kpiDiscoDesc.innerHTML = dados.KPIS.P99DISCOTotal.toFixed(1) + "%"
+            
+            kpiLatencia.innerHTML = dados.KPIS.P99REDETotal.toFixed(1) + "%"
+            kpiLatenciaDesc.innerHTML = dados.KPIS.P99REDETotal.toFixed(1) + "%"
+
+            return dados
+        }
+    });
+}
+
+async function carregarDados() {
     const idZona = sessionStorage.ID_ZONA
     const selectServer = document.getElementById('selectSrv');
     const nomeTopoServer = document.getElementById('nomeTopoServer');
     const parte2 = document.getElementById('p2');
 
-    selectServer.onchange = function () {
+    selectServer.onchange = async function () {
         if (selectServer.value == "todos") {
             parte2.style.display = "flex";
             nomeTopoServer.innerHTML = "Todos os Servidores";
+            atualizarComponente()
         } else {
             parte2.style.display = "none";
             nomeTopoServer.innerHTML = selectServer.value
+            atualizarComponente()
         }
     }
 
@@ -97,6 +148,9 @@ async function estimarDownloadsPorJogador() {
 document.addEventListener("DOMContentLoaded", () => {
     buscarDados()
     carregarDados()
+
+    setInterval(puxarDadosAws, 60000)
+    
     const ctxRamCpu = document.getElementById('chartRamxCpu');
     const ctxDiskLat = document.getElementById('chartDiskxLat');
     const ctxDownload = document.getElementById('chartDownload');
@@ -139,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Correlação entre taxa de download e consumo de disco',
+                    text: 'Comparação Disco X Latencia',
                     align: 'start',
                     font: {
                         size: 18
@@ -183,6 +237,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+
+    const labelsDiskLat = [];
+    const valoresDiskLat = [];    
 
     let ultimoTotal = null;
 
@@ -324,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
             labels: [],
             datasets: [
                 {
-                    label: 'Lançamentos previstos',
+                    label: 'Lançamentos agendados',
                     data: [],
                     backgroundColor: [],
                     borderColor: [],
@@ -360,24 +417,14 @@ document.addEventListener("DOMContentLoaded", () => {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Volume da quantidade de lançamentos de jogos',
+                    text: 'Quantidade de lançamentos de jogos',
                     align: 'start',
                     font: {
                         size: 18
                     },
                     padding: {
-                        top: 20
-                    }
-                },
-                subtitle: {
-                    display: true,
-                    text: 'Criticidade operacional baseada na densidade de lançamentos',
-                    align: 'start',
-                    font: {
-                        size: 14
-                    },
-                    padding: {
-                        bottom: 30
+                        top: 22,
+                        bottom: 10
                     }
                 },
                 legend: {
@@ -395,10 +442,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 },
                 x: {
-                    title: {
-                        display: true,
-                        text: 'Semanas'
-                    }
                 }
             }
         }
@@ -426,28 +469,16 @@ document.addEventListener("DOMContentLoaded", () => {
             plugins: {
                 title: {
                     display: true,
-                    text: "Estimativa semanal de volume de mais vendidos no Brasil",
+                    text: "Reviews dos últimos 7 dias por jogo",
                     align: "start",
                     font: {
                         size: 18
                     },
                     padding: {
-                        top: 20
+                        top: 22,
+                        bottom: 25
                     }
                 },
-
-                subtitle: {
-                    display: true,
-                    text: "Reviews dos últimos 7 dias por jogo",
-                    align: "start",
-                    font: {
-                        size: 14
-                    },
-                    padding: {
-                        bottom: 30
-                    }
-                },
-
                 legend: {
                     display: false
                 }
@@ -466,6 +497,44 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
     });
+
+    async function atualizarComponente() {
+
+        const dados = await puxarDadosAws()
+
+        const selectServer = document.getElementById("selectSrv");
+        const selecionado = selectServer.value;
+
+        const agora = new Date();
+        agora.setMinutes(0, 0, 0);
+        
+        const labelsDiskLat = [];
+        const valoresDisco = [22.5, 26.5, 40, 48, 51, 38, 32.5, 16.5, 30, 18, 61, 4, 23, 6, 12, 50, 33, 47, 43, 10, 75, 43, 22];
+        const valoresLatencia = [22.5, 53, 67, 43, 36, 48, 32.5, 23, 57, 73, 6, 53, 67, 43, 36, 23, 57, 73, 6, 23, 22, 54, 60];
+        for (let i = 11; i >= 0; i--) {
+            const horario = new Date(agora);
+            horario.setHours(agora.getHours() - (i * 2));
+            labelsDiskLat.push(
+                horario.toLocaleTimeString("pt-BR", {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                })
+            );
+        }
+
+        if (selecionado == "todos") {
+            valoresDisco[valoresDisco.length - 1] = dados.disco;
+            valoresLatencia[valoresLatencia.length - 1] = dados.latencia;
+        } else {
+            let selectMaior = selecionado.toLowerCase();
+            valoresDisco[valoresDisco.length - 1] = dados.selectMaior.DISCO.p99;
+            valoresLatencia[valoresLatencia.length - 1] = dados.selectMaior.LATENCIA.p99;
+        }
+
+        chartDiscoXLatencia.data.datasets[0].data = valoresDisco;
+        chartDiscoXLatencia.data.datasets[1].data = valoresLatencia;
+        chartDiscoXLatencia.update();
+    }
 
     async function buscarVolumeLancamentos() {
 
