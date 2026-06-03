@@ -44,8 +44,8 @@ h1{
 
 #container_kpis .div_kpi {
   flex: 1 1 220px;
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 220px;
+  max-width: 220px;
   min-height: 13rem;
   border-radius: 12px;
   padding: 16px;
@@ -117,8 +117,8 @@ h1{
 }
 
 #container_kpis .kpi5 {
-  border-color: #244770;
-  box-shadow: 1.5px 1px 2px 1px #244770, 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #6B7280;
+  box-shadow: 1.5px 1px 2px 1px #6B7280, 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #container_kpis .kpi2 h1 {
@@ -126,7 +126,7 @@ h1{
 }
 
 #container_kpis .kpi5 h1 {
-  color: #244770;
+  color: #6B7280;
 }
 
 /* KPI normal */
@@ -167,7 +167,7 @@ h1{
 
     background-color: #fcfeff;
     border: 1px solid #1c4886;
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 14px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 
@@ -276,12 +276,12 @@ h1{
 
 .selectServidor select {
   align-items: center;
-  background-color: #F0F9FF;
+  background-color: #fcfeff;
   border: 1px solid #244770;
-  border-radius: 20px;
+  border-radius: 4px;
   color: #244770;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 400;
   justify-content: center;
   padding: 8px;
 }
@@ -310,7 +310,7 @@ h1{
   border: solid #e5e7eb 2px;
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
   padding: 16px;
-  border-radius: 15px;
+  border-radius: 12px;
   background-color: white;
   box-sizing: border-box;
   overflow: hidden;
@@ -326,7 +326,7 @@ h1{
   border: solid #e5e7eb 2px;
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
   padding: 16px;
-  border-radius: 15px;
+  border-radius: 12px;
   background-color: white;
   box-sizing: border-box;
   overflow: hidden;

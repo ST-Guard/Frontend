@@ -15,6 +15,19 @@ function selectServidor(req, res) {
         });
 }
 
+function puxarDadosEspecifico(req, res) {
+    
+    const bucket = req.body.bucket;
+    especificoModel.puxarDadosEspecifico(bucket)
+        .then(resultado => res.json(resultado))
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+        
+}
+
 module.exports = {
-    selectServidor
+    selectServidor,
+    puxarDadosEspecifico
 }
