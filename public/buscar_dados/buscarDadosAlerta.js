@@ -1,4 +1,6 @@
-
+function navegarPara(caminho) {
+  window.location.href = caminho;
+}
 async function carregarDadosDashAlerta() {
     try {
         const respostaURL = await fetch('/alertas/obter-url-s3');

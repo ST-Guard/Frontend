@@ -45,6 +45,11 @@ app.use("/zonas", zonaRouter);
 app.use("/sessao", sessaoRouter);
 app.use("/steam", steamRouter);
 app.use("/especifico", especificoRouter);
+var buscarDadosAnalista = require("./src/routes/BuscarDadosAnalista")
+
+/* Rotas analista */ 
+app.use("/bzonas", buscarzonasRouter)
+app.use("/banalista", buscarDadosAnalista)
 
 /* VICTIN ROTA */
 app.use("/alertas", dadosAlertaRouter)
