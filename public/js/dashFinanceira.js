@@ -26,8 +26,6 @@ function buscarDados() {
     })
     .catch(() => {}); 
 
-
-
     const BUCKET = 'smartdatabucket2'
         fetch("/financeira/pegarDadosFinanceira", {
         method: "POST", 
@@ -44,26 +42,37 @@ function buscarDados() {
           console.log("Dados não encontrados")
           return
         }
-            console.log("Dados buscados pelo S3 com sucesso!");
-            console.log(dados)
-            plotarDados(dados)
+        regioes = dados.dadosAlertas.Steam
+        totalAlertasCriticos = 0
+        totalAlertasAtencao = 0
+        for(regiao in regioes){
+          const dcsDaRegiao = regioes[regiao];
+          for (const nomeDC in dcsDaRegiao) {
+            const dadosDC = dcsDaRegiao[nomeDC];
+            totalAlertasCriticos += dadosDC.KPIs['CRITICOS_ABERTOS']
+            totalAlertasAtencao += dadosDC.KPIs['MEDIOS_ABERTOS'] 
+          }
+        }
+        const dadosAlertas = {
+          totalAlertasCriticos: totalAlertasCriticos,
+          totalAlertasAtencao: totalAlertasAtencao
+        }
+        dados.dadosFinanceiros.KPIS['ALERTAS'] = dadosAlertas
+        dadosFinais = dados.dadosFinanceiros
+        console.log("Dados buscados pelo S3 com sucesso!");
+        console.log(dadosFinais)
+        plotarDados(dadosFinais)
     });
 
 
 }
 
 function formatarMoeda(valor) {
-  return Number(valor || 0).toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  });
+  return Number(valor || 0).toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'});
 }
 
 function formatarPercentual(valor) {
-  return `${Number(valor || 0).toLocaleString('pt-BR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })}%`;
+  return `${Number(valor || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}%`;
 }
 
 function formatarVariacaoMoeda(valor) {
@@ -77,10 +86,7 @@ function formatarVariacaoPercentual(valor) {
   const numero = Number(valor || 0);
   const seta = numero >= 0 ? '▲' : '▼';
   const sinal = numero >= 0 ? '+' : '';
-  return `${seta} ${sinal}${numero.toLocaleString('pt-BR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })}% vs mês anterior`;
+  return `${seta} ${sinal}${numero.toLocaleString('pt-BR', {minimumFractionDigits: 2,maximumFractionDigits: 2})}% vs mês anterior`;
 }
 
 function atualizarTexto(id, valor) {
@@ -212,7 +218,7 @@ function plotarDados(dadosS3){
   const custo = kpis.CUSTO_TOTAL || {};
   const orcamento = kpis.ORCAMENTO || {};
   const previsto = kpis.CUSTO_PREVISTO || {};
-
+  const alertas = kpis.ALERTAS
 
  // KPIS
   atualizarTexto("ROI_ESTIMADO", formatarPercentual(roi.ROI_MES_CORRENTE));
@@ -228,8 +234,11 @@ function plotarDados(dadosS3){
   atualizarTexto("kpi-cost-val", formatarMoeda(custo.CUSTO));
   atualizarTexto("kpi-cost-delta", formatarVariacaoMoeda(custo.DELTA_CUSTO));
   atualizarSelo("kpi-cost-delta", custo.DELTA_CUSTO, false);
+  atualizarTexto("kpi-alertas-criticos-id", alertas.totalAlertasCriticos)
+  atualizarTexto(" kpi-alertas-atencao-id", alertas.totalAlertasAtencao)
 
-  
+ 
+
   
   budgetRegressionValue = Number(previsto.CUSTO_PREVISTO || orcamento.CUSTO_PREVISTO || 0);
   budgetActualValue = Number(orcamento.CUSTO_CORRENTE || custo.CUSTO || 0);
@@ -796,7 +805,7 @@ function definirVisualizacaoBarra(view, btn) {
     ? 'Comparação de custo entre datacenters'
     : 'ROI por datacenter';
   document.getElementById('bar-sub').textContent = view === 'custo'
-    ? 'Custo mensal — soma = ' + 562000
+    ? 'Custo mensal'
     : 'Receita sobre custo por DC (negativo = prejuízo)';
   construirGraficoBarra();
 }

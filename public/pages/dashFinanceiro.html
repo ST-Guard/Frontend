@@ -349,9 +349,9 @@
             </div>
             <div class="div_situacao">
               <div style="display:flex;align-items:baseline;gap:8px;">
-                <h1 style="color:var(--KPI-negativo);">-</h1>
+                <h1 style="color:var(--KPI-negativo);" id="kpi-alertas-criticos-id">3</h1>
                 <span style="font-size:0.9rem;font-weight:600;color:var(--corFonteTexto);">Crítico</span>
-                <h1 style="color:#F5A623;">-</h1>
+                <h1 style="color:#F5A623;" id="kpi-alertas-atencao-id">5</h1>
                 <span style="font-size:0.9rem;font-weight:600;color:var(--corFonteTexto);">Alertas</span>
               </div>
               <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
@@ -400,11 +400,12 @@
       </div>
       <!-- GRAFICO DE BARRAS -->
       <div class="linha-inferior">
+
         <div class="cartao">
           <div class="cabecalho-cartao" style="margin-bottom:14px;">
             <div>
               <div class="titulo-secao" id="bar-title">Comparação de custo entre datacenters</div>
-              <div class="sub-secao" id="bar-sub">Custo mensal — soma = R$ 562.000</div>
+              <div class="sub-secao" id="bar-sub">Custo mensal</div>
             </div>
             <div class="alternador-vista">
               <button class="btn-alternador active" onclick="definirVisualizacaoBarra('custo',this)">
@@ -420,7 +421,7 @@
           <canvas id="barChart" height="220"></canvas>
         </div>
         <!-- TABELA DE SERVIDORES -->
-        <div class="cartao">
+        <div class="cartao tabela_servidores" >
           <div class="cabecalho-cartao" style="margin-bottom:14px;">
             <div>
               <div class="titulo-secao" id="table-title">Top servidores por custo</div>
