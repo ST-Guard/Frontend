@@ -19,16 +19,6 @@
 
 <body>
 
-  <!-- <div id="modalGrafico" class="modal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="fecharModal()">
-        &times;
-      </span>
-      <h2 id="tituloModal"></h2>
-      <div id="conteudoModal"></div>
-    </div>
-  </div> -->
-
   <header>
     <nav>
       <div class="logo-nav" onclick="fnNavegar('/')">
@@ -180,8 +170,7 @@
           <div>
             <div class="div_titulo_srv">
               <h3>Relatórios gerados.</h3>
-              <img src="../assets/icons_dashOpGestora/info.svg" alt="Ícone de informação">
-            </div>
+              </div>
             <p>Histórico dos relatórios operacionais criados pela gestão.</p>
           </div>
 
@@ -316,7 +305,6 @@
         <div>
           <div class="div_titulo_srv">
             <h3>Ranking de Servidores Críticos (Top 5).</h3>
-            <img src="../assets/icons_dashOpGestora/info.svg" alt="Ícone de informação">
           </div>
           <p>Servidores identificados com a saúde fora do ideal.</p>
         </div>
@@ -328,7 +316,6 @@
       </div>
 
       <div id="listaRankingServidoresCriticos" class="lista_servidores">
-        <!-- JS renderiza ranking crítico aqui -->
       </div>
     </div>
 
@@ -337,7 +324,6 @@
         <div>
           <div class="div_titulo_srv">
             <h3>Tendência de degradação</h3>
-            <img src="../assets/icons_dashOpGestora/info.svg" alt="Ícone de informação">
           </div>
           <p>Estimativa para os próximos 7 dias da saúde dos servidores.</p>
         </div>
@@ -349,7 +335,6 @@
       </div>
 
       <div id="listaTendenciaDegradacao" class="lista_servidores">
-        <!-- JS renderiza tendência aqui -->
       </div>
     </div>
 
@@ -362,7 +347,6 @@
         <div>
           <div class="div_titulo_srv">
             <h3>Comparação de saúde entre as zonas.</h3>
-            <img src="../assets/icons_dashOpGestora/info.svg" alt="Ícone de informação">
           </div>
         </div>
 
@@ -388,9 +372,8 @@
         <div>
           <div class="div_titulo_srv">
             <h3>Comparativo de uptime por servidor.</h3>
-            <img src="../assets/icons_dashOpGestora/info.svg" alt="Ícone de informação">
           </div>
-          <p>Uptime individual dos servidores, analisados sob o período dos últimos 7 dias.</p>
+          <p>Uptime individual dos servidores, analisados sob o período dos últimos 30 dias.</p>
         </div>
 
         <div class="tempo_card">
@@ -400,7 +383,6 @@
       </div>
 
       <div id="listaUptimeServidores" class="lista_uptime_servidores">
-        <!-- JS renderiza uptime aqui -->
       </div>
     </div>
 
@@ -425,10 +407,15 @@
         <canvas id="graficoIncidentesSemana"></canvas>
       </div>
 
-      <div class="box_tendencia">
-        <h4>Tendência ⊙</h4>
-        <p id="textoTendenciaIncidentes">Aguardando dados do datacenter selecionado.</p>
-      </div>
+     <div class="boxTendencia">
+                            <div class="tendencia">
+                                <img src="../assets/icone_certo.png" alt="">
+                                <div class="textos">
+                                    <h1>Tendência Positiva</h1>
+                                    <p>Alertas Criticos com queda significativa.</p>
+                                </div>
+                            </div>
+                        </div>
     </div>
 
    

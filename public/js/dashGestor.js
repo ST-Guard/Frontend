@@ -17,7 +17,7 @@ function voltar(){
 
 function atualizarDiaSemana() {
     const dataAtual = new Date();
-    const cidadeSessao = sessionStorage.getItem("ESTADO") || "Região";
+    const cidadeSessao = sessionStorage.getItem("CIDADE") || "Região";
 
     const diasDaSemana = [
         "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
