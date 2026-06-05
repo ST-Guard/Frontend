@@ -317,7 +317,7 @@ header {
   align-items: center;
   gap: 10px;
 }
-.kpis-baixo-center {
+.kpis-inferiores-centralizados {
   width: 100%;
   flex: 1 0 100%;
   display: flex;
@@ -427,7 +427,7 @@ header {
 }
 
 /* Linha inferior mantém a mesma base visual das demais KPIs */
-.kpis-baixo-center .div_kpi {
+.kpis-inferiores-centralizados .div_kpi {
   height: 148px;
 }
 
@@ -727,7 +727,7 @@ header {
   padding-right: 4px;
 }
 
-.envoltorio-tabela.fading { opacity: 0; }
+.envoltorio-tabela.desaparecendo { opacity: 0; }
 
 .envoltorio-tabela::-webkit-scrollbar {
   width: 8px;
@@ -907,6 +907,17 @@ canvas { max-width: 100%; }
 }
 .btn-baixar:hover { background: rgba(44,93,134,0.15); }
 
+.estado-lista-relatorios {
+  padding: 24px 16px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.estado-lista-relatorios.erro {
+  color: var(--KPI-negativo);
+}
+
 
  /* SEÇÃO PREDITIVA */
    
@@ -962,7 +973,7 @@ canvas { max-width: 100%; }
 }
 
 .secao-preditiva .sub-secao,
-.secao-preditiva .forecast-chart-label {
+.secao-preditiva .rotulo-grafico-previsao {
   color: var(--text-muted) !important;
 }
 
@@ -1285,96 +1296,18 @@ canvas { max-width: 100%; }
 
 /* Documento do relatório */
 .doc-relatorio { padding: 40px 52px; color: #1a2a3a; }
-.capa-relatorio { border-bottom: 3px solid #2C5D86; padding-bottom: 32px; margin-bottom: 36px; }
-.cabecalho-capa-relatorio { display: flex; align-items: flex-start; justify-content: space-between; }
-.logo-capa-relatorio { display: flex; align-items: center; gap: 10px; }
-.icone-logo-capa-relatorio {
-  width: 42px; height: 42px;
-  background: linear-gradient(135deg, #2C5D86, #1a3a5c);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-}
-.texto-logo-capa-relatorio { font-size: 15px; font-weight: 800; color: #1a2a3a; line-height: 1.2; }
-.sub-logo-capa-relatorio  { font-size: 10px; color: #6b7e91; font-weight: 500; }
-.badge-capa-relatorio {
-  background: #f0f6ff;
-  border: 1px solid #c8dff5 !important;
-  border-radius: 8px;
-  padding: 6px 14px;
-  text-align: right;
-}
-.rotulo-badge-capa-relatorio { font-size: 9px; text-transform: uppercase; letter-spacing: 0.7px; color: #6b7e91; font-weight: 600; }
-.val-badge-capa-relatorio   { font-size: 13px; font-weight: 700; color: #2C5D86; margin-top: 2px; }
-.titulo-capa-relatorio { margin-top: 28px; }
-.titulo-capa-relatorio h1 { font-size: 26px; font-weight: 800; color: #1a2a3a; margin: 0 0 6px; line-height: 1.2; }
-.titulo-capa-relatorio p  { font-size: 13px; color: #6b7e91; margin: 0; }
-.tags-capa-relatorio { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-.tag-relatorio { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
-.tag-relatorio.blue  { background: #e8f0f8; color: #2C5D86; }
-.tag-relatorio.green { background: #e8f5f0; color: #2e7d5a; }
-.tag-relatorio.gold  { background: #fdf6e3; color: #9a7a1a; }
-
-.secao-relatorio { margin-bottom: 32px; }
-.titulo-secao-relatorio {
-  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
-  color: #2C5D86; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 16px;
-  display: flex; align-items: center; gap: 8px;
-}
-.titulo-secao-relatorio::before {
-  content: ''; display: inline-block;
-  width: 3px; height: 14px;
-  background: #2C5D86; border-radius: 2px;
+.doc-relatorio.pdf-ativo {
+  height: min(76vh, 760px);
+  padding: 0;
 }
 
-.grade-kpi-relatorio { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
-.kpi-relatorio {
-  background: #f8fafc;
-  border: 1px solid #e8ecf2 !important;
-  border-radius: 10px;
-  padding: 14px 16px;
+.visualizador-pdf-relatorio {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #f4f6f8;
 }
-.rotulo-kpi-relatorio { font-size: 9px; text-transform: uppercase; letter-spacing: 0.6px; color: #6b7e91; font-weight: 600; }
-.val-kpi-relatorio   { font-size: 18px; font-weight: 700; color: #1a2a3a; margin: 4px 0 2px; }
-.delta-kpi-relatorio { font-size: 10px; font-weight: 600; }
-.delta-kpi-relatorio.up-bad    { color: #c0392b; }
-.delta-kpi-relatorio.up-good   { color: #2e7d5a; }
-.delta-kpi-relatorio.down-good { color: #2e7d5a; }
-
-.tabela-relatorio { width: 100%; border-collapse: collapse; font-size: 12px; }
-.tabela-relatorio th {
-  text-align: left; padding: 8px 12px; background: #f0f5fa;
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
-  color: #6b7e91; font-weight: 700; border-bottom: 2px solid #d8e4f0;
-}
-.tabela-relatorio td { padding: 10px 12px; border-bottom: 1px solid #f0f3f6; color: #2d3748; vertical-align: middle; }
-.tabela-relatorio tr:last-child td { border-bottom: none; }
-.tabela-relatorio tr:hover td { background: #fafcff; }
-.tabela-relatorio .td-num  { font-weight: 600; }
-.tabela-relatorio .td-pos  { color: #2e7d5a; font-weight: 700; }
-.tabela-relatorio .td-neg  { color: #c0392b; font-weight: 700; }
-.tabela-relatorio .td-muted{ color: #9aa5b4; font-size: 11px; }
-
-.caixa-insight-relatorio {
-  background: #f0f6ff;
-  border-left: 3px solid #2C5D86;
-  border-radius: 0 8px 8px 0;
-  padding: 12px 16px;
-  margin-bottom: 10px;
-}
-.titulo-insight-relatorio { font-size: 11px; font-weight: 700; color: #2C5D86; margin-bottom: 4px; }
-.texto-insight-relatorio  { font-size: 12px; color: #4a5568; line-height: 1.6; }
-.caixa-insight-relatorio.warn { background: #fff8f0; border-color: #e67e22; }
-.caixa-insight-relatorio.warn .titulo-insight-relatorio { color: #c0392b; }
-.caixa-insight-relatorio.good { background: #f0faf5; border-color: #27ae60; }
-.caixa-insight-relatorio.good .titulo-insight-relatorio { color: #2e7d5a; }
-
-.rodape-relatorio {
-  border-top: 1px solid #e8ecf0;
-  padding-top: 20px; margin-top: 8px;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.esq-rodape-relatorio  { font-size: 10px; color: #9aa5b4; line-height: 1.6; }
-.dir-rodape-relatorio { font-size: 10px; color: #9aa5b4; text-align: right; }
 
 /* RESPONSIVIDADE  */
 
@@ -1409,7 +1342,6 @@ canvas { max-width: 100%; }
   .linha-graficos, .linha-inferior { padding: 0 16px; }
   .secao-preditiva, #reports-section { margin: 0 16px; width: calc(100% - 32px); }
   .doc-relatorio { padding: 24px 20px; }
-  .grade-kpi-relatorio { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* Ofuscar rs */
@@ -1432,7 +1364,7 @@ canvas { max-width: 100%; }
 
 
 
-.model-mae-badge-class{
+.selo-mae-modelo{
   font-size:11px;
   font-weight:600;
   padding:3px 10px;
