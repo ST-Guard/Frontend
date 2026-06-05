@@ -23,7 +23,7 @@ async function buscarGestoraOpJson(req, res) {
     try {
         const comando = new GetObjectCommand({
             Bucket: process.env.AWS_BUCKET_NAME,
-            Key: "client/gestoraOp_master.json"
+            Key: "client/dashOpGestao.json"
         });
 
         const resposta = await s3.send(comando);
@@ -33,7 +33,7 @@ async function buscarGestoraOpJson(req, res) {
         res.status(200).json(json);
 
     } catch (erro) {
-        console.error("Erro ao buscar gestoraOp_master.json no S3:", erro);
+        console.error("Erro ao buscar dashOpGestao.json no S3:", erro);
 
         res.status(500).json({
             erro: "Erro ao buscar JSON da gestora no S3",
