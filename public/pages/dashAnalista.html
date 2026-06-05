@@ -439,6 +439,7 @@
         }
 
 
+
        if(empresa_usuario != null && nome_datacenter != null && dados_do_s3 != null && zonas_usuario.length > 1){
 
         console.log("OS DADOS CHEGARAM")
@@ -454,12 +455,12 @@
         
         zonas_dados = []
         for (i = 0; i < zonas_usuario.length; i++ ) {
-    let nome_zona_com_espaco = zonas_usuario[i]           // "Zona A"
-    let nome_zona_sem_espaco = zonas_usuario[i].replaceAll(' ', '') // "ZonaA"
 
-    // Prioriza sem espaço (dados mais recentes no seu caso)
-    let zona_atual = dados_juntos[nome_zona_sem_espaco] ?? dados_juntos[nome_zona_com_espaco]
 
+        var nome_zona = zonas_usuario[i]
+    
+
+        var zona_atual = dados_juntos[nome_zona]
     zonas_dados.push({ nome_zona: zonas_usuario[i], dados: zona_atual })
         }
 
@@ -473,7 +474,6 @@
         
         
     }
-
 
 
 
@@ -514,6 +514,7 @@
 
 
 
+
        if(empresa_usuario != null && nome_datacenter != null && dados_do_s3 != null && zonas_usuario.length > 1){
 
         console.log("OS DADOS CHEGARAM")
@@ -529,12 +530,12 @@
         
         zonas_dados = []
         for (i = 0; i < zonas_usuario.length; i++ ) {
-    let nome_zona_com_espaco = zonas_usuario[i]           // "Zona A"
-    let nome_zona_sem_espaco = zonas_usuario[i].replaceAll(' ', '') // "ZonaA"
 
-    // Prioriza sem espaço (dados mais recentes no seu caso)
-    let zona_atual = dados_juntos[nome_zona_sem_espaco] ?? dados_juntos[nome_zona_com_espaco]
 
+        var nome_zona = zonas_usuario[i]
+    
+
+        var zona_atual = dados_juntos[nome_zona]
     zonas_dados.push({ nome_zona: zonas_usuario[i], dados: zona_atual })
         }
 
@@ -1164,7 +1165,7 @@ function plotar_dados(value){
 
 function mudarTelaEspecifica(nomeServidor){
     sessionStorage.setItem("servidor", nomeServidor)
-    window.location.href = "index.html"
+    window.location.href = "dashAnalistaEspecifica.html"
     
 }
 
