@@ -457,6 +457,7 @@ function selecionarDatacenters() {
 
 function selecionarAlerta(data) {
     window.location.href = "dashAlertas.html";
+    const titulo = document.getElementById("dataCenterTitulo")
 
     let nome;
 
@@ -478,15 +479,13 @@ function selecionarAlerta(data) {
     }
 
     titulo.innerHTML = nome
-
-    
 }
 
 function voltar() {
     sessionStorage.setItem('DATA', "")
     sessionStorage.setItem('REGIAO', "")
 
-    window.location.href = "dashAlertas.html";
+    window.location.href = "inicioGestor.html";
 
     titulo.innerHTML = ""
 }
