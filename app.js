@@ -41,7 +41,11 @@ app.use("/enviar", falecosnosRouter);
 app.use("/servidor", servidorRouter);
 app.use("/zonas", zonaRouter);
 app.use("/sessao", sessaoRouter);
+var buscarDadosAnalista = require("./src/routes/BuscarDadosAnalista")
+
+/* Rotas analista */ 
 app.use("/bzonas", buscarzonasRouter)
+app.use("/banalista", buscarDadosAnalista)
 
 /* VICTIN ROTA */
 app.use("/alertas", dadosAlertaRouter)

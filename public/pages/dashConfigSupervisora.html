@@ -1,0 +1,148 @@
+ <!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Data | Supervisor(a) Regional</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="./../assets/icon/icon.png">
+    <link rel="stylesheet" href="./../css/dashboard.css" />
+    <link rel="stylesheet" href="./../css/dashConfigGestor.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body onload="mascaraTel(document.getElementById('telefone'))">
+
+    <header>
+        <nav>
+            <div class="logo-nav" onclick="fnNavegar('/')">
+                <a href="../pages/index.html">
+                    <img src="./../assets/logos/smart data branco.png" alt="">
+                </a>
+            </div>
+
+            <div class="right-nav">
+                <div class="logo-notificao">
+                    <a href="dashAlertas.html">
+                        <img src="./../assets/dashboard-icons/notificao.svg" alt="" />
+                    </a>
+                    <div class="qtd-notificao">
+                        <img src="./../assets/dashboard-icons/circulo.svg" alt="">
+                        <p class="qtd-notificao">10</p>
+                    </div>
+                </div>
+
+                <div class="separacao"></div>
+
+                <div class="logo-usuario">
+                    <div class="userImg">
+                        <a href="dashConfigSupervisora.html">
+                            <img src="./../assets/dashboard-icons/cirucloUser.svg" alt="Usuário" id="imagemPerfilCima">
+                        </a>
+                    </div>
+                    <div class="userInfo">
+                        <h2 class="user-name" id="username"> Rebecca Salles</h2>
+                        <h3 class="user-cargo" id="cargoname">Supervisor(a) Regional</h3>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+  <div class="corpoPagina">
+    <div class="sidebar">
+      <div class="sidebar-buttons">
+        <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashSupervisoraRegional.html')">
+          <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
+          <p><a href="../pages/dashSupervisoraRegional.html">Dashboard</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashCadastroRegioes.html')">
+          <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
+          <p><a href="../pages/dashCadastroRegioes.html">Regiões</a></p>
+          <!-- <p onclick="mudarDash()">Dashboard</p> -->
+        </div>
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashConfigSupervisora.html')">
+          <img src="../assets/dashboard-icons/icon_config_branco.svg" alt="">
+          <p><a href="../pages/dashConfigSupervisora.html">Configurações</a></p>
+          <!-- <p onclick="mudarConfig()">Configurações</p> -->
+        </div>
+        <div class="sidebar-button-sair">
+          <div class="saindo">
+            <a href="login.html" onclick="limparSessao()" class="sair">
+              <img src="../assets/dashboard-icons/sair.svg" alt="">
+              <p>Sair</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>   
+
+
+ <div class="SubcorpoPagina">
+            <div class="textoInicio">
+                <div class="div_titulo">
+                    <h1>Configurações</h1>
+                </div>
+            </div>
+            <div class="containerConfig">
+                <div class="boxInicio">
+                    <h2>Perfil <span>Supervisor(a) Regional</span></h2>
+                    <h3>Atualize suas informações pessoais e de contato.</h3>
+                </div>
+                <div class="boxImagem">
+                    <img src="../assets/dashConfig/usuario.png" id="imgPerfil"
+                        onerror="this.src='../assets/dashConfig/usuario.png'">
+                    <button onclick="mudarImagemPerfil()">Trocar foto</button>
+                    <input type="file" id="inpImagem" onchange="salvarImagemPerfil()" hidden>
+                </div>
+                <div class="linha"></div>
+                <div class="containerInputP1">
+                    <div class="input1">
+                        <div class="boxInput">
+                            <span>Nome completo</span>
+                            <input type="text" id="nome" value="Rebecca Salles">
+                        </div>
+                        <div class="boxInput">
+                            <span>Telefone</span>
+                            <input type="text" id="telefone" value="11123456789" maxlength="15"
+                                oninput="mascaraTel(this)">
+                        </div>
+                    </div>
+                    <div class="input2">
+                        <div class="boxInput">
+                            <span>E-mail</span>
+                            <input type="text" id="email" value="rebeccasalles@gmail.com" disabled>
+                        </div>
+                        <div class="boxInput">
+                            <span>Cargo</span>
+                            <input type="text" id="cargo" value="Supervisor(a)" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="boxTextArea">
+                    <span>Bio</span>
+                    <textarea id="bio"
+                        placeholder="Responsável pelo monitoramento e disponibilidade dos servidores de produção."
+                        disabled></textarea>
+                </div>
+                <div class="botaoSalvar">
+                    <button onclick="salvar()"><img src="../assets/dashConfig/save.png" alt="">Salvar
+                        alterações</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="./../js/sessao.js"></script>
+<script src="./../js/dashConfigGestor.js"></script>
+</html>
+
