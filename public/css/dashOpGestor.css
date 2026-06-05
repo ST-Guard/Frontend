@@ -348,9 +348,8 @@ header {
 .card_servidores {
     width: 50%;
     min-height: 240px;
-    border: 1px solid #949494;
-    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -415,7 +414,7 @@ header {
     max-height: 220px;
     overflow-y: auto;
     background-color: #f7f7f7;
-    border: 1px solid #9A9A9A;
+    border: 1px solid #dcdcdc;
     border-radius: 5px;
     padding: 10px;
     box-sizing: border-box;
@@ -424,7 +423,7 @@ header {
 .item_servidor {
     width: 100%;
     min-height: 42px;
-    border: 1px solid #9A9A9A;
+    border: 1px solid #dcdcdc;
     background-color:white ;
     border-radius: 5px;
     margin-bottom: 16px;
@@ -504,10 +503,9 @@ header {
     min-width: 0;
 
     min-height: 360px;
-    border: 1px solid #9A9A9A;
-    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dcdcdc;
 
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -543,7 +541,7 @@ header {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #9A9A9A;
+    color: #dcdcdc;
     white-space: nowrap;
 }
 
@@ -552,7 +550,7 @@ header {
 }
 
 .tempo_card p {
-    color: #9A9A9A;
+    color: #dcdcdc;
     font-size: 0.85rem;
     margin: 0;
 }
@@ -711,8 +709,7 @@ header {
     min-width: 0;
     min-height: 330px;
     border: 1px solid #9A9A9A;
-    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -722,8 +719,7 @@ header {
     min-width: 0;
     min-height: 330px;
     border: 1px solid #9A9A9A;
-    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -806,7 +802,7 @@ header {
 
     background-color: #fcfeff;
     border: 1px solid #1c4886;
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 14px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 
@@ -957,9 +953,9 @@ header {
 .card_relatorios_gerados {
   width: 100%;
   min-height: 300px;
-  border: 1px solid #9A9A9A;
+  border: 1px solid #dcdcdc;
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
+  border-radius: 12px;
   padding: 20px;
   box-sizing: border-box;
   background-color: white;
@@ -1163,7 +1159,6 @@ header {
 .item_tendencia:hover .tooltip-tendencia {
     display: block;
 }
-
 
 .lista_servidores,
 .card_servidores,
