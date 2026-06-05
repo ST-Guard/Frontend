@@ -76,49 +76,77 @@ async function puxarDadosAws() {
             kpiLatencia.innerHTML = dados.KPIS.P99REDETotal.toFixed(1) + "%"
             kpiLatenciaDesc.innerHTML = dados.KPIS.P99REDETotal.toFixed(1) + "%"
 
+            if (dados.KPIS.P99CPUTotal >= 75) {
+                document.querySelector('#container_kpis .kpi3').style.borderColor = '#FF5252';
+                document.querySelector('#container_kpis .kpi3 h1').style.color = '#FF5252';
+                document.querySelector('#container_kpis .kpi3').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi3.src = "../assets/dashboard-icons/icon_alerta.svg"
+            } else if (dados.KPIS.P99CPUTotal >= 60) {
+                document.querySelector('#container_kpis .kpi3').style.borderColor = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi3 h1').style.color = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi3').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi3.src = "../assets/dashboard-icons/icon_atencao.svg"
+            } else {
+                document.querySelector('#container_kpis .kpi3').style.borderColor = '#23B26D';
+                document.querySelector('#container_kpis .kpi3 h1').style.color = '#23B26D';
+                document.querySelector('#container_kpis .kpi3').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi3.src = "../assets/dashboard-icons/icon_Check.svg"
+            }
+
+            if (dados.KPIS.P99RAMTotal >= 75) {
+                document.querySelector('#container_kpis .kpi4').style.borderColor = '#FF5252';
+                document.querySelector('#container_kpis .kpi4 h1').style.color = '#FF5252';
+                document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi4.src = "../assets/dashboard-icons/icon_Alerta.svg"
+            } else if (dados.KPIS.P99RAMTotal >= 60) {
+                document.querySelector('#container_kpis .kpi4').style.borderColor = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi4 h1').style.color = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;   
+                imgKpi4.src = "../assets/dashboard-icons/icon_Atencao.svg"        
+            } else {
+                document.querySelector('#container_kpis .kpi4').style.borderColor = '#23B26D';
+                document.querySelector('#container_kpis .kpi4 h1').style.color = '#23B26D';
+                document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi4.src = "../assets/dashboard-icons/icon_Check.svg"
+            }
+
+            if (dados.KPIS.P99DISCOTotal >= 75) {
+                document.querySelector('#container_kpis .kpi2').style.borderColor = '#FF5252';
+                document.querySelector('#container_kpis .kpi2 h1').style.color = '#FF5252';
+                document.querySelector('#container_kpis .kpi2').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi2.src = "../assets/dashboard-icons/icon_alerta.svg"
+            } else if (dados.KPIS.P99DISCOTotal >= 60) {
+                document.querySelector('#container_kpis .kpi2').style.borderColor = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi2 h1').style.color = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi2').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi2.src = "../assets/dashboard-icons/icon_Atencao.svg"        
+            } else {
+                document.querySelector('#container_kpis .kpi2').style.borderColor = '#23B26D';
+                document.querySelector('#container_kpis .kpi2 h1').style.color = '#23B26D';
+                document.querySelector('#container_kpis .kpi2').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi2.src = "../assets/dashboard-icons/icon_Check.svg"
+            }
+
+            if (dados.KPIS.P99REDETotal >= 75) {
+                document.querySelector('#container_kpis .kpi1').style.borderColor = '#FF5252';
+                document.querySelector('#container_kpis .kpi1 h1').style.color = '#FF5252';
+                document.querySelector('#container_kpis .kpi1').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi1.src = "../assets/dashboard-icons/icon_alerta.svg"
+            } else if (dados.KPIS.P99REDETotal >= 60) {
+                document.querySelector('#container_kpis .kpi1').style.borderColor = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi1 h1').style.color = '#F5CC4D';
+                document.querySelector('#container_kpis .kpi1').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;     
+                imgKpi1.src = "../assets/dashboard-icons/icon_atencao.svg"     
+            } else {
+                document.querySelector('#container_kpis .kpi1').style.borderColor = '#23B26D';
+                document.querySelector('#container_kpis .kpi1 h1').style.color = '#23B26D';
+                document.querySelector('#container_kpis .kpi1').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
+                imgKpi1.src = "../assets/dashboard-icons/icon_Check.svg"
+            }
+
             return dados
         }
     });
-}
-
-async function carregarDados() {
-    const idZona = sessionStorage.ID_ZONA
-    const selectServer = document.getElementById('selectSrv');
-    const nomeTopoServer = document.getElementById('nomeTopoServer');
-    const parte2 = document.getElementById('p2');
-
-    selectServer.onchange = async function () {
-        if (selectServer.value == "todos") {
-            parte2.style.display = "flex";
-            nomeTopoServer.innerHTML = "Todos os Servidores";
-            atualizarComponente()
-        } else {
-            parte2.style.display = "none";
-            nomeTopoServer.innerHTML = selectServer.value
-            atualizarComponente()
-        }
-    }
-
-    fetch(`/especifico/selectServidor/${idZona}`)
-    .then(resposta => resposta.json())
-    .then(lista => {
-            selectServer.style.display = 'flex';
-            selectServer.innerHTML = `<option selected value = "todos">Todos os Servidores</option>`;
-            console.log(lista)
-            for (let i = 0; i < lista.length; i++) {
-                selectServer.innerHTML += `
-                    <option value="${lista[i].nome}">
-                        ${lista[i].nome}
-                    </option>
-                `;
-            }
-
-            selectServer.onchange();
-        })
-        .catch(
-            erro => console.log(erro)
-        );
-
 }
 
 async function estimarDownloadsPorJogador() {
@@ -375,6 +403,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    const labelsRamCpu = [];
+    const valoresRamCpu = [];    
+
     const chartVolume = new Chart(ctxVolume, { 
         type: 'bar',
         data: {
@@ -498,44 +529,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
     });
 
-    async function atualizarComponente() {
-
-        const dados = await puxarDadosAws()
-
-        const selectServer = document.getElementById("selectSrv");
-        const selecionado = selectServer.value;
-
-        const agora = new Date();
-        agora.setMinutes(0, 0, 0);
-        
-        const labelsDiskLat = [];
-        const valoresDisco = [22.5, 26.5, 40, 48, 51, 38, 32.5, 16.5, 30, 18, 61, 4, 23, 6, 12, 50, 33, 47, 43, 10, 75, 43, 22];
-        const valoresLatencia = [22.5, 53, 67, 43, 36, 48, 32.5, 23, 57, 73, 6, 53, 67, 43, 36, 23, 57, 73, 6, 23, 22, 54, 60];
-        for (let i = 11; i >= 0; i--) {
-            const horario = new Date(agora);
-            horario.setHours(agora.getHours() - (i * 2));
-            labelsDiskLat.push(
-                horario.toLocaleTimeString("pt-BR", {
-                    hour: "2-digit",
-                    minute: "2-digit"
-                })
-            );
-        }
-
-        if (selecionado == "todos") {
-            valoresDisco[valoresDisco.length - 1] = dados.disco;
-            valoresLatencia[valoresLatencia.length - 1] = dados.latencia;
-        } else {
-            let selectMaior = selecionado.toLowerCase();
-            valoresDisco[valoresDisco.length - 1] = dados.selectMaior.DISCO.p99;
-            valoresLatencia[valoresLatencia.length - 1] = dados.selectMaior.LATENCIA.p99;
-        }
-
-        chartDiscoXLatencia.data.datasets[0].data = valoresDisco;
-        chartDiscoXLatencia.data.datasets[1].data = valoresLatencia;
-        chartDiscoXLatencia.update();
-    }
-
     async function buscarVolumeLancamentos() {
 
         const resposta = await fetch("/steam/volumeLancamentosSteam");
@@ -650,6 +643,107 @@ document.addEventListener("DOMContentLoaded", () => {
         chartDownload.update();
     }
 
+    async function carregarDados() {
+        const idZona = sessionStorage.ID_ZONA
+        const selectServer = document.getElementById('selectSrv');
+        const nomeTopoServer = document.getElementById('nomeTopoServer');
+        const parte2 = document.getElementById('p2');
+
+        selectServer.onchange = async function () {
+            if (selectServer.value == "todos") {
+                parte2.style.display = "flex";
+                nomeTopoServer.innerHTML = "Todos os Servidores";
+                atualizarComponente()
+            } else {
+                parte2.style.display = "none";
+                nomeTopoServer.innerHTML = selectServer.value
+                atualizarComponente()
+            }
+        }
+
+        fetch(`/especifico/selectServidor/${idZona}`)
+        .then(resposta => resposta.json())
+        .then(lista => {
+                selectServer.style.display = 'flex';
+                selectServer.innerHTML = `<option selected value = "todos">Todos os Servidores</option>`;
+                console.log(lista)
+                for (let i = 0; i < lista.length; i++) {
+                    selectServer.innerHTML += `
+                        <option value="${lista[i].nome}">
+                            ${lista[i].nome}
+                        </option>
+                    `;
+                }
+
+                selectServer.onchange();
+            })
+            .catch(
+                erro => console.log(erro)
+            );
+
+    }
+
+    async function atualizarComponente() {
+
+        const dados = await puxarDadosAws()
+        console.log(dados)
+
+        const selectServer = document.getElementById("selectSrv");
+        const selecionado = selectServer.value;
+
+        const agora = new Date();
+        agora.setMinutes(0, 0, 0);
+            
+        const labelsRamCpu = [];
+        const valoresRam = [32.5, 35, 61, 50, 68, 51, 32.5, 35, 61, 50, 68, 51];
+        const valoresCpu = [32.5, 45, 52, 70, 73, 37, 32.5, 45, 52, 70, 73, 37];
+
+        const labelsDiskLat = [];
+        const valoresDisco = [22.5, 26.5, 40, 48, 51, 38, 32.5, 16.5, 30, 18, 61, 4];
+        const valoresLatencia = [22.5, 53, 67, 43, 36, 48, 32.5, 23, 57, 73, 6, 53];
+
+        for (let i = 11; i >= 0; i--) {
+            const horario = new Date(agora);
+            horario.setHours(agora.getHours() - (i * 2));
+            labelsDiskLat.push(
+                horario.toLocaleTimeString("pt-BR", {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                })
+            );
+
+            labelsRamCpu.push(
+                horario.toLocaleTimeString("pt-BR", {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                })
+            );
+        }
+
+        if (selecionado == "todos") {
+            valoresRam[valoresRam.length - 1] = dados.KPIS.P99RAMTotal.toFixed(1);
+            valoresCpu[valoresCpu.length - 1] = dados.KPIS.P99CPUTotal.toFixed(1);
+            valoresDisco[valoresDisco.length - 1] = dados.KPIS.P99DISCOTotal.toFixed(1);
+            valoresLatencia[valoresLatencia.length - 1] = dados.KPIS.P99REDETotal.toFixed(1);
+        } else {
+            let selectMaior = selecionado.toLowerCase();
+            valoresRam[valoresRam.length - 1] = dados.Servidores[selectMaior].RAM.p99.toFixed(1);
+            valoresCpu[valoresCpu.length - 1] = dados.Servidores[selectMaior].CPU.p99.toFixed(1);
+            valoresDisco[valoresDisco.length - 1] = dados.Servidores[selectMaior].DISCO.p99.toFixed(1);
+            valoresLatencia[valoresLatencia.length - 1] = dados.Servidores[selectMaior].REDE.p99.toFixed(1);
+        }
+
+        chartRamXCpu.data.labels = labelsRamCpu;
+        chartRamXCpu.data.datasets[0].data = valoresRam;
+        chartRamXCpu.data.datasets[1].data = valoresCpu;
+        chartRamXCpu.update();
+
+        chartDiscoXLatencia.data.labels = labelsDiskLat;
+        chartDiscoXLatencia.data.datasets[0].data = valoresDisco;
+        chartDiscoXLatencia.data.datasets[1].data = valoresLatencia;
+        chartDiscoXLatencia.update();
+    }
+
     carregarGraficoDownload();
     carregarGraficoReviews();
     buscarVolumeComprados()
@@ -657,7 +751,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(carregarGraficoDownload, 3600000);
 
 });
-
 
 function limparSessao() {
     sessionStorage.clear();

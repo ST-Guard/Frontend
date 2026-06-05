@@ -44,8 +44,8 @@ h1{
 
 #container_kpis .div_kpi {
   flex: 1 1 220px;
-  min-width: 220px;
-  max-width: 220px;
+  min-width: 210px;
+  max-width: 210px;
   min-height: 13rem;
   border-radius: 12px;
   padding: 16px;
@@ -225,6 +225,10 @@ h1{
 
 .vermelho_kpi {
     background-color: #FF5252;
+}
+
+.sidebar {
+    width: 15%;
 }
 
 .SubcorpoPagina {

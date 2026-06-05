@@ -20,7 +20,7 @@
 
 <body>
     <header>
-       <nav>
+       <nav class="navbar">
             <div class="logo-nav" onclick="fnNavegar('/')">
                 <a href="../pages/index.html">
                     <img src="./../assets/logos/smart data branco.png" alt="">
@@ -55,23 +55,15 @@
     <div class="corpoPagina">
         <div class="sidebar">
             <div class="sidebar-buttons">
-                <div class="sidebar-button-select dashboard-group">
-                    <div class="dashboard-main" onclick="toggleDashboardMenu(event)">
+                <div class="sidebar-button dashboard-group">
+                    <div class="dashboard-main" onclick="toggleDashboardMenu(event), fnNavegar('../pages/dashAnalista.html')">
                         <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
-                        <p>Dashboards</p>
-                    </div>
-                    <div class="submenu-dashboard" id="submenuDashboard">
-                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashAnalista.html')">
-                            <p>Dashboard Geral</p>
-                        </div>
-                        <div class="sidebar-subbutton" onclick="fnNavegar('../pages/dashAnalistaEspecifica.html')">
-                            <p>Dashboard Específica Analista</p>
-                        </div>
+                        <p><a href="dashAnalista.html">Dashboards</a></p>
                     </div>
                 </div>
-                <div class="sidebar-button" onclick="fnNavegar('dashServidorAnalista.html')">
+                <div class="sidebar-button-select" onclick="fnNavegar('dashAnalistaEspecifica.html')">
                     <img src="../assets/dashboard-icons/icon_servidores_branco.svg" alt="">
-                    <p><a href="dashServidorAnalista.html">Servidores</a></p>
+                    <p><a href="dashAnalistaEspecifica.html">Servidores</a></p>
                     <!-- <p onclick="mudarServidor()">Servidores</p> -->
                 </div>
                 <div class="sidebar-button" onclick="fnNavegar('dashConfigAnalista.html')">
@@ -105,9 +97,11 @@
                         </div>
                         <div class="div_situacao">
                             <h1 id="kpiP99Latencia">77%</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="" id="imgKpi1">
                         </div>
-                        <h4>Durante 99% do tempo, o uso ficou abaixo de <span id="descKpiLatencia">77%</span> </h4>
+                        <div class="status">
+                            <h4>Durante 99% do tempo, o uso ficou abaixo de <span id="descKpiLatencia">77%</span></h4>
+                        </div>
                     </div>
                     <div class="popUp_kpi">
                         <h5>Parâmetros Incidentes</h5>
@@ -124,7 +118,7 @@
                         </div>
                         <div class="div_situacao">
                             <h1 id="kpiP99Disco">62.4%</h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="" id="imgKpi2">
                         </div>
                         <div class="status">
                             <h4>Durante 99% do tempo, o uso ficou abaixo de <span id="descKpiDisco">64.4% </span> </h4>
@@ -145,7 +139,7 @@
                         </div>
                         <div class="div_situacao">
                             <h1 id="kpiP99Cpu">85.7%</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="" id="imgKpi3">
                         </div>
                         <div class="status">
                             <h4>Durante 99% do tempo, o uso ficou abaixo de <span id="descKpiCpu">85.7% </span> </h4>
@@ -166,7 +160,7 @@
                         </div>
                         <div class="div_situacao">
                             <h1 id="kpiP99Ram">37.2%</h1>
-                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
+                            <img src="../assets/dashboard-icons/icon_check.svg" alt="" id="imgKpi4">
                         </div>
                         <div class="status">
                             <h4>Durante 99% do tempo, o uso ficou abaixo de <span id="descKpiRam">37.2% </span></h4>
