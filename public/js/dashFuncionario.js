@@ -1,4 +1,4 @@
-function fnNavegar(caminho){
+function navegarPara(caminho){
     window.location.href = caminho
 }
 window.onload = () => {
