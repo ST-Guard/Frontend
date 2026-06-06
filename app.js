@@ -19,7 +19,7 @@ var servidorRouter = require("./src/routes/servidor")
 var zonaRouter = require("./src/routes/zona");
 var sessaoRouter = require("./src/routes/sessao");
 var financeira = require("./src/routes/financeiraRoute");
-var relatorio = require("./src/routes/relatorioRoute");
+var relatorio = require("./src/routes/relatorio");
 
 var buscarzonasRouter = require("./src/routes/buscarzona")
 /* VICTIN ROTA */
@@ -54,10 +54,10 @@ app.use("/alertas", dadosAlertaRouter)
 app.use("/alertas2", dadosAlertaRouter2)
 
 //Rotas Financeir.a
-app.use("/dashOperacional", dashOperacionalRouter);
 app.use("/financeira", financeira);
 
-app.use("/relatorio", relatorioRoute);
+app.use("/dashOperacional", dashOperacionalRouter);
+app.use("/relatorio", relatorio);
 
 
 // inicia o servidor
