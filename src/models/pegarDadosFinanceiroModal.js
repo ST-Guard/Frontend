@@ -1,5 +1,3 @@
-const { dadosFinanceira } = require("../controllers/financeiraController");
-const database = require("../database/config");
 require("dotenv").config({ path: ".env.dev" });
 const { S3Client, GetObjectCommand, ListObjectsV2Command } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
@@ -21,7 +19,7 @@ async function pegarDadosFinanceiro(bucket) {
     Key: "client/dashboard_financeiro.json",
   };
 
-  dadosFinanceiro = null;
+  let dadosFinanceiro = null;
   try {
     console.log("Entrou no try para buscar no S3 via AWS SDK");
     const command = new GetObjectCommand(parametros);
@@ -39,7 +37,7 @@ async function pegarDadosFinanceiro(bucket) {
   const parametrosAlertas = {
   Bucket: process.env.AWS_BUCKET_NAME,
   Key: "client/alertas_gestora.json", };
-  dadosAlertas = null
+  let dadosAlertas = null;
   try {
     const command = new GetObjectCommand(parametrosAlertas);
     const resposta = await s3Client.send(command);
@@ -48,8 +46,8 @@ async function pegarDadosFinanceiro(bucket) {
     console.log("Dados alertas carregados com sucesso do S3:", dados);
     dadosAlertas = dados
   } catch (error) {
-    console.error("Erro ao gerar URL do S3:", error);
-    return res.status(500).json({ error: "Erro interno do servidor" });
+    console.error("Erro ao buscar alertas no S3:", error);
+    throw error;
   }
 
   return {dadosFinanceiros: dadosFinanceiro, dadosAlertas: dadosAlertas}
