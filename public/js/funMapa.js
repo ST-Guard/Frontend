@@ -9,23 +9,23 @@ if (!sessionStorage.ID_USUARIO) {
 
 function buscarDados() {
     const idUsuario = sessionStorage.ID_USUARIO
-    
+
     fetch(`/sessao/buscarUsuario/${idUsuario}`, {
     })
-      .then(function (resposta) {
-        return resposta.json();
-    })
-    .then(function (dados) {
-        dados = dados[0]
+        .then(function (resposta) {
+            return resposta.json();
+        })
+        .then(function (dados) {
+            dados = dados[0]
 
-        username.innerHTML = dados.nomePessoa
-        cargoname.innerHTML = dados.cargo
-        if (dados.imagem) {
-            imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
-        } else {
-            imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
-        }
-    })
+            username.innerHTML = dados.nomePessoa
+            cargoname.innerHTML = dados.cargo
+            if (dados.imagem) {
+                imagemPerfilCima.src = `/assets/imgsBd/${dados.imagem}`
+            } else {
+                imagemPerfilCima.src = "../assets/dashConfig/usuario.png"
+            }
+        })
 }
 const idUsuario = sessionStorage.getItem("ID_USUARIO");
 const idEmpresa = sessionStorage.getItem("FK_EMPRESA");
@@ -454,12 +454,24 @@ function fecharPopupRegiao() {
 
 function selecionarDatacenters() {
     window.location.href = "dashOperacionalGestor.html";
-
 }
 
-function selecionarAlerta() {
+function selecionarAlerta(data) {
+    sessionStorage.setItem = ("DATA", "");
+    sessionStorage.setItem = ("REGIAO", "");
+
+    if (data == 1) {
+        sessionStorage.setItem = ("REGIAO", "SP");
+        sessionStorage.setItem = ("DATA", "DC-SP-01");
+    } else if (data == 2) {
+        sessionStorage.setItem = ("REGIAO", "RJ");
+        sessionStorage.setItem = ("DATA", "DC-RJ-01");
+    } else {
+        sessionStorage.setItem = ("REGIAO", "RS");
+        sessionStorage.setItem = ("DATA", "DC-RS-01");
+    }
+
     window.location.href = "dashAlertas.html";
- 
 }
 
 function limparSessao() {
