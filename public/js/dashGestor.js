@@ -17,7 +17,7 @@ function voltar(){
 
 function atualizarDiaSemana() {
     const dataAtual = new Date();
-    const cidadeSessao = sessionStorage.getItem("ESTADO") || "Região";
+    const cidadeSessao = sessionStorage.getItem("CIDADE") || "Região";
 
     const diasDaSemana = [
         "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
@@ -72,28 +72,75 @@ let datacenterSelecionado = null;
 const nomeEmpresa = sessionStorage.getItem("NOME_EMPRESA") || "Steam";
 
 async function iniciarDashOperacional() {
-    await carregarJsonGestoraOp();
+    const carregou = await carregarJsonGestoraOp();
+    if (!carregou) {
+        return;
+    }
     await carregarDatacentersDoGestor();
+    iniciarAtualizacaoAutomatica();
 }
 
+function iniciarAtualizacaoAutomatica() {
+    if (intervaloAtualizacaoDash) {
+        clearInterval(intervaloAtualizacaoDash);
+    }
+    intervaloAtualizacaoDash = setInterval(
+        atualizarDashboardAutomaticamente,
+        INTERVALO_ATUALIZACAO_DASH
+    );
+}
 async function carregarJsonGestoraOp() {
     try {
-        const resposta = await fetch("/dashOperacional/buscarGestoraOpJson");
+        const resposta = await fetch(
+            `/dashOperacional/buscarGestoraOpJson?t=${Date.now()}`,
+            {
+                cache: "no-store"
+            }
+        );
 
         if (!resposta.ok) {
             const erro = await resposta.text();
-            console.error("Erro ao buscar JSON da gestora:", erro);
-            return;
+            console.error("Erro ao buscar JSON da gestora:",erro);
+            return false;
         }
 
         dadosGestoraOp = await resposta.json();
-        console.log("JSON gestora OP carregado:", dadosGestoraOp);
 
+        console.log("JSON atualizado:",new Date().toLocaleTimeString(),dadosGestoraOp);
+        return true;
     } catch (erro) {
-        console.error("Erro geral ao carregar JSON da gestora:", erro);
+        console.error("Erro geral ao carregar JSON da gestora:",erro);
+        return false;
     }
 }
 
+// carregamento automático
+
+const INTERVALO_ATUALIZACAO_DASH = 30000;
+
+let intervaloAtualizacaoDash = null;
+let atualizacaoEmAndamento = false;
+
+async function atualizarDashboardAutomaticamente() {
+    if (atualizacaoEmAndamento) {
+        return;
+    }
+    atualizacaoEmAndamento = true;
+
+    try {
+        const atualizou = await carregarJsonGestoraOp();
+        if (!atualizou) {
+            return;
+        }
+        if (datacenterSelecionado) {
+            renderizarGraficosEKpisDatacenter(datacenterSelecionado);
+        }
+    } catch (erro) {
+        console.error("Erro ao atualizar dashboard:",erro);
+    } finally {
+        atualizacaoEmAndamento = false;
+    }
+}
 function encontrarDatacenterMaisCritico(datacentersPermitidos) {
     if (!dadosGestoraOp || !dadosGestoraOp.empresas) {
         console.error("JSON da gestora ainda não carregado.");
@@ -193,11 +240,11 @@ function selecionarDatacenter(nomeDatacenter) {
     datacenterSelecionado = nomeDatacenter;
     sessionStorage.setItem("DATACENTER_SELECIONADO", nomeDatacenter);
 
-    renderizarKpisDatacenter(nomeDatacenter);
+    renderizarGraficosEKpisDatacenter(nomeDatacenter);
 }
 
-//--------------------------------------------------KPIS RENDERIZANDO----------------------------------------------------------------------------
-function renderizarKpisDatacenter(nomeDatacenter) {
+//-------------------------------------------------- KPIS RENDERIZANDO ----------------------------------------------------------------------------
+function renderizarGraficosEKpisDatacenter(nomeDatacenter) {
     if (!dadosGestoraOp || !dadosGestoraOp.empresas) {
         console.error("JSON da gestora não carregado.");
         return;
@@ -220,13 +267,14 @@ function renderizarKpisDatacenter(nomeDatacenter) {
     console.log("Renderizando KPIs do datacenter:", nomeDatacenter, datacenter);
 
     atualizarKpiScore(datacenter);
-    atualizarKpiCrescimentoIncidentes(datacenter);
+    atualizarkpiCrescimentoAlertas(datacenter);
     atualizarKpiUptime(datacenter);
     atualizarKpiServidoresCriticos(datacenter);
     renderizarRankingServidoresCriticos(datacenter);
     renderizarTendenciaDegradacao(datacenter);
-     renderizarUptimeServidores(datacenter);
-     renderizarGraficoSaudeZonas(datacenter);
+    renderizarUptimeServidores(datacenter);
+    renderizarGraficoSaudeZonas(datacenter);
+    renderizarGraficoAlertas(datacenter);
 
 }
 function atualizarKpiScore(datacenter) {
@@ -239,8 +287,8 @@ function atualizarKpiScore(datacenter) {
     atualizarEstiloKpi("kpiScoreSaude", status);
 }
 
-function atualizarKpiCrescimentoIncidentes(datacenter) {
-    const kpi = datacenter.kpiCrescimentoIncidentes;
+function atualizarkpiCrescimentoAlertas(datacenter) {
+    const kpi = datacenter.kpiCrescimentoAlertas;
 
     if (!kpi) {
         document.getElementById("porcentCresc").innerHTML = 0;
@@ -248,7 +296,7 @@ function atualizarKpiCrescimentoIncidentes(datacenter) {
         document.getElementById("qntAlertasAtual").innerHTML = 0;
 
         atualizarIconeStatusPercentual("statusKPICresc", 0, 5, 15);
-        atualizarEstiloKpi("kpiCrescimentoIncidentes", "Estável");
+        atualizarEstiloKpi("kpiCrescimentoAlertas", "Estável");
         return;
     }
 
@@ -256,11 +304,11 @@ function atualizarKpiCrescimentoIncidentes(datacenter) {
     const status = classificarPercentual(percentual, 5, 15);
 
     document.getElementById("porcentCresc").innerHTML = percentual;
-    document.getElementById("qntAlertasAnterior").innerHTML = kpi.alertasSemanaAnterior ?? 0;
-    document.getElementById("qntAlertasAtual").innerHTML = kpi.alertasSemanaAtual ?? 0;
+    document.getElementById("qntAlertasAnterior").innerHTML = kpi.alertasIntervaloAnterior ?? 0;
+    document.getElementById("qntAlertasAtual").innerHTML = kpi.alertasIntervaloAtual ?? 0;
 
     atualizarIconeStatusPercentual("statusKPICresc", percentual, 5, 15);
-    atualizarEstiloKpi("kpiCrescimentoIncidentes", status);
+    atualizarEstiloKpi("kpiCrescimentoAlertas", status);
 }
 
 function atualizarKpiUptime(datacenter) {
@@ -499,11 +547,8 @@ function renderizarRankingServidoresCriticos(datacenter) {
                 </div>
             </div>
         `;
-    }
-
-);
+     });
 }
-
 function obterClasseStatusServidor(status) {
     const statusNormalizado = String(status || "")
         .trim()
@@ -592,85 +637,70 @@ function renderizarTendenciaDegradacao(datacenter) {
 const saudeZonas = []
 const nomesZonas = []
 function renderizarUptimeServidores(datacenter) {
-  const lista = document.getElementById("listaUptimeServidores");
+    const lista = document.getElementById(
+        "listaUptimeServidores"
+    );
 
-  if (!lista) {
-    console.error("Container listaUptimeServidores não encontrado no HTML.");
-    return;
-  }
+    if (!lista) {
+        console.error(
+            "Container listaUptimeServidores não encontrado no HTML."
+        );
+        return;
+    }
 
-  lista.innerHTML = "";
+    lista.innerHTML = "";
 
-  const servidores = [];
 
-  const zonas = datacenter?.zonas || [];
+    const servidores = datacenter?.uptimeServidores || [];
 
-  zonas.forEach(zona => {
-    const servidoresDaZona = zona.servidores || [];
-    
-    servidoresDaZona.forEach(servidor => {
-      servidores.push({
-        nome: servidor.servidor,
-        zona: servidor.zona,
-        uptimeOperacional: servidor.uptimeOperacional
-      });
+    if (servidores.length === 0) {
+        lista.innerHTML = `
+            <div class="item_servidor item_tendencia">
+                <p>Nenhum servidor encontrado</p>
+
+                <span class="status-servidor servidor-indefinido">
+                    ● Sem dados disponíveis
+                </span>
+            </div>
+        `;
+
+        return;
+    }
+
+    servidores.forEach((servidor, index) => {
+        const nomeServidor = servidor.servidor ||"Servidor não identificado";
+        const zona = servidor.zona ||"Zona não informada";
+        const valorUptime =Number(servidor.uptime ?? 0);
+        const statusUptime =servidor.statusUptime ||"Indefinido";
+        const horasIndisponivel =Number(servidor.tempoIndisponivelHoras ?? 0);
+        const classeStatus =obterClasseStatusServidor(statusUptime );
+
+        lista.innerHTML += `
+            <div class="item_servidor item_tendencia">
+                <div class="item">
+                    <p>
+                        ${index + 1}° ${nomeServidor}
+                    </p>
+
+                    <span class="status-servidor ${classeStatus}">
+                        ● Uptime: ${valorUptime.toFixed(4)}%
+                    </span>
+                </div>
+
+                <div class="tooltip-tendencia">
+                    <h4>Detalhes do uptime</h4>
+
+                    <p>Zona: ${zona}</p>
+
+                    <p>
+                        ${horasIndisponivel} horas de
+                        indisponibilidade nos últimos
+                        ${servidor.periodoDias ?? 30} dias.
+                    </p>
+                </div>
+            </div>
+        `;
     });
-  });
-
-  if (servidores.length === 0) {
-    lista.innerHTML = `
-      <div class="item_servidor item_tendencia">
-        <p>Nenhum servidor encontrado</p>
-        <span class="status-servidor servidor-indefinido">● Sem dados disponíveis</span>
-      </div>
-    `;
-    return;
-  }
-
-  servidores.forEach((servidor, index) => {
-    const nomeServidor = servidor.nome || "Servidor não identificado";
-    const uptimeDados = servidor.uptimeOperacional;
-
-    if (!uptimeDados) {
-      lista.innerHTML += `
-        <div class="item_servidor item_tendencia" >
-          <p>${index + 1}° ${nomeServidor}</p>
-          <span class="status-servidor servidor-indefinido">● Sem uptime disponível</span>
-        </div>
-      `;
-      return;
-    }
-
-    const valorUptime = uptimeDados.uptime;
-    const statusUptime = uptimeDados.statusUptime || "Indefinido";
-    const horasIndisponivel = uptimeDados.tempoIndisponivelHoras || 0;
-
-    let classeStatus = "servidor-indefinido";
-
-    if (statusUptime === "Saudável") {
-      classeStatus = "servidor-saudavel";
-    } else if (statusUptime === "Atenção") {
-      classeStatus = "servidor-atencao";
-    } else if (statusUptime === "Crítico") {
-      classeStatus = "servidor-critico";
-    }
-
-    lista.innerHTML += `
-      <div class="item_servidor item_tendencia">
-        <div class="item">
-          <p>${index + 1}° ${nomeServidor}</p>
-          <span class="status-servidor ${classeStatus}">
-            ● Uptime: ${valorUptime}%
-          </span>
-        </div>
-
-        <div class="tooltip-tendencia">
-          <h4>Motivo do uptime</h4>
-          <p>Servidor ficou ${horasIndisponivel} horas indisponível.</p>
-        </div>
-      </div>
-    `;
-  });
 }
 
 
@@ -678,168 +708,264 @@ function renderizarUptimeServidores(datacenter) {
 //}//---------------------------------------------------------------------------------------------------------------------------------------------
 
 function renderizarGraficoSaudeZonas(datacenter) {
-  const ctxSaudeZonas = document.getElementById('graficoSaudeZonas');
+    const canvas = document.getElementById(
+        "graficoSaudeZonas"
+    );
 
-  const nomesZonas = [];
-  const saudeZonas = [];
-
-  const zonas = datacenter?.zonas || [];
-
-  zonas.forEach(zona => {
-    nomesZonas.push(zona.zona);
-    saudeZonas.push(zona.score);
-  });
-
-  function definirCorZona(score) {
-    if (score >= 80) {
-      return '#22C55E';
-    } else if (score >= 60) {
-      return '#F5A400';
-    } else {
-      return '#F23845';
+    if (!canvas) {
+        console.error(
+            "Canvas graficoSaudeZonas não encontrado."
+        );
+        return;
     }
-  }
 
-  new Chart(ctxSaudeZonas, {
-    type: 'bar',
-    data: {
-      labels: nomesZonas,
-      datasets: [{
-        data: saudeZonas,
-        backgroundColor: saudeZonas.map(score => definirCorZona(score)),
-        borderRadius: 4,
-        barThickness: 46
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
+    const nomesZonas = [];
+    const saudeZonas = [];
+
+    const zonas = datacenter?.zonas || [];
+
+    zonas.forEach(zona => {
+        nomesZonas.push(zona.zona);
+        saudeZonas.push(zona.score);
+    });
+
+    function definirCorZona(score) {
+        if (score >= 80) {
+            return "#22C55E";
         }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-          ticks: {
-            stepSize: 25,
-            color: '#6B7280'
-          },
-          grid: {
-            color: '#E5E7EB'
-          }
-        },
-        x: {
-          ticks: {
-            color: '#6B7280'
-          },
-          grid: {
-            color: '#E5E7EB'
-          }
+
+        if (score >= 60) {
+            return "#F5A400";
         }
-      }
+
+        return "#F23845";
     }
-  });
+
+    if (graficoSaudeZonasInstancia) {
+        graficoSaudeZonasInstancia.destroy();
+    }
+
+    graficoSaudeZonasInstancia = new Chart(
+        canvas,
+        {
+            type: "bar",
+
+            data: {
+                labels: nomesZonas,
+
+                datasets: [
+                    {
+                        data: saudeZonas,
+                        backgroundColor: saudeZonas.map(
+                            definirCorZona
+                        ),
+                        borderRadius: 4,
+                        barThickness: 46
+                    }
+                ]
+            },
+
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                animation: {
+                    duration: 200
+                },
+
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+
+                        ticks: {
+                            stepSize: 25,
+                            color: "#6B7280"
+                        },
+
+                        grid: {
+                            color: "#E5E7EB"
+                        }
+                    },
+
+                    x: {
+                        ticks: {
+                            color: "#6B7280"
+                        },
+
+                        grid: {
+                            color: "#E5E7EB"
+                        }
+                    }
+                }
+            }
+        }
+    );
 }
 
 let graficoAlertasSemana = null;
 
 function renderizarGraficoAlertas(datacenter) {
-  const ctxIncidentesSemana = document.getElementById('graficoIncidentesSemana');
+    const canvas = document.getElementById(
+        "graficoIncidentesSemana"
+    );
 
-  if (!ctxIncidentesSemana) {
-    console.error("Canvas graficoIncidentesSemana não encontrado.");
-    return;
-  }
-
-  const dadosAlertas = datacenter?.graficoAlertasSemana || {};
-
-  const dias = [
-    "Segunda",
-    "Terça",
-    "Quarta",
-    "Quinta",
-    "Sexta",
-    "Sábado",
-    "Domingo"
-  ];
-
-  const qntAlertas = dias.map(dia => dadosAlertas[dia] || 0);
-
-  const media = dadosAlertas.media || 0;
-
-  const linhaMedia = dias.map(() => media);
-
-  if (graficoAlertasSemana !== null) {
-    graficoAlertasSemana.destroy();
-  }
-
-  graficoAlertasSemana = new Chart(ctxIncidentesSemana, {
-    type: 'line',
-    data: {
-      labels: dias,
-      datasets: [
-        {
-          label: 'Alertas Diários',
-          data: qntAlertas,
-          borderColor: '#2F80ED',
-          backgroundColor: '#2F80ED',
-          borderWidth: 3,
-          tension: 0.35,
-          pointRadius: 5,
-          pointHoverRadius: 6,
-          fill: false
-        },
-        {
-          label: 'Linha da Média',
-          data: linhaMedia,
-          borderColor: '#F5A400',
-          borderWidth: 2,
-          borderDash: [4, 4],
-          pointRadius: 0,
-          fill: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            color: '#6B7280'
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          suggestedMax: Math.max(...qntAlertas, media, 5),
-          ticks: {
-            stepSize: 5,
-            color: '#6B7280'
-          },
-          grid: {
-            color: '#E5E7EB',
-            borderDash: [4, 4]
-          }
-        },
-        x: {
-          ticks: {
-            color: '#6B7280'
-          },
-          grid: {
-            color: '#E5E7EB',
-            borderDash: [4, 4]
-          }
-        }
-      }
+    if (!canvas) {
+        console.error(
+            "Canvas graficoIncidentesSemana não encontrado."
+        );
+        return;
     }
-  });
+
+    const dadosGrafico =
+        datacenter?.graficoAlertasSemana || {};
+
+    const alertasPorDia =
+        dadosGrafico.alertasPorDia || {};
+
+    const dias = [
+        "Segunda",
+        "Terça",
+        "Quarta",
+        "Quinta",
+        "Sexta",
+        "Sábado",
+        "Domingo"
+    ];
+
+    const quantidadeAlertas = dias.map(
+        dia => Number(alertasPorDia[dia] ?? 0)
+    );
+
+    const media = Number(
+        dadosGrafico.mediaDiariaAlertas ?? 0
+    );
+
+    const linhaMedia = dias.map(() => media);
+
+    console.log(
+        "Dados do gráfico de alertas:",
+        {
+            dias,
+            quantidadeAlertas,
+            media
+        }
+    );
+
+    if (graficoAlertasSemana) {
+        graficoAlertasSemana.destroy();
+    }
+
+    graficoAlertasSemana = new Chart(
+        canvas,
+        {
+            type: "line",
+            data: {
+                labels: dias,
+                datasets: [
+                    {
+                        label: "Alertas diários",
+                        data: quantidadeAlertas,
+                        borderColor: "#2F80ED",
+                        backgroundColor: "#2F80ED",
+                        borderWidth: 3,
+                        tension: 0.35,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: false
+                    },
+                    {
+                        label: `Média diária: ${media}`,
+                        data: linhaMedia,
+                        borderColor: "#F5A400",
+                        backgroundColor: "#F5A400",
+                        borderWidth: 2,
+                        borderDash: [6, 6],
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        tension: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                animation: {
+                    duration: 300
+                },
+
+                interaction: {
+                    mode: "index",
+                    intersect: false
+                },
+
+                plugins: {
+                    legend: {
+                        position: "bottom",
+
+                        labels: {
+                            usePointStyle: true,
+                            color: "#6B7280",
+                            padding: 20
+                        }
+                    },
+
+                    tooltip: {
+                        callbacks: {
+                            label(context) {
+                                const valor =
+                                    context.parsed.y ?? 0;
+
+                                return (
+                                    `${context.dataset.label}: ` +
+                                    `${valor}`
+                                );
+                            }
+                        }
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+
+                        suggestedMax: Math.max(
+                            ...quantidadeAlertas,
+                            media,
+                            5
+                        ),
+
+                        ticks: {
+                            precision: 0,
+                            color: "#6B7280"
+                        },
+
+                        grid: {
+                            color: "#E5E7EB"
+                        }
+                    },
+
+                    x: {
+                        ticks: {
+                            color: "#6B7280"
+                        },
+
+                        grid: {
+                            color: "#E5E7EB"
+                        }
+                    }
+                }
+            }
+        }
+    );
 }
 
 

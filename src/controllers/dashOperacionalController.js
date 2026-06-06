@@ -33,7 +33,7 @@ async function buscarGestoraOpJson(req, res) {
         res.status(200).json(json);
 
     } catch (erro) {
-        console.error("Erro ao buscar gestoraOp_master.json no S3:", erro);
+        console.error("Erro ao buscar dashOpGestao.json no S3:", erro);
 
         res.status(500).json({
             erro: "Erro ao buscar JSON da gestora no S3",

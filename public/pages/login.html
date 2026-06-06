@@ -175,8 +175,81 @@
   var email_input = document.getElementById("email_input");
   var senha_input = document.getElementById("senha_input");
 
+
+    var senhaVar = senha_input.value;
+    var emailVar = email_input.value;
+
+    if (senhaVar == "" || emailVar == "") {
+      modal.style.display = "flex"
+      conteiner_msg.innerHTML = `Verifique se não há algum campo em branco!`
+      loadingModal()
+      return false;
+    }
+
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
+
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log("Dados recebidos: ", json);
+          //console.log(JSON.stringify(json));
+
+          sessionStorage.ID_USUARIO = json.idUsuario;
+          sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.EMAIL_USUARIO = json.email;
+          sessionStorage.FK_PAPEL = json.fkPapel;
+          sessionStorage.FK_EMPRESA = json.fkEmpresa;
+
+          /*if (json.fkPapel == 1) {
+            setTimeout(function () {
+              window.location.href = '/pages/dashboard/dashboardGestor.html';
+            }, 200);
+
+          } else {
+            setTimeout(function () {
+              window.location.href = '/pages/dashboard/dashboardAnalista.html';
+            }, 200);
+          }*/
+   
+if (json.fkPapel == 1) {
+    window.location.href = 'dashGestor.html';
+} else if (json.fkPapel == 3) {
+    window.location.href = 'dashSupervisoraRegional.html';
+} else {
+    window.location.href = 'dashAnalista.html';
+}
+});
+
+} else {
+    resposta.text().then(texto => {
+        console.error("ERRO VINDO DO SERVIDOR: ", texto);
+        modal.style.display = "flex"
+        conteiner_msg.innerHTML = `Houve um erro ao tentar realizar o login!`
+        loadingModal()
+    });
+}
+
+}).catch(function (erro) {
+    console.log(erro);
+})
+
   var senhaVar = senha_input.value;
   var emailVar = email_input.value;
+
 
   if (senhaVar == "" || emailVar == "") {
     modal.style.display = "flex";
