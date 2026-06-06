@@ -796,10 +796,14 @@ function renderizarGraficoSaudeZonas(datacenter) {
     );
 
     if (!canvas) {
-        console.error(
-            "Canvas graficoSaudeZonas não encontrado."
-        );
+        console.error("Canvas graficoSaudeZonas não encontrado.");
         return;
+    }
+
+    const graficoExistente = Chart.getChart(canvas);
+
+    if (graficoExistente) {
+        graficoExistente.destroy();
     }
 
     const nomesZonas = [];
@@ -893,15 +897,19 @@ function renderizarGraficoSaudeZonas(datacenter) {
 let graficoAlertasSemana = null;
 
 function renderizarGraficoAlertas(datacenter) {
-    const canvas = document.getElementById(
-        "graficoIncidentesSemana"
-    );
+    const canvas = document.getElementById("graficoIncidentesSemana");
 
     if (!canvas) {
         console.error(
             "Canvas graficoIncidentesSemana não encontrado."
         );
         return;
+    }
+
+    const graficoAlertasExistente = Chart.getChart(canvas);
+
+    if (graficoAlertasExistente) {
+        graficoAlertasExistente.destroy();
     }
 
     const dadosGrafico =
