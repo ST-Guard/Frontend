@@ -21,10 +21,12 @@ const s3 = new S3Client({
 
 async function buscarGestoraOpJson(req, res) {
     try {
-        const comando = new GetObjectCommand({
+        const parametros = {
             Bucket: process.env.AWS_BUCKET_NAME,
-            Key: "client/dashOpGestao.json"
-        });
+            Key: "client/dashOpGestao.json",
+          };
+          
+        const comando = new GetObjectCommand(parametros);
 
         const resposta = await s3.send(comando);
         const conteudo = await resposta.Body.transformToString();
