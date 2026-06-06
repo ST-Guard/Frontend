@@ -513,7 +513,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         p99cpu.addEventListener("click", function () {
 
-              abrirModal(
+            abrirModal(
                 "Pico de Consumo (P99)",
 
                 `
@@ -565,7 +565,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         p99latencia.addEventListener("click", function () {
 
-              abrirModal(
+            abrirModal(
                 "Latência Crítica (P99)",
 
                 `
@@ -660,7 +660,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </p>
 
                 <p>
-                Direcionam a atenção imediata da equipe técnica para problemas que impactam diretamente a disponibilidade e exigem correção urgente.
+                Esses alertas são medidos após algum componente mostrar uma captação que utrapassa em 30% ou mais o limite pré estabelecido pelo gestor na hora do cadastro do mesmo.
                 </p>
                 `
             );
@@ -686,7 +686,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </p>
 
                 <p>
-                Permitem a intervenção preventiva antes que o problema se torne crítico, garantindo a continuidade operacional sem sustos.
+                Esses alertas são medidos após algum componente mostrar uma captação que esta em 20 a 30% do limite pré estabelecido pelo gestor na hora do cadastro do mesmo.
                 </p>
                 `
             );
@@ -712,11 +712,38 @@ document.addEventListener("DOMContentLoaded", function () {
                 </p>
 
                 <p>
-                Mantem um histórico de eventos para análises futuras e ajustes finos de configuração, sem necessidade de ação imediata
+                Esses alertas são medidos após algum componente mostrar uma captação que utrapassa em até 10% o limite pré estabelecido pelo gestor na hora do cadastro do mesmo.
                 </p>
                 `
             );
 
+
+
+        });
+
+    }
+    const server =
+        document.getElementById("server?");
+
+    if (server) {
+
+        server.addEventListener("click", function () {
+
+            abrirModal(
+                "Notificações Informativas",
+
+                `
+                <p><b>Descrição:</b></p>
+
+                <p>
+                Servidor do datacenter selecionado que mais possui alertas ativos (baixos, médio ou críticos)
+                </p>
+
+                <p>
+                Direciona o olhar ao problema diretamente, trazendo agilidade na tomada de decisão e resolução de problemas.
+                </p>
+                `
+            );
         });
 
     }

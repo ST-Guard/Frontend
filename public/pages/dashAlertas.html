@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Aletas</title>
+    <title>Smart Data | Gestor Alertas</title>
     <link rel="stylesheet" href="../css/dashAlertas.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/dashMaps.css">
@@ -12,8 +12,6 @@
 </head>
 
 <body>
-
-
     <header>
         <nav>
             <div class="logo-nav" onclick="fnNavegar('/')">
@@ -103,7 +101,7 @@
             </div>
 
             <div id="container_kpis">
-                <div class="div_kpi kpi1" id="severa">
+                <div class="div_kpi kpi1">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>ALERTAS CRÍTICOS ABERTOS</h3>
@@ -112,10 +110,13 @@
                             <h1 id="qtdCriticos">3</h1>
                             <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
                         </div>
-                        <h4>Requerem ação imediata</h4>
+                        <div class="info">
+                            <h4>Requerem ação imediata</h4>
+                            <div id="severa" class="interrogacao">?</div>
+                        </div>
                     </div>
                 </div>
-                <div class="div_kpi kpi2" id="media">
+                <div class="div_kpi kpi2">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>ALERTAS MÉDIOS ABERTOS</h3>
@@ -125,11 +126,14 @@
                             <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
                         </div>
                         <div class="status">
-                            <h4>Requerem atenção</h4>
+                            <div class="info">
+                                <h4>Requerem atenção</h4>
+                                <div id="media" class="interrogacao">?</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="div_kpi kpi3" id="baixa">
+                <div class="div_kpi kpi3">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>ALERTAS BAIXOS ABERTOS</h3>
@@ -139,11 +143,14 @@
                             <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
                         </div>
                         <div class="status">
-                            <h4>Relevância inferior</h4>
+                            <div class="info">
+                                <h4>Relevância inferior</h4>
+                                <div id="baixa" class="interrogacao">?</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="div_kpi kpi4" id="resolvidos">
+                <div class="div_kpi kpi4">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>ALERTAS RESOLVIDOS (24h)</h3>
@@ -153,7 +160,10 @@
                             <img src="../assets/dashboard-icons/icon_check.svg" alt="">
                         </div>
                         <div class="status">
-                            <h4>.</h4>
+                            <div class="info">
+                                <h4>.</h4>
+                                <div id="resolvidos" class="interrogacao">?</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,7 +177,10 @@
                             <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
                         </div>
                         <div class="status">
-                            <div><span id="qtdAlertaServer">12</span> Alertas</div>
+                            <div class="info">
+                                <div><span id="qtdAlertaServer">12</span> Alertas</div>
+                                <div id="server?" class="interrogacao">?</div>
+                            </div>
                         </div>
                     </div>
                 </div>
