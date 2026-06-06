@@ -23,7 +23,7 @@ async function buscarGestoraOpJson(req, res) {
     try {
         const comando = new GetObjectCommand({
             Bucket: process.env.AWS_BUCKET_NAME,
-            Key: "client/gestoraOp_master.json"
+            Key: "client/dashOpGestao.json"
         });
 
         const resposta = await s3.send(comando);
