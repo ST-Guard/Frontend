@@ -479,3 +479,9 @@ nav {
 
 
 
+.sidebar {
+    width: 12%;
+    min-width: 12%;
+    max-width: 12%;
+    flex: 0 0 12%;
+}

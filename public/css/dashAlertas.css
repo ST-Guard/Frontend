@@ -583,7 +583,7 @@
     }
 
     .sidebar {
-        width: 250px;
+        width: 12%;
         height: auto;
         border-top: none;
         border-bottom: 1px solid var(--azul-escuro);
@@ -626,7 +626,7 @@
     }
 
     .sidebar {
-        width: 100%;
+        width: 12%;
         height: auto;
         border-top: none;
         border-bottom: 1px solid var(--azul-escuro);
@@ -1004,4 +1004,10 @@
         display: block;
         margin-bottom: 15px;
     }
+}
+.sidebar {
+    width: 12%;
+    min-width: 12%;
+    max-width: 12%;
+    flex: 0 0 12%;
 }

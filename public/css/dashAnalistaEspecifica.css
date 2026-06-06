@@ -244,7 +244,7 @@ color:var(--corDaFonte)
 @media (max-width: 1024px) {
 
   .sidebar {
-    width: 80px;
+    width: 12%;
   }
 
   .sidebar p {
@@ -320,7 +320,7 @@ color:var(--corDaFonte)
   }
 
   .sidebar {
-    width: 100%;
+    width: 12%;
     height: 70px;
     margin-top: 0;
     position: fixed;
