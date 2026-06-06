@@ -1,22 +1,27 @@
-fetch("../dados/dashboard_supervisora_regional.json")
-    .then(response => response.json())
-    .then(dados => {
 
-        console.log("JSON carregado");
-        console.log(dados);
+document.addEventListener('DOMContentLoaded', () => {
+    
+    fetch("../dados/dashboard_supervisora_regional.json")
+        .then(response => response.json())
+        .then(dados => {
+    
+            console.log("JSON carregado");
+            console.log(dados);
+    
+             dadosDashboardGlobal = dados;
+             
+            carregarKpis(dados);
+            carregarCards(dados);
+            carregarGraficoAlertas(dados);
+            carregarGraficoTopProblemas(dados);
+            carregarGraficoTrafego(dados);
+    
+        })
+        .catch(error => {
+            console.error(error);
+        });
 
-         dadosDashboardGlobal = dados;
-         
-        carregarKpis(dados);
-        carregarCards(dados);
-        carregarGraficoAlertas(dados);
-        carregarGraficoTopProblemas(dados);
-        carregarGraficoTrafego(dados);
-
-    })
-    .catch(error => {
-        console.error(error);
-    });
+});
 
     
 function aplicarStatusKpi(idCard, status) {
