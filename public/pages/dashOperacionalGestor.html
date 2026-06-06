@@ -136,64 +136,66 @@
     <button class="btn-relatorios" onclick="mostrarRelatorios()">Relatórios</button>
   </div>
 
-  <div class="header-kpi">
-    <div class="conteudoHeaderKpi">
-      <img src="../assets/icons_dashOpGestora/clock.svg" alt="">
-      <span class="atualizacao">Atualizações em 5 min.</span>
-    </div>
-  </div>
-
 <div id="div_relatorios" style="display: none;">
-    <div class="conteudo_relatorios">
+  <div class="conteudo_relatorios">
 
-        <button class="btn_fechar_relatorio" onclick="fecharRelatorios()">
-            <img
-                src="../assets/icons_dashOpGestora/minimize-2.svg"
-                alt="Fechar relatórios"
-            />
-        </button>
+    <button
+      class="btn_fechar_relatorio"
+      onclick="fecharRelatorios()"
+    >
+      <img
+        src="../assets/icons_dashOpGestora/minimize-2.svg"
+        alt="Fechar relatórios"
+      />
+    </button>
 
-        <div class="box_filtros_relatorio">
-            <h2>Relatórios Operacionais</h2>
+    <div class="box_filtros_relatorio">
+      <h2>Relatórios Operacionais</h2>
 
-            <p>
-                Visualize análises detalhadas, métricas históricas e indicadores
-                estratégicos da infraestrutura monitorada.
-            </p>
+      <p>
+        Visualize análises detalhadas, métricas históricas e indicadores
+        estratégicos da infraestrutura monitorada.
+      </p>
 
-            <p id="datacenterRelatoriosSelecionado">
-                Carregando datacenter selecionado...
-            </p>
+      <p id="datacenterRelatoriosSelecionado">
+        Carregando datacenter selecionado...
+      </p>
+    </div>
+
+    <div class="card_relatorios_gerados">
+
+      <div class="header_card_relatorios">
+
+        <div>
+          <div class="div_titulo_srv">
+            <h3>Relatórios gerados</h3>
+          </div>
+
+          <p>
+            Histórico dos relatórios operacionais gerados automaticamente.
+          </p>
         </div>
 
-        <div class="card_relatorios_gerados">
-            <div class="header_card_relatorios">
-                <div>
-                    <div class="div_titulo_srv">
-                        <h3>Relatórios gerados</h3>
-                    </div>
+        <div class="tempo_card">
+          <img
+            src="../assets/icons_dashOpGestora/clock.svg"
+            alt="Intervalo de geração"
+          />
 
-                    <p>
-                        Histórico dos relatórios operacionais gerados automaticamente.
-                    </p>
-                </div>
-                <img src="../assets/icons_dashOpGestora/dowload.svg">
-
-                <div class="tempo_card">
-                    <img src="../assets/icons_dashOpGestora/clock.svg"alt="Intervalo de geração"/>
-
-                    <p>A cada 30 minutos</p>
-                </div>
-            </div>
-
-            <div id="estadoRelatoriosGerados"class="estado_relatorios_gerados">
-                Carregando relatórios...
-            </div>
-
-            <divid="listaRelatoriosGerados"class="lista_relatorios_gerados"></div>
+          <p>A cada 30 minutos</p>
         </div>
+
+      </div>
+
+      <div id="estadoRelatoriosGerados" class="estado_relatorios_gerados">
+        Carregando relatórios...
+      </div>
+
+      <div id="listaRelatoriosGerados"class="lista_relatorios_gerados"></div>
 
     </div>
+
+  </div>
 </div>
 
   <div id="container_kpis">
@@ -221,7 +223,7 @@
       </div>
     </div>
 
-    <div  class="div_kpi kpi_com_tooltip" id="kpiCrescimentoIncidentes">
+    <div  class="div_kpi kpi_com_tooltip" id="kpiCrescimentoAlertas">
       <div class="info_kpi">
         <div class="containerTitulo">
           <h3>CRESC. ALERTAS</h3>
@@ -308,13 +310,13 @@
 
   <section class="secao1_servidores">
 
-    <div class="card_servidores">
+    <div class="card_servidores ">
       <div class="header_card_servidores">
         <div>
           <div class="div_titulo_srv">
-            <h3>Ranking de Servidores Críticos (Top 5).</h3>
+            <h3>Classificação de saúde de cada servidor</h3>
           </div>
-          <p>Servidores identificados com a saúde fora do ideal.</p>
+          <p>Servidores identificados com a saúde fora do ideal ficam mais acima na Classificação</p>
         </div>
 
         

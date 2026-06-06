@@ -17,7 +17,7 @@ function voltar(){
 
 function atualizarDiaSemana() {
     const dataAtual = new Date();
-    const cidadeSessao = sessionStorage.getItem("CIDADE") || "Região";
+    const cidadeSessao = sessionStorage.getItem("ESTADO") || "Região";
 
     const diasDaSemana = [
         "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
@@ -324,14 +324,19 @@ function atualizarKpiUptime(datacenter) {
         return;
     }
 
-    const percentual = kpi.percentualInstaveis ?? 0;
-    const status = classificarPercentual(percentual, 10, 25);
+    const quantidadeAbaixoIdeal = kpi.servidoresAbaixoIdeal ?? 0;
+    const totalServidores = kpi.totalServidores ?? 0;
+    const percentualAbaixoIdeal = Number(kpi.percentualAbaixoIdeal ?? 0);
+    const percentualFormatado = percentualAbaixoIdeal.toFixed(2);
 
-    document.getElementById("qntServComUptimeBaixo").innerHTML = kpi.qtdServidoresInstaveis ?? 0;
-    document.getElementById("totalSrvUptime").innerHTML = kpi.totalServidores ?? 0;
-    document.getElementById("porcentagemServComBaixoUpt").innerHTML = percentual;
+    const status = classificarPercentual(percentualAbaixoIdeal,10,25);
 
-    atualizarIconeStatusPercentual("statusMenorUpt", percentual, 10, 25);
+    qntServComUptimeBaixo.innerHTML = quantidadeAbaixoIdeal;
+    totalSrvUptime.innerHTML = totalServidores;
+    porcentagemServComBaixoUpt.innerHTML = `${percentualFormatado}%`;
+
+
+    atualizarIconeStatusPercentual("statusMenorUpt", percentualAbaixoIdeal, 10, 25);
     atualizarEstiloKpi("kpiServidoresInstaveis", status);
 }
 
@@ -479,6 +484,44 @@ function atualizarEstiloKpi(idKpi, status) {
     }
 }
 
+function definirClasseUptime(uptime) {
+    const valorUptime = Number(uptime);
+
+    if (valorUptime < 95) {
+        return "uptime_critico";
+    }
+
+    if (valorUptime < 99) {
+        return "uptime_atencao";
+    }
+    return "uptime_saudavel";
+}
+
+function definirClasseUptimeItem(uptime) {
+    const valorUptime = Number(uptime);
+
+    if (valorUptime < 95) {
+        return "uptime_critico_item";
+    }
+
+    if (valorUptime < 99) {
+        return "uptime_atencao_item";
+    }
+    return "uptime_saudavel_item";
+}
+
+function definirClasseUptimeP(uptime) {
+    const valorUptime = Number(uptime);
+
+    if (valorUptime < 95) {
+        return "uptime_critico_p";
+    }
+
+    if (valorUptime < 99) {
+        return "uptime_atencao_p";
+    }
+    return "uptime_saudavel_p";
+}
 //--------------------------------------------------------- WIDGETS SRV: CRITICOS E PREVISAO DE DEGRADAÇÃO ---------------------------------------
 
 function renderizarRankingServidoresCriticos(datacenter) {
@@ -489,7 +532,7 @@ function renderizarRankingServidoresCriticos(datacenter) {
         return;
     }
 
-    const ranking = datacenter.rankingSrvCriticosTop5 || [];
+    const ranking = datacenter.rankingSrv || [];
 
     lista.innerHTML = "";
 
@@ -534,19 +577,23 @@ function renderizarRankingServidoresCriticos(datacenter) {
         }
 
         lista.innerHTML += `
-            <div class="item_servidor item_tendencia">
+    <div class="item_servidor item_tendencia"  >
+         
+       
         <div class="item">
-                <p>${index + 1}° ${nomeServidor}</p>
-                <span class="status-servidor ${classeStatus}">
-                    ● Score: ${score} | ${zona}
-                </span>
-</div>
-                 <div class="tooltip-tendencia">
-               <h4>Motivo da criticidade</h4>
+            <p>${index + 1}° ${nomeServidor}</p>
+
+            <span class="status-servidor ${classeStatus}">
+                ● Score: ${score} | ${zona}
+            </span>
+        </div>
+
+        <div class="tooltip-tendencia">
+             <h4>Motivo da criticidade</h4>
             ${textoComponentes}
-                </div>
-            </div>
-        `;
+        </div>
+    </div>
+`;
      });
 }
 function obterClasseStatusServidor(status) {
@@ -579,15 +626,15 @@ function renderizarTendenciaDegradacao(datacenter) {
         return;
     }
 
-    const servidores = datacenter.rankingSrvCriticosTop5 || [];
+    const servidores = datacenter.rankingTendenciaServidores || [];
 
     lista.innerHTML = "";
 
     if (servidores.length === 0) {
         lista.innerHTML = `
             <div class="item_servidor item_tendencia">
-                <p>Nenhum servidor com tendência encontrada</p>
-                <span class="status-servidor servidor-indefinido">● Sem dados disponíveis</span>
+                <p>Nenhum risco de degradação identificado</p>
+                <span class="status-servidor servidor-indefinido">● Ambiente estável</span>
             </div>
         `;
         return;
@@ -596,6 +643,9 @@ function renderizarTendenciaDegradacao(datacenter) {
     servidores.forEach((servidor, index) => {
         const nomeServidor = servidor.servidor || "Servidor não identificado";
         const projecao = servidor.projecaoSaude;
+        const scoreAtual = Number( projecao.scoreAtual ??servidor.score ??0);
+        const scoreProjetado = Number(projecao.scoreProjetado ??scoreAtual);
+        const degradacaoProjetada = Number(projecao.degradacaoProjetada ??0);
 
         if (!projecao) {
             lista.innerHTML += `
@@ -608,30 +658,60 @@ function renderizarTendenciaDegradacao(datacenter) {
             `;
             return;
         }
-
-        const scoreAtual = projecao.scoreAtual ?? servidor.score ?? 0;
-        const scoreProjetado = projecao.scoreProjetado ?? 0;
-        const risco = projecao.risco || "Indefinido";
+        const risco =projecao.risco ||servidor.status || "Indefinido";
+        const confiabilidade = projecao.confiabilidade ||"não informada";
         const motivo = projecao.motivo || "Sem motivo informado";
         const classeStatus = obterClasseStatusServidor(risco);
+        let textoProjecao = "";
 
-        lista.innerHTML += `
-    <div class="item_servidor item_tendencia">
-        <div class="item">
-            <p>${index + 1}° ${nomeServidor}</p>
+        if (degradacaoProjetada > 0) {
+            textoProjecao = `
+                ● Atual: ${scoreAtual}
+                → Projetado: ${scoreProjetado}
+                | Queda: ${degradacaoProjetada} pontos
+            `;
+        } else {
+            textoProjecao = `
+                ● Score: ${scoreAtual}
+                | Tendência detectada
+            `;
+        }
 
-            <span class="status-servidor ${classeStatus}">
-                ● Score projetado: ${scoreProjetado} | Atual: ${scoreAtual}
-            </span>
-        </div>
+lista.innerHTML += `
+<div class="item_servidor item_tendencia">
+    <div class="item">
+        <p>
+            ${index + 1}° ${nomeServidor}
+        </p>
 
-        <div class="tooltip-tendencia">
-            <h4>Motivo da projeção</h4>
-            <p>${motivo}</p>
-        </div>
+        <span class="status-servidor ${classeStatus}">
+            ${textoProjecao}
+        </span>
     </div>
-      `;
-    });
+
+    <div class="tooltip-tendencia">
+        <h4>Motivo da projeção</h4>
+
+        <p>${motivo}</p>
+
+        <p>
+            <strong>Confiabilidade:</strong>
+            ${confiabilidade}
+        </p>
+
+        ${
+            degradacaoProjetada === 0
+            ? `
+                <p>A tendência ainda não alterou a faixa de penalidade do servidor.</p>
+            `
+            : `
+                <p><strong>Queda prevista:</strong>${degradacaoProjetada} pontos.</p>
+            `
+        }
+    </div>
+</div>
+`;
+});
 }
 
 const saudeZonas = []
@@ -674,16 +754,19 @@ function renderizarUptimeServidores(datacenter) {
         const statusUptime =servidor.statusUptime ||"Indefinido";
         const horasIndisponivel =Number(servidor.tempoIndisponivelHoras ?? 0);
         const classeStatus =obterClasseStatusServidor(statusUptime );
+        const classeUptime = definirClasseUptime(valorUptime);
+        const classeUptimeItem = definirClasseUptimeItem(valorUptime);
+        const classeUptimeP = definirClasseUptimeP(valorUptime);
 
         lista.innerHTML += `
-            <div class="item_servidor item_tendencia">
-                <div class="item">
-                    <p>
+            <div class="item_servidor item_tendencia  ${classeUptime}">
+                <div class="item  ${classeUptimeItem}">
+                    <p class=" ${classeUptimeP}">
                         ${index + 1}° ${nomeServidor}
                     </p>
 
                     <span class="status-servidor ${classeStatus}">
-                        ● Uptime: ${valorUptime.toFixed(4)}%
+                        ● Uptime: ${valorUptime.toFixed(2)}%
                     </span>
                 </div>
 
@@ -741,9 +824,7 @@ function renderizarGraficoSaudeZonas(datacenter) {
         return "#F23845";
     }
 
-    if (graficoSaudeZonasInstancia) {
-        graficoSaudeZonasInstancia.destroy();
-    }
+
 
     graficoSaudeZonasInstancia = new Chart(
         canvas,
@@ -881,7 +962,7 @@ function renderizarGraficoAlertas(datacenter) {
                         fill: false
                     },
                     {
-                        label: `Média diária: ${media}`,
+                        label: `Média diária até hoje: ${media}`,
                         data: linhaMedia,
                         borderColor: "#F5A400",
                         backgroundColor: "#F5A400",
@@ -987,15 +1068,14 @@ function limparSessao() {
 }
 
 async function carregarRelatoriosDatacenter() {
-    const nomeEmpresa =
-        sessionStorage.getItem("NOME_EMPRESA");
 
-    const nomeDatacenter =
-        sessionStorage.getItem("DATACENTER_SELECIONADO");
+    const nomeDatacenter =sessionStorage.getItem("DATACENTER_SELECIONADO");
 
     const listaRelatorios = document.getElementById(
         "listaRelatoriosGerados"
     );
+    console.log("Empresa usada:", nomeEmpresa);
+console.log("Datacenter usado:", nomeDatacenter);
 
     const estadoRelatorios = document.getElementById(
         "estadoRelatoriosGerados"
@@ -1045,7 +1125,7 @@ async function carregarRelatoriosDatacenter() {
     try {
         const empresaUrl = encodeURIComponent(nomeEmpresa);
         const datacenterUrl = encodeURIComponent(nomeDatacenter);
-
+        
         const resposta = await fetch(
             `/relatorios/listar/${empresaUrl}/${datacenterUrl}`
         );
@@ -1094,31 +1174,31 @@ function montarRelatorioGerado(relatorio, index) {
     );
 
     return `
-        <div class="item_relatorio_gerado">
-
-            <div class="icone_relatorio_gerado">
-                <span>PDF</span>
-            </div>
+            <div class="item_relatorio_gerado">
 
             <div class="informacoes_relatorio_gerado">
-                <h4>Relatório operacional ${index + 1}</h4>
-
-                <p class="nome_arquivo_relatorio">
-                    ${nomeArquivo}
-                </p>
+                <h4>${nomeArquivo}</h4>
 
                 <p class="detalhes_relatorio_gerado">
                     Gerado em ${dataFormatada}
-                    •
+                    <span>•</span>
                     ${tamanhoFormatado}
                 </p>
             </div>
 
-            <div class="acoes_relatorio_gerado">
-                <a class="btn_baixar_relatorio" href="${relatorio.urlDownload}"target="_blank" rel="noopener noreferrer">
-                <img src="../assets/icons_dashOpGestora/dowload.svg">
-                </a>
-            </div>
+            <a
+                class="btn_baixar_relatorio"
+                href="${relatorio.urlDownload}"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Baixar relatório"
+            >
+                <img
+                    src="../assets/icons_dashOpGestora/dowload.svg"
+                    alt="Baixar relatório"
+                >
+
+            </a>
 
         </div>
     `;
@@ -1180,3 +1260,68 @@ function escaparHtmlRelatorio(valor) {
 
     return elemento.innerHTML;
 }
+
+//--------------------------------------------------- MOVENDO O TOOLTIP  PARA QUE ELE NAO FIQUE CORTADO -------------------------------------------------------
+let tooltipAberto = null;
+let itemTooltipOriginal = null;
+
+document.addEventListener("mouseover", function (event) {
+    const item = event.target.closest(".item_tendencia");
+
+    if (!item || item.contains(event.relatedTarget)) {
+        return;
+    }
+
+    const tooltip = item.querySelector(".tooltip-tendencia");
+
+    if (!tooltip) {
+        return;
+    }
+
+    const itemPosicao = item.getBoundingClientRect();
+    itemTooltipOriginal = item;
+    tooltipAberto = tooltip;
+    document.body.appendChild(tooltip);
+    tooltip.style.display = "block";
+
+    const larguraTooltip = tooltip.offsetWidth;
+    const alturaTooltip = tooltip.offsetHeight;
+
+    let esquerda =itemPosicao.left +itemPosicao.width / 2 -larguraTooltip / 2;
+
+    let topo =itemPosicao.top -alturaTooltip -12;
+
+    esquerda = Math.max(10, esquerda);
+
+    esquerda = Math.min(esquerda,window.innerWidth - larguraTooltip - 10);
+
+    if (topo < 10) {
+        topo = itemPosicao.bottom + 12;
+        tooltip.classList.add("tooltip-abaixo");
+    } else {
+        tooltip.classList.remove("tooltip-abaixo");
+    }
+
+    tooltip.style.left = `${esquerda}px`;
+    tooltip.style.top = `${topo}px`;
+});
+
+document.addEventListener("mouseout", function (event) {
+    const item = event.target.closest(".item_tendencia");
+
+    if (!item || item.contains(event.relatedTarget)) {
+        return;
+    }
+
+    if (!tooltipAberto || !itemTooltipOriginal) {
+        return;
+    }
+
+    tooltipAberto.style.display = "none";
+    tooltipAberto.removeAttribute("style");
+
+    itemTooltipOriginal.appendChild(tooltipAberto);
+
+    tooltipAberto = null;
+    itemTooltipOriginal = null;
+});

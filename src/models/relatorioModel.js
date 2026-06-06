@@ -20,6 +20,9 @@ function formatarNomePasta(texto) {
 async function listarRelatorios(nomeEmpresa, nomeDatacenter) {
     const empresaFormatada = formatarNomePasta(nomeEmpresa);
     const datacenterFormatado = formatarNomePasta(nomeDatacenter);
+    console.log("##################################################")
+    console.log("empresaFormatada")
+        console.log("datacenterFormatado")
 
     const prefixo = `relatorios/gestora/${empresaFormatada}/${datacenterFormatado}/`;
 
@@ -29,7 +32,8 @@ async function listarRelatorios(nomeEmpresa, nomeDatacenter) {
     });
 
     const resposta = await s3.send(comandoListagem);
-
+    console.log("Prefixo usado no S3:", prefixo);
+    console.log("Bucket usado:", bucket);
     const arquivos = resposta.Contents || [];
 
     const relatoriosPdf = arquivos

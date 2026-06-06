@@ -271,21 +271,21 @@ function aplicarSaudeNoMapa(estadoMapa, statusRegiao) {
 function obterCoresPorScore(score) {
     if (score === null || score === undefined || Number.isNaN(Number(score))) {
         return {
-            estado: "#9eb9d8",
+            estado: "#707a86",
             glow: "#244770"
         };
     }
 
     const saude = Number(score);
 
-    if (saude > 90) {
+    if (saude >= 80) {
         return {
             estado: "#b6ffb6",
             glow: "#00ba60"
         };
     }
 
-    if (saude > 75) {
+    if (saude >= 60) {
         return {
             estado: "#ffeaab",
             glow: "#e8c82c"
