@@ -173,7 +173,7 @@
 }
 
 .SubcorpoPagina {
-    width: 85%;
+    width: 88%;
     max-height: 90vh;
     overflow: scroll;
     display: flex;
@@ -583,7 +583,7 @@
     }
 
     .sidebar {
-        width: 12%;
+        width: 250px;
         height: auto;
         border-top: none;
         border-bottom: 1px solid var(--azul-escuro);
@@ -626,7 +626,7 @@
     }
 
     .sidebar {
-        width: 12%;
+        width: 100%;
         height: auto;
         border-top: none;
         border-bottom: 1px solid var(--azul-escuro);
@@ -1004,10 +1004,4 @@
         display: block;
         margin-bottom: 15px;
     }
-}
-.sidebar {
-    width: 12%;
-    min-width: 12%;
-    max-width: 12%;
-    flex: 0 0 12%;
 }

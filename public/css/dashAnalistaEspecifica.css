@@ -151,7 +151,7 @@ color:var(--corDaFonte)
 }
 
 .SubcorpoPagina {
-  width: 82%;
+  width: 88%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -244,7 +244,7 @@ color:var(--corDaFonte)
 @media (max-width: 1024px) {
 
   .sidebar {
-    width: 12%;
+    width: 80px;
   }
 
   .sidebar p {
@@ -320,7 +320,7 @@ color:var(--corDaFonte)
   }
 
   .sidebar {
-    width: 12%;
+    width: 100%;
     height: 70px;
     margin-top: 0;
     position: fixed;

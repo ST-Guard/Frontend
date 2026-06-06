@@ -391,7 +391,7 @@ nav {
 
 
     .sidebar {
-        width: 12%;
+        width: 100%;
         min-height: auto;
         border-top: none;
         border-bottom: 1px solid var(--azul-escuro);
