@@ -1186,3 +1186,8 @@ header {
     max-height: 400px;
     overflow-y: auto;
 }
+
+.btn_baixar_relatorio{
+    background-color: transparent;
+    border: none;
+}

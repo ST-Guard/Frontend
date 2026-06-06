@@ -972,6 +972,8 @@ function renderizarGraficoAlertas(datacenter) {
 
 function mostrarRelatorios(){
 document.getElementById("div_relatorios").style.display = "block";
+carregarRelatoriosDatacenter();
+
 }
 
 function fecharRelatorios(){
@@ -982,4 +984,199 @@ document.getElementById("div_relatorios").style.display = "none";
 
 function limparSessao() {
     sessionStorage.clear();
+}
+
+async function carregarRelatoriosDatacenter() {
+    const nomeEmpresa =
+        sessionStorage.getItem("NOME_EMPRESA");
+
+    const nomeDatacenter =
+        sessionStorage.getItem("DATACENTER_SELECIONADO");
+
+    const listaRelatorios = document.getElementById(
+        "listaRelatoriosGerados"
+    );
+
+    const estadoRelatorios = document.getElementById(
+        "estadoRelatoriosGerados"
+    );
+
+    const textoDatacenter = document.getElementById(
+        "datacenterRelatoriosSelecionado"
+    );
+
+    if (!listaRelatorios || !estadoRelatorios) {
+        console.error(
+            "Elementos da área de relatórios não foram encontrados."
+        );
+        return;
+    }
+
+    listaRelatorios.innerHTML = "";
+
+    if (!nomeEmpresa) {
+        exibirEstadoRelatorios(
+            "Não foi possível identificar a empresa do usuário.",
+            "erro"
+        );
+
+        return;
+    }
+
+    if (!nomeDatacenter) {
+        exibirEstadoRelatorios(
+            "Nenhum datacenter está selecionado na dashboard.",
+            "vazio"
+        );
+
+        return;
+    }
+
+    if (textoDatacenter) {
+        textoDatacenter.textContent =
+            `Empresa: ${nomeEmpresa} | Datacenter: ${nomeDatacenter}`;
+    }
+
+    exibirEstadoRelatorios(
+        "Carregando relatórios...",
+        "carregando"
+    );
+
+    try {
+        const empresaUrl = encodeURIComponent(nomeEmpresa);
+        const datacenterUrl = encodeURIComponent(nomeDatacenter);
+
+        const resposta = await fetch(
+            `/relatorios/listar/${empresaUrl}/${datacenterUrl}`
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error( dados.mensagem ||"Não foi possível buscar os relatórios.");
+        }
+
+        const relatorios = dados.relatorios || [];
+
+        if (relatorios.length === 0) {
+            exibirEstadoRelatorios(
+                "Nenhum relatório encontrado para este datacenter.","vazio");
+            return;
+        }
+
+        estadoRelatorios.style.display = "none";
+
+        relatorios.forEach((relatorio, index) => {
+            listaRelatorios.innerHTML += montarRelatorioGerado(relatorio,index);
+        });
+
+    } catch (erro) {
+        console.error("Erro ao carregar relatórios:",erro);
+
+        exibirEstadoRelatorios(
+            "Não foi possível carregar os relatórios deste datacenter.",
+            "erro"
+        );
+    }
+}
+
+function montarRelatorioGerado(relatorio, index) {
+    const nomeArquivo = escaparHtmlRelatorio(
+        relatorio.nomeArquivo
+    );
+
+    const dataFormatada = formatarDataRelatorio(
+        relatorio.ultimaModificacao
+    );
+
+    const tamanhoFormatado = formatarTamanhoRelatorio(
+        relatorio.tamanhoBytes
+    );
+
+    return `
+        <div class="item_relatorio_gerado">
+
+            <div class="icone_relatorio_gerado">
+                <span>PDF</span>
+            </div>
+
+            <div class="informacoes_relatorio_gerado">
+                <h4>Relatório operacional ${index + 1}</h4>
+
+                <p class="nome_arquivo_relatorio">
+                    ${nomeArquivo}
+                </p>
+
+                <p class="detalhes_relatorio_gerado">
+                    Gerado em ${dataFormatada}
+                    •
+                    ${tamanhoFormatado}
+                </p>
+            </div>
+
+            <div class="acoes_relatorio_gerado">
+                <a class="btn_baixar_relatorio" href="${relatorio.urlDownload}"target="_blank" rel="noopener noreferrer">
+                <img src="../assets/icons_dashOpGestora/dowload.svg">
+                </a>
+            </div>
+
+        </div>
+    `;
+}
+
+function exibirEstadoRelatorios(mensagem, tipo) {
+    const estadoRelatorios = document.getElementById(
+        "estadoRelatoriosGerados"
+    );
+
+    if (!estadoRelatorios) {
+        return;
+    }
+
+    estadoRelatorios.style.display = "block";
+
+    estadoRelatorios.className =
+        `estado_relatorios_gerados estado_relatorios_${tipo}`;
+
+    estadoRelatorios.textContent = mensagem;
+}
+
+function formatarDataRelatorio(data) {
+    if (!data) {
+        return "data não informada";
+    }
+
+    return new Date(data).toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
+
+function formatarTamanhoRelatorio(tamanhoBytes) {
+    const tamanho = Number(tamanhoBytes);
+
+    if (!tamanho || tamanho <= 0) {
+        return "tamanho não informado";
+    }
+
+    if (tamanho < 1024) {
+        return `${tamanho} B`;
+    }
+
+    if (tamanho < 1024 * 1024) {
+        return `${(tamanho / 1024).toFixed(1)} KB`;
+    }
+
+    return `${(tamanho / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function escaparHtmlRelatorio(valor) {
+    const elemento = document.createElement("div");
+
+    elemento.textContent = valor || "";
+
+    return elemento.innerHTML;
 }

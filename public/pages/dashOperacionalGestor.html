@@ -143,39 +143,58 @@
     </div>
   </div>
 
-  <div id="div_relatorios" style="display: none;">
+<div id="div_relatorios" style="display: none;">
     <div class="conteudo_relatorios">
 
-      <button class="btn_fechar_relatorio" onclick="fecharRelatorios()">
-        <img src="../assets/icons_dashOpGestora/minimize-2.svg" alt="Fechar relatórios">
-      </button>
+        <button class="btn_fechar_relatorio" onclick="fecharRelatorios()">
+            <img
+                src="../assets/icons_dashOpGestora/minimize-2.svg"
+                alt="Fechar relatórios"
+            />
+        </button>
 
-      <div class="box_filtros_relatorio">
-        <h2>Relatórios Operacionais</h2>
-        <p>Visualize análises detalhadas, métricas históricas e indicadores estratégicos da infraestrutura monitorada.</p>
-      </div>
+        <div class="box_filtros_relatorio">
+            <h2>Relatórios Operacionais</h2>
 
-      <div class="card_relatorios_gerados">
-        <div class="header_card_relatorios">
-          <div>
-            <div class="div_titulo_srv">
-              <h3>Relatórios gerados.</h3>
-              </div>
-            <p>Histórico dos relatórios operacionais criados pela gestão.</p>
-          </div>
+            <p>
+                Visualize análises detalhadas, métricas históricas e indicadores
+                estratégicos da infraestrutura monitorada.
+            </p>
 
-          <div class="tempo_card">
-            <img src="../assets/icons_dashOpGestora/clock.svg" alt="">
-            <p>A cada 20 minutos</p>
-          </div>
+            <p id="datacenterRelatoriosSelecionado">
+                Carregando datacenter selecionado...
+            </p>
         </div>
 
-        <div id="listaRelatoriosGerados" class="lista_relatorios_gerados">
+        <div class="card_relatorios_gerados">
+            <div class="header_card_relatorios">
+                <div>
+                    <div class="div_titulo_srv">
+                        <h3>Relatórios gerados</h3>
+                    </div>
+
+                    <p>
+                        Histórico dos relatórios operacionais gerados automaticamente.
+                    </p>
+                </div>
+                <img src="../assets/icons_dashOpGestora/dowload.svg">
+
+                <div class="tempo_card">
+                    <img src="../assets/icons_dashOpGestora/clock.svg"alt="Intervalo de geração"/>
+
+                    <p>A cada 30 minutos</p>
+                </div>
+            </div>
+
+            <div id="estadoRelatoriosGerados"class="estado_relatorios_gerados">
+                Carregando relatórios...
+            </div>
+
+            <divid="listaRelatoriosGerados"class="lista_relatorios_gerados"></div>
         </div>
-      </div>
 
     </div>
-  </div>
+</div>
 
   <div id="container_kpis">
 
