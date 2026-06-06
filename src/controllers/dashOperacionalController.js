@@ -4,8 +4,8 @@ var dashOperacionalModel = require("../models/dashOperacionalModel");
 
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 
-console.log("AWS_REGION:", process.env.aws_region);
-console.log("aws_bucket_name:", process.env.aws_bucket_name);
+console.log("AWS_REGION:", process.env.AWS_REGION);
+console.log("AWS_BUCKET_NAME:", process.env.AWS_BUCKET_NAME);
 console.log("TEM ACCESS KEY:", !!process.env.aws_access_key_id);
 console.log("TEM SECRET KEY:", !!process.env.aws_secret_access_key);
 console.log("TEM SESSION TOKEN:", !!process.env.aws_session_token);
@@ -21,10 +21,12 @@ const s3 = new S3Client({
 
 async function buscarGestoraOpJson(req, res) {
     try {
-        const comando = new GetObjectCommand({
-            Bucket: process.env.aws_bucket_name,
-            Key: "client/dashOpGestao.json"
-        });
+        const parametros = {
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: "client/dashOpGestao.json",
+          };
+          
+        const comando = new GetObjectCommand(parametros);
 
         const resposta = await s3.send(comando);
         const conteudo = await resposta.Body.transformToString();
