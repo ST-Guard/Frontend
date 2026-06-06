@@ -2,7 +2,14 @@ const { S3Client, GetObjectCommand }
     = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
-const s3Client = new S3Client({ region: process.env.AWS_REGION });
+const s3Client = new S3Client({
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.aws_access_key_id,
+    secretAccessKey: process.env.aws_secret_access_key,
+    sessionToken: process.env.aws_session_token,
+  },
+});
 
 async function obterS3UrlController(req, res) {
     try {

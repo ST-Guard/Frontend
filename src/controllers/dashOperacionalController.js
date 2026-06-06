@@ -22,7 +22,7 @@ const s3 = new S3Client({
 async function buscarGestoraOpJson(req, res) {
     try {
         const comando = new GetObjectCommand({
-            Bucket: process.env.aws_bucket_name,
+            Bucket: process.env.AWS_BUCKET_NAME,
             Key: "client/dashOpGestao.json"
         });
 
