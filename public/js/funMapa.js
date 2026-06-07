@@ -164,7 +164,7 @@ function renderizarMapa() {
         }
 
         // Caso 2/3: empresa tem datacenter nessa região
-        const scoreRegiao = buscarScoreRegiaoNoJson(ufMapa);
+        const scoreRegiao = Number(buscarScoreRegiaoNoJson(ufMapa)).toFixed(0);
         const statusRegiao = converterScoreParaStatus(scoreRegiao);
 
         console.log("SCORE DO JSON PARA", ufMapa, "=", scoreRegiao);
@@ -313,7 +313,7 @@ function aplicarEstiloVisualDireto(estadoMapa, existeNaEmpresa, gestorTemAcesso,
 
     // Região não existe para a empresa no banco
     if (!existeNaEmpresa) {
-        shape.style.setProperty("fill", "#d9d9d9", "important");
+        shape.style.setProperty("fill", "#bdbdbd", "important");
         shape.style.setProperty("opacity", "0.45", "important");
         shape.style.setProperty("filter", "grayscale(3) brightness(1.08)", "important");
 
@@ -324,7 +324,7 @@ function aplicarEstiloVisualDireto(estadoMapa, existeNaEmpresa, gestorTemAcesso,
 
         if (label) {
             label.style.setProperty("opacity", "0.25", "important");
-            label.style.setProperty("filter", "grayscale(3)", "important");
+            label.style.setProperty("filter", "grayscale(5)", "important");
         }
 
         return;

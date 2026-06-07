@@ -278,7 +278,7 @@ function renderizarGraficosEKpisDatacenter(nomeDatacenter) {
 
 }
 function atualizarKpiScore(datacenter) {
-    const score = datacenter.score ?? 0;
+    const score = Number(datacenter.score ?? 0).toFixed(0);
     const status = datacenter.status ?? converterScoreParaStatus(score);
 
     document.getElementById("scoreDatacenter").innerHTML = score;
@@ -291,24 +291,41 @@ function atualizarkpiCrescimentoAlertas(datacenter) {
     const kpi = datacenter.kpiCrescimentoAlertas;
 
     if (!kpi) {
-        document.getElementById("porcentCresc").innerHTML = 0;
-        document.getElementById("qntAlertasAnterior").innerHTML = 0;
+        document.getElementById("variacaoAlertas").innerHTML = "+0";
+        document.getElementById("descricaoAlertas").innerHTML =  "0 alertas nos últimos 30 minutos";
         document.getElementById("qntAlertasAtual").innerHTML = 0;
-
-        atualizarIconeStatusPercentual("statusKPICresc", 0, 5, 15);
+        document.getElementById("comparacaoAlertas").innerHTML = "0 no período anterior";
+        atualizarIconeStatus("statusKPICresc", 0, 5, 15);
         atualizarEstiloKpi("kpiCrescimentoAlertas", "Estável");
         return;
     }
 
+    const atual = kpi.alertasIntervaloAtual ?? 0;
+    const anterior = kpi.alertasIntervaloAnterior ?? 0;
+    const diferenca = atual - anterior;
     const percentual = kpi.percentual ?? 0;
-    const status = classificarPercentual(percentual, 5, 15);
 
-    document.getElementById("porcentCresc").innerHTML = percentual;
-    document.getElementById("qntAlertasAnterior").innerHTML = kpi.alertasIntervaloAnterior ?? 0;
-    document.getElementById("qntAlertasAtual").innerHTML = kpi.alertasIntervaloAtual ?? 0;
+    let status;
+    console.log(anterior)
+    if (anterior === 0) {
+        if (atual === 0) {
+            status = "Estável";
+        } else if (atual <= 10) {
+            status = "Atenção";
+        } else {
+            status = "Crítico";
+        }
+    } else {
+        status = classificarPercentual(percentual, 5, 15);
+    }
 
-    atualizarIconeStatusPercentual("statusKPICresc", percentual, 5, 15);
+    document.getElementById("variacaoAlertas").innerHTML = diferenca >= 0 ? `+${diferenca}`: diferenca;
+    document.getElementById("descricaoAlertas").innerHTML = `${atual} alertas nos últimos 30 minutos`;
+    document.getElementById("comparacaoAlertas").innerHTML =   `${anterior} no período anterior`;
+
+    atualizarIconeStatus("statusKPICresc", status);
     atualizarEstiloKpi("kpiCrescimentoAlertas", status);
+  
 }
 
 function atualizarKpiUptime(datacenter) {
@@ -413,13 +430,15 @@ function atualizarIconeStatus(idImagem, status) {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 
-    if (statusNormalizado === "saudavel") {
+        if (statusNormalizado === "saudavel" ||statusNormalizado === "estavel") {
         imagem.src = "../assets/dashboard-icons/icon_check.svg";
         imagem.alt = "Saudável";
-    } else if (statusNormalizado === "atencao") {
+    }
+    else if (statusNormalizado === "atencao") {
         imagem.src = "../assets/dashboard-icons/icon_atencao.svg";
         imagem.alt = "Atenção";
-    } else {
+    }
+    else {
         imagem.src = "../assets/dashboard-icons/icon_alerta.svg";
         imagem.alt = "Crítico";
     }
@@ -557,22 +576,21 @@ function renderizarRankingServidoresCriticos(datacenter) {
             status,
             classeStatus
         });
-        const componentesTendencia = servidor.projecaoSaude?.componentesTendencia || [];
+        const componentesCritico = servidor.componentesCriticidade || [];
 
         let textoComponentes = "";
 
-        if (componentesTendencia.length === 0) {
+        if (componentesCritico.length === 0) {
             textoComponentes = `<p>Nenhum componente ficou acima do limite de forma relevante.</p>`;
         } else {
-            componentesTendencia.forEach(componente => {
-                const nomeComponente = componente.componente || "Componente";
-                const persistenciaAtual = componente.persistenciaAtual ?? 0;
-
+            componentesCritico.forEach(componente => {
+                const nomeComponente = (componente.componente || "Componente").toUpperCase();;
+                const persistencia = componente.persistencia ?? 0;
                 textoComponentes += `
-                    <p>
-                        ${persistenciaAtual}% das coletas de ${nomeComponente} ficaram acima do limite.
-                    </p>
-                `;
+                <p>
+                    ${nomeComponente}: ${persistencia}% das coletas acima do limite
+                </p>
+            `;
             });
         }
 
@@ -589,7 +607,7 @@ function renderizarRankingServidoresCriticos(datacenter) {
         </div>
 
         <div class="tooltip-tendencia">
-             <h4>Motivo da criticidade</h4>
+             <h4>Motivo do Score</h4>
             ${textoComponentes}
         </div>
     </div>
@@ -619,22 +637,21 @@ function obterClasseStatusServidor(status) {
 }
 
 function renderizarTendenciaDegradacao(datacenter) {
-    const lista = document.getElementById("listaTendenciaDegradacao");
+    const lista = document.getElementById("listaRiscoDegradacao");
 
     if (!lista) {
-        console.error("Container listaTendenciaDegradacao não encontrado no HTML.");
+        console.error("Container listaRiscoDegradacao não encontrado no HTML.");
         return;
     }
 
-    const servidores = datacenter.rankingTendenciaServidores || [];
+    const servidores = datacenter?.rankingTendenciaServidores || [];
 
     lista.innerHTML = "";
 
     if (servidores.length === 0) {
         lista.innerHTML = `
             <div class="item_servidor item_tendencia">
-                <p>Nenhum risco de degradação identificado</p>
-                <span class="status-servidor servidor-indefinido">● Ambiente estável</span>
+                <p>Nenhum servidor com tendencia de degradação identificado</p>
             </div>
         `;
         return;
@@ -642,75 +659,52 @@ function renderizarTendenciaDegradacao(datacenter) {
 
     servidores.forEach((servidor, index) => {
         const nomeServidor = servidor.servidor || "Servidor não identificado";
-        const projecao = servidor.projecaoSaude;
-        const scoreAtual = Number( projecao.scoreAtual ??servidor.score ??0);
-        const scoreProjetado = Number(projecao.scoreProjetado ??scoreAtual);
-        const degradacaoProjetada = Number(projecao.degradacaoProjetada ??0);
+        const tendencia = servidor.tendenciaDegradacao;
+        const componentes = tendencia.componentesTendencia || [];
+        const principal = componentes[0] || {};
+        const nomeComponente = principal.componente || "N/A";
+        const aumento = Number(principal.aumentoPersistencia || 0).toFixed(0);
+        const persistenciaAtual =Number(principal.persistenciaAtual || 0).toFixed(0);
 
-        if (!projecao) {
-            lista.innerHTML += `
-                <div class="item_servidor item_tendencia">
-                    <p>${index + 1}° ${nomeServidor}</p>
-                    <span class="status-servidor servidor-indefinido">
-                        ● Sem projeção disponível
-                    </span>
+        
+                    lista.innerHTML += `
+                <div  class="  item_servidor  item_tendencia " >
+                    <div class="item">
+                        <p>
+                            ${index + 1}º
+                            ${servidor.servidor}
+                        </p>
+
+                        <span  class="status-servidor  servidor-atencao " >
+                            ● Score:
+                            ${servidor.score}
+                            |
+                            ${nomeComponente}
+                            +${aumento} p.p.
+                        </span>
+                    </div>
+
+                    <div class="tooltip-tendencia" >
+                        <h4>
+                            Motivo do risco
+                        </h4>
+
+                        <p>
+                            ${tendencia.motivo}
+                        </p>
+
+                        <p>
+                            Persistência atual:
+                            ${persistenciaAtual}%
+                        </p>
+
+                        <p>
+                            Nível de risco:
+                            ${tendencia.nivelRisco}
+                        </p>
+                    </div>
                 </div>
             `;
-            return;
-        }
-        const risco =projecao.risco ||servidor.status || "Indefinido";
-        const confiabilidade = projecao.confiabilidade ||"não informada";
-        const motivo = projecao.motivo || "Sem motivo informado";
-        const classeStatus = obterClasseStatusServidor(risco);
-        let textoProjecao = "";
-
-        if (degradacaoProjetada > 0) {
-            textoProjecao = `
-                ● Atual: ${scoreAtual}
-                → Projetado: ${scoreProjetado}
-                | Queda: ${degradacaoProjetada} pontos
-            `;
-        } else {
-            textoProjecao = `
-                ● Score: ${scoreAtual}
-                | Tendência detectada
-            `;
-        }
-
-lista.innerHTML += `
-<div class="item_servidor item_tendencia">
-    <div class="item">
-        <p>
-            ${index + 1}° ${nomeServidor}
-        </p>
-
-        <span class="status-servidor ${classeStatus}">
-            ${textoProjecao}
-        </span>
-    </div>
-
-    <div class="tooltip-tendencia">
-        <h4>Motivo da projeção</h4>
-
-        <p>${motivo}</p>
-
-        <p>
-            <strong>Confiabilidade:</strong>
-            ${confiabilidade}
-        </p>
-
-        ${
-            degradacaoProjetada === 0
-            ? `
-                <p>A tendência ainda não alterou a faixa de penalidade do servidor.</p>
-            `
-            : `
-                <p><strong>Queda prevista:</strong>${degradacaoProjetada} pontos.</p>
-            `
-        }
-    </div>
-</div>
-`;
 });
 }
 
@@ -813,7 +807,7 @@ function renderizarGraficoSaudeZonas(datacenter) {
 
     zonas.forEach(zona => {
         nomesZonas.push(zona.zona);
-        saudeZonas.push(zona.score);
+        saudeZonas.push(Number(zona.score).toFixed(0));
     });
 
     function definirCorZona(score) {
