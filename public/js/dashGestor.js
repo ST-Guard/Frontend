@@ -275,6 +275,7 @@ function renderizarGraficosEKpisDatacenter(nomeDatacenter) {
     renderizarUptimeServidores(datacenter);
     renderizarGraficoSaudeZonas(datacenter);
     renderizarGraficoAlertas(datacenter);
+    atualizarTendenciaAlertas(datacenter);
 
 }
 function atualizarKpiScore(datacenter) {
@@ -1049,9 +1050,61 @@ function renderizarGraficoAlertas(datacenter) {
             }
         }
     );
+
+
 }
 
+function atualizarTendenciaAlertas(datacenter) {
+    const dadosGrafico = datacenter?.graficoAlertasSemana || {};
+    const alertasPorDia = dadosGrafico.alertasPorDia || {};
 
+    const dias = [
+        "Segunda",
+        "Terça",
+        "Quarta",
+        "Quinta",
+        "Sexta",
+        "Sábado",
+        "Domingo"
+    ];
+
+    const valores = dias.map(
+        dia => Number(alertasPorDia[dia] ?? 0)
+    );
+
+    const primeiroValor = valores[0];
+    const ultimoValor = valores[valores.length - 1];
+
+    const titulo = document.querySelector(".tendencia h1");
+    const descricao = document.querySelector(".tendencia p");
+    const imagem = document.querySelector(".tendencia img");
+    const tend = document.querySelector('.tendencia')
+
+    if (ultimoValor < primeiroValor) {
+        titulo.innerHTML = "Tendência Positiva";
+        descricao.innerHTML = "Redução recente no volume de alertas.";
+        imagem.src = "/assets/icone_certo.png";
+        tend.style.backgroundColor="  #C8F7DC"
+
+
+    } else if (ultimoValor > primeiroValor) {
+        titulo.innerHTML = "Tendência Negativa";
+        descricao.innerHTML = "Aumento recente no volume de alertas.";
+        imagem.src = "/assets/Icon_alerta.png";
+        tend.style.borderColor = "#FF5252";
+        tend.style.backgroundColor="  #FFD6D6"
+
+    } else {
+        titulo.innerHTML = "Tendência Estável";
+        descricao.innerHTML = "Volume de alertas sem variações relevantes.";
+        imagem.src = "/assets/dashboard-icons/checkAlerta.png";
+        tend.style.borderColor = "#F5CC4D";
+        tend.style.backgroundColor="  #FFEAB0"
+
+    }
+
+    console.log(imagem.src);
+}
 
 function mostrarRelatorios(){
 document.getElementById("div_relatorios").style.display = "block";
