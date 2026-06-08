@@ -11,7 +11,7 @@ const s3 = new S3Client({region: process.env.AWS_REGION || "us-east-1",
     }
 });
 
-const bucket = "smartdatabucket2";
+const bucket = "smartdatabucket4";
 
 function formatarNomePasta(texto) {
     return texto.trim().replaceAll(" ", "-").replaceAll("/", "-").replaceAll("\\", "-").replaceAll(":", "-");
