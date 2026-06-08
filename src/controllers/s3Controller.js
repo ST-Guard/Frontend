@@ -15,7 +15,7 @@ async function obterS3UrlController(req, res) {
     try {
         const comando = new GetObjectCommand({
             Bucket: process.env.AWS_BUCKET_NAME,
-            Key: 'client/historico.json',
+            Key: 'client/alertas_gestora.json',
         });
 
         const url = await getSignedUrl(s3Client, comando, { expiresIn: 300 });
