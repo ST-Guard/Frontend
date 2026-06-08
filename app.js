@@ -26,6 +26,9 @@ var dadosAlertaRouter2 = require("./src/routes/alertas2")
 
 var dashOperacionalRouter = require("./src/routes/dashOperacional");
 
+var dashboardSupervisoraRouter =
+    require("./src/routes/dashSupervisoraRoute");
+
 
 
 // middlewares
@@ -51,6 +54,9 @@ app.use("/alertas2", dadosAlertaRouter2)
 app.use("/dashOperacional", dashOperacionalRouter);
 app.use("/financeira", financeira);
 app.use("/bzonas", buscarzonasRouter);
+
+//Rotas Supervisora
+app.use("/dashSupervisora", dashboardSupervisoraRouter);
 
 // inicia o servidor
 app.listen(PORT, function () {

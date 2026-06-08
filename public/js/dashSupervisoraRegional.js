@@ -1,99 +1,122 @@
-fetch("../dados/dashboard_supervisora_regional.json")
+fetch("/dashSupervisora/obter-dashboard-supervisora")
+    .then(response => response.json())
+    .then(dado => fetch(dado.url))
     .then(response => response.json())
     .then(dados => {
 
-        console.log("JSON carregado");
+        console.log("JSON carregado do S3");
         console.log(dados);
 
-         dadosDashboardGlobal = dados;
-         
+        dadosDashboardGlobal = dados;
+
         carregarKpis(dados);
         carregarCards(dados);
         carregarGraficoAlertas(dados);
         carregarGraficoTopProblemas(dados);
         carregarGraficoTrafego(dados);
-
     })
     .catch(error => {
-        console.error(error);
+        console.error("Erro ao carregar JSON do S3:", error);
     });
 
-    
-function aplicarStatusKpi(idCard, status) {
+function nomeRegiao(sigla) {
+    if (sigla === "SP") return "São Paulo";
+    if (sigla === "RJ") return "Rio de Janeiro";
+    if (sigla === "RS") return "Rio Grande do Sul";
+    return sigla;
+}
+
+function aplicarStatusKpi(idCard, idIcone, idValor, status) {
     const card = document.getElementById(idCard);
+    const icone = document.getElementById(idIcone);
+    const valor = document.getElementById(idValor);
 
     card.classList.remove("kpi-normal", "kpi-atencao", "kpi-critico");
 
     if (status === "CRITICO") {
         card.classList.add("kpi-critico");
+        icone.src = "/assets/dashboard-icons/icon_alerta.svg";
+        
     } else if (status === "ATENCAO") {
         card.classList.add("kpi-atencao");
+        icone.src = "/assets/dashboard-icons/icon_atencao.svg";
+       
     } else {
         card.classList.add("kpi-normal");
+        icone.src = "/assets/dashboard-icons/icon_check.svg";
+        
     }
 }
-
 function carregarKpis(dados) {
 
     // Região com maior risco
+    const risco = dados.kpis.risco_operacional.maior_risco;
 
     document.getElementById("kpi_risco_regiao").innerText =
-        dados.kpis.risco_operacional.maior_risco.regiao;
+        nomeRegiao(risco.regiao);
 
     aplicarStatusKpi(
         "kpi_maior_risco_borda",
-        dados.kpis.risco_operacional.maior_risco.status
+        "icone_risco",
+        "kpi_risco_regiao",
+        risco.status
     );
 
 
     // Regiões instáveis
+    const instaveis = dados.kpis.regioes_instaveis;
 
     document.getElementById("kpi_regioes_instaveis_valor").innerText =
-        dados.kpis.regioes_instaveis.quantidade;
+        instaveis.quantidade;
 
     aplicarStatusKpi(
         "kpi_operando_borda",
-        dados.kpis.regioes_instaveis.quantidade >= 2 ? "CRITICO" :
-        dados.kpis.regioes_instaveis.quantidade == 1 ? "ATENCAO" :
+        "icone_instaveis",
+        "kpi_regioes_instaveis_valor",
+        instaveis.quantidade >= 2 ? "CRITICO" :
+        instaveis.quantidade == 1 ? "ATENCAO" :
         "NORMAL"
     );
 
 
-    // Menor capacidade disponível
-
-    const capacidade = dados.kpis.capacidade_disponivel;
+    // Recurso mais pressionado
+    const recurso = dados.kpis.recurso_mais_pressionado;
 
     document.getElementById("kpi_capacidade_valor").innerText =
-        `${capacidade.capacidade_disponivel}%`;
+        nomeRegiao(recurso.regiao);
 
     document.getElementById("kpi_capacidade_regiao").innerText =
-        capacidade.regiao;
+        `${recurso.componente} em ${recurso.valor}%`;
 
     aplicarStatusKpi(
         "kpi_uptime_borda",
-        capacidade.capacidade_disponivel <= 10 ? "CRITICO" :
-        capacidade.capacidade_disponivel <= 25 ? "ATENCAO" :
+        "icone_recurso",
+        "kpi_capacidade_valor",
+        recurso.valor >= 90 ? "CRITICO" :
+        recurso.valor >= 75 ? "ATENCAO" :
         "NORMAL"
     );
 
 
     // Região próxima de saturação
-
     const saturacao = dados.kpis.previsao_saturacao;
 
     document.getElementById("kpi_saturacao_valor").innerText =
-        saturacao.regiao;
+        nomeRegiao(saturacao.regiao);;
 
     document.getElementById("kpi_saturacao_tempo").innerText =
-    `: ${saturacao.tempo_formatado}`;
+        `: ${saturacao.tempo_formatado}`;
 
     aplicarStatusKpi(
         "kpi_saturacao_borda",
+        "icone_saturacao",
+        "kpi_saturacao_valor",
         saturacao.dias_para_saturar <= 7 ? "CRITICO" :
         saturacao.dias_para_saturar <= 20 ? "ATENCAO" :
         "NORMAL"
     );
 }
+
 //CARD REGIOES ---------------------------------------------------------------------------------------------------------
 function carregarCards(dados) {
 
@@ -119,10 +142,10 @@ function carregarCards(dados) {
 
         grade.innerHTML += `
             <div class="card-regiao"
-         onclick="abrirModalRegiao('${regiao.regiao}')">
+         ">
 
                 <div class="topo-card-regiao">
-                    <span class="nome-regiao">${regiao.regiao}</span>
+                    <span class="nome-regiao">${nomeRegiao(regiao.regiao)}</span>
                     <span class="etiqueta ${classeStatus}">
                         ${regiao.status}
                     </span>
@@ -132,15 +155,18 @@ function carregarCards(dados) {
                     <div class="titulo-datacenter">${dc.nome}</div>
 
                     <div class="linha-metrica texto-critico">
-                        ⚠️ ${dc.servidores_criticos} servidores críticos
+                         <img src="../assets/dashboard-icons/icon_alerta.svg" class="icone-status">
+                         ${dc.servidores_criticos} servidores críticos
                     </div>
 
                     <div class="linha-metrica texto-atencao">
-                        ⚠️ ${dc.servidores_atencao} servidores em atenção
+                        <img src="/assets/dashboard-icons/icon_atencao.svg" class="icone-status">
+                         ${dc.servidores_atencao} servidores em atenção
                     </div>
 
                     <div class="linha-metrica texto-normal">
-                        ✅ ${dc.servidores_saudaveis} servidores saudáveis
+                        <img src="../assets/dashboard-icons/icon_check.svg" class="icone-status">
+                        ${dc.servidores_saudaveis} servidores saudáveis
                     </div>
 
                 </div>
@@ -153,32 +179,6 @@ function carregarCards(dados) {
 
 let dadosDashboardGlobal = null;
 
-function abrirModalRegiao(nomeRegiao) {
-    const dadosModal = dadosDashboardGlobal.modal.previsao_saturacao_regioes;
-
-    const regiao = dadosModal.find(item => item.regiao === nomeRegiao);
-
-    document.getElementById("modalTituloRegiao").innerText =
-        `REGIÃO: ${regiao.regiao}`;
-
-    document.getElementById("modalSaturacaoAtual").innerText =
-        `${regiao.saturacao_atual}%`;
-
-    document.getElementById("modalPrevisao").innerText =
-        regiao.previsao;
-
-    document.getElementById("modalComponenteCritico").innerText =
-        `${regiao.componente_critico} (${regiao.valor_componente}%)`;
-
-    document.getElementById("modalCapacidade").innerText =
-        `${regiao.capacidade_disponivel}%`;
-
-    document.getElementById("modalRegiao").style.display = "flex";
-}
-
-function fecharModalRegiao() {
-    document.getElementById("modalRegiao").style.display = "none";
-}
 
 //Grafico ALertas ----------------------------------------------------------------------------------------------------------------
 function carregarGraficoAlertas(dados) {
@@ -186,9 +186,9 @@ function carregarGraficoAlertas(dados) {
 
     const labels = dadosGrafico.map(item => item.dia);
 
-    const saoPaulo = dadosGrafico.map(item => item["São Paulo"]);
-    const rio = dadosGrafico.map(item => item["Rio de Janeiro"]);
-    const portoAlegre = dadosGrafico.map(item => item["Porto Alegre"]);
+    const saoPaulo = dadosGrafico.map(item => item["SP"]);
+    const rio = dadosGrafico.map(item => item["RJ"]);
+    const portoAlegre = dadosGrafico.map(item => item["RS"]);
 
     const ctx = document.getElementById("graficoAlertas");
 
@@ -197,22 +197,31 @@ function carregarGraficoAlertas(dados) {
         data: {
             labels: labels,
             datasets: [
-                {
-                    label: "São Paulo",
-                    data: saoPaulo,
-                    tension: 0.4
-                },
-                {
-                    label: "Rio de Janeiro",
-                    data: rio,
-                    tension: 0.4
-                },
-                {
-                    label: "Porto Alegre",
-                    data: portoAlegre,
-                    tension: 0.4
-                }
-            ]
+                    {
+                        label: "São Paulo",
+                        data: saoPaulo,
+                        tension: 0.4,
+                        borderColor: "#66C0F4",
+                        backgroundColor: "#66C0F4",
+                        pointBackgroundColor: "#66C0F4"
+                    },
+                    {
+                        label: "Rio de Janeiro",
+                        data: rio,
+                        tension: 0.4,
+                        borderColor: "#2C5D86",
+                        backgroundColor: "#2C5D86",
+                        pointBackgroundColor: "#2C5D86"
+                    },
+                    {
+                        label: "Rio Grande do Sul",
+                        data: portoAlegre,
+                        tension: 0.4,
+                        borderColor: "#5316a2",
+                        backgroundColor: "#5316a2",
+                        pointBackgroundColor: "#5316a2"
+                    }
+                ]
         },
 
         options: {
@@ -246,14 +255,15 @@ function carregarGraficoTopProblemas(dados) {
 
     const dadosJson = dados.graficos.top_problemas;
 
-    const labels = dadosJson.map(item => item.regiao);
+    const labels = dadosJson.map(item => nomeRegiao(item.regiao));
+    
 
     const dadosProblemas = {
         labels: labels,
         datasets: [
             {
                 label: "CPU alta",
-                data: dadosJson.map(item => item.CPU),
+                data: dadosJson.map(item => item.CPU_PER),
                 backgroundColor: "#ef4444"
             },
             {
@@ -300,7 +310,7 @@ function carregarGraficoTopProblemas(dados) {
                     grid: { display: false },
                     ticks: {
                         color: "#64748b",
-                        font: { family: "'Segoe UI', sans-serif" }
+                        font: { family: "'Segoe UI', sans-serif"}
                     }
                 },
                 y: {
@@ -313,7 +323,7 @@ function carregarGraficoTopProblemas(dados) {
                     grid: { color: "#f1f5f9" },
                     title: {
                         display: true,
-                        text: "ocorr.",
+                        text: "ocorrências",
                         color: "#94a3b8",
                         font: { size: 11 }
                     }
@@ -330,8 +340,8 @@ function carregarGraficoTrafego(dados) {
     const dadosGrafico =
         dados.graficos.distribuicao_trafego;
 
-    const labels =
-        dadosGrafico.map(item => item.regiao);
+    const labels = 
+        dadosGrafico.map(item => nomeRegiao(item.regiao));
 
     const valores =
         dadosGrafico.map(item => item.percentual);
@@ -348,9 +358,9 @@ function carregarGraficoTrafego(dados) {
             datasets: [{
                 data: valores,
                 backgroundColor: [
-                    "#3b82f6",
-                    "#a855f7",
-                    "#ffdf3e"
+                    "#66C0F4",
+                    "#5316a2",
+                    "#2C5D86"
                 ]
             }]
         },

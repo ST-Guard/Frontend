@@ -172,10 +172,17 @@ header {
 .kpi-body {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin: 12px 0;
+    justify-content: center;
+    gap: 12px;
+    
+   
 }
 
+.icone-kpi{
+    width: 32px;
+    height: 32px;
+    
+}
 .kpi-valor {
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 28px;
@@ -185,7 +192,7 @@ header {
 
 .kpi-valor-longo {
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 21px;
+    font-size: 28px;
     font-weight: 700;
     color: #2d3748;
 }
@@ -332,6 +339,11 @@ transition: background-color 0.2s;
     margin-bottom: 6px;
 }
 
+.icone-status {
+    width: 18px;
+    height: 18px;
+}
+
 .linha-metrica:last-child {
     margin-bottom: 0;
 }
@@ -447,15 +459,16 @@ transition: background-color 0.2s;
 
 .legenda-problemas {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: center;
     gap: 12px;
-    margin-top: 10px;
+    margin-top: 1px;
 }
 
 .item-legenda-cor {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 2px;
     font-size: 12px;
     color: #475569;
 }

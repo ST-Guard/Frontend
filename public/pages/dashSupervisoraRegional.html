@@ -108,8 +108,10 @@
                     <span class="kpi-titulo">REGIÃO COM MAIOR RISCO</span>
                 </div>
                 <div class="kpi-body">
+                    
                     <span class="kpi-valor" id="kpi_risco_regiao">--</span>
-                    <span class="kpi-sub-valor" id="kpi_risco_icone"></span>
+                    <span class="kpi-sub-valor"></span>
+                    <img id="icone_risco" class="icone-kpi">
                 </div>
                 <div class="kpi-footer">
                     <p>Região com maior índice de risco operacional</p>
@@ -123,22 +125,24 @@
                 <div class="kpi-body">
                     <span class="kpi-valor" id="kpi_regioes_instaveis_valor">--/--</span>
                     <span class="kpi-sub-valor" id="kpi_instaveis_icone"></span>
+                    <img id="icone_instaveis" class="icone-kpi">
                 </div>
                     <div class="kpi-footer">
-                    <p>regiões que tiveram +30% das coletas em estado crítico</p>
+                    <p>Regiões que tiveram +30% das coletas em estado crítico</p>
                 </div>
             </div>
 
             <div class="card-kpi" id="kpi_uptime_borda">
                 <div class="kpi-header">
-                    <span class="kpi-titulo">MENOR CAPACIDADE DISPONÍVEL</span>
+                    <span class="kpi-titulo">REGIÃO COM RECURSO MAIS PRESSIONADO</span>
                 </div>
                 <div class="kpi-body">
                     <span class="kpi-valor-longo" id="kpi_capacidade_valor">--</span>
-                    <span class="kpi-sub-valor" id="kpi_capacidade_icone"></span>
+                    <span class="kpi-sub-valor"></span>
+                    <img id="icone_recurso" class="icone-kpi">
                 </div>
                 <div class="kpi-footer">
-                    <p><span id="kpi_capacidade_regiao">--</span> possui a menor margem operacional</p>
+                    <p><span id="kpi_capacidade_regiao">--</span></p>
                 </div>
             </div>
 
@@ -149,6 +153,7 @@
                 <div class="kpi-body">
                     <span class="kpi-valor-longo" id="kpi_saturacao_valor">--</span>
                     <span class="kpi-sub-valor" id="kpi_saturacao_icone"></span>
+                    <img id="icone_saturacao" class="icone-kpi">
                 </div>
                 <div class="kpi-footer">
                     <p>Previsão de <span id="kpi_saturacao_tempo">--</span> até saturação operacional</p>
@@ -178,8 +183,6 @@
                 
                 <select class="seletor-periodo">
                     <option>Últimos 7 dias</option>
-                    <option>Últimos 15 dias</option>
-                    <option>Últimos 30 dias</option>
                 </select>
             </div>
 
@@ -200,18 +203,19 @@
                     <h2>Top problemas por região</h2>
                     <p>Composição de incidentes por tipo em cada região</p>
                     
-                    <div class="legenda-problemas">
+                    
+                </div>
+                <select class="seletor-periodo">
+                    <option>Últimos 7 dias</option>
+                </select>
+            </div>
+            <div class="legenda-problemas">
                         <span class="item-legenda-cor"><span class="quadradinho vermelho"></span> CPU alta</span>
                         <span class="item-legenda-cor"><span class="quadradinho laranja"></span> Disco cheio</span>
                         <span class="item-legenda-cor"><span class="quadradinho roxo"></span> RAM crítica</span>
                         <span class="item-legenda-cor"><span class="quadradinho azul"></span> Latência alta</span>
                         <span class="item-legenda-cor"><span class="quadradinho cinza"></span> Perda pct.</span>
                     </div>
-                </div>
-                <select class="seletor-periodo">
-                    <option>Últimos 7 dias</option>
-                </select>
-            </div>
 
             <div class="area-canvas-problemas">
                 <canvas id="graficoTopProblemas"></canvas>
