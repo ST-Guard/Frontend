@@ -16,7 +16,7 @@ const s3Client = new S3Client({
 function BuscarDadosANalista(){
 
     var parametros = {
-        Bucket: process.env.AWS_BUCKET,
+        Bucket: process.env.AWS_BUCKET_NAME,
         Key: "client/dashboard_analista.json"
     }
 
