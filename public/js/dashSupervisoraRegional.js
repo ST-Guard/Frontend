@@ -1,15 +1,15 @@
 
-fetch("/dashSupervisora/obter-dashboard-supervisora")
-    .then(response => response.json())
-    .then(dado => fetch(dado.url))
+document.addEventListener('DOMContentLoaded', (event) => {
+    console.log("A")
+    fetch("/dashSupervisora/obter-dashboard-supervisora")
     .then(response => response.json())
     .then(dados => {
-
+        
         console.log("JSON carregado do S3");
         console.log(dados);
-
+        
         dadosDashboardGlobal = dados;
-
+        
         carregarKpis(dados);
         carregarCards(dados);
         carregarGraficoAlertas(dados);
@@ -19,6 +19,8 @@ fetch("/dashSupervisora/obter-dashboard-supervisora")
     .catch(error => {
         console.error("Erro ao carregar JSON do S3:", error);
     });
+    
+});
 
 function nomeRegiao(sigla) {
     if (sigla === "SP") return "São Paulo";
@@ -50,70 +52,62 @@ function aplicarStatusKpi(idCard, idIcone, idValor, status) {
 }
 function carregarKpis(dados) {
 
-    // Região com maior risco
     const risco = dados.kpis.risco_operacional.maior_risco;
-
-    document.getElementById("kpi_risco_regiao").innerText =
-        nomeRegiao(risco.regiao);
+    console.log("TESTE: " + risco.regiao)
+    document.getElementById("kpi_risco_regiao").innerText = risco?.regiao ? nomeRegiao(risco.regiao) : "Seguro";
 
     aplicarStatusKpi(
         "kpi_maior_risco_borda",
         "icone_risco",
         "kpi_risco_regiao",
-        risco.status
+        risco?.status || "NORMAL" 
     );
 
 
-    // Regiões instáveis
-    const instaveis = dados.kpis.regioes_instaveis;
+    
+    const instaveis = dados?.kpis?.regioes_instaveis;
+    const qtdInstaveis = instaveis?.quantidade || 0; 
 
-    document.getElementById("kpi_regioes_instaveis_valor").innerText =
-        instaveis.quantidade;
+    document.getElementById("kpi_regioes_instaveis_valor").innerText = qtdInstaveis;
 
     aplicarStatusKpi(
         "kpi_operando_borda",
         "icone_instaveis",
         "kpi_regioes_instaveis_valor",
-        instaveis.quantidade >= 2 ? "CRITICO" :
-        instaveis.quantidade == 1 ? "ATENCAO" :
+        qtdInstaveis >= 2 ? "CRITICO" :
+        qtdInstaveis === 1 ? "ATENCAO" :
         "NORMAL"
     );
 
 
-    // Recurso mais pressionado
-    const recurso = dados.kpis.recurso_mais_pressionado;
+    
+    const recurso = dados?.kpis?.recurso_mais_pressionado;
 
-    document.getElementById("kpi_capacidade_valor").innerText =
-        nomeRegiao(recurso.regiao);
+    document.getElementById("kpi_capacidade_valor").innerText = recurso?.regiao ? nomeRegiao(recurso.regiao) : "Estável";
+    document.getElementById("kpi_capacidade_regiao").innerText = recurso?.componente ? `${recurso.componente} em ${recurso.valor}%` : "Dentro do limite";
 
-    document.getElementById("kpi_capacidade_regiao").innerText =
-        `${recurso.componente} em ${recurso.valor}%`;
-
+    const valorRecurso = recurso?.valor || 0;
     aplicarStatusKpi(
         "kpi_uptime_borda",
         "icone_recurso",
         "kpi_capacidade_valor",
-        recurso.valor >= 90 ? "CRITICO" :
-        recurso.valor >= 75 ? "ATENCAO" :
+        valorRecurso >= 90 ? "CRITICO" :
+        valorRecurso >= 75 ? "ATENCAO" :
         "NORMAL"
     );
 
+    const saturacao = dados?.kpis?.previsao_saturacao;
+    document.getElementById("kpi_saturacao_valor").innerText = saturacao?.regiao ? nomeRegiao(saturacao.regiao) : "Seguro";
+    document.getElementById("kpi_saturacao_tempo").innerText = saturacao?.tempo_formatado ? `: ${saturacao.tempo_formatado}` : "";
 
-    // Região próxima de saturação
-    const saturacao = dados.kpis.previsao_saturacao;
-
-    document.getElementById("kpi_saturacao_valor").innerText =
-        nomeRegiao(saturacao.regiao);;
-
-    document.getElementById("kpi_saturacao_tempo").innerText =
-        `: ${saturacao.tempo_formatado}`;
+    const diasSaturar = saturacao?.dias_para_saturar ?? 999; 
 
     aplicarStatusKpi(
         "kpi_saturacao_borda",
         "icone_saturacao",
         "kpi_saturacao_valor",
-        saturacao.dias_para_saturar <= 7 ? "CRITICO" :
-        saturacao.dias_para_saturar <= 20 ? "ATENCAO" :
+        diasSaturar <= 7 ? "CRITICO" :
+        diasSaturar <= 20 ? "ATENCAO" :
         "NORMAL"
     );
 }
