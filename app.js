@@ -5,12 +5,12 @@ require("dotenv").config({ path: caminho_env });
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
+const cheerio = require("cheerio");
 
 var PORT = process.env.APP_PORT || process.env.PORTA || 3333;
 var HOST = process.env.APP_HOST || 'localhost';
 
 var app = express();
-
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
@@ -19,11 +19,14 @@ var servidorRouter = require("./src/routes/servidor")
 var zonaRouter = require("./src/routes/zona");
 var sessaoRouter = require("./src/routes/sessao");
 var financeira = require("./src/routes/financeiraRoute");
+var steamRouter = require("./src/routes/steam");
+var especificoRouter = require("./src/routes/especifico")
+var relatorioRouter = require("./src/routes/relatorioRouter");
 var buscarzonasRouter = require("./src/routes/buscarzona")
+
 /* VICTIN ROTA */
 var dadosAlertaRouter = require("./src/routes/alertas")
 var dadosAlertaRouter2 = require("./src/routes/alertas2")
-
 var dashOperacionalRouter = require("./src/routes/dashOperacional");
 
 var dashboardSupervisoraRouter =
@@ -44,16 +47,24 @@ app.use("/enviar", falecosnosRouter);
 app.use("/servidor", servidorRouter);
 app.use("/zonas", zonaRouter);
 app.use("/sessao", sessaoRouter);
+app.use("/steam", steamRouter);
+app.use("/especifico", especificoRouter);
+var buscarDadosAnalista = require("./src/routes/BuscarDadosAnalista")
+
+/* Rotas analista */ 
 app.use("/bzonas", buscarzonasRouter)
+app.use("/banalista", buscarDadosAnalista)
 
 /* VICTIN ROTA */
 app.use("/alertas", dadosAlertaRouter)
 app.use("/alertas2", dadosAlertaRouter2)
 
-//Rotas Financeir.a
+//Rotas Financeira
 app.use("/dashOperacional", dashOperacionalRouter);
 app.use("/financeira", financeira);
-app.use("/bzonas", buscarzonasRouter);
+
+app.use("/dashOperacional", dashOperacionalRouter);
+app.use("/relatorios", relatorioRouter);
 
 //Rotas Supervisora
 app.use("/dashSupervisora", dashboardSupervisoraRouter);

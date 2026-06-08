@@ -9,7 +9,7 @@ body {
 }
 
 .SubcorpoPagina {
-    width: 82%;
+    width: 88%;
     display: flex;
     max-height: 90vh;
     flex-direction: column;

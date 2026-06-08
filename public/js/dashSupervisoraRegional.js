@@ -1,3 +1,4 @@
+
 fetch("/dashSupervisora/obter-dashboard-supervisora")
     .then(response => response.json())
     .then(dado => fetch(dado.url))

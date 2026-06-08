@@ -72,28 +72,75 @@ let datacenterSelecionado = null;
 const nomeEmpresa = sessionStorage.getItem("NOME_EMPRESA") || "Steam";
 
 async function iniciarDashOperacional() {
-    await carregarJsonGestoraOp();
+    const carregou = await carregarJsonGestoraOp();
+    if (!carregou) {
+        return;
+    }
     await carregarDatacentersDoGestor();
+    iniciarAtualizacaoAutomatica();
 }
 
+function iniciarAtualizacaoAutomatica() {
+    if (intervaloAtualizacaoDash) {
+        clearInterval(intervaloAtualizacaoDash);
+    }
+    intervaloAtualizacaoDash = setInterval(
+        atualizarDashboardAutomaticamente,
+        INTERVALO_ATUALIZACAO_DASH
+    );
+}
 async function carregarJsonGestoraOp() {
     try {
-        const resposta = await fetch("/dashOperacional/buscarGestoraOpJson");
+        const resposta = await fetch(
+            `/dashOperacional/buscarGestoraOpJson?t=${Date.now()}`,
+            {
+                cache: "no-store"
+            }
+        );
 
         if (!resposta.ok) {
             const erro = await resposta.text();
-            console.error("Erro ao buscar JSON da gestora:", erro);
-            return;
+            console.error("Erro ao buscar JSON da gestora:",erro);
+            return false;
         }
 
         dadosGestoraOp = await resposta.json();
-        console.log("JSON gestora OP carregado:", dadosGestoraOp);
 
+        console.log("JSON atualizado:",new Date().toLocaleTimeString(),dadosGestoraOp);
+        return true;
     } catch (erro) {
-        console.error("Erro geral ao carregar JSON da gestora:", erro);
+        console.error("Erro geral ao carregar JSON da gestora:",erro);
+        return false;
     }
 }
 
+// carregamento automático
+
+const INTERVALO_ATUALIZACAO_DASH = 30000;
+
+let intervaloAtualizacaoDash = null;
+let atualizacaoEmAndamento = false;
+
+async function atualizarDashboardAutomaticamente() {
+    if (atualizacaoEmAndamento) {
+        return;
+    }
+    atualizacaoEmAndamento = true;
+
+    try {
+        const atualizou = await carregarJsonGestoraOp();
+        if (!atualizou) {
+            return;
+        }
+        if (datacenterSelecionado) {
+            renderizarGraficosEKpisDatacenter(datacenterSelecionado);
+        }
+    } catch (erro) {
+        console.error("Erro ao atualizar dashboard:",erro);
+    } finally {
+        atualizacaoEmAndamento = false;
+    }
+}
 function encontrarDatacenterMaisCritico(datacentersPermitidos) {
     if (!dadosGestoraOp || !dadosGestoraOp.empresas) {
         console.error("JSON da gestora ainda não carregado.");
@@ -193,11 +240,11 @@ function selecionarDatacenter(nomeDatacenter) {
     datacenterSelecionado = nomeDatacenter;
     sessionStorage.setItem("DATACENTER_SELECIONADO", nomeDatacenter);
 
-    renderizarKpisDatacenter(nomeDatacenter);
+    renderizarGraficosEKpisDatacenter(nomeDatacenter);
 }
 
-//--------------------------------------------------KPIS RENDERIZANDO----------------------------------------------------------------------------
-function renderizarKpisDatacenter(nomeDatacenter) {
+//-------------------------------------------------- KPIS RENDERIZANDO ----------------------------------------------------------------------------
+function renderizarGraficosEKpisDatacenter(nomeDatacenter) {
     if (!dadosGestoraOp || !dadosGestoraOp.empresas) {
         console.error("JSON da gestora não carregado.");
         return;
@@ -220,17 +267,19 @@ function renderizarKpisDatacenter(nomeDatacenter) {
     console.log("Renderizando KPIs do datacenter:", nomeDatacenter, datacenter);
 
     atualizarKpiScore(datacenter);
-    atualizarKpiCrescimentoIncidentes(datacenter);
+    atualizarkpiCrescimentoAlertas(datacenter);
     atualizarKpiUptime(datacenter);
     atualizarKpiServidoresCriticos(datacenter);
     renderizarRankingServidoresCriticos(datacenter);
     renderizarTendenciaDegradacao(datacenter);
-     renderizarUptimeServidores(datacenter);
-     renderizarGraficoSaudeZonas(datacenter);
+    renderizarUptimeServidores(datacenter);
+    renderizarGraficoSaudeZonas(datacenter);
+    renderizarGraficoAlertas(datacenter);
+    atualizarTendenciaAlertas(datacenter);
 
 }
 function atualizarKpiScore(datacenter) {
-    const score = datacenter.score ?? 0;
+    const score = Number(datacenter.score ?? 0).toFixed(0);
     const status = datacenter.status ?? converterScoreParaStatus(score);
 
     document.getElementById("scoreDatacenter").innerHTML = score;
@@ -239,28 +288,45 @@ function atualizarKpiScore(datacenter) {
     atualizarEstiloKpi("kpiScoreSaude", status);
 }
 
-function atualizarKpiCrescimentoIncidentes(datacenter) {
-    const kpi = datacenter.kpiCrescimentoIncidentes;
+function atualizarkpiCrescimentoAlertas(datacenter) {
+    const kpi = datacenter.kpiCrescimentoAlertas;
 
     if (!kpi) {
-        document.getElementById("porcentCresc").innerHTML = 0;
-        document.getElementById("qntAlertasAnterior").innerHTML = 0;
+        document.getElementById("variacaoAlertas").innerHTML = "+0";
+        document.getElementById("descricaoAlertas").innerHTML =  "0 alertas nos últimos 30 minutos";
         document.getElementById("qntAlertasAtual").innerHTML = 0;
-
-        atualizarIconeStatusPercentual("statusKPICresc", 0, 5, 15);
-        atualizarEstiloKpi("kpiCrescimentoIncidentes", "Estável");
+        document.getElementById("comparacaoAlertas").innerHTML = "0 no período anterior";
+        atualizarIconeStatus("statusKPICresc", 0, 5, 15);
+        atualizarEstiloKpi("kpiCrescimentoAlertas", "Estável");
         return;
     }
 
+    const atual = kpi.alertasIntervaloAtual ?? 0;
+    const anterior = kpi.alertasIntervaloAnterior ?? 0;
+    const diferenca = atual - anterior;
     const percentual = kpi.percentual ?? 0;
-    const status = classificarPercentual(percentual, 5, 15);
 
-    document.getElementById("porcentCresc").innerHTML = percentual;
-    document.getElementById("qntAlertasAnterior").innerHTML = kpi.alertasSemanaAnterior ?? 0;
-    document.getElementById("qntAlertasAtual").innerHTML = kpi.alertasSemanaAtual ?? 0;
+    let status;
+    console.log(anterior)
+    if (anterior === 0) {
+        if (atual === 0) {
+            status = "Estável";
+        } else if (atual <= 10) {
+            status = "Atenção";
+        } else {
+            status = "Crítico";
+        }
+    } else {
+        status = classificarPercentual(percentual, 5, 15);
+    }
 
-    atualizarIconeStatusPercentual("statusKPICresc", percentual, 5, 15);
-    atualizarEstiloKpi("kpiCrescimentoIncidentes", status);
+    document.getElementById("variacaoAlertas").innerHTML = diferenca >= 0 ? `+${diferenca}`: diferenca;
+    document.getElementById("descricaoAlertas").innerHTML = `${atual} alertas nos últimos 30 minutos`;
+    document.getElementById("comparacaoAlertas").innerHTML =   `${anterior} no período anterior`;
+
+    atualizarIconeStatus("statusKPICresc", status);
+    atualizarEstiloKpi("kpiCrescimentoAlertas", status);
+  
 }
 
 function atualizarKpiUptime(datacenter) {
@@ -276,14 +342,19 @@ function atualizarKpiUptime(datacenter) {
         return;
     }
 
-    const percentual = kpi.percentualInstaveis ?? 0;
-    const status = classificarPercentual(percentual, 10, 25);
+    const quantidadeAbaixoIdeal = kpi.servidoresAbaixoIdeal ?? 0;
+    const totalServidores = kpi.totalServidores ?? 0;
+    const percentualAbaixoIdeal = Number(kpi.percentualAbaixoIdeal ?? 0);
+    const percentualFormatado = percentualAbaixoIdeal.toFixed(2);
 
-    document.getElementById("qntServComUptimeBaixo").innerHTML = kpi.qtdServidoresInstaveis ?? 0;
-    document.getElementById("totalSrvUptime").innerHTML = kpi.totalServidores ?? 0;
-    document.getElementById("porcentagemServComBaixoUpt").innerHTML = percentual;
+    const status = classificarPercentual(percentualAbaixoIdeal,10,25);
 
-    atualizarIconeStatusPercentual("statusMenorUpt", percentual, 10, 25);
+    qntServComUptimeBaixo.innerHTML = quantidadeAbaixoIdeal;
+    totalSrvUptime.innerHTML = totalServidores;
+    porcentagemServComBaixoUpt.innerHTML = `${percentualFormatado}%`;
+
+
+    atualizarIconeStatusPercentual("statusMenorUpt", percentualAbaixoIdeal, 10, 25);
     atualizarEstiloKpi("kpiServidoresInstaveis", status);
 }
 
@@ -360,13 +431,15 @@ function atualizarIconeStatus(idImagem, status) {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 
-    if (statusNormalizado === "saudavel") {
+        if (statusNormalizado === "saudavel" ||statusNormalizado === "estavel") {
         imagem.src = "../assets/dashboard-icons/icon_check.svg";
         imagem.alt = "Saudável";
-    } else if (statusNormalizado === "atencao") {
+    }
+    else if (statusNormalizado === "atencao") {
         imagem.src = "../assets/dashboard-icons/icon_atencao.svg";
         imagem.alt = "Atenção";
-    } else {
+    }
+    else {
         imagem.src = "../assets/dashboard-icons/icon_alerta.svg";
         imagem.alt = "Crítico";
     }
@@ -431,6 +504,44 @@ function atualizarEstiloKpi(idKpi, status) {
     }
 }
 
+function definirClasseUptime(uptime) {
+    const valorUptime = Number(uptime);
+
+    if (valorUptime < 95) {
+        return "uptime_critico";
+    }
+
+    if (valorUptime < 99) {
+        return "uptime_atencao";
+    }
+    return "uptime_saudavel";
+}
+
+function definirClasseUptimeItem(uptime) {
+    const valorUptime = Number(uptime);
+
+    if (valorUptime < 95) {
+        return "uptime_critico_item";
+    }
+
+    if (valorUptime < 99) {
+        return "uptime_atencao_item";
+    }
+    return "uptime_saudavel_item";
+}
+
+function definirClasseUptimeP(uptime) {
+    const valorUptime = Number(uptime);
+
+    if (valorUptime < 95) {
+        return "uptime_critico_p";
+    }
+
+    if (valorUptime < 99) {
+        return "uptime_atencao_p";
+    }
+    return "uptime_saudavel_p";
+}
 //--------------------------------------------------------- WIDGETS SRV: CRITICOS E PREVISAO DE DEGRADAÇÃO ---------------------------------------
 
 function renderizarRankingServidoresCriticos(datacenter) {
@@ -441,7 +552,7 @@ function renderizarRankingServidoresCriticos(datacenter) {
         return;
     }
 
-    const ranking = datacenter.rankingSrvCriticosTop5 || [];
+    const ranking = datacenter.rankingSrv || [];
 
     lista.innerHTML = "";
 
@@ -466,44 +577,44 @@ function renderizarRankingServidoresCriticos(datacenter) {
             status,
             classeStatus
         });
-        const componentesTendencia = servidor.projecaoSaude?.componentesTendencia || [];
+        const componentesCritico = servidor.componentesCriticidade || [];
 
         let textoComponentes = "";
 
-        if (componentesTendencia.length === 0) {
+        if (componentesCritico.length === 0) {
             textoComponentes = `<p>Nenhum componente ficou acima do limite de forma relevante.</p>`;
         } else {
-            componentesTendencia.forEach(componente => {
-                const nomeComponente = componente.componente || "Componente";
-                const persistenciaAtual = componente.persistenciaAtual ?? 0;
-
+            componentesCritico.forEach(componente => {
+                const nomeComponente = (componente.componente || "Componente").toUpperCase();;
+                const persistencia = componente.persistencia ?? 0;
                 textoComponentes += `
-                    <p>
-                        ${persistenciaAtual}% das coletas de ${nomeComponente} ficaram acima do limite.
-                    </p>
-                `;
+                <p>
+                    ${nomeComponente}: ${persistencia}% das coletas acima do limite
+                </p>
+            `;
             });
         }
 
         lista.innerHTML += `
-            <div class="item_servidor item_tendencia">
+    <div class="item_servidor item_tendencia"  >
+         
+       
         <div class="item">
-                <p>${index + 1}° ${nomeServidor}</p>
-                <span class="status-servidor ${classeStatus}">
-                    ● Score: ${score} | ${zona}
-                </span>
-</div>
-                 <div class="tooltip-tendencia">
-               <h4>Motivo da criticidade</h4>
+            <p>${index + 1}° ${nomeServidor}</p>
+
+            <span class="status-servidor ${classeStatus}">
+                ● Score: ${score} | ${zona}
+            </span>
+        </div>
+
+        <div class="tooltip-tendencia">
+             <h4>Motivo do Score</h4>
             ${textoComponentes}
-                </div>
-            </div>
-        `;
-    }
-
-);
+        </div>
+    </div>
+`;
+     });
 }
-
 function obterClasseStatusServidor(status) {
     const statusNormalizado = String(status || "")
         .trim()
@@ -527,22 +638,21 @@ function obterClasseStatusServidor(status) {
 }
 
 function renderizarTendenciaDegradacao(datacenter) {
-    const lista = document.getElementById("listaTendenciaDegradacao");
+    const lista = document.getElementById("listaRiscoDegradacao");
 
     if (!lista) {
-        console.error("Container listaTendenciaDegradacao não encontrado no HTML.");
+        console.error("Container listaRiscoDegradacao não encontrado no HTML.");
         return;
     }
 
-    const servidores = datacenter.rankingSrvCriticosTop5 || [];
+    const servidores = datacenter?.rankingTendenciaServidores || [];
 
     lista.innerHTML = "";
 
     if (servidores.length === 0) {
         lista.innerHTML = `
             <div class="item_servidor item_tendencia">
-                <p>Nenhum servidor com tendência encontrada</p>
-                <span class="status-servidor servidor-indefinido">● Sem dados disponíveis</span>
+                <p>Nenhum servidor com tendencia de degradação identificado</p>
             </div>
         `;
         return;
@@ -550,127 +660,125 @@ function renderizarTendenciaDegradacao(datacenter) {
 
     servidores.forEach((servidor, index) => {
         const nomeServidor = servidor.servidor || "Servidor não identificado";
-        const projecao = servidor.projecaoSaude;
+        const tendencia = servidor.tendenciaDegradacao;
+        const componentes = tendencia.componentesTendencia || [];
+        const principal = componentes[0] || {};
+        const nomeComponente = principal.componente || "N/A";
+        const aumento = Number(principal.aumentoPersistencia || 0).toFixed(0);
+        const persistenciaAtual =Number(principal.persistenciaAtual || 0).toFixed(0);
 
-        if (!projecao) {
-            lista.innerHTML += `
-                <div class="item_servidor item_tendencia">
-                    <p>${index + 1}° ${nomeServidor}</p>
-                    <span class="status-servidor servidor-indefinido">
-                        ● Sem projeção disponível
-                    </span>
+        
+                    lista.innerHTML += `
+                <div  class="  item_servidor  item_tendencia " >
+                    <div class="item">
+                        <p>
+                            ${index + 1}º
+                            ${servidor.servidor}
+                        </p>
+
+                        <span  class="status-servidor  servidor-atencao " >
+                            ● Score:
+                            ${servidor.score}
+                            |
+                            ${nomeComponente}
+                            +${aumento} p.p.
+                        </span>
+                    </div>
+
+                    <div class="tooltip-tendencia" >
+                        <h4>
+                            Motivo do risco
+                        </h4>
+
+                        <p>
+                            ${tendencia.motivo}
+                        </p>
+
+                        <p>
+                            Persistência atual:
+                            ${persistenciaAtual}%
+                        </p>
+
+                        <p>
+                            Nível de risco:
+                            ${tendencia.nivelRisco}
+                        </p>
+                    </div>
                 </div>
             `;
-            return;
-        }
-
-        const scoreAtual = projecao.scoreAtual ?? servidor.score ?? 0;
-        const scoreProjetado = projecao.scoreProjetado ?? 0;
-        const risco = projecao.risco || "Indefinido";
-        const motivo = projecao.motivo || "Sem motivo informado";
-        const classeStatus = obterClasseStatusServidor(risco);
-
-        lista.innerHTML += `
-    <div class="item_servidor item_tendencia">
-        <div class="item">
-            <p>${index + 1}° ${nomeServidor}</p>
-
-            <span class="status-servidor ${classeStatus}">
-                ● Score projetado: ${scoreProjetado} | Atual: ${scoreAtual}
-            </span>
-        </div>
-
-        <div class="tooltip-tendencia">
-            <h4>Motivo da projeção</h4>
-            <p>${motivo}</p>
-        </div>
-    </div>
-      `;
-    });
+});
 }
 
 const saudeZonas = []
 const nomesZonas = []
 function renderizarUptimeServidores(datacenter) {
-  const lista = document.getElementById("listaUptimeServidores");
+    const lista = document.getElementById(
+        "listaUptimeServidores"
+    );
 
-  if (!lista) {
-    console.error("Container listaUptimeServidores não encontrado no HTML.");
-    return;
-  }
+    if (!lista) {
+        console.error(
+            "Container listaUptimeServidores não encontrado no HTML."
+        );
+        return;
+    }
 
-  lista.innerHTML = "";
+    lista.innerHTML = "";
 
-  const servidores = [];
 
-  const zonas = datacenter?.zonas || [];
+    const servidores = datacenter?.uptimeServidores || [];
 
-  zonas.forEach(zona => {
-    const servidoresDaZona = zona.servidores || [];
-    
-    servidoresDaZona.forEach(servidor => {
-      servidores.push({
-        nome: servidor.servidor,
-        zona: servidor.zona,
-        uptimeOperacional: servidor.uptimeOperacional
-      });
+    if (servidores.length === 0) {
+        lista.innerHTML = `
+            <div class="item_servidor item_tendencia">
+                <p>Nenhum servidor encontrado</p>
+
+                <span class="status-servidor servidor-indefinido">
+                    ● Sem dados disponíveis
+                </span>
+            </div>
+        `;
+
+        return;
+    }
+
+    servidores.forEach((servidor, index) => {
+        const nomeServidor = servidor.servidor ||"Servidor não identificado";
+        const zona = servidor.zona ||"Zona não informada";
+        const valorUptime =Number(servidor.uptime ?? 0);
+        const statusUptime =servidor.statusUptime ||"Indefinido";
+        const horasIndisponivel =Number(servidor.tempoIndisponivelHoras ?? 0);
+        const classeStatus =obterClasseStatusServidor(statusUptime );
+        const classeUptime = definirClasseUptime(valorUptime);
+        const classeUptimeItem = definirClasseUptimeItem(valorUptime);
+        const classeUptimeP = definirClasseUptimeP(valorUptime);
+
+        lista.innerHTML += `
+            <div class="item_servidor item_tendencia  ${classeUptime}">
+                <div class="item  ${classeUptimeItem}">
+                    <p class=" ${classeUptimeP}">
+                        ${index + 1}° ${nomeServidor}
+                    </p>
+
+                    <span class="status-servidor ${classeStatus}">
+                        ● Uptime: ${valorUptime.toFixed(2)}%
+                    </span>
+                </div>
+
+                <div class="tooltip-tendencia">
+                    <h4>Detalhes do uptime</h4>
+
+                    <p>Zona: ${zona}</p>
+
+                    <p>
+                        ${horasIndisponivel} horas de
+                        indisponibilidade nos últimos
+                        ${servidor.periodoDias ?? 30} dias.
+                    </p>
+                </div>
+            </div>
+        `;
     });
-  });
-
-  if (servidores.length === 0) {
-    lista.innerHTML = `
-      <div class="item_servidor item_tendencia">
-        <p>Nenhum servidor encontrado</p>
-        <span class="status-servidor servidor-indefinido">● Sem dados disponíveis</span>
-      </div>
-    `;
-    return;
-  }
-
-  servidores.forEach((servidor, index) => {
-    const nomeServidor = servidor.nome || "Servidor não identificado";
-    const uptimeDados = servidor.uptimeOperacional;
-
-    if (!uptimeDados) {
-      lista.innerHTML += `
-        <div class="item_servidor item_tendencia" >
-          <p>${index + 1}° ${nomeServidor}</p>
-          <span class="status-servidor servidor-indefinido">● Sem uptime disponível</span>
-        </div>
-      `;
-      return;
-    }
-
-    const valorUptime = uptimeDados.uptime;
-    const statusUptime = uptimeDados.statusUptime || "Indefinido";
-    const horasIndisponivel = uptimeDados.tempoIndisponivelHoras || 0;
-
-    let classeStatus = "servidor-indefinido";
-
-    if (statusUptime === "Saudável") {
-      classeStatus = "servidor-saudavel";
-    } else if (statusUptime === "Atenção") {
-      classeStatus = "servidor-atencao";
-    } else if (statusUptime === "Crítico") {
-      classeStatus = "servidor-critico";
-    }
-
-    lista.innerHTML += `
-      <div class="item_servidor item_tendencia">
-        <div class="item">
-          <p>${index + 1}° ${nomeServidor}</p>
-          <span class="status-servidor ${classeStatus}">
-            ● Uptime: ${valorUptime}%
-          </span>
-        </div>
-
-        <div class="tooltip-tendencia">
-          <h4>Motivo do uptime</h4>
-          <p>Servidor ficou ${horasIndisponivel} horas indisponível.</p>
-        </div>
-      </div>
-    `;
-  });
 }
 
 
@@ -678,174 +786,330 @@ function renderizarUptimeServidores(datacenter) {
 //}//---------------------------------------------------------------------------------------------------------------------------------------------
 
 function renderizarGraficoSaudeZonas(datacenter) {
-  const ctxSaudeZonas = document.getElementById('graficoSaudeZonas');
+    const canvas = document.getElementById(
+        "graficoSaudeZonas"
+    );
 
-  const nomesZonas = [];
-  const saudeZonas = [];
-
-  const zonas = datacenter?.zonas || [];
-
-  zonas.forEach(zona => {
-    nomesZonas.push(zona.zona);
-    saudeZonas.push(zona.score);
-  });
-
-  function definirCorZona(score) {
-    if (score >= 80) {
-      return '#22C55E';
-    } else if (score >= 60) {
-      return '#F5A400';
-    } else {
-      return '#F23845';
+    if (!canvas) {
+        console.error("Canvas graficoSaudeZonas não encontrado.");
+        return;
     }
-  }
 
-  new Chart(ctxSaudeZonas, {
-    type: 'bar',
-    data: {
-      labels: nomesZonas,
-      datasets: [{
-        data: saudeZonas,
-        backgroundColor: saudeZonas.map(score => definirCorZona(score)),
-        borderRadius: 4,
-        barThickness: 46
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-          ticks: {
-            stepSize: 25,
-            color: '#6B7280'
-          },
-          grid: {
-            color: '#E5E7EB'
-          }
-        },
-        x: {
-          ticks: {
-            color: '#6B7280'
-          },
-          grid: {
-            color: '#E5E7EB'
-          }
-        }
-      }
+    const graficoExistente = Chart.getChart(canvas);
+
+    if (graficoExistente) {
+        graficoExistente.destroy();
     }
-  });
+
+    const nomesZonas = [];
+    const saudeZonas = [];
+
+    const zonas = datacenter?.zonas || [];
+
+    zonas.forEach(zona => {
+        nomesZonas.push(zona.zona);
+        saudeZonas.push(Number(zona.score).toFixed(0));
+    });
+
+    function definirCorZona(score) {
+        if (score >= 80) {
+            return "#22C55E";
+        }
+
+        if (score >= 60) {
+            return "#F5A400";
+        }
+
+        return "#F23845";
+    }
+
+
+
+    graficoSaudeZonasInstancia = new Chart(
+        canvas,
+        {
+            type: "bar",
+
+            data: {
+                labels: nomesZonas,
+
+                datasets: [
+                    {
+                        data: saudeZonas,
+                        backgroundColor: saudeZonas.map(
+                            definirCorZona
+                        ),
+                        borderRadius: 4,
+                        barThickness: 46
+                    }
+                ]
+            },
+
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                animation: {
+                    duration: 200
+                },
+
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+
+                        ticks: {
+                            stepSize: 25,
+                            color: "#6B7280"
+                        },
+
+                        grid: {
+                            color: "#E5E7EB"
+                        }
+                    },
+
+                    x: {
+                        ticks: {
+                            color: "#6B7280"
+                        },
+
+                        grid: {
+                            color: "#E5E7EB"
+                        }
+                    }
+                }
+            }
+        }
+    );
 }
 
 let graficoAlertasSemana = null;
 
 function renderizarGraficoAlertas(datacenter) {
-  const ctxIncidentesSemana = document.getElementById('graficoIncidentesSemana');
+    const canvas = document.getElementById("graficoIncidentesSemana");
 
-  if (!ctxIncidentesSemana) {
-    console.error("Canvas graficoIncidentesSemana não encontrado.");
-    return;
-  }
-
-  const dadosAlertas = datacenter?.graficoAlertasSemana || {};
-
-  const dias = [
-    "Segunda",
-    "Terça",
-    "Quarta",
-    "Quinta",
-    "Sexta",
-    "Sábado",
-    "Domingo"
-  ];
-
-  const qntAlertas = dias.map(dia => dadosAlertas[dia] || 0);
-
-  const media = dadosAlertas.media || 0;
-
-  const linhaMedia = dias.map(() => media);
-
-  if (graficoAlertasSemana !== null) {
-    graficoAlertasSemana.destroy();
-  }
-
-  graficoAlertasSemana = new Chart(ctxIncidentesSemana, {
-    type: 'line',
-    data: {
-      labels: dias,
-      datasets: [
-        {
-          label: 'Alertas Diários',
-          data: qntAlertas,
-          borderColor: '#2F80ED',
-          backgroundColor: '#2F80ED',
-          borderWidth: 3,
-          tension: 0.35,
-          pointRadius: 5,
-          pointHoverRadius: 6,
-          fill: false
-        },
-        {
-          label: 'Linha da Média',
-          data: linhaMedia,
-          borderColor: '#F5A400',
-          borderWidth: 2,
-          borderDash: [4, 4],
-          pointRadius: 0,
-          fill: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            color: '#6B7280'
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          suggestedMax: Math.max(...qntAlertas, media, 5),
-          ticks: {
-            stepSize: 5,
-            color: '#6B7280'
-          },
-          grid: {
-            color: '#E5E7EB',
-            borderDash: [4, 4]
-          }
-        },
-        x: {
-          ticks: {
-            color: '#6B7280'
-          },
-          grid: {
-            color: '#E5E7EB',
-            borderDash: [4, 4]
-          }
-        }
-      }
+    if (!canvas) {
+        console.error(
+            "Canvas graficoIncidentesSemana não encontrado."
+        );
+        return;
     }
-  });
+
+    const graficoAlertasExistente = Chart.getChart(canvas);
+
+    if (graficoAlertasExistente) {
+        graficoAlertasExistente.destroy();
+    }
+
+    const dadosGrafico =
+        datacenter?.graficoAlertasSemana || {};
+
+    const alertasPorDia =
+        dadosGrafico.alertasPorDia || {};
+
+    const dias = [
+        "Segunda",
+        "Terça",
+        "Quarta",
+        "Quinta",
+        "Sexta",
+        "Sábado",
+        "Domingo"
+    ];
+
+    const quantidadeAlertas = dias.map(
+        dia => Number(alertasPorDia[dia] ?? 0)
+    );
+
+    const media = Number(
+        dadosGrafico.mediaDiariaAlertas ?? 0
+    );
+
+    const linhaMedia = dias.map(() => media);
+
+    console.log(
+        "Dados do gráfico de alertas:",
+        {
+            dias,
+            quantidadeAlertas,
+            media
+        }
+    );
+
+    if (graficoAlertasSemana) {
+        graficoAlertasSemana.destroy();
+    }
+
+    graficoAlertasSemana = new Chart(
+        canvas,
+        {
+            type: "line",
+            data: {
+                labels: dias,
+                datasets: [
+                    {
+                        label: "Alertas diários",
+                        data: quantidadeAlertas,
+                        borderColor: "#2F80ED",
+                        backgroundColor: "#2F80ED",
+                        borderWidth: 3,
+                        tension: 0.35,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: false
+                    },
+                    {
+                        label: `Média diária até hoje: ${media}`,
+                        data: linhaMedia,
+                        borderColor: "#F5A400",
+                        backgroundColor: "#F5A400",
+                        borderWidth: 2,
+                        borderDash: [6, 6],
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        tension: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                animation: {
+                    duration: 300
+                },
+
+                interaction: {
+                    mode: "index",
+                    intersect: false
+                },
+
+                plugins: {
+                    legend: {
+                        position: "bottom",
+
+                        labels: {
+                            usePointStyle: true,
+                            color: "#6B7280",
+                            padding: 20
+                        }
+                    },
+
+                    tooltip: {
+                        callbacks: {
+                            label(context) {
+                                const valor =
+                                    context.parsed.y ?? 0;
+
+                                return (
+                                    `${context.dataset.label}: ` +
+                                    `${valor}`
+                                );
+                            }
+                        }
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+
+                        suggestedMax: Math.max(
+                            ...quantidadeAlertas,
+                            media,
+                            5
+                        ),
+
+                        ticks: {
+                            precision: 0,
+                            color: "#6B7280"
+                        },
+
+                        grid: {
+                            color: "#E5E7EB"
+                        }
+                    },
+
+                    x: {
+                        ticks: {
+                            color: "#6B7280"
+                        },
+
+                        grid: {
+                            color: "#E5E7EB"
+                        }
+                    }
+                }
+            }
+        }
+    );
+
+
 }
 
+function atualizarTendenciaAlertas(datacenter) {
+    const dadosGrafico = datacenter?.graficoAlertasSemana || {};
+    const alertasPorDia = dadosGrafico.alertasPorDia || {};
 
+    const dias = [
+        "Segunda",
+        "Terça",
+        "Quarta",
+        "Quinta",
+        "Sexta",
+        "Sábado",
+        "Domingo"
+    ];
+
+    const valores = dias.map(
+        dia => Number(alertasPorDia[dia] ?? 0)
+    );
+
+    const primeiroValor = valores[0];
+    const ultimoValor = valores[valores.length - 1];
+
+    const titulo = document.querySelector(".tendencia h1");
+    const descricao = document.querySelector(".tendencia p");
+    const imagem = document.querySelector(".tendencia img");
+    const tend = document.querySelector('.tendencia')
+
+    if (ultimoValor < primeiroValor) {
+        titulo.innerHTML = "Tendência Positiva";
+        descricao.innerHTML = "Redução recente no volume de alertas.";
+        imagem.src = "/assets/icone_certo.png";
+        tend.style.backgroundColor="  #C8F7DC"
+
+
+    } else if (ultimoValor > primeiroValor) {
+        titulo.innerHTML = "Tendência Negativa";
+        descricao.innerHTML = "Aumento recente no volume de alertas.";
+        imagem.src = "/assets/Icon_alerta.png";
+        tend.style.borderColor = "#FF5252";
+        tend.style.backgroundColor="  #FFD6D6"
+
+    } else {
+        titulo.innerHTML = "Tendência Estável";
+        descricao.innerHTML = "Volume de alertas sem variações relevantes.";
+        imagem.src = "/assets/dashboard-icons/checkAlerta.png";
+        tend.style.borderColor = "#F5CC4D";
+        tend.style.backgroundColor="  #FFEAB0"
+
+    }
+
+    console.log(imagem.src);
+}
 
 function mostrarRelatorios(){
 document.getElementById("div_relatorios").style.display = "block";
+carregarRelatoriosDatacenter();
+
 }
 
 function fecharRelatorios(){
@@ -857,3 +1121,262 @@ document.getElementById("div_relatorios").style.display = "none";
 function limparSessao() {
     sessionStorage.clear();
 }
+
+async function carregarRelatoriosDatacenter() {
+
+    const nomeDatacenter =sessionStorage.getItem("DATACENTER_SELECIONADO");
+
+    const listaRelatorios = document.getElementById(
+        "listaRelatoriosGerados"
+    );
+    console.log("Empresa usada:", nomeEmpresa);
+console.log("Datacenter usado:", nomeDatacenter);
+
+    const estadoRelatorios = document.getElementById(
+        "estadoRelatoriosGerados"
+    );
+
+    const textoDatacenter = document.getElementById(
+        "datacenterRelatoriosSelecionado"
+    );
+
+    if (!listaRelatorios || !estadoRelatorios) {
+        console.error(
+            "Elementos da área de relatórios não foram encontrados."
+        );
+        return;
+    }
+
+    listaRelatorios.innerHTML = "";
+
+    if (!nomeEmpresa) {
+        exibirEstadoRelatorios(
+            "Não foi possível identificar a empresa do usuário.",
+            "erro"
+        );
+
+        return;
+    }
+
+    if (!nomeDatacenter) {
+        exibirEstadoRelatorios(
+            "Nenhum datacenter está selecionado na dashboard.",
+            "vazio"
+        );
+
+        return;
+    }
+
+    if (textoDatacenter) {
+        textoDatacenter.textContent =
+            `Empresa: ${nomeEmpresa} | Datacenter: ${nomeDatacenter}`;
+    }
+
+    exibirEstadoRelatorios(
+        "Carregando relatórios...",
+        "carregando"
+    );
+
+    try {
+        const empresaUrl = encodeURIComponent(nomeEmpresa);
+        const datacenterUrl = encodeURIComponent(nomeDatacenter);
+        
+        const resposta = await fetch(
+            `/relatorios/listar/${empresaUrl}/${datacenterUrl}`
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error( dados.mensagem ||"Não foi possível buscar os relatórios.");
+        }
+
+        const relatorios = dados.relatorios || [];
+
+        if (relatorios.length === 0) {
+            exibirEstadoRelatorios(
+                "Nenhum relatório encontrado para este datacenter.","vazio");
+            return;
+        }
+
+        estadoRelatorios.style.display = "none";
+
+        relatorios.forEach((relatorio, index) => {
+            listaRelatorios.innerHTML += montarRelatorioGerado(relatorio,index);
+        });
+
+    } catch (erro) {
+        console.error("Erro ao carregar relatórios:",erro);
+
+        exibirEstadoRelatorios(
+            "Não foi possível carregar os relatórios deste datacenter.",
+            "erro"
+        );
+    }
+}
+
+function montarRelatorioGerado(relatorio, index) {
+    const nomeArquivo = escaparHtmlRelatorio(
+        relatorio.nomeArquivo
+    );
+
+    const dataFormatada = formatarDataRelatorio(
+        relatorio.ultimaModificacao
+    );
+
+    const tamanhoFormatado = formatarTamanhoRelatorio(
+        relatorio.tamanhoBytes
+    );
+
+    return `
+            <div class="item_relatorio_gerado">
+
+            <div class="informacoes_relatorio_gerado">
+                <h4>${nomeArquivo}</h4>
+
+                <p class="detalhes_relatorio_gerado">
+                    Gerado em ${dataFormatada}
+                    <span>•</span>
+                    ${tamanhoFormatado}
+                </p>
+            </div>
+
+            <a
+                class="btn_baixar_relatorio"
+                href="${relatorio.urlDownload}"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Baixar relatório"
+            >
+                <img
+                    src="../assets/icons_dashOpGestora/dowload.svg"
+                    alt="Baixar relatório"
+                >
+
+            </a>
+
+        </div>
+    `;
+}
+
+function exibirEstadoRelatorios(mensagem, tipo) {
+    const estadoRelatorios = document.getElementById(
+        "estadoRelatoriosGerados"
+    );
+
+    if (!estadoRelatorios) {
+        return;
+    }
+
+    estadoRelatorios.style.display = "block";
+
+    estadoRelatorios.className =
+        `estado_relatorios_gerados estado_relatorios_${tipo}`;
+
+    estadoRelatorios.textContent = mensagem;
+}
+
+function formatarDataRelatorio(data) {
+    if (!data) {
+        return "data não informada";
+    }
+
+    return new Date(data).toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
+
+function formatarTamanhoRelatorio(tamanhoBytes) {
+    const tamanho = Number(tamanhoBytes);
+
+    if (!tamanho || tamanho <= 0) {
+        return "tamanho não informado";
+    }
+
+    if (tamanho < 1024) {
+        return `${tamanho} B`;
+    }
+
+    if (tamanho < 1024 * 1024) {
+        return `${(tamanho / 1024).toFixed(1)} KB`;
+    }
+
+    return `${(tamanho / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function escaparHtmlRelatorio(valor) {
+    const elemento = document.createElement("div");
+
+    elemento.textContent = valor || "";
+
+    return elemento.innerHTML;
+}
+
+//--------------------------------------------------- MOVENDO O TOOLTIP  PARA QUE ELE NAO FIQUE CORTADO -------------------------------------------------------
+let tooltipAberto = null;
+let itemTooltipOriginal = null;
+
+document.addEventListener("mouseover", function (event) {
+    const item = event.target.closest(".item_tendencia");
+
+    if (!item || item.contains(event.relatedTarget)) {
+        return;
+    }
+
+    const tooltip = item.querySelector(".tooltip-tendencia");
+
+    if (!tooltip) {
+        return;
+    }
+
+    const itemPosicao = item.getBoundingClientRect();
+    itemTooltipOriginal = item;
+    tooltipAberto = tooltip;
+    document.body.appendChild(tooltip);
+    tooltip.style.display = "block";
+
+    const larguraTooltip = tooltip.offsetWidth;
+    const alturaTooltip = tooltip.offsetHeight;
+
+    let esquerda =itemPosicao.left +itemPosicao.width / 2 -larguraTooltip / 2;
+
+    let topo =itemPosicao.top -alturaTooltip -12;
+
+    esquerda = Math.max(10, esquerda);
+
+    esquerda = Math.min(esquerda,window.innerWidth - larguraTooltip - 10);
+
+    if (topo < 10) {
+        topo = itemPosicao.bottom + 12;
+        tooltip.classList.add("tooltip-abaixo");
+    } else {
+        tooltip.classList.remove("tooltip-abaixo");
+    }
+
+    tooltip.style.left = `${esquerda}px`;
+    tooltip.style.top = `${topo}px`;
+});
+
+document.addEventListener("mouseout", function (event) {
+    const item = event.target.closest(".item_tendencia");
+
+    if (!item || item.contains(event.relatedTarget)) {
+        return;
+    }
+
+    if (!tooltipAberto || !itemTooltipOriginal) {
+        return;
+    }
+
+    tooltipAberto.style.display = "none";
+    tooltipAberto.removeAttribute("style");
+
+    itemTooltipOriginal.appendChild(tooltipAberto);
+
+    tooltipAberto = null;
+    itemTooltipOriginal = null;
+});

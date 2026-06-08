@@ -26,8 +26,6 @@ function buscarDados() {
     })
     .catch(() => {}); 
 
-
-
     const BUCKET = 'smartdatabucket2'
         fetch("/financeira/pegarDadosFinanceira", {
         method: "POST", 
@@ -44,26 +42,37 @@ function buscarDados() {
           console.log("Dados não encontrados")
           return
         }
-            console.log("Dados buscados pelo S3 com sucesso!");
-            console.log(dados)
-            plotarDados(dados)
+        regioes = dados.dadosAlertas.Steam
+        totalAlertasCriticos = 0
+        totalAlertasAtencao = 0
+        for(regiao in regioes){
+          const dcsDaRegiao = regioes[regiao];
+          for (const nomeDC in dcsDaRegiao) {
+            const dadosDC = dcsDaRegiao[nomeDC];
+            totalAlertasCriticos += dadosDC.KPIs['CRITICOS_ABERTOS']
+            totalAlertasAtencao += dadosDC.KPIs['MEDIOS_ABERTOS'] 
+          }
+        }
+        const dadosAlertas = {
+          totalAlertasCriticos: totalAlertasCriticos,
+          totalAlertasAtencao: totalAlertasAtencao
+        }
+        dados.dadosFinanceiros.KPIS['ALERTAS'] = dadosAlertas
+        dadosFinais = dados.dadosFinanceiros
+        console.log("Dados buscados pelo S3 com sucesso!");
+        console.log(dadosFinais)
+        plotarDados(dadosFinais)
     });
 
 
 }
 
 function formatarMoeda(valor) {
-  return Number(valor || 0).toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  });
+  return Number(valor || 0).toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'});
 }
 
 function formatarPercentual(valor) {
-  return `${Number(valor || 0).toLocaleString('pt-BR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })}%`;
+  return `${Number(valor || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}%`;
 }
 
 function formatarVariacaoMoeda(valor) {
@@ -77,10 +86,7 @@ function formatarVariacaoPercentual(valor) {
   const numero = Number(valor || 0);
   const seta = numero >= 0 ? '▲' : '▼';
   const sinal = numero >= 0 ? '+' : '';
-  return `${seta} ${sinal}${numero.toLocaleString('pt-BR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })}% vs mês anterior`;
+  return `${seta} ${sinal}${numero.toLocaleString('pt-BR', {minimumFractionDigits: 2,maximumFractionDigits: 2})}% vs mês anterior`;
 }
 
 function atualizarTexto(id, valor) {
@@ -201,7 +207,7 @@ function aplicarHistoricoMensal(historicoMensal, projecoes = []) {
   prevCustoLn = [...HISTORICO_MESES.slice(0, -1).map(() => null), ultimoCustoHistorico, ...tresMesesProjecao.map(item => Number(item.custo_previsto || 0) / 1000)];
   prevReceitaLn = [...HISTORICO_MESES.slice(0, -1).map(() => null), ultimaReceitaHistorica, ...tresMesesProjecao.map(item => Number(item.receita_prevista || 0) / 1000)];
 
-  definirPeriodoGrafico(periodoGraficoLinha, document.querySelector('.btn-periodo.active:not(.roi-period-btn)'));
+  definirPeriodoGrafico(periodoGraficoLinha, document.querySelector('.btn-periodo.active:not(.botao-periodo-roi)'));
 }
 
 function plotarDados(dadosS3){
@@ -212,7 +218,7 @@ function plotarDados(dadosS3){
   const custo = kpis.CUSTO_TOTAL || {};
   const orcamento = kpis.ORCAMENTO || {};
   const previsto = kpis.CUSTO_PREVISTO || {};
-
+  const alertas = kpis.ALERTAS
 
  // KPIS
   atualizarTexto("ROI_ESTIMADO", formatarPercentual(roi.ROI_MES_CORRENTE));
@@ -228,8 +234,11 @@ function plotarDados(dadosS3){
   atualizarTexto("kpi-cost-val", formatarMoeda(custo.CUSTO));
   atualizarTexto("kpi-cost-delta", formatarVariacaoMoeda(custo.DELTA_CUSTO));
   atualizarSelo("kpi-cost-delta", custo.DELTA_CUSTO, false);
+  atualizarTexto("kpi-alertas-criticos-id", alertas.totalAlertasCriticos)
+  atualizarTexto(" kpi-alertas-atencao-id", alertas.totalAlertasAtencao)
 
-  
+ 
+
   
   budgetRegressionValue = Number(previsto.CUSTO_PREVISTO || orcamento.CUSTO_PREVISTO || 0);
   budgetActualValue = Number(orcamento.CUSTO_CORRENTE || custo.CUSTO || 0);
@@ -486,7 +495,7 @@ function construirGraficoRoi(rotulos, historico) {
 }
 
 function definirPeriodoRoi(periodo, botao) {
-  document.querySelectorAll('.roi-period-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.botao-periodo-roi').forEach(b => b.classList.remove('active'));
   if (botao) botao.classList.add('active');
   
   let inicio = 0;
@@ -505,8 +514,8 @@ function definirPeriodoRoi(periodo, botao) {
 function abrirModalRoi() {
   document.getElementById('roi-modal').classList.add('active');
   
-  const botaoAtivo = document.querySelector('.roi-period-btn.active') || document.querySelectorAll('.roi-period-btn')[2];
-  const indicePeriodo = Array.from(document.querySelectorAll('.roi-period-btn')).indexOf(botaoAtivo) + 1;
+  const botaoAtivo = document.querySelector('.botao-periodo-roi.active') || document.querySelectorAll('.botao-periodo-roi')[2];
+  const indicePeriodo = Array.from(document.querySelectorAll('.botao-periodo-roi')).indexOf(botaoAtivo) + 1;
   
   definirPeriodoRoi(indicePeriodo, botaoAtivo);
 }
@@ -522,17 +531,11 @@ function fecharModalRoi() {
 let HISTORICO_MESES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 let custoHistorico = [12, 14, 13, 15, 14, 16, 15, 17, 18, 16, 19, 20]; 
 let receitaHistorica = [25, 28, 26, 30, 29, 32, 34, 33, 36, 35, 38, 40]; 
-const mesAtual = 11; 
 
 
 function rotuloMes(indice) {
   const mesesFuturos = ['Jan (Prev)', 'Fev (Prev)', 'Mar (Prev)'];
   return mesesFuturos[indice] || `Mês ${indice + 1}`;
-}
-
-
-function calcularPrevisao(mesAtual, mesesAFrente) {
-    return receitaHistorica[11] * (1 + (mesesAFrente * 0.05)); 
 }
 
 
@@ -563,9 +566,6 @@ let todasReceitas = [...receitaHistorica, ...Array(3).fill(null)];
 let prevCustoLn = [...custoHistorico.map(() => null), custoHistorico[11], ...previsoesL3.map(f => f.custo)];
 let prevReceitaLn = [...receitaHistorica.map(() => null), receitaHistorica[11], ...previsoesL3.map(f => f.receita)];
 let historicoRoi = custoHistorico.map((c, i) => parseFloat((((receitaHistorica[i] - c) / c) * 100).toFixed(1)));
-const previsaoRoi = previsoesL3.map(f => parseFloat(f.roi));
-const todoHistoricoRoi = [...historicoRoi, ...Array(3).fill(null)];
-const todaPrevisaoRoi = [...Array(11).fill(null), historicoRoi[11], ...previsaoRoi];
 
 Chart.defaults.font.family = "'IBM Plex Sans', sans-serif";
 Chart.defaults.color = '#6B7E91';
@@ -645,7 +645,7 @@ function construirGraficoLinha(rotulos, custo, receita, unidade = 'k', custoPrev
 
 function definirPeriodoGrafico(periodo, botao) {
   periodoGraficoLinha = periodo;
-  document.querySelectorAll('.btn-periodo:not(.roi-period-btn)').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.btn-periodo:not(.botao-periodo-roi)').forEach(b => b.classList.remove('active'));
   if (botao) botao.classList.add('active');
 
   if (periodo === '24h') {
@@ -796,7 +796,7 @@ function definirVisualizacaoBarra(view, btn) {
     ? 'Comparação de custo entre datacenters'
     : 'ROI por datacenter';
   document.getElementById('bar-sub').textContent = view === 'custo'
-    ? 'Custo mensal — soma = ' + 562000
+    ? 'Custo mensal'
     : 'Receita sobre custo por DC (negativo = prejuízo)';
   construirGraficoBarra();
 }
@@ -963,10 +963,10 @@ function renderTabelaAtual(animar = true) {
     return;
   }
 
-  w.classList.add('fading');
+  w.classList.add('desaparecendo');
   setTimeout(() => {
     w.innerHTML = html;
-    w.classList.remove('fading');
+    w.classList.remove('desaparecendo');
   }, 200);
 }
 
@@ -987,150 +987,196 @@ function definirVisualizacaoTabela(view, btn) {
 // ══════════════════════════════════════════════
 // RELATÓRIOS
   
-const reportsData = [
-  { month:'Novembro 2025',  gen:'02/12/2025', cost:540000, rev:825000, roi:52.8 },
-  { month:'Outubro 2025',   gen:'02/11/2025', cost:528000, rev:802000, roi:51.9 },
-  { month:'Setembro 2025',  gen:'02/10/2025', cost:519000, rev:780000, roi:50.3 },
-  { month:'Agosto 2025',    gen:'02/09/2025', cost:503000, rev:758000, roi:50.7 },
-  { month:'Julho 2025',     gen:'02/08/2025', cost:491000, rev:742000, roi:51.1 },
-  { month:'Junho 2025',     gen:'02/07/2025', cost:478000, rev:720000, roi:50.6 },
-  { month:'Maio 2025',      gen:'02/06/2025', cost:452000, rev:695000, roi:53.8 },
-  { month:'Abril 2025',     gen:'02/05/2025', cost:461000, rev:671000, roi:45.6 },
-  { month:'Março 2025',     gen:'02/04/2025', cost:445000, rev:640000, roi:43.8 },
-  { month:'Fevereiro 2025', gen:'02/03/2025', cost:428000, rev:612000, roi:43.0 },
-  { month:'Janeiro 2025',   gen:'02/02/2025', cost:412000, rev:580000, roi:40.8 },
-];
+let relatoriosDisponiveis = [];
+let urlRelatorioAtual = '';
+
+const mesesRelatorio = {
+  janeiro: 1,
+  fevereiro: 2,
+  marco: 3,
+  abril: 4,
+  maio: 5,
+  junho: 6,
+  julho: 7,
+  agosto: 8,
+  setembro: 9,
+  outubro: 10,
+  novembro: 11,
+  dezembro: 12,
+};
+
+function normalizarTextoRelatorio(texto) {
+  return String(texto || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+function obterPeriodoRelatorio(nomeArquivo) {
+  const nomeNormalizado = normalizarTextoRelatorio(nomeArquivo);
+  const correspondencia = nomeNormalizado.match(
+    /^relatorio-financeiro-([a-z]+)-(\d{4})\.pdf$/
+  );
+
+  if (!correspondencia) {
+    return {
+      titulo: nomeArquivo.replace(/\.pdf$/i, ''),
+      mes: 0,
+      ano: 0,
+    };
+  }
+
+  const nomeMes = correspondencia[1];
+  const ano = Number(correspondencia[2]);
+  const mes = mesesRelatorio[nomeMes] || 0;
+  const mesFormatado = nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1);
+
+  return {
+    titulo: `${mesFormatado} ${ano}`,
+    mes,
+    ano,
+  };
+}
+
+function formatarTamanhoArquivo(bytes) {
+  const tamanho = Number(bytes || 0);
+  if (tamanho < 1024) return `${tamanho} B`;
+  if (tamanho < 1024 * 1024) return `${(tamanho / 1024).toFixed(1)} KB`;
+  return `${(tamanho / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+async function buscarRelatoriosS3() {
+  const lista = document.getElementById('reports-list');
+  if (!lista) return;
+
+  lista.innerHTML = '<div class="estado-lista-relatorios">Buscando relatórios na S3...</div>';
+
+  try {
+    const resposta = await fetch('/financeira/relatorios');
+    if (!resposta.ok) throw new Error('Não foi possível carregar os relatórios.');
+
+    relatoriosDisponiveis = await resposta.json();
+    relatoriosDisponiveis = relatoriosDisponiveis
+      .map(relatorio => ({
+        ...relatorio,
+        periodo: obterPeriodoRelatorio(relatorio.nomeArquivo),
+      }))
+      .sort((a, b) => {
+        const ordemA = (a.periodo.ano * 100) + a.periodo.mes;
+        const ordemB = (b.periodo.ano * 100) + b.periodo.mes;
+        return ordemB - ordemA;
+      });
+
+    renderizarListaRelatorios();
+  } catch (erro) {
+    console.error('Erro ao buscar relatórios financeiros:', erro);
+    lista.innerHTML = `
+      <div class="estado-lista-relatorios erro">
+        Não foi possível carregar os relatórios financeiros.
+      </div>`;
+  }
+}
 
 function renderizarListaRelatorios() {
-  const list = document.getElementById('reports-list');
-  list.innerHTML = '';
-  reportsData.forEach(r => {
-    const margin = r.rev - r.cost;
-    list.innerHTML += `
+  const lista = document.getElementById('reports-list');
+  if (!lista) return;
+
+  if (!relatoriosDisponiveis.length) {
+    lista.innerHTML = `
+      <div class="estado-lista-relatorios">
+        Nenhum relatório PDF foi encontrado na pasta relatorios/.
+      </div>`;
+    return;
+  }
+
+  lista.innerHTML = relatoriosDisponiveis.map((relatorio, indice) => `
       <div class="item-relatorio">
         <div class="icone-doc-relatorio">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         </div>
         <div>
-          <div class="nome-relatorio">${r.month}</div>
-          <div class="data-relatorio">Gerado em ${r.gen}</div>
+          <div class="nome-relatorio">${relatorio.periodo.titulo}</div>
+          <div class="data-relatorio">${relatorio.nomeArquivo}</div>
         </div>
         <div class="meta-relatorio">
-          <div class="item-meta-relatorio"><div class="rotulo-meta-relatorio">Custo</div><div class="valor-meta-relatorio">${r.cost}</div></div>
-          <div class="item-meta-relatorio"><div class="rotulo-meta-relatorio">Receita</div><div class="valor-meta-relatorio">${r.rev}</div></div>
-          <div class="item-meta-relatorio"><div class="rotulo-meta-relatorio">Margem</div><div class="valor-meta-relatorio" style="color:#2e7d5a;"> R$ ${(margin/1000).toFixed(0)}k</div></div>
-          <div class="item-meta-relatorio"><div class="rotulo-meta-relatorio">ROI</div><div class="roi-relatorio pos">+${r.roi}%</div></div>
+          <div class="item-meta-relatorio">
+            <div class="rotulo-meta-relatorio">Formato</div>
+            <div class="valor-meta-relatorio">PDF</div>
+          </div>
+          <div class="item-meta-relatorio">
+            <div class="rotulo-meta-relatorio">Tamanho</div>
+            <div class="valor-meta-relatorio">${formatarTamanhoArquivo(relatorio.tamanho)}</div>
+          </div>
         </div>
-        <button class="btn-baixar" onclick='abrirModalRelatorio(${JSON.stringify(r)})'>
+        <button class="btn-baixar" data-indice-relatorio="${indice}">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           Visualizar
         </button>
-      </div>`;
+      </div>
+  `).join('');
+
+  lista.querySelectorAll('[data-indice-relatorio]').forEach(botao => {
+    botao.addEventListener('click', () => {
+      const indice = Number(botao.dataset.indiceRelatorio);
+      abrirRelatorioS3(relatoriosDisponiveis[indice]);
+    });
   });
 }
 
-function montarConteudoRelatorio(relatorio) {
-  const custo = Number(relatorio.cost || 0);
-  const receita = Number(relatorio.rev || 0);
-  const margem = receita - custo;
-  const custoSobreReceita = receita > 0 ? (custo / receita) * 100 : 0;
-  const roiClasse = Number(relatorio.roi || 0) >= 0 ? 'td-pos' : 'td-neg';
+async function abrirRelatorioS3(relatorio) {
+  if (!relatorio) return;
 
-  return `
-    <section class="capa-relatorio">
-      <div class="cabecalho-capa-relatorio">
-        <div class="logo-capa-relatorio">
-          <div class="icone-logo-capa-relatorio">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-7"/><path d="M16 7h3v3"/></svg>
-          </div>
-          <div>
-            <div class="texto-logo-capa-relatorio">Smart Data</div>
-            <div class="sub-logo-capa-relatorio">Infraestrutura STEAM</div>
-          </div>
-        </div>
-        <div class="badge-capa-relatorio">
-          <div class="rotulo-badge-capa-relatorio">Gerado em</div>
-          <div class="val-badge-capa-relatorio">${relatorio.gen}</div>
-        </div>
-      </div>
-      <div class="titulo-capa-relatorio">
-        <h1>Relatório Mensal - ${relatorio.month}</h1>
-        <p>Resumo financeiro consolidado de custos, receitas, margem e ROI.</p>
-      </div>
-      <div class="tags-capa-relatorio">
-        <span class="tag-relatorio blue">Financeiro</span>
-        <span class="tag-relatorio green">ROI ${formatarPercentual(relatorio.roi)}</span>
-        <span class="tag-relatorio gold">Fechamento mensal</span>
-      </div>
-    </section>
-
-    <section class="secao-relatorio">
-      <div class="titulo-secao-relatorio">Indicadores principais</div>
-      <div class="grade-kpi-relatorio">
-        <div class="kpi-relatorio">
-          <div class="rotulo-kpi-relatorio">Custo total</div>
-          <div class="val-kpi-relatorio">${formatarMoeda(custo)}</div>
-          <div class="delta-kpi-relatorio up-bad">Infraestrutura</div>
-        </div>
-        <div class="kpi-relatorio">
-          <div class="rotulo-kpi-relatorio">Receita total</div>
-          <div class="val-kpi-relatorio">${formatarMoeda(receita)}</div>
-          <div class="delta-kpi-relatorio up-good">Faturamento</div>
-        </div>
-        <div class="kpi-relatorio">
-          <div class="rotulo-kpi-relatorio">Margem</div>
-          <div class="val-kpi-relatorio">${formatarMoeda(margem)}</div>
-          <div class="delta-kpi-relatorio up-good">Receita - custo</div>
-        </div>
-        <div class="kpi-relatorio">
-          <div class="rotulo-kpi-relatorio">ROI</div>
-          <div class="val-kpi-relatorio">${formatarPercentual(relatorio.roi)}</div>
-          <div class="delta-kpi-relatorio up-good">Retorno estimado</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="secao-relatorio">
-      <div class="titulo-secao-relatorio">Resumo financeiro</div>
-      <table class="tabela-relatorio">
-        <thead>
-          <tr><th>Métrica</th><th>Valor</th><th>Leitura</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Custo operacional</td><td class="td-num">${formatarMoeda(custo)}</td><td class="td-muted">Energia, rede, hardware e operação</td></tr>
-          <tr><td>Receita estimada</td><td class="td-num">${formatarMoeda(receita)}</td><td class="td-muted">Receita gerada pela infraestrutura</td></tr>
-          <tr><td>Margem líquida</td><td class="td-pos">${formatarMoeda(margem)}</td><td class="td-muted">Diferença entre receita e custo</td></tr>
-          <tr><td>ROI mensal</td><td class="${roiClasse}">${formatarPercentual(relatorio.roi)}</td><td class="td-muted">Rentabilidade estimada no período</td></tr>
-          <tr><td>Custo sobre receita</td><td class="td-num">${formatarPercentual(custoSobreReceita)}</td><td class="td-muted">Quanto da receita foi consumida por custos</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <footer class="rodape-relatorio">
-      <div class="esq-rodape-relatorio">Smart Data<br>Relatório gerado automaticamente pelo dashboard financeiro.</div>
-      <div class="dir-rodape-relatorio">${relatorio.month}<br>${relatorio.gen}</div>
-    </footer>
-  `;
-}
-
-function abrirModalRelatorio(relatorio) {
   const modal = document.getElementById('report-full-modal');
   const titulo = document.getElementById('report-modal-title');
   const subtitulo = document.getElementById('report-modal-sub');
   const corpo = document.getElementById('report-doc-body');
-
   if (!modal || !titulo || !subtitulo || !corpo) return;
 
-  titulo.textContent = `Relatório Mensal - ${relatorio.month}`;
-  subtitulo.textContent = `Gerado em ${relatorio.gen} · Infraestrutura STEAM`;
-  corpo.innerHTML = montarConteudoRelatorio(relatorio);
+  titulo.textContent = `Relatório Financeiro - ${relatorio.periodo.titulo}`;
+  subtitulo.textContent = relatorio.nomeArquivo;
+  corpo.classList.add('pdf-ativo');
+  corpo.innerHTML = '<div class="estado-lista-relatorios">Carregando PDF...</div>';
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+
+  try {
+    const resposta = await fetch(
+      `/financeira/relatorios/url?chave=${relatorio.chave}`
+    );
+    if (!resposta.ok) throw new Error('Não foi possível abrir o relatório.');
+
+    const dados = await resposta.json();
+    urlRelatorioAtual = dados.url;
+
+    const visualizador = document.createElement('iframe');
+    visualizador.className = 'visualizador-pdf-relatorio';
+    visualizador.src = urlRelatorioAtual;
+    visualizador.title = `Relatório financeiro de ${relatorio.periodo.titulo}`;
+    corpo.replaceChildren(visualizador);
+  } catch (erro) {
+    console.error('Erro ao abrir relatório financeiro:', erro);
+    corpo.innerHTML = `
+      <div class="estado-lista-relatorios erro">
+        Não foi possível abrir este relatório.
+      </div>`;
+  }
+}
+
+function abrirRelatorioEmNovaAba() {
+  if (urlRelatorioAtual) {
+    window.open(urlRelatorioAtual, '_blank', 'noopener');
+  }
 }
 
 function fecharModalRelatorio() {
   const modal = document.getElementById('report-full-modal');
+  const corpo = document.getElementById('report-doc-body');
   if (modal) modal.classList.remove('active');
+  if (corpo) {
+    corpo.classList.remove('pdf-ativo');
+    corpo.innerHTML = '';
+  }
+  urlRelatorioAtual = '';
   document.body.style.overflow = '';
 }
 
@@ -1157,7 +1203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buscarDados();
   
   // Gráfico de linha (período padrão: 12 meses)
-  definirPeriodoGrafico('12m', document.querySelector('.btn-periodo.active:not(.roi-period-btn)'));
+  definirPeriodoGrafico('12m', document.querySelector('.btn-periodo.active:not(.botao-periodo-roi)'));
 
   setInterval(() => {
     if (periodoGraficoLinha === '24h') buscarDados();
@@ -1173,5 +1219,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // definirVisualizacaoTabela('servidores', true);
 
      // Relatórios
-  renderizarListaRelatorios();
+  buscarRelatoriosS3();
 });
