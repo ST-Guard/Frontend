@@ -26,7 +26,7 @@ function buscarDados() {
     })
     .catch(() => {}); 
 
-    const BUCKET = 'smartdatabucket2'
+        var BUCKET = ''
         fetch("/financeira/pegarDadosFinanceira", {
         method: "POST", 
         headers: { "Content-Type": "application/json" },

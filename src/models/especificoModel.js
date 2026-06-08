@@ -14,7 +14,7 @@ const s3Client = new S3Client({
 async function puxarDadosEspecifico(bucket) {
 
     const parametros = {
-        Bucket: bucket,
+        Bucket: process.env.AWS_BUCKET_NAME,
         Key: "client/servidor.json" 
     };
     try {
@@ -35,7 +35,7 @@ async function puxarDadosEspecifico(bucket) {
 function selectServidor(idZona) {
 
     const instrucaoSql = `
-        SELECT * FROM SERVIDOR
+        SELECT * FROM servidor
             WHERE fkzona = ?;
     `;
     return database.executar(instrucaoSql, [idZona]);

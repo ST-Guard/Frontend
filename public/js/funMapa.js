@@ -457,20 +457,20 @@ function selecionarDatacenters() {
 }
 
 function selecionarAlerta(data) {
-    sessionStorage.setItem = ("DATA", "");
-    sessionStorage.setItem = ("REGIAO", "");
+    sessionStorage.setItem("DATA", "");
+    sessionStorage.setItem("REGIAO", "");
 
     if (data == 1) {
-        sessionStorage.setItem = ("REGIAO", "SP");
-        sessionStorage.setItem = ("DATA", "DC-SP-01");
+        sessionStorage.setItem("REGIAO", "SP");
+        sessionStorage.setItem("DATA", "DC-SP-01");
         dataCenterTitulo.innerHTML = "São Paulo"
     } else if (data == 2) {
-        sessionStorage.setItem = ("REGIAO", "RJ");
-        sessionStorage.setItem = ("DATA", "DC-RJ-01");
+        sessionStorage.setItem("REGIAO", "RJ");
+        sessionStorage.setItem("DATA", "DC-RJ-01");
         dataCenterTitulo.innerHTML = "Rio de Janeiro"
     } else {
-        sessionStorage.setItem = ("REGIAO", "RS");
-        sessionStorage.setItem = ("DATA", "DC-RS-01");
+        sessionStorage.setItem("REGIAO", "RS");
+        sessionStorage.setItem("DATA", "DC-RS-01");
         dataCenterTitulo.innerHTML = "Porto Alegre"
     }
 

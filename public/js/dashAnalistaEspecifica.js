@@ -90,24 +90,24 @@ async function puxarDadosAws() {
                 document.querySelector('#container_kpis .kpi3').style.borderColor = '#23B26D';
                 document.querySelector('#container_kpis .kpi3 h1').style.color = '#23B26D';
                 document.querySelector('#container_kpis .kpi3').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
-                imgKpi3.src = "../assets/dashboard-icons/icon_Check.svg"
+                imgKpi3.src = "../assets/dashboard-icons/icon_check.svg"
             }
 
             if (dados.KPIS.P99RAMTotal >= 75) {
                 document.querySelector('#container_kpis .kpi4').style.borderColor = '#FF5252';
                 document.querySelector('#container_kpis .kpi4 h1').style.color = '#FF5252';
                 document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #FF5252, 0 4px 12px rgba(0,0,0,0.1)`;
-                imgKpi4.src = "../assets/dashboard-icons/icon_Alerta.svg"
+                imgKpi4.src = "../assets/dashboard-icons/icon_alerta.svg"
             } else if (dados.KPIS.P99RAMTotal >= 60) {
                 document.querySelector('#container_kpis .kpi4').style.borderColor = '#F5CC4D';
                 document.querySelector('#container_kpis .kpi4 h1').style.color = '#F5CC4D';
                 document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;   
-                imgKpi4.src = "../assets/dashboard-icons/icon_Atencao.svg"        
+                imgKpi4.src = "../assets/dashboard-icons/icon_atencao.svg"        
             } else {
                 document.querySelector('#container_kpis .kpi4').style.borderColor = '#23B26D';
                 document.querySelector('#container_kpis .kpi4 h1').style.color = '#23B26D';
                 document.querySelector('#container_kpis .kpi4').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
-                imgKpi4.src = "../assets/dashboard-icons/icon_Check.svg"
+                imgKpi4.src = "../assets/dashboard-icons/icon_check.svg"
             }
 
             if (dados.KPIS.P99DISCOTotal >= 75) {
@@ -119,12 +119,12 @@ async function puxarDadosAws() {
                 document.querySelector('#container_kpis .kpi2').style.borderColor = '#F5CC4D';
                 document.querySelector('#container_kpis .kpi2 h1').style.color = '#F5CC4D';
                 document.querySelector('#container_kpis .kpi2').style.boxShadow = `1.5px 1px 2px 1px #F5CC4D, 0 4px 12px rgba(0,0,0,0.1)`;
-                imgKpi2.src = "../assets/dashboard-icons/icon_Atencao.svg"        
+                imgKpi2.src = "../assets/dashboard-icons/icon_atencao.svg"        
             } else {
                 document.querySelector('#container_kpis .kpi2').style.borderColor = '#23B26D';
                 document.querySelector('#container_kpis .kpi2 h1').style.color = '#23B26D';
                 document.querySelector('#container_kpis .kpi2').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
-                imgKpi2.src = "../assets/dashboard-icons/icon_Check.svg"
+                imgKpi2.src = "../assets/dashboard-icons/icon_check.svg"
             }
 
             if (dados.KPIS.P99REDETotal >= 75) {
@@ -141,7 +141,7 @@ async function puxarDadosAws() {
                 document.querySelector('#container_kpis .kpi1').style.borderColor = '#23B26D';
                 document.querySelector('#container_kpis .kpi1 h1').style.color = '#23B26D';
                 document.querySelector('#container_kpis .kpi1').style.boxShadow = `1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)`;
-                imgKpi1.src = "../assets/dashboard-icons/icon_Check.svg"
+                imgKpi1.src = "../assets/dashboard-icons/icon_check.svg"
             }
 
             return dados
@@ -727,10 +727,16 @@ document.addEventListener("DOMContentLoaded", () => {
             valoresLatencia[valoresLatencia.length - 1] = dados.KPIS.P99REDETotal.toFixed(1);
         } else {
             let selectMaior = selecionado.toLowerCase();
-            valoresRam[valoresRam.length - 1] = dados.Servidores[selectMaior].RAM.p99.toFixed(1);
-            valoresCpu[valoresCpu.length - 1] = dados.Servidores[selectMaior].CPU.p99.toFixed(1);
-            valoresDisco[valoresDisco.length - 1] = dados.Servidores[selectMaior].DISCO.p99.toFixed(1);
-            valoresLatencia[valoresLatencia.length - 1] = dados.Servidores[selectMaior].REDE.p99.toFixed(1);
+            const valoresRam = [24, 42, 55.3, 19, 73, 81, 38, 66.9, 90, 47.5, 12, 33.7];
+            const valoresCpu = [18, 39.5, 58, 64.5, 81, 41.2, 22, 51, 49.5, 75, 68.5, 33];
+            const valoresDisco = [14.3, 29.8, 35.1, 52.4, 47.2, 22.7, 39.5, 11.2, 44.6, 28.3, 63.9, 8.5];
+            const valoresLatencia = [22.5, 53, 67, 43, 36, 48, 32.5, 23, 57, 73, 6, 53];
+
+            valoresRam[valoresRam.length - 1] = dados.KPIS.P99RAMTotal.toFixed(1);
+            valoresCpu[valoresCpu.length - 1] = dados.KPIS.P99CPUTotal.toFixed(1);
+            valoresDisco[valoresDisco.length - 1] = dados.KPIS.P99DISCOTotal.toFixed(1);
+            valoresLatencia[valoresLatencia.length - 1] = dados.KPIS.P99REDETotal.toFixed(1);
+
         }
 
         chartRamXCpu.data.labels = labelsRamCpu;

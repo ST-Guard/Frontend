@@ -12,15 +12,20 @@ const s3Client = new S3Client({
 });
 
 async function obterS3UrlController2(req, res) {
+    
+    const parametros = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: 'client/alertas_gestora.json', 
+    };
+
     try {
-        const comando = new GetObjectCommand({
-            Bucket: process.env.AWS_BUCKET_NAME,
-            Key: 'client/alertas_gestora.json',
-        });
-
-        const url = await getSignedUrl(s3Client, comando, { expiresIn: 300 });
-
-        return res.json({ url });
+        const command = new GetObjectCommand(parametros);
+        const resposta = await s3Client.send(command);
+        const stringData = await resposta.Body.transformToString();
+        const dados = JSON.parse(stringData);
+        console.log("Dados alertas_gestora.json carregados com sucesso do S3!");
+        
+        return res.status(200).json(dados);
     } catch (error) {
         console.error('Erro ao gerar URL do S3:', error);
         return res.status(500).json({ error: 'Erro interno do servidor' });

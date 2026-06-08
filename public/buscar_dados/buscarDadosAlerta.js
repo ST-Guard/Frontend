@@ -1,25 +1,15 @@
 function navegarPara(caminho) {
   window.location.href = caminho;
 }
+
 async function carregarDadosDashAlerta() {
     try {
-        const respostaURL = await fetch('/alertas/obter-url-s3');
-        const { url } = await respostaURL.json();
-
-        const respostaS3 = await fetch(url);
-
-        if (!respostaS3.ok) {
-            throw new Error('Erro ao carregar dados do s3');
-        }
-
-        const dadosDashboard = await respostaS3.json();
-
+        const resposta = await fetch("/alertas/obter-url-s3");    
+        const dadosDashboard = await resposta.json();
         console.log("Dados recebidos:", dadosDashboard);
-
         renderizarDadosDash(dadosDashboard);
-
     } catch (error) {
-        console.log("Houve um erro na função carregarDadosDashAlerta: " + error);
+        console.error("Erro ao puxar dados do S3 1:", error);
     }
 }
 
@@ -36,27 +26,17 @@ async function atualizarDados() {
         console.log("Erro ao atualizar:", error);
     }
 }
+
 /*===================================================================================== */
 
 async function carregarDadosDashAlerta2() {
     try {
-        const respostaURL = await fetch('/alertas2/obter-url-s3');
-        const { url } = await respostaURL.json();
-
-        const respostaS3 = await fetch(url);
-
-        if (!respostaS3.ok) {
-            throw new Error('Erro ao carregar dados do s3');
-        }
-
-        const dadosDashboard2 = await respostaS3.json();
-
+        const resposta = await fetch("/alertas2/obter-url-s3");
+        const dadosDashboard2 = await resposta.json()
         console.log("Dados recebidos 2:", dadosDashboard2);
-
         renderizarDadosDash2(dadosDashboard2);
-
     } catch (error) {
-        console.log("Houve um erro na função carregarDadosDashAlerta2: " + error);
+        console.error("Erro ao puxar dados do S3 2:", error);
     }
 }
 
@@ -98,7 +78,7 @@ async function renderizarDadosDash(dadosDashboard) {
     const listaMttrBaixo = dados.map(item => Number((item.baixo / 60).toFixed(2)));
     const listaMttrMedio = dados.map(item => Number((item.medio / 60).toFixed(2)));
     const listaMttrCritico = dados.map(item => Number((item.critico / 60).toFixed(2)));
-    const listaMttrLabels = dados.map(item => item.servidor);
+    const listaMttrLabels = dados.map(item => item.nomeServidor);
 
     if (mttrServer) {
         mttrServer.data.labels = listaMttrLabels;
@@ -232,7 +212,6 @@ async function renderizarDadosDash2(dadosDashboard2) {
     /* =========================================================*/
 
     renderizarCardsAlertas(dadosDashboard2, data, regiao);
-    renderizarSla(dadosDashboard2, data, regiao);
 }
 
 function renderizarCardsAlertas(dadosDashboard2, data, regiao) {
