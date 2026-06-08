@@ -19,9 +19,9 @@ var servidorRouter = require("./src/routes/servidor")
 var zonaRouter = require("./src/routes/zona");
 var sessaoRouter = require("./src/routes/sessao");
 var financeira = require("./src/routes/financeiraRoute");
-var relatorioRouter = require("./src/routes/relatorioRouter");
 var steamRouter = require("./src/routes/steam");
 var especificoRouter = require("./src/routes/especifico")
+var relatorioRouter = require("./src/routes/relatorioRouter");
 var buscarzonasRouter = require("./src/routes/buscarzona")
 
 /* VICTIN ROTA */
