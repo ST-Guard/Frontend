@@ -18,7 +18,7 @@
 
 </head>
 
-<body onload="obter_todos_dados()">
+<body onload="obter_todos_dados(); setTimeout(obter_todos_dados, 3000);">
 
     <header>        
         <nav>
@@ -85,7 +85,6 @@
                 </div>
             </div>
         </div>
-
         <div class="corpoDash">
 
 
@@ -95,21 +94,21 @@
             </div>
 
             <div id="container_kpis">
-                <div class="div_kpi kpi1" id="kpi1" onclick="abrirModal()"></div>
-                <div class="div_kpi kpi2" id="kpi2" onclick="abrirModal()"></div>
+                <div class="div_kpi kpi1" id="kpi1" onclick="abrirModal('ZONA COM A MAIOR QUANTIDADE DE ALERTAS EM ABERTO', 'Está KPI é referente a Zona alocada ao analista que proporcionalmente está com mais alertas em aberto. ')"></div>
+                <div class="div_kpi" id="kpi2" onclick="abrirModal('ZONA COM O MAIOR TEMPO DE MTTR', 'Está KPI é refente a Zona alocada ao analista com o maior tempo de resolução de alertas e suas cores estão ordenadas, sendo elass: <br> 4 horas para incidentes baixos - Verde <br> 12 horas para incidentes médios - Amarelo <br> 24 horas para incidentes Criticos - Vermelho <br>')"></div>
             
+                <div class="div_kpi kpi4" id="kpi4" onclick="abrirModal('ZONA COM A MAIOR QUANTIDADE DE SERVIDORES SOBRECARREGADOS', 'Está KPI é referente a Zona alocada ao analista com a maior quantidade de servidores sobrecarregados ou seja que estão proximos ou já estão de seu limite alocado.')"></div>
 
 
 
-
-                <div class="div_kpi kpi3" onclick="abrirModal()">
+                <div class="div_kpi" id="kpi3" onclick="abrirModal('TRAFEGO TOTAL DE JOGADORES', 'Está KPI é referente a quantidade de jogadores que estão redirecionados ao Datacenter do analista alocado.')">
                     <div class="info_kpi">
                         <div class="containerTitulo">
                             <h3>TRAFEGO TOTAL DE JOGADORES NO DATACENTER</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 id="trafego_dt"></h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
+
                         </div>
                         <div class="div_especiCrit">
                             
@@ -120,16 +119,20 @@
 
                 
 
-                <div class="div_kpi kpi4" id="kpi4" onclick="abrirModal()"></div>
+
 
 
 
 
             </div>
 
-                           <div id="modal" style="display: none; background-color:  brown; height: 100%; width: 100%;     z-index: 999; position: fixed;">
-    <h1>lalalalalal</h1>
-   </div>
+    <div id="modalGrafico" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal()">&times;</span>
+            <h2 id="tituloModal"></h2>
+            <div id="conteudoModal"></div>
+        </div>
+    </div>
 
             <div id="container_graficosP1">
                 <div id="servidores_criticos">
@@ -181,7 +184,7 @@
                     <div class="primeiro_grafico">
                         <div class="titulo_p1">
                             <h1 id="titulo_grafico1">Trafego total comparado ao dia da semana anterior ZONA A</h1>
-                            <img src="../assets/icons_dashOpGestora/info.svg" alt="" onclick="abrirModal()">
+                            <img src="../assets/icons_dashOpGestora/info.svg" alt="" onclick="abrirModal('TRAFEGO DE JOGADORES DA ZONA ATUAL COMPARADO AO MESMO DIA DA SEMANA ANTERIOR', 'A impotancia deste grafico se deve à observar e se preparar para os servidores da zona alocada ao funcionario que  pentrarão em alerta ou sobrecarregados, verificando a primeira variavél que é o mesmo dia da semana anterior.')">
                         </div>
                         <div class="grafico_p1">
 
@@ -191,7 +194,7 @@
                         </div>
                         <div class="informacoes_p1">
                             <div class="dia_atual_semana">
-                                <h1>Dia atual: Sabado</h1>
+                                <h1 id="dia_semana">Dia atual: Sabado</h1>
                             </div>
                             <div class="dia_anterior">
                                     <div class="quadrado_roxo">
@@ -208,37 +211,13 @@
                         </div>
                     </div>
 
-                    <div class="segundo_grafico">
-                        <div class="titulo_p2">
-                            <h1 id="titulo_grafico2">Tempo de resolução de chamado em horas (MTTR) ZONA A</h1>
-                        <img src="../assets/icons_dashOpGestora/info.svg" alt="" onclick="abrirModal()">
-                        </div>
-                        <div class="grafico_p2">
-                                <canvas id="myChart2" style="width: 100%;"></canvas>
-                        </div>
-                        <div class="informacoes_p2">
-                            <div class="tempo_sla">
-                                <div class="quadrado_vermelho">
-                                    <p>b</p>
-                                </div>
-                                <h1>TEMPO ESTIPULADO SLA</h1>
-                            </div>
-                            <div>
-                                <div class="mttr_atual">
-                                    <div class="quadrado_azul">
-                                        <p>b</p>
-                                    </div>
-                                    <h1>MTTR DA ZONA</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="segunda_divisao">
                     <div class="terceiro_grafico">
                                                 <div class="titulo_p3">
-                            <h1 id="titulo_grafico3">Correlação entre o Disco em cache x P99 latencia da ZONA A</h1>
-                            <img src="../assets/icons_dashOpGestora/info.svg" alt="" onclick="abrirModal()">
+                            <h1 id="titulo_grafico3">Correlação entre o Disco em TB x P99 latencia da ZONA A</h1>
+                            <img src="../assets/icons_dashOpGestora/info.svg" alt="" onclick="abrirModal('A CORRELAÇÃO ENTRE O DISCO EM TERABYTES X O P99 DA ZONA', 'A importancia deste gráfico se deve ao processamento da Steam onde os dados mais acessados são alocados localmente, sua importancia se deve ao fato do uso do disco total, onde se ele estiver com uma porcentagem alta, pode ocorrer travamentos e acarretar em delays para o usuário final' )">
                         </div>
                         <div class="grafico_p3">
                             <canvas id="myChart3" style="width: 100%;"></canvas>
@@ -255,15 +234,15 @@
                                     <div class="quadrado_azul">
                                         <p>b</p>
                                     </div>
-                                    <h1>DISCO EM CACHE</h1>
+                                    <h1>DISCO EM TERABYTES</h1>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="quarto_grafico">
                                                 <div class="titulo_p4">
-                            <h1>Correlação entre a quantidade de computadores sobrecarregados x  <br> computadores com latencia alta</h1>
-                            <img src="../assets/icons_dashOpGestora/info.svg" alt="" onclick="abrirModal()">
+                            <h1>Correlação entre a quantidade de servidores sobrecarregados x  <br> servidores com alta latencia</h1>
+                            <img src="../assets/icons_dashOpGestora/info.svg" alt="" onclick="abrirModal('CORRELAÇÃO ENTRE A QUANTIDADE DE SERVIDORES COM ALTA LATENCIA X SERVIDORES SOBRECARREGADOS', 'Este gráfico se deve pois o servidor em sobrecarga, atrasa respostas e faz com que a latencia fique alta, se a latencia explode primeiro o computador acumula conexões esperando resposta até esgotar sua memṕria podendo colocar o servidor em um estado de fora da operação, monitorar este gráfico tem de grande importancia para a saúde do sistema.')">
                         </div>
                         <div class="grafico_p4">
                             <canvas id="myChart4" style="width: 100%;"></canvas>
@@ -301,875 +280,18 @@
 </body>
 
 <script>
-    dados_merge_json = ""
 
-    function obter_todos_dados(){
-    console.log("Chamando os dados")
 
-    var zonas_usuario = []
-    var empresa_usuario = null
-    var nome_datacenter = null
-    var dados_do_s3 = null
-    var servidores_usuario = []
-
-    var dados_juntos = ""
-
-
-
-
-    // buscando as zonas do usuario    
-    fetch("/bzonas/BuscarZonas", {
-        method: "POST",
-        headers: {
-                "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-                idUsuario: sessionStorage.ID_USUARIO
-            })
-
-    }).then(function(resposta) {
-        resposta_json = resposta.json()
-        return resposta_json
-       
-    }).then(function(dados) {
-         var zonas = dados.resultadoenvio
-         var mensagem = ""
-
-         var_options = ""
-
-         for(i = 0; i < zonas.length; i++) {
-
-            zonas_usuario.push(zonas[i].nome)
-     
-            var zona_nome =  zonas[i].nome
-            var_options  += `<option value="${zona_nome}">${zona_nome}</option>`
-
-         }
-
-         select_zonas.innerHTML = `                  <option value="valor_vazio">SELECIONE A ZONA</option>       ${var_options}`
-
-
-       if(empresa_usuario != null && nome_datacenter != null && dados_do_s3 != null && zonas_usuario.length > 1){
-
-        console.log("OS DADOS CHEGARAM")
-        console.log(empresa_usuario)
-        console.log(nome_datacenter)
-        console.log(dados_do_s3)
-        
-        console.log(zonas_usuario)
-
-
-
-        dados_juntos = dados_do_s3[empresa_usuario][nome_datacenter]
-        
-        zonas_dados = []
-        for (i = 0; i < zonas_usuario.length; i++ ) {
-
-
-        var nome_zona = zonas_usuario[i]
-    
-
-        var zona_atual = dados_juntos[nome_zona]
-    zonas_dados.push({ nome_zona: zonas_usuario[i], dados: zona_atual })
-        }
-
-        dados_merge = {total_trafego: dados_juntos.TOTAL_JOGADORES_DATACENTER, zonas: zonas_dados}
-        
-
-        console.log("JUNTANDO OS DADOS DO USUARIO FICOU: ")
-        console.log(dados_merge)
-
-        plotarDadosGKPis(dados_merge)
-        
-        
-    }
-
-
-
-
-
-
-     
-    }).catch(function(erro) {
-        console.log("Existe algum erro na aplicação")
-        console.log(erro)
-    })
-
-
-
-
-
-
-    // buscando os dados da empresa
-         fetch("/bzonas/BuscarEmpresa", {
-        method: "POST",
-        headers: {
-                "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-                idUsuario: sessionStorage.ID_USUARIO
-            })
-
-    }).then(function(resposta) {
-
-        resposta_json = resposta.json()
-        return resposta_json
-       
-        
-    }).then(function(dados) {
-        var dados_empresa = dados.resultadoenvio
-
-        empresa_usuario = dados_empresa[0]
-        empresa_usuario = empresa_usuario.razaoSocial
-
-        nome_datacenter = dados_empresa[0].datacenter
-        console.log("o nome do datacenter é ", nome_datacenter)
-
-
-        for(i = 0; i < dados_empresa.length; i++){
-
-            servidor = dados_empresa[i].nome
-            servidores_usuario.push(servidor)
-        }
-
-
-
-       if(empresa_usuario != null && nome_datacenter != null && dados_do_s3 != null && zonas_usuario.length > 1){
-
-        console.log("OS DADOS CHEGARAM")
-        console.log(empresa_usuario)
-        console.log(nome_datacenter)
-        console.log(dados_do_s3)
-        
-        console.log(zonas_usuario)
-
-
-
-        dados_juntos = dados_do_s3[empresa_usuario][nome_datacenter]
-        
-        zonas_dados = []
-        for (i = 0; i < zonas_usuario.length; i++ ) {
-
-
-        var nome_zona = zonas_usuario[i]
-    
-
-        var zona_atual = dados_juntos[nome_zona]
-    zonas_dados.push({ nome_zona: zonas_usuario[i], dados: zona_atual })
-        }
-
-        dados_merge = {total_trafego: dados_juntos.TOTAL_JOGADORES_DATACENTER, zonas: zonas_dados}
-        
-
-        console.log("JUNTANDO OS DADOS DO USUARIO FICOU: ")
-        console.log(dados_merge)
-
-        plotarDadosGKPis(dados_merge)
-        
-        
-    }
-
-
-
-
-
-    
-    }).catch(function(erro) {
-        console.log("Existe algum erro na aplicação")
-        console.log(erro)
-    })
-
-
-
-
-    // buscando os dados gerais do analista
-            fetch("/banalista/buscarDadosAnalista_Gerais", {
-        method: "POST",
-        headers: {
-                "Content-Type": "application/json"
-        },
-
-
-    }).then(function(resposta) {
-
-        resposta_json = resposta.json()
-        return resposta_json
-       
-        
-    }).then(function(dados) {
-        
-        console.log(dados)
-
-
-        var dados_gerais  = dados
-
-        dados_do_s3 = dados_gerais["KPIS"]
-
-
-
-
-
-       if(empresa_usuario != null && nome_datacenter != null && dados_do_s3 != null && zonas_usuario.length > 1){
-
-        console.log("OS DADOS CHEGARAM")
-        console.log(empresa_usuario)
-        console.log(nome_datacenter)
-        console.log(dados_do_s3)
-        
-        console.log(zonas_usuario)
-
-
-
-        dados_juntos = dados_do_s3[empresa_usuario][nome_datacenter]
-        
-        zonas_dados = []
-        for (i = 0; i < zonas_usuario.length; i++ ) {
-
-
-        var nome_zona = zonas_usuario[i]
-    
-
-        var zona_atual = dados_juntos[nome_zona]
-    zonas_dados.push({ nome_zona: zonas_usuario[i], dados: zona_atual })
-        }
-
-        dados_merge = {total_trafego: dados_juntos.TOTAL_JOGADORES_DATACENTER, zonas: zonas_dados}
-        
-
-        console.log("JUNTANDO OS DADOS DO USUARIO FICOU: ")
-        console.log(dados_merge)
-
-        plotarDadosGKPis(dados_merge)
-        
-        
-    }
-
-
-
-        
-    }).catch(function(erro) {
-        console.log("Existe algum erro na aplicação")
-        console.log(erro)
-    })
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-function plotarDadosGKPis(dados_zonas_json) {
-    
-
-
-    console.log("VAMOS PLOTAR OS DADOS DAS KPIS")
-
-    trafego_dt.innerHTML = dados_zonas_json.total_trafego
-
-
-    var zona_matriz = []
-    var servidores_matriz = []
-
-
-    for (i = 0; i < dados_zonas_json.zonas.length; i++){
-
-    var dado_zona_atual = dados_zonas_json.zonas[i]
-    var nome_zona = dado_zona_atual.nome_zona
-    var dados_zona  = dado_zona_atual.dados
-
-
-
-    if (dados_zona == null) {
-        console.log("Zona sem dados:", nome_zona)
-        continue
-    }
-
-    
-        var servidores_zona = dados_zona.servidores_zona
-        var chaves_zonas = Object.keys(servidores_zona)
-
-
-
-
-        for(l = 0; l < chaves_zonas.length; l++){
-            servidor_atual = servidores_zona[chaves_zonas[l]]
-
-
-            servidores_matriz.push([
-                servidor_atual.NOME_ZONA,
-                servidor_atual.NOME_SERVIDOR,
-                servidor_atual.CPU,
-                servidor_atual.RAM,
-                servidor_atual.DISCO,
-                servidor_atual.SCORE_SERVIDOR              
-            ])
-        }
-
-
-
-        var quantidade_computadores = dados_zona.QUANTIDADE_SERVIDORES
-        var quantidade_sobrecarregados = dados_zona.QUANTIDADE_SOBRECAREGADOS
-        var quantidade_alta_latencia = dados_zona.QUANTIDADE_ALTA_LATENCIA
-        var P99_latencia = dados_zona.P99_LATENCIA
-        var total_disco = dados_zona.TOTAL_DISCO
-        var quantidade_em_abero = dados_zona.QUANTIDADE_ALERTA_ABERTOS
-        var mttr_zona = dados_zona.MTTR_ZONA
-
-
-
-    
-    
-
-
-
-        zona_matriz.push([nome_zona, 
-        quantidade_computadores, 
-        quantidade_sobrecarregados, 
-        quantidade_alta_latencia, 
-        P99_latencia,
-        total_disco, 
-        quantidade_em_abero, 
-        mttr_zona
-    ])
-
-        
-
-    }
-
-
-
-    // ordenando os servidores
-    servidores_matriz.sort((a, b) => b[5] - a[5])
-
-    var servidores_ordenados = servidores_matriz
-
-
-
-    conteudo = ""
-    for( i= 0; i < servidores_ordenados.length; i++){
-
-
-        
-
-
-        var servidor = servidores_ordenados[i]
-    
-
-
-
-
-
-
-        conteudo += `
-                                                                        <div class="div_server">
-                            
-                            <div class="div_nomeServer" onclick="mudarTelaEspecifica('${servidor[1]}')">
-                                <div class="div_titulos_info">
-                                <h1>${i + 1}-</h1>
-                                
-                                <img src="./../assets/dashboard-icons/server.svg" alt="">
-
-                                <div class="titulos_info">
-
-                                <h4><span id="nomeServer">${servidor[0]}</span></h4>
-                                <h4><span id="nomeServer">${servidor[1]}</span></h4>
-                                </div>
-                                </div>
-                                <div  class="div_info_cpu">
-                                <img src="./../assets/dashboard-icons/icon_kpiCPU.svg" alt="">
-                                <h4>CPU</h4>
-                                <h4>${servidor[2]}</h4>
-                                </div>
-                                <div class="div_info_ram">
-                                <img src="./../assets/dashboard-icons/icon_ram.svg" alt="">
-                                <h4>RAM</h4>
-                                <h4>${servidor[3]}</h4>
-                                </div>
-                                <div class="div_info_disco">
-                                <img src="./../assets/dashboard-icons/icon_kpiDisco.svg" alt="">
-                                <H4>DISCO</H4>
-                                <h4>${servidor[4]}</h4>
-                                </div>
-
-                            </div>
-                        </div>
-        
-        
-        
-        `
-
-
-    }
-
-
-
-
-    conteudoServCrit.innerHTML  =  `                        <div class="conteudoTitulo">
-                            <h1>Servidores - Ordem de Criticidade</h1>
-
-                        </div>
-    ${conteudo}`
-
-
-
-    /// KPIS
-    var kpi_em_abertos_ordenada = []
-    var mttr_ordenado = []
-    var kpi_sobrecarregados_ordenado = []
-
-
-
-    for(var  i = 0; i < zona_matriz.length; i++){
-
-
-        servidor_atual = zona_matriz[i]
-
-
-        var nome_zona = servidor_atual[0]
-        var qtd_servidores = servidor_atual[1]
-        var sobrecarregados = servidor_atual[2]
-        var quantidade_alertas_abertos = servidor_atual[6]
-        var mttr = servidor_atual[7]
-
-
-
-
-        var porcentagem = 0
-        var porcentagem_sobrecarregados =  0
-
-
-        if (qtd_servidores > 0){
-            porcentagem  = quantidade_alertas_abertos * 100 / qtd_servidores
-            porcentagem_sobrecarregados = quantidade_sobrecarregados * 100 /qtd_servidores
-        } else {
-            porcentagem = 0
-            porcentagem_sobrecarregados = 0
-        }
-
-
-    
-
-
-
-
-
-        kpi_em_abertos_ordenada.push({nome_zona: nome_zona, qtd_servidores: qtd_servidores, aberto: quantidade_alertas_abertos, porcentagem: porcentagem})
-        mttr_ordenado.push({nome_zona: nome_zona, mttr: mttr})
-        kpi_sobrecarregados_ordenado.push({nome_zona: nome_zona, qtd_servidores: qtd_servidores, sobrecarregados: quantidade_sobrecarregados, porcentagem: porcentagem_sobrecarregados})
-
-
-    }
-
-
-
-    kpi_em_abertos_ordenada.sort((a, b) => b.porcentagem - a.porcentagem)
-
-
-
-    var ultima = kpi_em_abertos_ordenada[0]
-
-    if(ultima.porcentagem > 60){
-
-
-            kpi1.innerHTML = `
-                        <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3 style="font-size: 18px;">ZONA COM A MAIOR QUANTIDADE DE ALERTAS EM ABERTO</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1>${ultima.nome_zona}</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
-                        </div>
-                        <div class="div_situacao">
-                            <h1 style="font-size: 20px;">${ultima.aberto}/${ultima.qtd_servidores} EM ALERTA</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
-                        </div>
-
-                    </div>
-    `
-
-
-
-
-    } else if(ultima.porcentagem > 1){
-            
-    kpi1.innerHTML = `
-                        <div class="info_kpi" style="">
-                        <div class="containerTitulo">
-                            <h3 style="font-size: 18px;">ZONA COM A MAIOR QUANTIDADE DE ALERTAS EM ABERTO</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1>${ultima.nome_zona}</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
-                        </div>
-                        <div class="div_situacao">
-                            <h1 style="font-size: 20px;">${ultima.aberto}/${ultima.qtd_servidores} EM ALERTA</h1>
-                            <img src="../assets/dashboard-icons/icon_alerta.svg" alt="">
-                        </div>
-
-                    </div>
-    `
-    } else {
-
-
-    
-    kpi1.innerHTML = `                                   
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3 style="font-size: 18px;">ZONA COM A MAIOR QUANTIDADE DE ALERTAS EM ABERTO</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1 style="color: #23B26D; ">${ultima.nome_zona}</h1>
-                           
-                        </div>
-                        <div class="div_situacao">
-                            <h1 style="font-size: 20px; color: #23B26D;">${ultima.aberto}/${ultima.qtd_servidores} EM ALERTA</h1>
-                            
-                        </div>
-
-                    </div>
-                
-    `
-    kpi1.style.border = "1px solid var(--KPI-normal)"
-    kpi1.style.boxShadow = "1.5px 1px 2px 1px #23B26D, 0 4px 12px rgba(0,0,0,0.1)"
-                }
-        mttr_ordenado.sort((a, b) => b.mttr - a.mttr)
-    
-        maior_mttr = mttr_ordenado[0]
-        maior_mttr.mttr = (maior_mttr.mttr / 60 ).toFixed(2)
-            kpi2.innerHTML = `
-                            
-                    <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3>ZONA COM MAIOR MTTR</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1>${maior_mttr.nome_zona}</h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
-                        </div>
-                        <div class="div_situacao">
-                            <h1 style="font-size: 20px;">${maior_mttr.mttr} HORAS </h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
-                        </div>
-
-                    </div>
-               `
-    kpi_sobrecarregados_ordenado.sort((a, b) => b.porcentagem - a.porcentagem)
-    console.log(kpi_sobrecarregados_ordenado)
-    maior_zona_sobrecarregada = kpi_sobrecarregados_ordenado[0]
-    kpi4.innerHTML = ` 
-                   
-                        <div class="info_kpi">
-                        <div class="containerTitulo">
-                            <h3 style="font-size: 18px;">ZONA COM A MAIOR QUANTIDADE DE SERVIDORES SOBRECARREGADOS</h3>
-                        </div>
-                        <div class="div_situacao">
-                            <h1>${maior_zona_sobrecarregada.nome_zona}</h1>
-                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
-                        </div>
-                        <div class="div_situacao">
-                            <h1 style="font-size: 20px;">${maior_zona_sobrecarregada.sobrecarregados}/${maior_zona_sobrecarregada.qtd_servidores} SOBRECARREGADOS</h1>
-                            <img src="../assets/dashboard-icons/icon_check.svg" alt="">
-                        </div>
-    `
+    function abrirModal(titulo, conteudo) {
+    document.getElementById("tituloModal").innerHTML = titulo;
+    document.getElementById("conteudoModal").innerHTML = conteudo;
+    document.getElementById("modalGrafico")
+        .classList.add("ativo");
 }
 
-
-
-
-
-
-function buscarZonaGrafico() {
-    var valor_select_zona = select_zonas.value
-    if(valor_select_zona != "valor_vazio") {
-        titulo_zona.innerHTML = ` 
-                <h1>Panorama - ${valor_select_zona}</h1>
-                <h2>Visão de primeiras investigações.</h2>
-        
-        `
-        graficos_parte2.style.display = "block"
-        titulo_grafico1.innerHTML = `Trafego total comparado ao dia da semana anterior ${valor_select_zona}`
-        titulo_grafico2.innerHTML = `Tempo de resolução de chamado em horas (MTTR) ${valor_select_zona}`
-        titulo_grafico3.innerHTML = `Correlação entre o Disco em cache x P99 latencia da ${valor_select_zona} `
-        plotar_dados(valor_select_zona)
-        
-    
-    } else {
-                titulo_zona.innerHTML = ` 
-                <h1>Selecione uma zona</h1>
-                <h2>Visão de primeiras investigações.</h2>
-        
-        `
-              graficos_parte2.style.display = "none"
-    }
+function fecharModal() {
+    document.getElementById("modalGrafico")
+        .classList.remove("ativo");
 }
-
-
-
-function plotar_dados(value){
-    var valor_selecionado = value
-    var json = dados_merge_json
-
-
-    var chave = valor_selecionado;
-
-
-    console.log("ESTOU SEPARANDO OS DADOS PARA AS DASHBOARDS")
-    console.log(chave)
-    console.log(json)
-
-    json_para_selecionar_dados = ""
-
-    for (i = 0; i < json.length; i++){
-        valor_atual = json[i]
-
-        chave_json = Object.keys(valor_atual)
-
-
-        if(chave_json == chave){
-            json_para_selecionar_dados =  valor_atual
-            
-
-        } else {
-            console.log("QUEBROU")
-        }
-        
-    }
-
-
-
-
-    console.log(json_para_selecionar_dados)
-
-    chave_selecionar_dados = Object.keys(json_para_selecionar_dados)
-
-    lista_dados = json_para_selecionar_dados[chave_selecionar_dados]
-
-    var dados_gerais = lista_dados[0]
-
-    var dia_semana = dados_gerais.DIA_SEMANA
-    var semana_anterior = dados_gerais.JOGADORES_SEMANA_ANTERIOR
-    var dia_atual = dados_gerais.JOGADORES_ZONA
-    console.log(typeof dados_gerais["data-hora"])
-    var hora_agora = new Date(dados_gerais["data-hora"])
-
-
-    hora_agora = hora_agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
-
-
-
-    var json_montado = {dia: dia_semana, semana_anterior: semana_anterior, dia_atual: dia_atual, hora: hora_agora}
-
-
-    
-    console.log(json_montado)
-
-
-    plotarGrafico_trafego(json_montado)
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function plotarGrafico_trafego(dados_trafego) {
-
-        console.log('iniciando plotagem do gráfico...');
-
-  
-
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
-
-        // Criando estrutura para plotar gráfico - dados
-        let dados = {
-    data: {
-
-
-        labels: [],
-        datasets: [{
-            label: 'Quantidade de jogadores na sexta passada',
-            data: [],
-            borderColor: '#244770',
-            borderWidth: 4,
-            tension: 0.1,
-                     
-        }, {
-            label: 'Quantidade com latencia alta',
-            data: [],
-            borderColor: '#66C0F4',
-            borderWidth: 4,
-            tension: 0.1,
-            
-        }]
-  
-    
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-
-      scales: {
-        y: {
-          
-          ticks: {
-            stepSize: 50,
-            color: '#6B7280'
-
-        }
-    },
-        x: {
-
-          ticks: {
-            stepSize: 25,
-            color: '#6B7280'
-
-        }
-        }
-      },
-
-    }
-        };
-
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(dados_trafego)
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-       
-            var registro = dados_trafego;
-            dados.data.labels.push(registro.hora);
-            dados.data.datasets[0].data.push(registro.semana_anterior);
-            dados.data.datasets[1].data.push(registro.dia_atual);
-        
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.data.datasets)
-        console.log('----------------------------------------------')
-
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados.data,
-            options: {
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-
-      scales: {
-        y: {
-          
-          ticks: {
-            stepSize: 50,
-            color: '#6B7280'
-
-        }
-    },
-        x: {
-
-          ticks: {
-            stepSize: 25,
-            color: '#6B7280'
-
-        }
-        }
-      },
-
-    }
-        };
-
-        // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(
-            document.getElementById(`myChart`),
-            config
-        );
-
-        setTimeout(() => atualizarGrafico(dados, myChart), 2000);
-    }
-
-
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico_trafego(dados, myChart) {
-
-
-
-        
-
-
-
-                    dados.data.labels.push(registro.hora);
-                    dados.data.datasets[0].data.push(registro.semana_anterior);
-                    dados.data.datasets[1].data.push(registro.dia_atual);
-                    myChart.update();
-
-
-                
-                
-                
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart), 2000);
-
-                console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    }
-
-
-            
-
-                
-
-
-
-function mudarTelaEspecifica(nomeServidor){
-    sessionStorage.setItem("servidor", nomeServidor)
-    window.location.href = "dashAnalistaEspecifica.html"
-    
-}
-
-
-
-
-
-
-
 </script>
-
-
 </html>
