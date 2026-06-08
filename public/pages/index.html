@@ -21,22 +21,21 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0F1C2E; width: 100%; height: 100%;">
-      <div class="container-fluid px-5">
-        <a class="navbar-brand fs-3 fw-semibold" href="#">
-          <a class="navbar-brand" href="../pages/index.html">
-            <img src="../assets/fundos-home/smart_branca.png" alt="Smart Data Logo" style="height: 50px; width: auto;">
-          </a>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../pages/index.html">
+          <img src="../assets/fundos-home/smart_branca.png" alt="Smart Data Logo">
+        </a>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+        <button class="navbar-toggler" type="button" onclick="alternarMenuNavegacao()"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menu de navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-4">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4">
               <li class="nav-item">
-                <a class="nav-link text-white fs-5" href="#div_relatorios">Serviços</a>
+                <a class="nav-link text-white fs-5" href="#monitoramento">Serviços</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white fs-5" href="#terceiro-banner">Smart Data</a>
@@ -49,13 +48,8 @@
               </li>
             </ul>
 
-            <div class="d-flex">
-              <a href="../pages/login.html">
-                <button class="btn" style="background-color: #F5CC4D; width: 120px; height: 38px; 
-                                       border-radius: 6px; font-weight: 500; align-items: center; display: flex; justify-content: center; font-weight: 600; color: black;">
-                  Login
-                </button>
-              </a>
+            <div class="area-login">
+              <a class="btn btn-login" href="../pages/login.html">Login</a>
             </div>
           </div>
       </div>
@@ -251,7 +245,7 @@
 
       <div class="coluna-footer">
         <h4>Links Rápidos</h4>
-        <a href="#div_relatorios">Serviços</a>
+        <a href="#monitoramento">Serviços</a>
         <a href="#terceiro-banner">Smart Data</a>
         <a href="#diferenciais">Benefícios</a>
         <a href="./login.html">Login</a>

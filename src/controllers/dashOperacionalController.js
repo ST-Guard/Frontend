@@ -6,25 +6,27 @@ const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 console.log("AWS_REGION:", process.env.AWS_REGION);
 console.log("AWS_BUCKET_NAME:", process.env.AWS_BUCKET_NAME);
-console.log("TEM ACCESS KEY:", !!process.env.AWS_ACCESS_KEY_ID);
-console.log("TEM SECRET KEY:", !!process.env.AWS_SECRET_ACCESS_KEY);
-console.log("TEM SESSION TOKEN:", !!process.env.AWS_SESSION_TOKEN);
+console.log("TEM ACCESS KEY:", !!process.env.aws_access_key_id);
+console.log("TEM SECRET KEY:", !!process.env.aws_secret_access_key);
+console.log("TEM SESSION TOKEN:", !!process.env.aws_session_token);
 
 const s3 = new S3Client({
     region: process.env.AWS_REGION || "us-east-1",
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        sessionToken: process.env.AWS_SESSION_TOKEN
+        accessKeyId: process.env.aws_access_key_id,
+        secretAccessKey: process.env.aws_secret_access_key,
+        sessionToken: process.env.aws_session_token
     }
 });
 
 async function buscarGestoraOpJson(req, res) {
     try {
-        const comando = new GetObjectCommand({
+        const parametros = {
             Bucket: process.env.AWS_BUCKET_NAME,
-            Key: "client/gestoraOp_master.json"
-        });
+            Key: "client/dashOpGestao.json",
+          };
+          
+        const comando = new GetObjectCommand(parametros);
 
         const resposta = await s3.send(comando);
         const conteudo = await resposta.Body.transformToString();
@@ -33,7 +35,7 @@ async function buscarGestoraOpJson(req, res) {
         res.status(200).json(json);
 
     } catch (erro) {
-        console.error("Erro ao buscar gestoraOp_master.json no S3:", erro);
+        console.error("Erro ao buscar dashOpGestao.json no S3:", erro);
 
         res.status(500).json({
             erro: "Erro ao buscar JSON da gestora no S3",

@@ -1,4 +1,4 @@
-<html lang="pt-br">
+ <html lang="pt-br">
 
 <head>
   <meta charset="UTF-8" />
@@ -30,10 +30,10 @@
           <div class="sub-secao">Histórico de rentabilidade (%)</div>
         </div>
         <div class="botoes-periodo">
-          <button class="btn-periodo roi-period-btn" onclick="definirPeriodoRoi(1,this)">30 dias</button>
-          <button class="btn-periodo roi-period-btn" onclick="definirPeriodoRoi(2,this)">6 meses</button>
-          <button class="btn-periodo roi-period-btn active" onclick="definirPeriodoRoi(3,this)">12 meses</button>
-          <button class="btn-periodo roi-period-btn" onclick="definirPeriodoRoi(4,this)">YTD</button>
+          <button class="btn-periodo botao-periodo-roi" onclick="definirPeriodoRoi(1,this)">30 dias</button>
+          <button class="btn-periodo botao-periodo-roi" onclick="definirPeriodoRoi(2,this)">6 meses</button>
+          <button class="btn-periodo botao-periodo-roi active" onclick="definirPeriodoRoi(3,this)">12 meses</button>
+          <button class="btn-periodo botao-periodo-roi" onclick="definirPeriodoRoi(4,this)">YTD</button>
         </div>
       </div>
       <canvas id="roiChart" height="120"></canvas>
@@ -51,9 +51,9 @@
           </div>
         </div>
         <div class="acoes-barra-ferramentas-relatorio">
-          <button class="btn-barra-ferramentas-relatorio imprimir" onclick="window.print()">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            Imprimir
+          <button class="btn-barra-ferramentas-relatorio imprimir" onclick="abrirRelatorioEmNovaAba()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+            Abrir PDF
           </button>
           <button class="btn-barra-ferramentas-relatorio fechar" onclick="fecharModalRelatorio()">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -304,7 +304,7 @@
             <div class="nota-pop-orcamento">Orçamento = regressão linear dos últimos 12 meses + margem. Recalculado automaticamente a cada mês.</div>
           </div>
         </div>
-        <div class="kpis-baixo-center">
+        <div class="kpis-inferiores-centralizados">
 
     
         <!-- KPI CUSTO PREVISTO (PROX. MÊS) -->
@@ -343,7 +343,7 @@
             <div><span class="tooltip-bom">Bom:</span> Nenhum alerta crítico e baixa quantidade de alertas ativos.</div>
             <div><span class="tooltip-atencao">Atenção:</span> Alertas críticos ativos ou aumento recorrente de alertas no mês.</div>
           </div>
-          <div class="info_kpi" id="KPI_ALERTA_ID">
+          <div class="info_kpi" id="KPI_ALERTA_ID" onclick="navegarPara('../pages/dashAlertas.html')">
             <div class="containerTitulo">
               <h3>ALERTAS ATIVOS NA INFRAESTRUTURA (MÊS)</h3>
             </div>
@@ -452,11 +452,11 @@
             </svg>
           </div>
         
-          <div class="predict-header-text">
+          <div class="texto-cabecalho-preditivo">
             <div class="titulo-secao" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#fff;">
               Análise Preditiva — Projeção de Custo e Receita
-              <span id="model-mae-badge_custo" class="model-mae-badge-class">MAE — custo</span>
-              <span id="model-mae-badge_receita" class="model-mae-badge-class">MAE — receita</span>
+              <span id="model-mae-badge_custo" class="selo-mae-modelo">MAE — custo</span>
+              <span id="model-mae-badge_receita" class="selo-mae-modelo">MAE — receita</span>
             </div>
             <div class="sub-secao" style="color:rgba(255,255,255,0.5);">Projeção por regressão linear sobre o histórico de 12 meses</div>
           </div>
@@ -494,7 +494,7 @@
 
         <div class="inferior-preditivo">
           <div>
-            <div class="forecast-chart-label" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:10px;">
+            <div class="rotulo-grafico-previsao" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:10px;">
               <span>Curva de custo e receita: histórico + projeção linear</span>
             </div>
             <canvas id="forecastChart" height="90"></canvas>
@@ -516,9 +516,9 @@
               <div class="sub-secao">Gere o fecho do mês ou consulte relatórios anteriores.</div>
             </div>
           </div>
-          <button class="btn-primario" onclick="abrirModalRelatorio({month:'Dezembro 2025',gen:'02/01/2026',cost:562000,rev:860000,roi:53.0})">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            Gerar relatório de Dezembro 2025
+          <button class="btn-primario" onclick="buscarRelatoriosS3()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Atualizar relatórios
           </button>
         </div>
         <div id="reports-list"></div>

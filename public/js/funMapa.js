@@ -1,5 +1,6 @@
 console.log("FUNMAP.JS CARREGOU");
 
+
 if (!sessionStorage.ID_USUARIO) {
     conteiner_msg.innerHTML = "Você precisa estar logado!"
     loadingModal()
@@ -163,7 +164,7 @@ function renderizarMapa() {
         }
 
         // Caso 2/3: empresa tem datacenter nessa região
-        const scoreRegiao = buscarScoreRegiaoNoJson(ufMapa);
+        const scoreRegiao = Number(buscarScoreRegiaoNoJson(ufMapa)).toFixed(0);
         const statusRegiao = converterScoreParaStatus(scoreRegiao);
 
         console.log("SCORE DO JSON PARA", ufMapa, "=", scoreRegiao);
@@ -270,21 +271,21 @@ function aplicarSaudeNoMapa(estadoMapa, statusRegiao) {
 function obterCoresPorScore(score) {
     if (score === null || score === undefined || Number.isNaN(Number(score))) {
         return {
-            estado: "#9eb9d8",
+            estado: "#707a86",
             glow: "#244770"
         };
     }
 
     const saude = Number(score);
 
-    if (saude > 90) {
+    if (saude >= 80) {
         return {
             estado: "#b6ffb6",
             glow: "#00ba60"
         };
     }
 
-    if (saude > 75) {
+    if (saude >= 60) {
         return {
             estado: "#ffeaab",
             glow: "#e8c82c"
@@ -312,7 +313,7 @@ function aplicarEstiloVisualDireto(estadoMapa, existeNaEmpresa, gestorTemAcesso,
 
     // Região não existe para a empresa no banco
     if (!existeNaEmpresa) {
-        shape.style.setProperty("fill", "#d9d9d9", "important");
+        shape.style.setProperty("fill", "#bdbdbd", "important");
         shape.style.setProperty("opacity", "0.45", "important");
         shape.style.setProperty("filter", "grayscale(3) brightness(1.08)", "important");
 
@@ -323,7 +324,7 @@ function aplicarEstiloVisualDireto(estadoMapa, existeNaEmpresa, gestorTemAcesso,
 
         if (label) {
             label.style.setProperty("opacity", "0.25", "important");
-            label.style.setProperty("filter", "grayscale(3)", "important");
+            label.style.setProperty("filter", "grayscale(5)", "important");
         }
 
         return;
@@ -456,39 +457,24 @@ function selecionarDatacenters() {
 }
 
 function selecionarAlerta(data) {
-    window.location.href = "dashAlertas.html";
-
-    let nome;
-
-    sessionStorage.setItem('DATA', "")
-    sessionStorage.setItem('REGIAO', "")
+    sessionStorage.setItem = ("DATA", "");
+    sessionStorage.setItem = ("REGIAO", "");
 
     if (data == 1) {
-        nome = "São Paulo"
-        sessionStorage.setItem('DATA', "DC-SP-01")
-        sessionStorage.setItem('REGIAO', "SP")
+        sessionStorage.setItem = ("REGIAO", "SP");
+        sessionStorage.setItem = ("DATA", "DC-SP-01");
+        dataCenterTitulo.innerHTML = "São Paulo"
     } else if (data == 2) {
-        nome = "Rio de Janeiro"
-        sessionStorage.setItem('DATA', "DC-RJ-01")
-        sessionStorage.setItem('REGIAO', "RJ")
+        sessionStorage.setItem = ("REGIAO", "RJ");
+        sessionStorage.setItem = ("DATA", "DC-RJ-01");
+        dataCenterTitulo.innerHTML = "Rio de Janeiro"
     } else {
-        nome = "Porto Alegre"
-        sessionStorage.setItem('DATA', "DC-RS-01")
-        sessionStorage.setItem('REGIAO', "RS")
+        sessionStorage.setItem = ("REGIAO", "RS");
+        sessionStorage.setItem = ("DATA", "DC-RS-01");
+        dataCenterTitulo.innerHTML = "Porto Alegre"
     }
 
-    titulo.innerHTML = nome
-
-    
-}
-
-function voltar() {
-    sessionStorage.setItem('DATA', "")
-    sessionStorage.setItem('REGIAO', "")
-
     window.location.href = "dashAlertas.html";
-
-    titulo.innerHTML = ""
 }
 
 function limparSessao() {

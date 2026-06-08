@@ -21,11 +21,12 @@ var sessaoRouter = require("./src/routes/sessao");
 var financeira = require("./src/routes/financeiraRoute");
 var steamRouter = require("./src/routes/steam");
 var especificoRouter = require("./src/routes/especifico")
+var relatorioRouter = require("./src/routes/relatorioRouter");
 var buscarzonasRouter = require("./src/routes/buscarzona")
+
 /* VICTIN ROTA */
 var dadosAlertaRouter = require("./src/routes/alertas")
 var dadosAlertaRouter2 = require("./src/routes/alertas2")
-
 var dashOperacionalRouter = require("./src/routes/dashOperacional");
 
 
@@ -55,10 +56,12 @@ app.use("/banalista", buscarDadosAnalista)
 app.use("/alertas", dadosAlertaRouter)
 app.use("/alertas2", dadosAlertaRouter2)
 
-//Rotas Financeir.a
+//Rotas Financeira
 app.use("/dashOperacional", dashOperacionalRouter);
 app.use("/financeira", financeira);
-app.use("/bzonas", buscarzonasRouter);
+
+app.use("/dashOperacional", dashOperacionalRouter);
+app.use("/relatorios", relatorioRouter);
 
 // inicia o servidor
 app.listen(PORT, function () {

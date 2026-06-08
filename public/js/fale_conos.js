@@ -1,6 +1,27 @@
-function fnNavegar(caminho){
-    window.location.href = caminho
+function alternarMenuNavegacao() {
+    var menuNavegacao = document.getElementById("navbarNav")
+    var botaoMenu = document.querySelector(".navbar-toggler")
+    var menuEstaAberto = menuNavegacao.classList.toggle("show")
+
+    botaoMenu.setAttribute("aria-expanded", menuEstaAberto)
 }
+
+function fecharMenuNavegacao() {
+    var menuNavegacao = document.getElementById("navbarNav")
+    var botaoMenu = document.querySelector(".navbar-toggler")
+
+    menuNavegacao.classList.remove("show")
+    botaoMenu.setAttribute("aria-expanded", "false")
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var linksMenu = document.querySelectorAll("#navbarNav .nav-link, #navbarNav .btn-login")
+
+    linksMenu.forEach(function (linkMenu) {
+        linkMenu.addEventListener("click", fecharMenuNavegacao)
+    })
+})
+
 function enviar_mensagem(){
     
     var nome_usuario  = input_nome.value
@@ -69,4 +90,4 @@ function enviar_mensagem(){
       
     }
 
-} 
+}

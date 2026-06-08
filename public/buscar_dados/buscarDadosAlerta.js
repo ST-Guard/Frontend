@@ -128,6 +128,8 @@ async function renderizarDadosDash(dadosDashboard) {
     subMedio.innerHTML = listaMttrLabels[indiceM];
     subCritico.innerHTML = listaMttrLabels[indiceC];
     subMelhorC.innerHTML = listaMttrLabels[indiceCmin];
+
+    renderizarSla(dadosDashboard, data, regiao)
 }
 
 async function renderizarDadosDash2(dadosDashboard2) {
@@ -269,80 +271,72 @@ function renderizarCardsAlertas(dadosDashboard2, data, regiao) {
                 </div>
                 <div class="botoes_card_alerta">
                     <button style="background-color: #6B7280; color: white; font-weight: 550;"
-                        onclick="verDetalhe(${alerta.id_servidor})">Ver detalhe</button>
+                        onclick="verDetalhe(window.location.href = "dashServidorGestor.html")">Ver detalhe</button>
                 </div>
             </div>
         `;
     });
 }
 
-function renderizarSla(dadosDashboard2, data) {
+function renderizarSla(dadosDashboard, data, regiao) {
+    const containerNome = document.getElementById("nomesAnalistas");
+    const containerMttr = document.getElementById("mttrMedios");
+    const containerResolvidos = document.getElementById("resolvidosSLA");
+    const containerPercentual = document.getElementById("percentual");
 
-    const container = document.getElementById("listaSla");
+    containerNome.innerHTML = `
+        <div class="subtitulo">Analista:</div>
+    `;
+    containerMttr.innerHTML = `
+        <div class="subtitulo">MTTR médio:</div>
+    `;
+    containerResolvidos.innerHTML = `
+        <div class="subtitulo">Resolvidos | na SLA</div>
+    `;
+    containerPercentual.innerHTML = `
+        <div class="subtitulo">% de chamados dentro da SLA:</div> 
+    `;
 
-    const slaAnalistas =
-        dadosDashboard2["SmartData Corp"][data]
-            ?.sla_por_analista || [];
+    const listaMttr = dadosDashboard.região[regiao][data].mttr_por_servidor; 
+    const listaSla = dadosDashboard.região[regiao][data].sla_por_analista; 
 
-    container.innerHTML = "";
-
-    slaAnalistas.forEach(analista => {
-
-        const corStatus =
-            analista.percentual >= 90
-                ? "#22C55E"
-                : analista.percentual >= 70
-                    ? "#F59E0B"
-                    : "#EF4444";
-
-        const statusTexto =
-            analista.percentual >= 90
-                ? "Excelente"
-                : analista.percentual >= 70
-                    ? "Atenção"
-                    : "Crítico";
-
-        container.innerHTML += `
+    
+    listaSla.forEach((analistaSla) => {
         
-        <div class="card_sla">
+        const dadosMttrCorrespondente = listaMttr.find(
+            (analistaMttr) => analistaMttr.nomeAnalista === analistaSla.nomeAnalista
+        );
 
-            <div class="topo_sla">
+        const mttrMedio = dadosMttrCorrespondente ? dadosMttrCorrespondente.mttrMedio : "N/A";
 
-                <div class="nome_analista">
-                    <img src="../assets/dashAlerta/user.png">
-                    <span>${analista.nomeAnalista}</span>
-                </div>
-
-                <div class="status_sla">
-                    <span style="color:${corStatus}">
-                        ${statusTexto}
-                    </span>
-                </div>
-
+        containerNome.innerHTML += `
+            <div class="item">
+                <img src="../assets/dashAlerta/user.png">
+                <span>${analistaSla.nomeAnalista}</span>
             </div>
+        `;
 
-            <div class="infos_sla">
-
-                <div class="info_item">
-                    <span>Total chamados</span>
-                    <strong>${analista.totalChamados}</strong>
-                </div>
-
-                <div class="info_item">
-                    <span>Dentro SLA</span>
-                    <strong>${analista.dentroSla}</strong>
-                </div>
-
-                <div class="info_item">
-                    <span>Percentual SLA</span>
-                    <strong style="color:${corStatus}">
-                        ${analista.percentual}%
-                    </strong>
-                </div>
-
+        containerMttr.innerHTML += `
+            <div class="item">
+                <img src="../assets/dashAlerta/medio.png">
+                <span>${mttrMedio}</span>
             </div>
+        `;
 
-        </div>
+        containerResolvidos.innerHTML += `
+            <div class="item mttr-group">
+                <img src="../assets/dashAlerta/baixo.png">
+                <div class="baixo">${analistaSla.totalChamados}</div> |
+                <img src="../assets/dashAlerta/medio.png">
+                <div class="medio">${analistaSla.dentroSla}</div>
+            </div>
+        `;
+
+        containerPercentual.innerHTML += `
+            <div class="item">
+                <img src="../assets/icon/.png" alt="">
+                <span>${analistaSla.percentual}%</span>
+            </div>
         `;
     });
 }
