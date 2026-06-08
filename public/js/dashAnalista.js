@@ -99,7 +99,11 @@ function  obter_todos_dados(){
 
 
         dados_juntos = dados_do_s3[empresa_usuario][nome_datacenter]
-        
+
+
+
+
+
         zonas_dados = []
         for (i = 0; i < zonas_usuario.length; i++ ) {
 
@@ -119,7 +123,13 @@ function  obter_todos_dados(){
 
         plotarDadosGKPis(dados_merge)
         dados_merge_json = dados_merge
-        
+
+
+
+
+        var data_center = document.getElementById("data_center_id")
+
+        data_center.innerHTML = nome_datacenter
     }
 
 
@@ -182,8 +192,16 @@ function  obter_todos_dados(){
 
 
 
+  
+        
+
+
+
         dados_juntos = dados_do_s3[empresa_usuario][nome_datacenter]
         
+
+
+
         zonas_dados = []
         for (i = 0; i < zonas_usuario.length; i++ ) {
 
@@ -204,6 +222,13 @@ function  obter_todos_dados(){
         plotarDadosGKPis(dados_merge)
         dados_merge_json = dados_merge
         
+
+
+
+
+        var data_center = document.getElementById("data_center_id")
+
+        data_center.innerHTML = nome_datacenter
     }
 
 
@@ -252,7 +277,12 @@ function  obter_todos_dados(){
         console.log(nome_datacenter)
         console.log(dados_do_s3)
         
-        console.log(zonas_usuario)
+        console.log(zonas_usuario  
+        )
+
+
+
+        
 
 
 
@@ -278,6 +308,13 @@ function  obter_todos_dados(){
         plotarDadosGKPis(dados_merge)
         dados_merge_json = dados_merge
         
+
+
+
+
+        var data_center = document.getElementById("data_center_id")
+
+        data_center.innerHTML = nome_datacenter
     }
 
 
