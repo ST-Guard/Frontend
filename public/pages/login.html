@@ -224,15 +224,13 @@
               window.location.href = '/pages/dashboard/dashboardAnalista.html';
             }, 200);
           }*/
-   
-if (json.fkPapel == 1) {
-    window.location.href = 'inicioGestor.html';
-} else if (json.fkPapel == 3) {
-    window.location.href = 'dashSupervisoraRegional.html';
-} else {
-    window.location.href = 'dashAnalista.html';
-}
-});
+
+          if (json.fkPapel == 1) {
+            window.location.href = 'inicioGestor.html';
+          } else {
+            window.location.href = 'dashAnalista.html';
+          }
+        });
 
 } else {
     resposta.text().then(texto => {

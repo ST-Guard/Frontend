@@ -44,7 +44,7 @@ async function cadastrarComponente(nome, tipo, unidade, capacidade, fkServidor) 
     const idComponente = componenteResult.insertId;
 
     await database.executar(`
-        INSERT INTO componentes_servidores (limite, fkServidor, fkComponentes)
+        INSERT INTO componentes_servidoreses (limite, fkServidor, fkComponentes)
         VALUES (?, ?, ?);
     `, [capacidade, fkServidor, idComponente]);
 }
@@ -64,12 +64,9 @@ function listarServidores(idEmpresa) {
 
         FROM servidor s JOIN zona z ON z.idZona = s.fkZona
             JOIN datacenter d ON d.idDataCenter = z.fkDataCenter
-		JOIN datacenters_gestores dg 
-        ON dg.fk_datacenter = d.idDataCenter 
-        JOIN usuario u
-        ON u.idUsuario = dg.fk_usuario
-        JOIN papel p ON u.fkPapel = p.idPapel
-            LEFT JOIN componentes_servidores cs ON cs.fkServidor = s.idServidor
+            JOIN usuario u ON u.idUsuario = d.fkUsuarioDataCenter
+            JOIN papel p ON p.idPapel = u.fkPapel
+            LEFT JOIN componentes_servidor cs ON cs.fkServidor = s.idServidor
             LEFT JOIN componentes c ON c.idComponente = cs.fkComponentes
 
         WHERE p.fkEmpresa =  ? 
