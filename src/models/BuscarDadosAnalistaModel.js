@@ -4,7 +4,7 @@ const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 
 const s3Client = new S3Client({
-    region: process.env.AWS_REGION,
+    region: process.env.AWS_BUCKET_NAME,
     credentials: {
         accessKeyId: process.env.aws_access_key_id,
         secretAccessKey: process.env.aws_secret_access_key,
