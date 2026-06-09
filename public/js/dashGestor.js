@@ -292,10 +292,9 @@ function atualizarkpiCrescimentoAlertas(datacenter) {
     const kpi = datacenter.kpiCrescimentoAlertas;
 
     if (!kpi) {
-        document.getElementById("variacaoAlertas").innerHTML = "+0";
-        document.getElementById("descricaoAlertas").innerHTML =  "0 alertas nos últimos 30 minutos";
-        document.getElementById("qntAlertasAtual").innerHTML = 0;
-        document.getElementById("comparacaoAlertas").innerHTML = "0 no período anterior";
+      document.getElementById("variacaoAlertas").innerHTML = 0;
+        document.getElementById("descricaoAlertas").innerHTML ="Últimos 30 minutos";
+        document.getElementById("comparacaoAlertas").innerHTML ="→ Sem alteração";
         atualizarIconeStatus("statusKPICresc", 0, 5, 15);
         atualizarEstiloKpi("kpiCrescimentoAlertas", "Estável");
         return;
@@ -306,24 +305,32 @@ function atualizarkpiCrescimentoAlertas(datacenter) {
     const diferenca = atual - anterior;
     const percentual = kpi.percentual ?? 0;
 
+
     let status;
-    console.log(anterior)
-    if (anterior === 0) {
-        if (atual === 0) {
-            status = "Estável";
-        } else if (atual <= 10) {
-            status = "Atenção";
-        } else {
-            status = "Crítico";
-        }
-    } else {
-        status = classificarPercentual(percentual, 5, 15);
+
+    if (diferenca <= 0) {
+    status = "Estável"; 
     }
+    else if (diferenca <= 3) {
+        status = "Atenção"; 
+    }
+    else {
+        status = "Crítico"; 
+    }
+    document.getElementById("variacaoAlertas").innerHTML = atual;
+    document.getElementById("descricaoAlertas").innerHTML =
+        "Últimos 30 minutos";
 
-    document.getElementById("variacaoAlertas").innerHTML = diferenca >= 0 ? `+${diferenca}`: diferenca;
-    document.getElementById("descricaoAlertas").innerHTML = `${atual} alertas nos últimos 30 minutos`;
-    document.getElementById("comparacaoAlertas").innerHTML =   `${anterior} no período anterior`;
-
+    if (diferenca > 0) {
+        document.getElementById("comparacaoAlertas").innerHTML =
+            `↑ +${diferenca} em relação ao período anterior`;
+    } else if (diferenca < 0) {
+        document.getElementById("comparacaoAlertas").innerHTML =
+            `↓ ${diferenca} em relação ao período anterior`;
+    } else {
+        document.getElementById("comparacaoAlertas").innerHTML =
+            "→ Sem alteração";
+    }
     atualizarIconeStatus("statusKPICresc", status);
     atualizarEstiloKpi("kpiCrescimentoAlertas", status);
   

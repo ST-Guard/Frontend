@@ -659,6 +659,11 @@ header {
     color: #4B5563;
 }
 
+#comparacaoAlertas{
+    margin-top: -10px;
+    font-size: 1rem;
+    color: #1c4886;
+}
 
 .uptime_critico_item {
     background-color: #FFD6D6 !important;
