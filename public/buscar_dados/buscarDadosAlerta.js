@@ -297,23 +297,22 @@ function renderizarSla(dadosDashboard, data, regiao) {
 
         containerMttr.innerHTML += `
             <div class="item">
-                <img src="../assets/dashAlerta/medio.png">
+                <img src="../assets/dashAlerta/relogio.png">
                 <span>${mttrMedio}</span>
             </div>
         `;
 
         containerResolvidos.innerHTML += `
             <div class="item mttr-group">
-                <img src="../assets/dashAlerta/baixo.png">
+                <img src="../assets/dashAlerta/check.png">
                 <div class="baixo">${analistaSla.totalChamados}</div> |
-                <img src="../assets/dashAlerta/medio.png">
+                <img src="../assets/dashAlerta/alvo.png">
                 <div class="medio">${analistaSla.dentroSla}</div>
             </div>
         `;
 
         containerPercentual.innerHTML += `
             <div class="item">
-                <img src="../assets/icon/.png" alt="">
                 <span>${analistaSla.percentual}%</span>
             </div>
         `;
