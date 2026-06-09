@@ -53,12 +53,12 @@
     <div class="corpoPagina">
         <div class="sidebar">
       <div class="sidebar-buttons">
-        <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashSupervisoraRegional.html')">
+        <div class="sidebar-button" onclick="fnNavegar('../pages/dashSupervisoraRegional.html')">
           <img src="../assets/dashboard-icons/icon_dashboard_azul.svg" alt="">
           <p><a href="../pages/dashSupervisoraRegional.html">Dashboard</a></p>
           <!-- <p onclick="mudarDash()">Dashboard</p> -->
         </div>
-        <div class="sidebar-button" onclick="fnNavegar('../pages/dashCadastroRegioes.html')">
+        <div class="sidebar-button-select" onclick="fnNavegar('../pages/dashCadastroRegioes.html')">
           <img src="../assets/dashboard-icons/icon_form_branco.svg" alt="">
           <p><a href="../pages/dashCadastroRegioes.html">Regiões</a></p>
           <!-- <p onclick="mudarDash()">Dashboard</p> -->
@@ -85,7 +85,7 @@
 
                 <div class="kpi">
                     <p class="kpi_ativos">Regiões ativas</p>
-                    <h2 id="kpi_ativos">0</h2>
+                    <h2 id="kpi_ativos">3</h2>
                     <h4 id="kpi_inativos">0 Inativos</h4>
                     <img src="./../assets/img-funcionario/pessoas.png">
                 </div>
@@ -100,7 +100,7 @@
                 <button class="busca_botao_cadastrar" onclick="abrirModal()">Cadastrar Região +</button>
             </div>
 
-            <div id="lista_funcionarios"></div>
+            <div id="div_regioes"></div>
         </div>
     </div>
 
@@ -135,5 +135,5 @@
         </div>
     </div>
 </body>
-<script src="./../js/dashFuncionario.js" defer></script>
+<script src="./../js/dashCadastroRegioes.js" defer></script>
 </html>

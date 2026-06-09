@@ -432,6 +432,91 @@ nav {
     font-size: 0.8rem;
 }
 
+.card_regiao {
+    margin-bottom: 20px;
+}
+
+.regiao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+.regiao_esquerda {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.regiao_avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--azul-claro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.regiao_avatar img {
+    width: 28px;
+    height: 28px;
+}
+
+.regiao_info {
+    display: flex;
+    flex-direction: column;
+}
+
+.regiao_nome {
+    margin: 0;
+    color: var(--azul-mais-escuro);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.regiao_descricao {
+    margin-top: 5px;
+    color: #66C0F4;
+    font-size: 1rem;
+}
+
+.regiao_acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.regiao_desativar {
+    background-color: #777;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.regiao_desativar:hover {
+    opacity: 0.9;
+}
+
+.regiao_deletar {
+    background-color: rgb(212, 63, 63);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.regiao_deletar:hover {
+    opacity: 0.9;
+}
+
 /* ######## (MOBILE E TABLETS) ######## */
 @media (max-width: 768px) {
     html,

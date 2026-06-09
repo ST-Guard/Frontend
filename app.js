@@ -23,6 +23,9 @@ var steamRouter = require("./src/routes/steam");
 var especificoRouter = require("./src/routes/especifico")
 var relatorioRouter = require("./src/routes/relatorioRouter");
 var buscarzonasRouter = require("./src/routes/buscarzona")
+var regiaoRouter = require("./src/routes/regiaoRoute");
+
+
 
 /* VICTIN ROTA */
 var dadosAlertaRouter = require("./src/routes/alertas")
@@ -31,6 +34,7 @@ var dashOperacionalRouter = require("./src/routes/dashOperacional");
 
 var dashboardSupervisoraRouter =
     require("./src/routes/dashSupervisoraRoute");
+
 
 
 
@@ -50,7 +54,7 @@ app.use("/sessao", sessaoRouter);
 app.use("/steam", steamRouter);
 app.use("/especifico", especificoRouter);
 var buscarDadosAnalista = require("./src/routes/BuscarDadosAnalista")
-
+app.use("/regioes", regiaoRouter);
 /* Rotas analista */ 
 app.use("/bzonas", buscarzonasRouter)
 app.use("/banalista", buscarDadosAnalista)
