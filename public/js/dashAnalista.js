@@ -832,7 +832,7 @@ function buscarZonaGrafico() {
         graficos_parte2.style.display = "block"
         titulo_grafico1.innerHTML = `Trafego total comparado ao dia da semana anterior ${valor_select_zona}`
          
-        titulo_grafico3.innerHTML = `Correlação entre o Disco em cache x P99 latencia da ${valor_select_zona} `
+        titulo_grafico3.innerHTML = `Correlação entre o Disco em TB x P99 latencia da ${valor_select_zona} `
 
         plotar_dados(valor_select_zona)
 
