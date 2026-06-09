@@ -664,23 +664,23 @@ function plotarDadosGKPis(dados_zonas_json) {
         mttr_ordenado.sort((a, b) => b.mttr - a.mttr)
     
         maior_mttr = mttr_ordenado[0]
-        maior_mttr.mttr = parseFloat((maior_mttr.mttr / 60 ).toFixed(2))
 
 
-        if (maior_mttr.mttr > 24) {
+
+        if (maior_mttr.mttr > 60) {
             kpi2.innerHTML = `
                             
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>ZONA COM MAIOR MTTR</h3>
+                            <h3>ZONA COM MAIOR MTTR PARA ALERTAS CRÍTICOS</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 style="color: var(--KPI-urgente)">${maior_mttr.nome_zona}</h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
+
                         </div>
                         <div class="div_situacao">
-                            <h1 style="font-size: 20px; color: var(--KPI-urgente);">${new Date(maior_mttr.mttr * 3600 * 1000).toISOString().substr(11, 5)} HORAS </h1>
-                            <img src="../assets/dashboard-icons/icon_atencao.svg" alt="">
+                            <h1 style="font-size: 20px; color: var(--KPI-urgente);">${new Date(maior_mttr.mttr * 3600 * 1000).toISOString().substr(11, 5)} HORAS</h1>
+
                         </div>
 
                     </div>
@@ -690,14 +690,14 @@ kpi2.style.boxShadow = "1.5px 1px 2px 1px var(--KPI-urgente), 0 4px 12px rgba(0,
 
 
 
-        }else if(maior_mttr.mttr > 4){
+        }else if(maior_mttr.mttr > 45){
 
 
                         kpi2.innerHTML = `
                             
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>ZONA COM MAIOR MTTR</h3>
+<h3>ZONA COM MAIOR MTTR PARA ALERTAS CRÍTICOS</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 style="color: var(--KPI-importante)">${maior_mttr.nome_zona}</h1>
@@ -718,7 +718,7 @@ kpi2.style.boxShadow = "1.5px 1px 2px 1px var(--KPI-importante), 0 4px 12px rgba
                             
                     <div class="info_kpi">
                         <div class="containerTitulo">
-                            <h3>ZONA COM MAIOR MTTR</h3>
+<h3>ZONA COM MAIOR MTTR PARA ALERTAS CRÍTICOS</h3>
                         </div>
                         <div class="div_situacao">
                             <h1 style="color: var(--KPI-normal)">${maior_mttr.nome_zona}</h1>
