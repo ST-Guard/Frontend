@@ -1018,8 +1018,8 @@ function plotarGrafico_correlacao(dados_info, chaves_zona){
        
             var registro = dados_info;
             dados.data.labels.push(registro.hora);
-            dados.data.datasets[0].data.push(registro.sobrecarregados);
-            dados.data.datasets[1].data.push(registro.latencia);
+            dados.data.datasets[0].data.push(registro.latencia);
+            dados.data.datasets[1].data.push(registro.qtd_sobrecarregados);
         
 
         console.log('----------------------------------------------')
@@ -1588,14 +1588,14 @@ function plotarGrafico_p99_disco(dados_info, chaves_zona){
             dados_grafico.data.datasets[0].data.shift();
     }
 
-    dados_grafico.data.datasets[0].data.push(qtd_sobrecarregados)
+    dados_grafico.data.datasets[0].data.push(qtd_alta_latencia)
 
 
 
     if( dados_grafico.data.datasets[1].data.length > 10){
             dados_grafico.data.datasets[1].data.shift();
     }
-    dados_grafico.data.datasets[1].data.push(qtd_alta_latencia)
+    dados_grafico.data.datasets[1].data.push(qtd_sobrecarregados)
     setTimeout(() => atualizarGrafico(zonai, dados_grafico, myChart, "correlacao"), 30000);   
 
     }
@@ -1782,14 +1782,14 @@ function plotarGrafico_p99_disco(dados_info, chaves_zona){
             dados_grafico.data.datasets[0].data.shift();
     }
 
-    dados_grafico.data.datasets[0].data.push(qtd_sobrecarregados)
+    dados_grafico.data.datasets[0].data.push(qtd_alta_latencia)
 
 
 
     if( dados_grafico.data.datasets[1].data.length > 10){
             dados_grafico.data.datasets[1].data.shift();
     }
-    dados_grafico.data.datasets[1].data.push(qtd_alta_latencia)
+    dados_grafico.data.datasets[1].data.push(qtd_sobrecarregados)
     setTimeout(() => atualizarGrafico(zonai, dados_grafico, myChart, "correlacao"), 30000);   
 
     }
@@ -1968,14 +1968,14 @@ function plotarGrafico_p99_disco(dados_info, chaves_zona){
             dados_grafico.data.datasets[0].data.shift();
     }
 
-    dados_grafico.data.datasets[0].data.push(qtd_sobrecarregados)
+    dados_grafico.data.datasets[0].data.push(qtd_alta_latencia)
 
 
 
     if( dados_grafico.data.datasets[1].data.length > 10){
             dados_grafico.data.datasets[1].data.shift();
     }
-    dados_grafico.data.datasets[1].data.push(qtd_alta_latencia)
+    dados_grafico.data.datasets[1].data.push(qtd_sobrecarregados)
     setTimeout(() => atualizarGrafico(zonai, dados_grafico, myChart, "correlacao"), 30000);   
 
     }
