@@ -1,3 +1,7 @@
+function navegarPara(caminho) {
+  window.location.href = caminho;
+}
+
 function alternarMenuNavegacao() {
     var menuNavegacao = document.getElementById("navbarNav")
     var botaoMenu = document.querySelector(".navbar-toggler")

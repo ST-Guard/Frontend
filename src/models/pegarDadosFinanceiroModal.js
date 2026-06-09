@@ -36,7 +36,8 @@ async function pegarDadosFinanceiro(bucket) {
   //Pega os alertas do json alertas
   const parametrosAlertas = {
   Bucket: process.env.AWS_BUCKET_NAME,
-  Key: "client/alertas_gestora.json", };
+  Key: "client/alertas_gestora.json", 
+  };
   let dadosAlertas = null;
   try {
     const command = new GetObjectCommand(parametrosAlertas);
@@ -55,6 +56,53 @@ async function pegarDadosFinanceiro(bucket) {
   
 }
 
+
+
+
+const mesesRelatorio = [
+  "janeiro",
+  "fevereiro",
+  "marco",
+  "abril",
+  "maio",
+  "junho",
+  "julho",
+  "agosto",
+  "setembro",
+  "outubro",
+  "novembro",
+  "dezembro",
+];
+
+function ehRelatorioFinanceiro(chave) {
+  if (typeof chave !== "string") return false;
+
+  const prefixo = "relatorios/relatorio-financeiro-";
+  const extensao = ".pdf";
+  const chaveNormalizada = chave.toLowerCase();
+
+  if (!chaveNormalizada.startsWith(prefixo)
+    || !chaveNormalizada.endsWith(extensao)) {
+    return false;
+  }
+
+  const periodo = chaveNormalizada
+    .slice(prefixo.length, -extensao.length)
+    .split("-");
+
+  if (periodo.length !== 2) return false;
+
+  const [mes, ano] = periodo;
+  const anoPossuiApenasNumeros = [...ano].every(caractere =>
+    caractere >= "0" && caractere <= "9"
+  );
+
+  return mesesRelatorio.includes(mes)
+    && ano.length === 4
+    && anoPossuiApenasNumeros;
+}
+
+
 async function listarRelatoriosFinanceiros() {
   const relatorios = [];
   let tokenContinuacao;
@@ -67,13 +115,9 @@ async function listarRelatoriosFinanceiros() {
     });
     const resposta = await s3Client.send(comando);
 
-    (resposta.Contents || [])
-      .filter(arquivo => {
-        if (!arquivo.Key) return false;
-
-        return /^relatorios\/relatorio-financeiro-[a-z]+-\d{4}\.pdf$/i
-          .test(arquivo.Key);
-      })
+    (resposta.Contents || []).filter(arquivo =>
+        ehRelatorioFinanceiro(arquivo.Key)
+      )
       .forEach(arquivo => {
         relatorios.push({
           chave: arquivo.Key,
@@ -92,9 +136,7 @@ async function listarRelatoriosFinanceiros() {
 }
 
 async function gerarUrlRelatorioFinanceiro(chave) {
-  const chaveValida = typeof chave === "string"
-    && chave.startsWith("relatorios/")
-    && /\.pdf$/i.test(chave);
+  const chaveValida = ehRelatorioFinanceiro(chave);
 
   if (!chaveValida) {
     throw new Error("Relatório inválido.");
