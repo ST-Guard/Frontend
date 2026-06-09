@@ -666,7 +666,7 @@ function renderizarTendenciaDegradacao(datacenter) {
         const nomeComponente = principal.componente || "N/A";
         const aumento = Number(principal.aumentoPersistencia || 0).toFixed(0);
         const persistenciaAtual =Number(principal.persistenciaAtual || 0).toFixed(0);
-
+        const spann = document.querySelector(".status");
         
                     lista.innerHTML += `
                 <div  class="  item_servidor  item_tendencia " >
@@ -676,12 +676,9 @@ function renderizarTendenciaDegradacao(datacenter) {
                             ${servidor.servidor}
                         </p>
 
-                        <span  class="status-servidor  servidor-atencao " >
-                            ● Score:
-                            ${servidor.score}
-                            |
+                        <span  class="status" >
                             ${nomeComponente}
-                            +${aumento} p.p.
+                            <b>+${aumento} p.p. </b>
                         </span>
                     </div>
 
@@ -696,13 +693,12 @@ function renderizarTendenciaDegradacao(datacenter) {
 
                         <p>
                             Persistência atual:
-                            ${persistenciaAtual}%
+                            <b>${persistenciaAtual}%</b>
+                        </p>
+                        <p>
+                        Nível de risco: <b>${tendencia.nivelRisco}</b>
                         </p>
 
-                        <p>
-                            Nível de risco:
-                            ${tendencia.nivelRisco}
-                        </p>
                     </div>
                 </div>
             `;
@@ -914,13 +910,13 @@ function renderizarGraficoAlertas(datacenter) {
         dadosGrafico.alertasPorDia || {};
 
     const dias = [
+        "Domingo",
         "Segunda",
         "Terça",
         "Quarta",
         "Quinta",
         "Sexta",
-        "Sábado",
-        "Domingo"
+        "Sábado"
     ];
 
     const quantidadeAlertas = dias.map(
@@ -1085,6 +1081,8 @@ function atualizarTendenciaAlertas(datacenter) {
         descricao.innerHTML = "Redução recente no volume de alertas.";
         imagem.src = "/assets/icone_certo.png";
         tend.style.backgroundColor="  #C8F7DC"
+        tend.style.borderColor = "#23B26D";
+
 
 
     } else if (ultimoValor > primeiroValor) {
@@ -1361,8 +1359,11 @@ document.addEventListener("mouseover", function (event) {
     tooltip.style.top = `${topo}px`;
 });
 
+
 document.addEventListener("mouseout", function (event) {
     const item = event.target.closest(".item_tendencia");
+
+    fecharTooltipAtual();
 
     if (!item || item.contains(event.relatedTarget)) {
         return;
@@ -1380,3 +1381,17 @@ document.addEventListener("mouseout", function (event) {
     tooltipAberto = null;
     itemTooltipOriginal = null;
 });
+
+function fecharTooltipAtual() {
+    if (!tooltipAberto || !itemTooltipOriginal) {
+        return;
+    }
+
+    tooltipAberto.style.display = "none";
+    tooltipAberto.removeAttribute("style");
+
+    itemTooltipOriginal.appendChild(tooltipAberto);
+
+    tooltipAberto = null;
+    itemTooltipOriginal = null;
+}

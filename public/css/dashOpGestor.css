@@ -655,6 +655,10 @@ header {
     color: #23B26D;
 }
 
+.status{
+    color: #4B5563;
+}
+
 
 .uptime_critico_item {
     background-color: #FFD6D6 !important;
