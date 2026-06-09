@@ -142,7 +142,7 @@ async function renderizarDadosDash2(dadosDashboard2) {
     const kpiNomeServer = document.getElementById("nomeServer");
     const subKpiQtdAlerta = document.getElementById("qtdAlertaServer");
 
-    kpiCriticoAberto.innerHTML = caminho.KPIs.CRITICOS_ABERTOS;
+    kpiCriticoAberto.innerHTML = caminho.KPIs.CRITICOS_ABERTOS ? caminho.KPIs.CRITICOS_ABERTOS : 0;
     kpiMedioAverto.innerHTML = caminho.KPIs.MEDIOS_ABERTOS;
     kpiBaixoAberto.innerHTML = caminho.KPIs.BAIXOS_ABERTOS;
     KpiResolvidos.innerHTML = caminho.KPIs.RESOLVIDOS_24H;

@@ -257,10 +257,7 @@ function navegarPara(caminho) {
 }
 async function carregarDadosDashAlerta() {
     try {
-        const respostaURL = await fetch('/alertas/obter-url-s3');
-        const { url } = await respostaURL.json();
-
-        const respostaS3 = await fetch(url);
+        const respostaS3 = await fetch('/alertas/obter-url-s3');
 
         if (!respostaS3.ok) {
             throw new Error('Erro ao carregar dados do s3');
@@ -279,10 +276,12 @@ async function carregarDadosDashAlerta() {
 
 async function atualizarDados() {
     try {
-        const respostaURL = await fetch('/api/obter-url-s3');
-        const { url } = await respostaURL.json();
+        const respostaS3 = await fetch('/alertas/obter-url-s3');
 
-        const respostaS3 = await fetch(url);
+        if (!respostaS3.ok) {
+            throw new Error('Erro ao atualizar dados do S3');
+        }
+
         const dadosAtualizados = await respostaS3.json();
 
         renderizarDadosDash(dadosAtualizados);
@@ -295,10 +294,7 @@ async function atualizarDados() {
 
 async function carregarDadosDashAlerta2() {
     try {
-        const respostaURL = await fetch('/alertas2/obter-url-s3');
-        const { url } = await respostaURL.json();
-
-        const respostaS3 = await fetch(url);
+        const respostaS3 = await fetch('/alertas2/obter-url-s3');
 
         if (!respostaS3.ok) {
             throw new Error('Erro ao carregar dados do s3');
@@ -317,10 +313,12 @@ async function carregarDadosDashAlerta2() {
 
 async function atualizarDados2() {
     try {
-        const respostaURL = await fetch('/api/obter-url-s3');
-        const { url } = await respostaURL.json();
+        const respostaS3 = await fetch('/alertas2/obter-url-s3');
 
-        const respostaS3 = await fetch(url);
+        if (!respostaS3.ok) {
+            throw new Error('Erro ao atualizar alertas do S3');
+        }
+
         const dadosAtualizados2 = await respostaS3.json();
 
         renderizarDadosDash2(dadosAtualizados2);
@@ -417,7 +415,7 @@ async function renderizarDadosDash2(dadosDashboard2) {
     const kpiNomeServer = document.getElementById("nomeServer");
     const subKpiQtdAlerta = document.getElementById("qtdAlertaServer");
 
-    kpiCriticoAberto.innerHTML = caminho.KPIs.CRITICOS_ABERTOS;
+    kpiCriticoAberto.innerHTML = caminho.KPIs.CRITICOS_ABERTOS ? caminho.KPIs.CRITICOS_ABERTOS : 0;
     kpiMedioAverto.innerHTML = caminho.KPIs.MEDIOS_ABERTOS;
     kpiBaixoAberto.innerHTML = caminho.KPIs.BAIXOS_ABERTOS;
     KpiResolvidos.innerHTML = caminho.KPIs.RESOLVIDOS_24H;
@@ -487,7 +485,6 @@ async function renderizarDadosDash2(dadosDashboard2) {
     /* =========================================================*/
 
     renderizarCardsAlertas(dadosDashboard2, data, regiao);
-    renderizarSla(dadosDashboard2, data, regiao);
 }
 
 function renderizarCardsAlertas(dadosDashboard2, data, regiao) {

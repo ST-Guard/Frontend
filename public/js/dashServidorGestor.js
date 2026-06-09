@@ -236,7 +236,13 @@ function mostrarServidores() {
     var idEmpresa = sessionStorage.FK_EMPRESA;
 
     fetch(`/servidor/listarServidores/${idEmpresa}`)
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`Erro ${res.status} ao buscar servidores`);
+            }
+
+            return res.json();
+        })
         .then(servidores => {
             console.log("SERVIDORES:", servidores);
             boxServidores.innerHTML = "";
@@ -365,48 +371,6 @@ function mostrarServidores() {
             for (let i = 0; i < servidores.length; i++) {
                 const idServidor = servidores[i].idServidor
 
-                const cpuValorPrincipal = document.getElementById("cpuValorPrincipal");
-                const cpuUsoPrincipal = document.getElementById("cpuUsoPrincipal");
-                const cpuLivrePrincipal = document.getElementById("cpuLivrePrincipal");
-                const barraCpuPrincipal = document.getElementById("cpuBarraPrincipal");
-                
-                const ramValorPrincipal = document.getElementById("ramValorPrincipal");
-                const ramUsoPrincipal = document.getElementById("ramUsoPrincipal");
-                const ramLivrePrincipal = document.getElementById("ramLivrePrincipal");
-                const barraRamPrincipal = document.getElementById("ramBarraPrincipal");
-
-                const discoValorPrincipal = document.getElementById("discoValorPrincipal");
-                const discoUsoPrincipal = document.getElementById("discoUsoPrincipal");
-                const discoLivrePrincipal = document.getElementById("discoLivrePrincipal");
-                const barraDiscoPrincipal = document.getElementById("discoBarraPrincipal");
-
-                const redeValorPrincipal = document.getElementById("redeValorPrincipal");
-                const redeUsoPrincipal = document.getElementById("redeUsoPrincipal");
-                const redeLivrePrincipal = document.getElementById("redeLivrePrincipal");
-                const barraRedePrincipal = document.getElementById("redeBarraPrincipal");
-
-                cpuUsoPrincipal.innerHTML = 95.7
-                cpuValorPrincipal.innerHTML = 95.7
-                cpuLivrePrincipal.innerHTML = 4.3
-                barraCpuPrincipal.style.width = 95.7 + "%";
-                barraCpuPrincipal.style.backgroundColor = "#810606"
-
-                ramUsoPrincipal.innerHTML = 65.3
-                ramValorPrincipal.innerHTML = 65.3
-                ramLivrePrincipal.innerHTML = 34.7
-                barraRamPrincipal.style.width = 65.3 + "%"
-                barraRamPrincipal.style.backgroundColor = "#f28647"
-
-                discoUsoPrincipal.innerHTML = 14.1
-                discoValorPrincipal.innerHTML = 14.1
-                discoLivrePrincipal.innerHTML = 85.9
-                barraDiscoPrincipal.style.width = 14.1 + "%"
-
-                redeUsoPrincipal.innerHTML = 20
-                redeValorPrincipal.innerHTML = 20
-                redeLivrePrincipal.innerHTML = 30
-                barraRedePrincipal.style.width = 20 + "%"
-                
                 const cpuValor = document.getElementById("cpuValor" + idServidor);
                 const cpuUso = document.getElementById("cpuUso" + idServidor);
                 const cpuLivre = document.getElementById("cpuLivre" + idServidor);
@@ -427,6 +391,11 @@ function mostrarServidores() {
                 const redeLivre = document.getElementById("redeLivre" + idServidor);
                 const barraRede = document.getElementById("redeBarra" + idServidor);
 
+                servidores[i].limiteCpu = Number(servidores[i].limiteCpu) || 100
+                servidores[i].limiteRam = Number(servidores[i].limiteRam) || 1
+                servidores[i].limiteDisco = Number(servidores[i].limiteDisco) || 1
+                servidores[i].limiteRede = Number(servidores[i].limiteRede) || 1
+
                 const aleatorioCpu = gerarPorcentagem()
                 const aleatorioRam = gerarRam()
                 const aleatorioDisco = gerarArmazenamento()
@@ -444,7 +413,7 @@ function mostrarServidores() {
                 totalServidor += 1
                 somaCpu.push(aleatorioCpu)
                 somaRam.push(ramPorcentagem)
-                somaDisco.push(redePorcentagem)
+                somaDisco.push(discoPorcentagem)
                 somaRede.push(aleatorioRede)
 
                 cpuUso.innerHTML = `Em Uso ${aleatorioCpu}%`
@@ -494,27 +463,21 @@ function mostrarServidores() {
                 }
 
                 function gerarPorcentagem() {
-                    return Math.floor(Math.random() * (servidores[i].limiteCpu - 10)) + 1;
+                    return Math.floor(Math.random() * Math.max(1, servidores[i].limiteCpu - 10)) + 1;
                 }
 
                 function gerarRam() {
-                    return Math.floor(Math.random() * (servidores[i].limiteRam - 2)) + 1;
+                    return Math.floor(Math.random() * Math.max(1, servidores[i].limiteRam - 2)) + 1;
                 }
 
                 function gerarArmazenamento() {
-                    return Math.floor(Math.random() * (servidores[i].limiteDisco - 25)) + 1;
+                    return Math.floor(Math.random() * Math.max(1, servidores[i].limiteDisco - 25)) + 1;
                 }
 
                 function gerarRede() {
-                    return Math.floor(Math.random() * (servidores[i].limiteRede - 10)) + 1;
+                    return Math.floor(Math.random() * Math.max(1, servidores[i].limiteRede - 10)) + 1;
                 }
             }
-
-            totalServidor += 1
-            somaCpu.push(95.7)
-            somaDisco.push(14.1)
-            somaRam.push(65.3)
-            somaRede.push(20)
 
             const qtdServidores = document.getElementById("qtdServidores");
             const kpiP99Cpu = document.getElementById("kpiP99Cpu");
@@ -523,13 +486,13 @@ function mostrarServidores() {
             const kpiP99Rede = document.getElementById("kpiP99Rede");
 
             const ordenadoCpu = [...somaCpu].sort((a, b) => a - b);
-            const P99Cpu = ordenadoCpu[Math.floor(ordenadoCpu.length * 0.99)];
+            const P99Cpu = ordenadoCpu[Math.min(ordenadoCpu.length - 1, Math.floor(ordenadoCpu.length * 0.99))] || 0;
             const ordenadoRam = [...somaRam].sort((a, b) => a - b);
-            const P99Ram = ordenadoRam[Math.floor(ordenadoRam.length * 0.99)];
+            const P99Ram = ordenadoRam[Math.min(ordenadoRam.length - 1, Math.floor(ordenadoRam.length * 0.99))] || 0;
             const ordenadoDisco = [...somaDisco].sort((a, b) => a - b);
-            const P99Disco = ordenadoDisco[Math.floor(ordenadoDisco.length * 0.99)];
+            const P99Disco = ordenadoDisco[Math.min(ordenadoDisco.length - 1, Math.floor(ordenadoDisco.length * 0.99))] || 0;
             const ordenadoRede = [...somaRede].sort((a, b) => a - b);
-            const P99Rede = ordenadoRede[Math.floor(ordenadoRede.length * 0.99)];
+            const P99Rede = ordenadoRede[Math.min(ordenadoRede.length - 1, Math.floor(ordenadoRede.length * 0.99))] || 0;
 
             qtdServidores.innerHTML = totalServidor
             kpiP99Cpu.innerHTML = P99Cpu.toFixed(1) + "%"
@@ -608,6 +571,10 @@ function mostrarServidores() {
             // for (var i = 0; i < servidores.length; i++) {
             //     carregarComponentes(servidores[i].idServidor);
             // }
+        })
+        .catch(erro => {
+            console.error("Erro ao exibir servidores:", erro);
+            boxServidores.innerHTML = `<p class="mensagemErro">Não foi possível carregar os servidores.</p>`;
         });
 }
 
