@@ -163,7 +163,7 @@ header {
 }
 
 .kpi-titulo {
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 600;
     color: #8c8c8c;
     letter-spacing: 0.5px;
@@ -208,6 +208,13 @@ header {
     color: #8c8c8c;
     line-height: 1.4;
     margin: 0;
+}
+
+#kpi_risco_score{
+     font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #8c8c8c;
+    line-height: 1.4;
 }
 
 
@@ -603,10 +610,48 @@ transition: background-color 0.2s;
 
 .modal-info strong {
     display: block;
-    margin-top: 6px;
+
     font-size: 20px;
     color: #0f172a;
 }
+
+.kpi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tooltip-kpi {
+    position: relative;
+    display: inline-block;
+}
+
+.icone-info {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.tooltip-conteudo {
+    display: none;
+    position: absolute;
+    top: 22px;
+    right: 0;
+    width: 260px;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.15);
+    z-index: 9999;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.tooltip-kpi:hover .tooltip-conteudo {
+    display: block;
+}
+
 
 
 
