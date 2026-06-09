@@ -293,8 +293,7 @@ function atualizarkpiCrescimentoAlertas(datacenter) {
 
     if (!kpi) {
       document.getElementById("variacaoAlertas").innerHTML = 0;
-        document.getElementById("descricaoAlertas").innerHTML ="Últimos 30 minutos";
-        document.getElementById("comparacaoAlertas").innerHTML ="→ Sem alteração";
+        document.getElementById("comparacaoAlertas").innerHTML ="→ Sem alerta captado nos último 30 minutos.";
         atualizarIconeStatus("statusKPICresc", 0, 5, 15);
         atualizarEstiloKpi("kpiCrescimentoAlertas", "Estável");
         return;
@@ -318,18 +317,16 @@ function atualizarkpiCrescimentoAlertas(datacenter) {
         status = "Crítico"; 
     }
     document.getElementById("variacaoAlertas").innerHTML = atual;
-    document.getElementById("descricaoAlertas").innerHTML =
-        "Últimos 30 minutos";
-
+   
     if (diferenca > 0) {
         document.getElementById("comparacaoAlertas").innerHTML =
-            `↑ +${diferenca} em relação ao período anterior`;
+            `↑ +${diferenca} em relação aos 30 min anteriores`;
     } else if (diferenca < 0) {
         document.getElementById("comparacaoAlertas").innerHTML =
-            `↓ ${diferenca} em relação ao período anterior`;
+            `↓ ${diferenca} em relação aos 30 min anteriores`;
     } else {
         document.getElementById("comparacaoAlertas").innerHTML =
-            "→ Sem alteração";
+            "→ Sem alerta captado nos último 30 minutos.";
     }
     atualizarIconeStatus("statusKPICresc", status);
     atualizarEstiloKpi("kpiCrescimentoAlertas", status);
