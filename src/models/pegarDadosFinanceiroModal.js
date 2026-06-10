@@ -12,6 +12,31 @@ const s3Client = new S3Client({
   },
 });
 
+function normalizarAlertasPorRegiao(dados) {
+  const empresa = dados && dados.Steam;
+
+  if (!empresa || typeof empresa !== "object") return dados;
+
+  const entradas = Object.entries(empresa);
+  const formatoJaRegionalizado = entradas.every(([, valor]) =>
+    valor && typeof valor === "object" && !valor.KPIs
+  );
+
+  if (formatoJaRegionalizado) return dados;
+
+  const regioes = {};
+
+  for (const [nomeDataCenter, conteudo] of entradas) {
+    const correspondencia = nomeDataCenter.match(/^DC-([^-]+)-/i);
+    const regiao = correspondencia ? correspondencia[1].toUpperCase() : "OUTROS";
+
+    if (!regioes[regiao]) regioes[regiao] = {};
+    regioes[regiao][nomeDataCenter] = conteudo;
+  }
+
+  return { ...dados, Steam: regioes };
+}
+
 async function pegarDadosFinanceiro(bucket) {
   //pega os dados do Json finaneiro
   const parametros = {
@@ -45,7 +70,7 @@ async function pegarDadosFinanceiro(bucket) {
     const stringData = await resposta.Body.transformToString();
     const dados = JSON.parse(stringData);
     console.log("Dados alertas carregados com sucesso do S3:", dados);
-    dadosAlertas = dados
+    dadosAlertas = normalizarAlertasPorRegiao(dados);
   } catch (error) {
     console.error("Erro ao buscar alertas no S3:", error);
     throw error;

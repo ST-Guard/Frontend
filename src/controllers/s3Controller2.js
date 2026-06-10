@@ -11,6 +11,41 @@ const s3Client = new S3Client({
   },
 });
 
+function normalizarAlertasPorRegiao(dados) {
+    const empresa = dados && dados.Steam;
+
+    if (!empresa || typeof empresa !== "object") {
+        return dados;
+    }
+
+    const entradas = Object.entries(empresa);
+    const formatoJaRegionalizado = entradas.every(([, valor]) =>
+        valor && typeof valor === "object" && !valor.KPIs
+    );
+
+    if (formatoJaRegionalizado) {
+        return dados;
+    }
+
+    const regioes = {};
+
+    for (const [nomeDataCenter, conteudo] of entradas) {
+        const correspondencia = nomeDataCenter.match(/^DC-([^-]+)-/i);
+        const regiao = correspondencia ? correspondencia[1].toUpperCase() : "OUTROS";
+
+        if (!regioes[regiao]) {
+            regioes[regiao] = {};
+        }
+
+        regioes[regiao][nomeDataCenter] = conteudo;
+    }
+
+    return {
+        ...dados,
+        Steam: regioes
+    };
+}
+
 async function obterS3UrlController2(req, res) {
     
     const parametros = {
@@ -25,7 +60,7 @@ async function obterS3UrlController2(req, res) {
         const dados = JSON.parse(stringData);
         console.log("Dados alertas_gestora.json carregados com sucesso do S3!");
         
-        return res.status(200).json(dados);
+        return res.status(200).json(normalizarAlertasPorRegiao(dados));
     } catch (error) {
         console.error('Erro ao gerar URL do S3:', error);
         return res.status(500).json({ error: 'Erro interno do servidor' });
@@ -34,5 +69,6 @@ async function obterS3UrlController2(req, res) {
 
 
 module.exports = {
-    obterS3UrlController2
+    obterS3UrlController2,
+    normalizarAlertasPorRegiao
 };

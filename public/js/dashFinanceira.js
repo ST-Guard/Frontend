@@ -35,22 +35,27 @@ function buscarDados() {
     }),
   })
     .then(function (resposta) {
+      if (!resposta.ok) {
+        throw new Error("Não foi possível carregar os dados financeiros.");
+      }
+
       return resposta.json();
     })
     .then(function (dados) {
-      if (dados == [] || dados == null || dados == {}) {
+      if (!dados || !dados.dadosFinanceiros || !dados.dadosAlertas) {
         console.log("Dados não encontrados");
         return;
       }
-      regioes = dados.dadosAlertas.Steam;
-      totalAlertasCriticos = 0;
-      totalAlertasAtencao = 0;
-      for (regiao in regioes) {
+      const regioes = dados.dadosAlertas.Steam || {};
+      let totalAlertasCriticos = 0;
+      let totalAlertasAtencao = 0;
+      for (const regiao in regioes) {
         const dcsDaRegiao = regioes[regiao];
         for (const nomeDC in dcsDaRegiao) {
           const dadosDC = dcsDaRegiao[nomeDC];
-          totalAlertasCriticos += dadosDC.KPIs["CRITICOS_ABERTOS"];
-          totalAlertasAtencao += dadosDC.KPIs["MEDIOS_ABERTOS"];
+          const kpis = dadosDC.KPIs || {};
+          totalAlertasCriticos += Number(kpis.CRITICOS_ABERTOS || 0);
+          totalAlertasAtencao += Number(kpis.MEDIOS_ABERTOS || 0);
         }
       }
       const dadosAlertas = {
@@ -62,6 +67,9 @@ function buscarDados() {
       console.log("Dados buscados pelo S3 com sucesso!");
       console.log(dadosFinais);
       plotarDados(dadosFinais);
+    })
+    .catch(function (erro) {
+      console.error("Erro ao carregar a dashboard financeira:", erro);
     });
 }
 
@@ -277,7 +285,7 @@ function plotarDados(dadosS3) {
   atualizarTexto("kpi-cost-delta", formatarVariacaoMoeda(custo.DELTA_CUSTO));
   atualizarSelo("kpi-cost-delta", custo.DELTA_CUSTO, false);
   atualizarTexto("kpi-alertas-criticos-id", alertas.totalAlertasCriticos);
-  atualizarTexto(" kpi-alertas-atencao-id", alertas.totalAlertasAtencao);
+  atualizarTexto("kpi-alertas-atencao-id", alertas.totalAlertasAtencao);
 
   budgetRegressionValue = Number(
     previsto.CUSTO_PREVISTO || orcamento.CUSTO_PREVISTO || 0,
