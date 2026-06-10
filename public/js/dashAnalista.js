@@ -809,7 +809,7 @@ kpi4.style.boxShadow = "1.5px 1px 2px 1px var(--KPI-importante), 0 4px 12px rgba
 
     kpi4.style.border = "1px solid var(--KPI-normal)"
 kpi4.style.boxShadow = "1.5px 1px 2px 1px var(--KPI-normal), 0 4px 12px rgba(0,0,0,0.1)"
-kp4.h1.style.color = "ar(--KPI-normal)"
+
 
     }
 
