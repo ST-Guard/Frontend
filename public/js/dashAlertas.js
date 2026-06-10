@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Distribuição de alertas por severidade (último mês)',
+                    text: 'Distribuição de alertas por severidade (últimas semanas)',
                     align: 'start',
                     font: {
                         size: 18
@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 title: {
                     display: true,
-                    text: 'Distribuição de alertas por componentes (último mês)',
+                    text: 'Distribuição de alertas por componentes (últimas semanas)',
                     align: 'start',
                     font: {
                         size: 18
